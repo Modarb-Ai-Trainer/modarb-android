@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Modarb</string>
+    <string name="app_name">Moderb</string>
+    <string name="your_personal_fitness_journey_begins">Your Personal Fitness Journey \n Begins</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="already_a_user">Already a user ?</string>
+    <string name="continue_with_existing_account">continue with existing account</string>
+    <string name="start">Start</string>
 </resources>

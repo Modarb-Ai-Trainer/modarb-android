@@ -3,4 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button">#6739FF</color>
+    <color name="darker_purple">#383347</color>
+    <color name="gray_200">#A0A0A0</color>
+    <color name="while_600">#D1D1D1</color>
+    <color name="primary_50">#F0EBFF</color>
+    <color name="secondary_200">#F3EFFF</color>
 </resources>
