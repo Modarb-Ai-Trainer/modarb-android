@@ -12,11 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
-
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.onboarding.activities.WelcomeScreenActivity"
             android:exported="true">
