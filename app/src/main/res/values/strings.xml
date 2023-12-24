@@ -5,4 +5,7 @@
     <string name="already_a_user">Already a user ?</string>
     <string name="continue_with_existing_account">continue with existing account</string>
     <string name="start">Start</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
 </resources>
