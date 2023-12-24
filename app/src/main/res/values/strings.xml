@@ -8,4 +8,13 @@
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="tailored_workouts_and_nutrition_plans">Tailored Workouts and \n Nutrition Plans</string>
+    <string name="description_tailored_workouts_and_nutrition_plans">Get ready for workouts and nutrition plans tailored \n just for you. Tell us your goals, preferences, and \n fitness level, and let our AI create a customized \n roadmap to success</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="real_time_guidance_and_progress_tracking">Real-Time Guidance and \n Progress Tracking</string>
+    <string name="description_real_time_guidance_and_progress_tracking">Experience real-time guidance during workouts and track your progress effortlessly. Our app provides insights, charts, and motivation to keep you on the path to a healthier lifestyle.</string>
+    <string name="welcome_to_your_fitness_revolution">Welcome to your fitness \n revolution</string>
+    <string name="description_welcome_to_your_fitness_revolution">Meet your new workout companion – your smart personal trainer. Ready to guide you every step of the way. Let\'s make every workout count!</string>
+    <string name="get_started">Get Started</string>
 </resources>
