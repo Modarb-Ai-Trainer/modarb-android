@@ -13,4 +13,7 @@
     <color name="gray_75">#BFBFBF</color>
     <color name="primary_200">#B9A4FF</color>
     <color name="primary_400">#8561FF</color>
+    <color name="lavender">#EEE8FE</color>
+    <color name="white_violet">#E5DDFE</color>
+    <color name="platinum">#E6E6E6</color>
 </resources>

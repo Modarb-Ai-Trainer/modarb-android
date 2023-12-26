@@ -17,4 +17,11 @@
     <string name="welcome_to_your_fitness_revolution">Welcome to your fitness \n revolution</string>
     <string name="description_welcome_to_your_fitness_revolution">Meet your new workout companion – your smart personal trainer. Ready to guide you every step of the way. Let\'s make every workout count!</string>
     <string name="get_started">Get Started</string>
+    <string name="whats_your_fitness_goal">What\'s Your Fitness Goal</string>
+    <string name="lose_weight">Lose Weight\n</string>
+    <string name="want_to_burn_fats_and_lose_weight">want to burn fats and lose weight</string>
+    <string name="gain_muscle">Gain Muscle\n</string>
+    <string name="want_to_gain_weight_and_or_build_muscle">want to gain weight and /or build \n muscle</string>
+    <string name="get_fitter">Get Fitter\n</string>
+    <string name="want_to_enhance_my_overall_physical_fitness">want to enhance my overall \n physical fitness</string>
 </resources>
