@@ -16,4 +16,8 @@
     <color name="lavender">#EEE8FE</color>
     <color name="white_violet">#E5DDFE</color>
     <color name="platinum">#E6E6E6</color>
+    <color name="white_smoke">#F7F7F7</color>
+    <color name="dark_charcoal">#313131</color>
+    <color name="neon_blue">#6739FF</color>
+    <color name="tropical_indigo">#997AFF</color>
 </resources>
