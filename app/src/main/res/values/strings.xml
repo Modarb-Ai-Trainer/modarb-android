@@ -32,5 +32,9 @@
     <string name="title_activity_gender_selection">GenderSelectionActivity</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-
+    <string name="create_your_account">Create Your Account</string>
+    <string name="unlock_a_personalized_fitness_experience">Unlock a Personalized Fitness Experience</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
 </resources>

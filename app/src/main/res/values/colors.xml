@@ -20,4 +20,7 @@
     <color name="dark_charcoal">#313131</color>
     <color name="neon_blue">#6739FF</color>
     <color name="tropical_indigo">#997AFF</color>
+    <color name="han_purple">#5E35E8</color>
+    <color name="shadow_gray">#403e3e</color>
+    <color name="nickel">#757575</color>
 </resources>
