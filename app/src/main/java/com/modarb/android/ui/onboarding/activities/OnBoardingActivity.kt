@@ -12,7 +12,7 @@ import com.modarb.android.ui.onboarding.adapters.OnBoardingAdapter
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
-    private var currPos: Int =0
+    private var currPos: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class OnBoardingActivity : AppCompatActivity() {
         val view2 = layoutInflater.inflate(R.layout.gender_selection_view, null)
         val view3 = layoutInflater.inflate(R.layout.target_weight_selection_view, null)
 
-        val adapter = OnBoardingAdapter(listOf(view1, view2,view3), this)
+        val adapter = OnBoardingAdapter(listOf(view1, view2, view3), this)
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
     }
@@ -64,7 +64,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun goBack() {
         currPos = binding.viewPager.currentItem
-        if(currPos==0)finish()
+        if (currPos == 0) finish()
         if ((currPos - 1) != binding.viewPager.adapter?.itemCount) {
             binding.viewPager.currentItem = currPos - 1
         }
