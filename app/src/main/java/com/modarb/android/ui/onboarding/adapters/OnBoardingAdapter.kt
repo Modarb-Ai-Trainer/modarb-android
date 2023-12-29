@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.onboarding.helpers.SelectGenderView
-import com.modarb.android.ui.onboarding.helpers.SelectGoalView
+import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGenderView
+import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGoalView
 
 class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
     RecyclerView.Adapter<OnBoardingAdapter.ViewHolder>() {

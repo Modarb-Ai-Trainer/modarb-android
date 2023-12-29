@@ -1,4 +1,4 @@
-package com.modarb.android.ui.onboarding.helpers
+package com.modarb.android.ui.onboarding.ViewPagerViews
 
 import android.view.View
 import android.widget.NumberPicker

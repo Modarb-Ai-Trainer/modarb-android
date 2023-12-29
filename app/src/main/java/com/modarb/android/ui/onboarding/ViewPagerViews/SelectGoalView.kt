@@ -1,4 +1,4 @@
-package com.modarb.android.ui.onboarding.helpers
+package com.modarb.android.ui.onboarding.ViewPagerViews
 
 import android.content.Context
 import android.view.View
