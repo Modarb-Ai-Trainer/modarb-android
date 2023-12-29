@@ -3,11 +3,9 @@ package com.modarb.android.ui.onboarding.activities
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityOnBoardingSplashBinding
-import com.modarb.android.databinding.ActivityWelcomeScreenBinding
-import com.modarb.android.ui.onboarding.adapters.ViewPagerAdapter
+import com.modarb.android.ui.onboarding.adapters.SplashViewPagerAdapter
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 @SuppressLint("CustomSplashScreen")
@@ -22,14 +20,31 @@ class OnBoardingSplashActivity : AppCompatActivity() {
         initViewPager()
     }
 
-    private fun initViewPager(){
+    private fun initViewPager() {
         val view1 = layoutInflater.inflate(R.layout.onboarding1, null)
         val view2 = layoutInflater.inflate(R.layout.onboarding2, null)
         val view3 = layoutInflater.inflate(R.layout.onboarding3, null)
-        val adapter = ViewPagerAdapter(listOf(view1, view2,view3))
+        val adapter = SplashViewPagerAdapter(listOf(view1, view2, view3))
         val dotsIndicator = findViewById<DotsIndicator>(R.id.dots_indicator)
+        //binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
         dotsIndicator.attachTo(binding.viewPager)
+        handleButtons()
+    }
 
+    private fun handleButtons() {
+        binding.nextButton.setOnClickListener {
+            val currPos: Int = binding.viewPager.currentItem
+            if ((currPos + 1) != binding.viewPager.adapter?.itemCount) {
+                binding.viewPager.currentItem = currPos + 1
+            }
+        }
+
+        binding.backButton.setOnClickListener{
+            val currPos: Int = binding.viewPager.currentItem
+            if ((currPos - 1) != binding.viewPager.adapter?.itemCount) {
+                binding.viewPager.currentItem = currPos - 1
+            }
+        }
     }
 }

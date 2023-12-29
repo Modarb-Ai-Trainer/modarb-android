@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/black">
+    android:background="@color/grey_900">
 
     <TextView
         android:id="@+id/textView"
@@ -27,25 +27,24 @@
         android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:padding="8dp"
         android:text="@string/how_old_are_you"
         android:textColor="@color/lavender"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/numberPicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleBackground2"
-        app:layout_constraintVertical_bias="0.555" />
+        app:layout_constraintTop_toBottomOf="@+id/femaleGenderView" />
 
     <View
-        android:id="@+id/circleBackground1"
+        android:id="@+id/maleGenderView"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@drawable/circular_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/circleBackground2"
+        app:layout_constraintEnd_toStartOf="@+id/femaleGenderView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.1" />
@@ -56,10 +55,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/circleBackground1"
-        app:layout_constraintEnd_toEndOf="@+id/circleBackground1"
-        app:layout_constraintStart_toStartOf="@+id/circleBackground1"
-        app:layout_constraintTop_toTopOf="@+id/circleBackground1"
+        app:layout_constraintBottom_toBottomOf="@+id/maleGenderView"
+        app:layout_constraintEnd_toEndOf="@+id/maleGenderView"
+        app:layout_constraintStart_toStartOf="@+id/maleGenderView"
+        app:layout_constraintTop_toTopOf="@+id/maleGenderView"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
@@ -81,14 +80,14 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/circleBackground2"
+        android:id="@+id/femaleGenderView"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@drawable/circular_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@id/circleBackground1"
+        app:layout_constraintStart_toEndOf="@id/maleGenderView"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.1"/>
 
@@ -98,10 +97,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/circleBackground2"
-        app:layout_constraintEnd_toEndOf="@+id/circleBackground2"
-        app:layout_constraintStart_toStartOf="@+id/circleBackground2"
-        app:layout_constraintTop_toTopOf="@+id/circleBackground2"
+        app:layout_constraintBottom_toBottomOf="@+id/femaleGenderView"
+        app:layout_constraintEnd_toEndOf="@+id/femaleGenderView"
+        app:layout_constraintStart_toStartOf="@+id/femaleGenderView"
+        app:layout_constraintTop_toTopOf="@+id/femaleGenderView"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
@@ -124,19 +123,16 @@
 
     <NumberPicker
         android:id="@+id/numberPicker"
-        android:layout_width="115dp"
-        android:layout_height="266dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_width="120dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="32dp"
         android:textColor="@color/neon_blue"
+        android:theme="@style/AppTheme.Picker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.772" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.050000012" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

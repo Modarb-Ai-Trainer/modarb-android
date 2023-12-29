@@ -14,11 +14,7 @@
                 android:width="2dp"
                 android:color="@color/primary_400" />
             <corners android:radius="20dp" />
-            <padding
-                android:end="10dp"
-                android:top="40dp"
-                android:start="10dp"
-                android:bottom="40dp" />
+
         </shape>
     </item>
 </selector>
