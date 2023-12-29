@@ -1,5 +1,6 @@
 package com.modarb.android.ui.onboarding.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.activity.OnBackPressedCallback
@@ -11,7 +12,7 @@ import com.modarb.android.ui.onboarding.adapters.OnBoardingAdapter
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
-    private var curPage: Int = 0
+    private var currPos: Int =0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +25,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("InflateParams")
     private fun initViewPager() {
         val view1 = layoutInflater.inflate(R.layout.goal_selection_view, null)
         val view2 = layoutInflater.inflate(R.layout.gender_selection_view, null)
@@ -54,23 +56,22 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun goNext() {
-        val currPos: Int = binding.viewPager.currentItem
+        currPos = binding.viewPager.currentItem
         if ((currPos + 1) != binding.viewPager.adapter?.itemCount) {
-            curPage++
             binding.viewPager.currentItem = currPos + 1
         }
     }
 
     private fun goBack() {
-        val currPos: Int = binding.viewPager.currentItem
+        currPos = binding.viewPager.currentItem
+        if(currPos==0)finish()
         if ((currPos - 1) != binding.viewPager.adapter?.itemCount) {
-            curPage--
             binding.viewPager.currentItem = currPos - 1
         }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK && curPage == 0) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && currPos == 0) {
             finish()
         }
         return super.onKeyDown(keyCode, event)
