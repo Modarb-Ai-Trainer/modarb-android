@@ -25,7 +25,6 @@
         android:id="@+id/nextButton"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/button"
         android:padding="12dp"
