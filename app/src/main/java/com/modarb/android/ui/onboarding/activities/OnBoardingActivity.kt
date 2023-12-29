@@ -2,6 +2,7 @@ package com.modarb.android.ui.onboarding.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,7 @@ import com.modarb.android.ui.onboarding.adapters.OnBoardingAdapter
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
     private var currPos: Int = 0
-
+    private var curPage: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
@@ -59,19 +60,22 @@ class OnBoardingActivity : AppCompatActivity() {
         currPos = binding.viewPager.currentItem
         if ((currPos + 1) != binding.viewPager.adapter?.itemCount) {
             binding.viewPager.currentItem = currPos + 1
+            curPage++
         }
     }
 
     private fun goBack() {
         currPos = binding.viewPager.currentItem
-        if (currPos == 0) finish()
+        if (curPage == 0) finish()
         if ((currPos - 1) != binding.viewPager.adapter?.itemCount) {
             binding.viewPager.currentItem = currPos - 1
+            curPage--
         }
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK && currPos == 0) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && curPage == 0) {
             finish()
         }
         return super.onKeyDown(keyCode, event)
