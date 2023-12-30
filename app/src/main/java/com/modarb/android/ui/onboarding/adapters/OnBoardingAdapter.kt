@@ -14,6 +14,7 @@ import com.modarb.android.ui.onboarding.ViewPagerViews.SelectFitnessLevelView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGenderView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGoalView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectTargetWeightView
+import com.modarb.android.ui.onboarding.models.ItemSelectionModel
 
 class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
     RecyclerView.Adapter<OnBoardingAdapter.ViewHolder>() {
@@ -70,10 +71,36 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
                 }
 
                 6 -> {
-                    ItemSelectionView(view, ctx)
+                    ItemSelectionView(
+                        view, ctx, getEquipmentList(), R.string.what_equipment_do_you_have
+                    )
+                }
+
+                7 -> {
+                    ItemSelectionView(view, ctx, getPainPositions(), R.string.do_you_have_pain)
                 }
             }
         }
+    }
+
+    private fun getEquipmentList(): List<ItemSelectionModel> {
+        return listOf(
+            ItemSelectionModel("Barbells"),
+            ItemSelectionModel("Dumbbells"),
+            ItemSelectionModel("Gym machines"),
+            ItemSelectionModel("Resistance band"),
+            ItemSelectionModel("Body weight")
+        )
+    }
+
+    private fun getPainPositions(): List<ItemSelectionModel> {
+        return listOf(
+            ItemSelectionModel("Neek"),
+            ItemSelectionModel("Shoulders"),
+            ItemSelectionModel("Back"),
+            ItemSelectionModel("Arms"),
+            ItemSelectionModel("Knees")
+        )
     }
 
     private fun getBMIData(): List<String> {

@@ -10,15 +10,12 @@ import com.modarb.android.ui.onboarding.adapters.SelectedItemsAdapter
 import com.modarb.android.ui.onboarding.models.ItemSelectionModel
 import kotlin.math.abs
 
-class ItemSelectionView(view: View, ctx: Context) : SelectedItemsAdapter.OnItemClickListener {
-
-    private var itemList: List<ItemSelectionModel> = listOf(
-        ItemSelectionModel("Barbells"),
-        ItemSelectionModel("Dumbbells"),
-        ItemSelectionModel("Gym machines"),
-        ItemSelectionModel("Resistance band"),
-        ItemSelectionModel("Body weight")
-    )
+class ItemSelectionView(
+    view: View,
+    ctx: Context,
+    private var itemList: List<ItemSelectionModel>,
+    var title: Int
+) : SelectedItemsAdapter.OnItemClickListener {
 
     init {
 
@@ -30,7 +27,7 @@ class ItemSelectionView(view: View, ctx: Context) : SelectedItemsAdapter.OnItemC
 
 
         val questionTitle = view.findViewById<TextView>(R.id.questionTitle)
-        questionTitle.text = ctx.getString(R.string.what_equipment_do_you_have)
+        questionTitle.text = ctx.getString(title)
     }
 
     /*

@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/heightTxt">
 
 
-        <com.modarb.android.utils.CustomViews.RulerView
+        <com.modarb.android.ui.onboarding.utils.CustomViews.RulerView
             android:id="@+id/heightPicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weightTxt">
 
-        <com.modarb.android.utils.CustomViews.RulerView
+        <com.modarb.android.ui.onboarding.utils.CustomViews.RulerView
             android:id="@+id/weightPicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/targetTxt">
 
-        <com.modarb.android.utils.CustomViews.RulerView
+        <com.modarb.android.ui.onboarding.utils.CustomViews.RulerView
             android:id="@+id/targetWeightPicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

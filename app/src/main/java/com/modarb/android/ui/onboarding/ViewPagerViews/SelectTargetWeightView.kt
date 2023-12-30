@@ -5,7 +5,7 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import com.modarb.android.R
-import com.modarb.android.utils.CustomViews.RulerView
+import com.modarb.android.ui.onboarding.utils.CustomViews.RulerView
 
 class SelectTargetWeightView(private val view: View, private val context: Context) {
 
