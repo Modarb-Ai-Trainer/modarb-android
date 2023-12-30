@@ -46,5 +46,6 @@
     <string name="gym">Gym</string>
     <string name="home">Home</string>
     <string name="both">Both</string>
+    <string name="what_equipment_do_you_have">What Equipment do\n you have available to\n you?\n</string>
 
 </resources>

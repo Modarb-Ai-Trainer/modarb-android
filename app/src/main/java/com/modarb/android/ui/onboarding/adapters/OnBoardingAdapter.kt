@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.ui.onboarding.ViewPagerViews.ItemSelectionView
 import com.modarb.android.ui.onboarding.ViewPagerViews.MessageView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectExercisePlaceView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectFitnessLevelView
@@ -40,6 +41,7 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
              3 handle bmi
              4 fitness level
              5 exercise place
+             6 equipments
              */
 
             when (type) {
@@ -65,6 +67,10 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
 
                 5 -> {
                     SelectExercisePlaceView(view, ctx)
+                }
+
+                6 -> {
+                    ItemSelectionView(view, ctx)
                 }
             }
         }

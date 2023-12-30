@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey_900"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:buttonTint="@color/white"
+        android:background="@drawable/neon_blue_edges"
+        android:button="@drawable/custom_check_box"
+        android:drawablePadding="10dp"
+        android:layoutDirection="rtl"
+        android:padding="21dp"
+        tools:text="Barbells"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</LinearLayout>
+
