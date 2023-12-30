@@ -33,6 +33,13 @@ class Data {
                 "Your personalized journey awaits!"
             )
         }
+
+        fun getCompleteMessages(): List<String> {
+            return listOf(
+                "Great job completing the initial steps! Now, let's tailor your workout plan to match your fitness level, preferred locations, and available equipment for a truly personalized experience.\n",
+                "Your journey to a healthier you is just a step away! \uD83D\uDE80\uD83D\uDCAA",
+            )
+        }
     }
 
 

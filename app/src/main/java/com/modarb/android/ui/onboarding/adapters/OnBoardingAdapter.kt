@@ -35,7 +35,9 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
         fun bind(view: View, type: Int) {
             val container = itemView.findViewById<FrameLayout>(R.id.container)
             container.removeAllViews()
-            container.addView(view)/*
+            container.addView(view)
+
+            /*
              0 goal
              1 gender
              2 height and weight
@@ -43,6 +45,7 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
              4 fitness level
              5 exercise place
              6 equipments
+             7 pain positions
              */
 
             when (type) {
@@ -78,6 +81,10 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
 
                 7 -> {
                     ItemSelectionView(view, ctx, Data.getPainPositions(), R.string.do_you_have_pain)
+                }
+
+                8 -> {
+                    MessageView(view, ctx, Data.getCompleteMessages())
                 }
             }
         }
