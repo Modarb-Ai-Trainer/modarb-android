@@ -56,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:layout_margin="8dp"
             android:textColor="@color/white_500"
             tools:text="test" />
 
@@ -90,6 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:layout_margin="8dp"
             android:textColor="@color/white_500"
             android:textSize="14sp"
             tools:text="test" />
@@ -122,6 +124,7 @@
             tools:text="test" />
 
         <TextView
+            android:layout_margin="8dp"
             android:id="@+id/containerThreeDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -35,5 +35,12 @@
     <string name="what_s_your_height">What’s Your height?</string>
     <string name="what_s_your_weight">What’s Your Weight?</string>
     <string name="what_s_your_target_weight">What’s Your Target weight?</string>
+    <string name="beginner">Beginner</string>
+    <string name="beginnerDesc">first time user, have no or little experience .show me what to do and how to do it</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="intermediateDesc">i know some exercise and how to do them properly , help me get into a structured routine</string>
+    <string name="advanced">Advanced</string>
+    <string name="advancedDesc">i’m very experienced with training .Show me something new .</string>
+    <string name="fitness_level">What’s Your Fitness\n level?</string>
 
 </resources>

@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.onboarding.ViewPagerViews.MessageView
+import com.modarb.android.ui.onboarding.ViewPagerViews.SelectFitnessLevelView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGenderView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGoalView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectTargetWeightView
@@ -36,6 +37,7 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
             // 1 gender
             // 2 height and weight
             // 3 handle bmi
+            // 4 fitness level
             when (type) {
                 0 -> {
                     SelectGoalView(view, ctx)
@@ -51,6 +53,10 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
 
                 3 -> {
                     MessageView(view, ctx, getBMIData())
+                }
+
+                4 -> {
+                    SelectFitnessLevelView(view, ctx)
                 }
             }
         }
