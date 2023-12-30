@@ -17,7 +17,7 @@
         android:padding="8dp"
         android:text="@string/whats_your_gender"
         android:textColor="@color/lavender"
-        android:textSize="20sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
