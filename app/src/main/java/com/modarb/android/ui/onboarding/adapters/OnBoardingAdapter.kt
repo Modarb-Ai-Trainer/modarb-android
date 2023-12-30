@@ -34,12 +34,18 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
             // 0 goal
             // 1 gender
             // 2 height and weight
-            if (type == 0) {
-                SelectGoalView(view, ctx)
-            } else if (type == 1) {
-                SelectGenderView(view)
-            }else if(type == 2){
-                SelectTargetWeightView(view,ctx)
+            when (type) {
+                0 -> {
+                    SelectGoalView(view, ctx)
+                }
+
+                1 -> {
+                    SelectGenderView(view)
+                }
+
+                2 -> {
+                    SelectTargetWeightView(view, ctx)
+                }
             }
         }
     }
