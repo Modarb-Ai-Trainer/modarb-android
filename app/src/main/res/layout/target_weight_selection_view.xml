@@ -31,25 +31,39 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         tools:text="190 cm" />
 
-    <com.kevalpatel2106.rulerpicker.RulerValuePicker
-        android:id="@+id/heightPicker"
+
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/grey_900"
-        app:indicator_color="@color/primary_400"
-        app:indicator_interval="10dp"
-        app:indicator_width="2dp"
-        android:elevation="3dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/ruler_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heightTxt"
-        app:max_value="250"
-        app:min_value="80"
-        app:notch_color="@color/primary_400"
-        app:ruler_text_color="@color/white"
-        app:ruler_text_size="6sp" />
+        app:layout_constraintTop_toBottomOf="@+id/heightTxt">
+
+
+        <com.modarb.android.utils.RulerView
+            android:id="@+id/heightPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            app:centerLineColor="@color/primary_400"
+            app:centerLineHeight="32dp"
+            app:numDigits="1"
+            app:numMaxValue="100"
+            app:numMinValue="20"
+            app:numTextColor="@color/white"
+            app:numValue="70"
+            app:sideLineColor="@color/white"
+            app:sideLineHeight="24dp"
+            app:textSize="14sp"
+            app:textSpaceHeight="12dp" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView8"
@@ -62,7 +76,7 @@
         android:textSize="21sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heightPicker" />
+        app:layout_constraintTop_toBottomOf="@+id/frame" />
 
     <TextView
         android:id="@+id/weightTxt"
@@ -75,24 +89,39 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:text="55 kg" />
 
-    <com.kevalpatel2106.rulerpicker.RulerValuePicker
-        android:id="@+id/weightPicker"
+
+    <FrameLayout
+        android:id="@+id/frame2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/grey_900"
-        app:indicator_color="@color/primary_400"
-        app:indicator_interval="10dp"
-        app:indicator_width="2dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/ruler_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weightTxt"
-        app:max_value="250"
-        app:min_value="80"
-        app:notch_color="@color/white"
-        app:ruler_text_color="@color/white"
-        app:ruler_text_size="6sp" />
+        app:layout_constraintTop_toBottomOf="@+id/weightTxt">
 
+        <com.modarb.android.utils.RulerView
+            android:id="@+id/weightPicker"
+            android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:layout_height="wrap_content"
+            app:centerLineColor="@color/primary_400"
+            app:centerLineHeight="32dp"
+            app:numDigits="1"
+            app:numMaxValue="220"
+            app:numMinValue="10"
+            app:numTextColor="@color/white"
+            app:numValue="78"
+            app:sideLineColor="@color/white"
+            app:sideLineHeight="24dp"
+            app:textSize="14sp"
+            app:textSpaceHeight="12dp" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView10"
@@ -105,7 +134,7 @@
         android:textSize="21sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weightPicker" />
+        app:layout_constraintTop_toBottomOf="@+id/frame2" />
 
     <TextView
         android:id="@+id/targetTxt"
@@ -117,21 +146,36 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         tools:text="55 kg" />
 
-    <com.kevalpatel2106.rulerpicker.RulerValuePicker
-        android:id="@+id/targetPicker"
+    <FrameLayout
+        android:id="@+id/frame3"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/grey_900"
-        app:indicator_color="@color/primary_400"
-        app:indicator_interval="10dp"
-        app:indicator_width="2dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/ruler_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetTxt"
-        app:max_value="250"
-        app:min_value="80"
-        app:notch_color="@color/white"
-        app:ruler_text_color="@color/white"
-        app:ruler_text_size="6sp" />
+        app:layout_constraintTop_toBottomOf="@+id/targetTxt">
+
+        <com.modarb.android.utils.RulerView
+            android:id="@+id/targetWeightPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            app:centerLineColor="@color/primary_400"
+            app:centerLineHeight="32dp"
+            app:numDigits="1"
+            app:numMaxValue="220"
+            app:numMinValue="10"
+            app:numTextColor="@color/white"
+            app:numValue="78"
+            app:sideLineColor="@color/white"
+            app:sideLineHeight="24dp"
+            app:textSize="14sp"
+            app:textSpaceHeight="12dp" />
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

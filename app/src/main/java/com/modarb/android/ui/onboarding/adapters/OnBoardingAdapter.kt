@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGenderView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGoalView
+import com.modarb.android.ui.onboarding.ViewPagerViews.SelectTargetWeightView
 
 class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
     RecyclerView.Adapter<OnBoardingAdapter.ViewHolder>() {
@@ -37,6 +38,8 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
                 SelectGoalView(view, ctx)
             } else if (type == 1) {
                 SelectGenderView(view)
+            }else if(type == 2){
+                SelectTargetWeightView(view,ctx)
             }
         }
     }
