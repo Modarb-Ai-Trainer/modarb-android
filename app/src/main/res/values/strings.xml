@@ -42,5 +42,6 @@
     <string name="advanced">Advanced</string>
     <string name="advancedDesc">i’m very experienced with training .Show me something new .</string>
     <string name="fitness_level">What’s Your Fitness\n level?</string>
+    <string name="exercise_place">Where do you exercise ?</string>
 
 </resources>

@@ -32,8 +32,9 @@ class OnBoardingActivity : AppCompatActivity() {
         val view3 = layoutInflater.inflate(R.layout.target_weight_selection_view, null)
         val view4 = layoutInflater.inflate(R.layout.message_view, null)
         val view5 = layoutInflater.inflate(R.layout.single_selection_view, null)
+        val view6 = layoutInflater.inflate(R.layout.single_selection_view, null)
 
-        val adapter = OnBoardingAdapter(listOf(view1, view2, view3, view4, view5), this)
+        val adapter = OnBoardingAdapter(listOf(view1, view2, view3, view4, view5, view6), this)
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
     }

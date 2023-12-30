@@ -73,33 +73,34 @@ class SelectFitnessLevelView(private var view: View, private var ctx: Context) {
         val questionTitle = view.findViewById<TextView>(R.id.questionTitle)
         questionTitle.text = ctx.getString(R.string.fitness_level)
         title.text = ctx.getString(titleStr)
+        desc.visibility = View.VISIBLE
         desc.text = ctx.getString(descStr)
     }
 
+
     private fun setOnClickListenerForViews(
         container: LinearLayout,
-        getFitterView: LinearLayout,
-        loseWeightView: LinearLayout,
-        gainMuscleView: LinearLayout
+        firstItem: LinearLayout,
+        secondItem: LinearLayout,
+        thirdItem: LinearLayout
     ) {
         container.setOnClickListener {
             when (container.id) {
-                // handle on clicks
                 R.id.container1 -> {
                     setViewBackgrounds(
-                        loseWeightView, getFitterView, gainMuscleView
+                        secondItem, firstItem, thirdItem
                     )
                 }
 
                 R.id.container2 -> {
                     setViewBackgrounds(
-                        gainMuscleView, getFitterView, loseWeightView
+                        thirdItem, firstItem, secondItem
                     )
                 }
 
                 R.id.container3 -> {
                     setViewBackgrounds(
-                        getFitterView, loseWeightView, gainMuscleView
+                        firstItem, secondItem, thirdItem
                     )
                 }
             }

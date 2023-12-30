@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.onboarding.ViewPagerViews.MessageView
+import com.modarb.android.ui.onboarding.ViewPagerViews.SelectExercisePlaceView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectFitnessLevelView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGenderView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGoalView
@@ -32,12 +33,15 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
         fun bind(view: View, type: Int) {
             val container = itemView.findViewById<FrameLayout>(R.id.container)
             container.removeAllViews()
-            container.addView(view)
-            // 0 goal
-            // 1 gender
-            // 2 height and weight
-            // 3 handle bmi
-            // 4 fitness level
+            container.addView(view)/*
+             0 goal
+             1 gender
+             2 height and weight
+             3 handle bmi
+             4 fitness level
+             5 exercise place
+             */
+
             when (type) {
                 0 -> {
                     SelectGoalView(view, ctx)
@@ -57,6 +61,10 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
 
                 4 -> {
                     SelectFitnessLevelView(view, ctx)
+                }
+
+                5 -> {
+                    SelectExercisePlaceView(view, ctx)
                 }
             }
         }
