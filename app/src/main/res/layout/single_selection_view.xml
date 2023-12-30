@@ -65,11 +65,11 @@
                 android:id="@+id/containerOneDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="4dp"
                 android:textAlignment="center"
+                android:visibility="gone"
                 android:textColor="@color/white_500"
                 android:textSize="14sp"
-                android:visibility="gone"
                 tools:text="test" />
 
         </LinearLayout>
@@ -103,7 +103,7 @@
                 android:id="@+id/containerTwoDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/white_500"
                 android:textSize="14sp"
@@ -141,7 +141,7 @@
                 android:id="@+id/containerThreeDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/white_500"
                 android:textSize="14sp"
