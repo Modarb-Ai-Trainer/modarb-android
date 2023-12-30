@@ -17,13 +17,13 @@
     <string name="welcome_to_your_fitness_revolution">Welcome to your fitness \n revolution</string>
     <string name="description_welcome_to_your_fitness_revolution">Meet your new workout companion – your smart personal trainer. Ready to guide you every step of the way. Let’s make every workout count!</string>
     <string name="get_started">Get Started</string>
-    <string name="whats_your_fitness_goal">What’s Your Fitness Goal</string>
-    <string name="lose_weight">Lose Weight\n</string>
-    <string name="want_to_burn_fats_and_lose_weight">want to burn fats and lose weight</string>
-    <string name="gain_muscle">Gain Muscle\n</string>
-    <string name="want_to_gain_weight_and_or_build_muscle">want to gain weight and /or build \n muscle</string>
-    <string name="get_fitter">Get Fitter\n</string>
-    <string name="want_to_enhance_my_overall_physical_fitness">want to enhance my overall \n physical fitness</string>
+    <string name="whats_your_fitness_goal">What’s Your Fitness \n Goal ?</string>
+    <string name="lose_weight">Lose Weight</string>
+    <string name="want_to_burn_fats_and_lose_weight">I want to burn fats and lose weight</string>
+    <string name="gain_muscle">Gain Muscle</string>
+    <string name="want_to_gain_weight_and_or_build_muscle">I want to gain weight and /or build \n muscle</string>
+    <string name="get_fitter">Get Fitter</string>
+    <string name="want_to_enhance_my_overall_physical_fitness">I want to enhance my overall \n physical fitness</string>
     <string name="whats_your_gender">What’s Your gender ?</string>
     <string name="how_old_are_you">How old are you ?</string>
     <string name="whats_your_height">What’s Your height?</string>
@@ -32,9 +32,19 @@
     <string name="title_activity_gender_selection">GenderSelectionActivity</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="create_your_account">Create Your Account</string>
-    <string name="unlock_a_personalized_fitness_experience">Unlock a Personalized Fitness Experience</string>
-    <string name="name">Name</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="register">Register</string>
+    <string name="what_s_your_height">What’s Your height?</string>
+    <string name="what_s_your_weight">What’s Your Weight?</string>
+    <string name="what_s_your_target_weight">What’s Your Target weight?</string>
+    <string name="beginner">Beginner</string>
+    <string name="beginnerDesc">first time user, have no or little experience .show me what to do and how to do it</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="intermediateDesc">i know some exercise and how to do them properly , help me get into a structured routine</string>
+    <string name="advanced">Advanced</string>
+    <string name="advancedDesc">i’m very experienced with training .Show me something new .</string>
+    <string name="fitness_level">What’s Your Fitness\n level?</string>
+    <string name="exercise_place">Where do you\n exercise ?</string>
+    <string name="gym">Gym</string>
+    <string name="home">Home</string>
+    <string name="both">Both</string>
+
 </resources>

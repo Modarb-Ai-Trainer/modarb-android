@@ -7,8 +7,8 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 
-class ViewPagerAdapter(private val views: List<View>) :
-    RecyclerView.Adapter<ViewPagerAdapter.ViewHolder>() {
+class SplashViewPagerAdapter(private val views: List<View>) :
+    RecyclerView.Adapter<SplashViewPagerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_page, parent, false)
