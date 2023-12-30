@@ -2,7 +2,6 @@ package com.modarb.android.ui.onboarding.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -31,8 +30,9 @@ class OnBoardingActivity : AppCompatActivity() {
         val view1 = layoutInflater.inflate(R.layout.goal_selection_view, null)
         val view2 = layoutInflater.inflate(R.layout.gender_selection_view, null)
         val view3 = layoutInflater.inflate(R.layout.target_weight_selection_view, null)
+        val view4 = layoutInflater.inflate(R.layout.message_view, null)
 
-        val adapter = OnBoardingAdapter(listOf(view1, view2, view3), this)
+        val adapter = OnBoardingAdapter(listOf(view1, view2, view3, view4), this)
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
     }
