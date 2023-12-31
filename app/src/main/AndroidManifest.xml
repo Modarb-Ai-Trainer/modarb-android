@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
         <activity
+
             android:name=".ui.onboarding.activities.WelcomeScreenActivity"
             android:exported="false" />
         <activity
@@ -24,14 +25,20 @@
             android:name=".ui.onboarding.activities.GoalSelectionActivity"
             android:exported="false" />
         <activity
+
+
             android:name=".ui.onboarding.activities.OnBoardingSplashActivity"
             android:exported="false" />
+
+
         <activity
             android:name=".ui.onboarding.activities.GenderSelectionActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+
         <activity
             android:name=".ui.onboarding.activities.RegisterScreenActivity"
             android:exported="true">

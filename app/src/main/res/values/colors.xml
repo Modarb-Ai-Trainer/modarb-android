@@ -23,4 +23,6 @@
     <color name="han_purple">#5E35E8</color>
     <color name="shadow_gray">#403e3e</color>
     <color name="nickel">#757575</color>
+    <color name="white_500">#E6E6E6</color>
+    <color name="grey_900">#151515</color>
 </resources>

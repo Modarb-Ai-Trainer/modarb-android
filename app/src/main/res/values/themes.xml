@@ -6,7 +6,9 @@
         <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
 
     </style>
-
+    <style name="AppTheme.Picker" parent="Theme.Material3.DayNight.NoActionBar" >
+        <item name="android:textColorPrimary">@color/primary_400</item>
+    </style>
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
     </style>
