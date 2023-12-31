@@ -34,7 +34,9 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(view: View, type: Int) {
             val container = itemView.findViewById<FrameLayout>(R.id.container)
-            container.removeAllViews()
+            val parent = view.parent as? ViewGroup
+            parent?.removeView(view)
+
             container.addView(view)
 
             /*
@@ -87,6 +89,7 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
                     MessageView(view, ctx, Data.getCompleteMessages())
                 }
             }
+
         }
     }
 

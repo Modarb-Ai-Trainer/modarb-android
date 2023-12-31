@@ -1,8 +1,9 @@
 package com.modarb.android.ui.onboarding.activities
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityOnBoardingSplashBinding
 import com.modarb.android.ui.onboarding.adapters.SplashViewPagerAdapter
@@ -37,6 +38,9 @@ class OnBoardingSplashActivity : AppCompatActivity() {
             val currPos: Int = binding.viewPager.currentItem
             if ((currPos + 1) != binding.viewPager.adapter?.itemCount) {
                 binding.viewPager.currentItem = currPos + 1
+            } else {
+                val intent = Intent(this, OnBoardingActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -46,5 +50,7 @@ class OnBoardingSplashActivity : AppCompatActivity() {
                 binding.viewPager.currentItem = currPos - 1
             }
         }
+
+
     }
 }
