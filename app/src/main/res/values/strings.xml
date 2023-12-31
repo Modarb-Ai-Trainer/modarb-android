@@ -53,5 +53,6 @@
     <string name="both">Both</string>
     <string name="what_equipment_do_you_have">What Equipment do\n you have available to\n you?\n</string>
     <string name="do_you_have_pain">Do you currently\n experience any pain or\n discomfort in your\n body</string>
+    <string name="continue_">Continue</string>
 
 </resources>

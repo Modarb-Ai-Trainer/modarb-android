@@ -37,11 +37,9 @@ class OnBoardingActivity : AppCompatActivity() {
         val view8 = layoutInflater.inflate(R.layout.multiple_selection_view, null)
         val view9 = layoutInflater.inflate(R.layout.message_view, null)
 
-        val adapter =
-            OnBoardingAdapter(
-                listOf(view1, view2, view3, view4, view5, view6, view7, view8, view9),
-                this
-            )
+        val adapter = OnBoardingAdapter(
+            listOf(view1, view2, view3, view4, view5, view6, view7, view8, view9), this
+        )
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
     }
@@ -67,6 +65,9 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun goNext() {
         currPos = binding.viewPager.currentItem
+        if (curPage + 2 == binding.viewPager.adapter?.itemCount) {
+            binding.nextButton.text = getString(R.string.continue_)
+        }
         if ((currPos + 1) != binding.viewPager.adapter?.itemCount) {
             binding.viewPager.currentItem = currPos + 1
             curPage++
@@ -74,6 +75,7 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun goBack() {
+        binding.nextButton.text = getString(R.string.next)
         currPos = binding.viewPager.currentItem
         if (curPage == 0) finish()
         if ((currPos - 1) != binding.viewPager.adapter?.itemCount) {
