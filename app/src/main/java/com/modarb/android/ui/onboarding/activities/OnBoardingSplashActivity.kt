@@ -44,11 +44,8 @@ class OnBoardingSplashActivity : AppCompatActivity() {
             }
         }
 
-        binding.backButton.setOnClickListener{
-            val currPos: Int = binding.viewPager.currentItem
-            if ((currPos - 1) != binding.viewPager.adapter?.itemCount) {
-                binding.viewPager.currentItem = currPos - 1
-            }
+        binding.backButton.setOnClickListener {
+            finish()
         }
 
 
