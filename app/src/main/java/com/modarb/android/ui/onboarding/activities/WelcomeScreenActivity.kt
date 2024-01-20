@@ -1,7 +1,8 @@
 package com.modarb.android.ui.onboarding.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWelcomeScreenBinding
@@ -25,11 +26,19 @@ class WelcomeScreenActivity : AppCompatActivity() {
                 showLogin()
             }
         }
+
+        binding.startButton.setOnClickListener {
+            val intent = Intent(this, OnBoardingSplashActivity::class.java)
+            startActivity(intent)
+        }
+
     }
-    private fun initBottomSheet(){
+
+    private fun initBottomSheet() {
         bottomSheet = BottomSheetDialog(this)
 
     }
+
     private fun showLogin() {
         bottomSheet.setContentView(R.layout.login_view)
         bottomSheet.show()

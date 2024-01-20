@@ -1,4 +1,4 @@
-package com.modarb.android.utils.CustomViews
+package com.modarb.android.ui.onboarding.utils.CustomViews
 
 import android.annotation.SuppressLint
 import android.content.Context
