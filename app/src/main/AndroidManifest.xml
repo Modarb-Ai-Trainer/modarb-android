@@ -12,21 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.onboarding.activities.WelcomeScreenActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.onboarding.activities.OnBoardingSplashActivity"
             android:exported="false" />
         <activity
             android:name=".ui.onboarding.activities.OnBoardingActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
-
         <activity
-            android:name=".ui.onboarding.activities.WelcomeScreenActivity"
+            android:name=".ui.onboarding.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
