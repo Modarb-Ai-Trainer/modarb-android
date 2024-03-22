@@ -54,5 +54,12 @@
     <string name="what_equipment_do_you_have">What Equipment do\n you have available to\n you?\n</string>
     <string name="do_you_have_pain">Do you currently\n experience any pain or\n discomfort in your\n body</string>
     <string name="continue_">Continue</string>
+    <string name="day_1">Day 1</string>
+    <string name="full_body_workout">Full-body workout</string>
+    <string name="start_workout">Start Workout</string>
+    <string name="exercises_6">Exercises \n 6</string>
+    <string name="sets_20">sets \n 20</string>
+    <string name="Duration_40_50_min">Duration \n 40–50 min</string>
+
 
 </resources>
