@@ -60,6 +60,8 @@
     <string name="exercises_6">Exercises \n 6</string>
     <string name="sets_20">sets \n 20</string>
     <string name="Duration_40_50_min">Duration \n 40–50 min</string>
-
+    <string name="workoutTitle">Title</string>
+    <string name="workoutDescription">Description</string>
+    <string name="button">button</string>
 
 </resources>
