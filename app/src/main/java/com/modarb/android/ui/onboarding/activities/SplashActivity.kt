@@ -52,7 +52,7 @@ class SplashActivity : AppCompatActivity() {
             override fun onAnimationEnd(animation: Animator) {
 
                 handler.postDelayed({
-                    startActivity(Intent(this@SplashActivity, OnBoardingSplashActivity::class.java))
+                    startActivity(Intent(this@SplashActivity, WelcomeScreenActivity::class.java))
                 }, 200)
 
             }
