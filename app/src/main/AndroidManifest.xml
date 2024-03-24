@@ -30,7 +30,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.onboarding.activities.WorkoutActivity"
+            android:name=".ui.workout.activites.WorkoutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

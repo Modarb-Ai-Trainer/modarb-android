@@ -1,14 +1,14 @@
-package com.modarb.android.ui.onboarding.activities
+package com.modarb.android.ui.workout.activites
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import com.modarb.android.R
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.modarb.android.ui.onboarding.adapters.WorkoutAdapter
-import com.modarb.android.ui.onboarding.models.WorkoutModel
+import com.modarb.android.R
+import com.modarb.android.ui.workout.adapters.WorkoutAdapter
+import com.modarb.android.ui.workout.models.WorkoutModel
 
 class WorkoutActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
