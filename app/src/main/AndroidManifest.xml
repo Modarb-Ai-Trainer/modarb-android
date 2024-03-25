@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
         <activity
-            android:name=".ui.onboarding.activities.SplashActivity"
+            android:name=".ui.workout.activites.TodayWorkoutActivity"
             android:exported="false" />
         <activity
             android:name=".ui.onboarding.activities.WelcomeScreenActivity"
@@ -30,7 +30,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.workout.activites.WorkoutActivity"
+            android:name=".ui.onboarding.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
