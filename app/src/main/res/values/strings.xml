@@ -63,5 +63,6 @@
     <string name="workoutTitle">Title</string>
     <string name="workoutDescription">Description</string>
     <string name="button">button</string>
+    <string name="an_error_occurred">An error occurred</string>
 
 </resources>

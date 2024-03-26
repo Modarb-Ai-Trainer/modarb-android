@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.activites.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.workout.activites.TodayWorkoutActivity"
             android:exported="false" />
         <activity
