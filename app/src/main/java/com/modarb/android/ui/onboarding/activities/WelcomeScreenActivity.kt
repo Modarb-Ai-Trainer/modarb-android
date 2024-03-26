@@ -2,16 +2,18 @@ package com.modarb.android.ui.onboarding.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWelcomeScreenBinding
 import com.modarb.android.network.RetrofitService
-import com.modarb.android.network.models.BaseErrorResponse
+import com.modarb.android.network.RetrofitService.handleRequest
 import com.modarb.android.ui.onboarding.viewModel.UserRepository
 import com.modarb.android.ui.onboarding.viewModel.UserViewModel
 import com.modarb.android.ui.onboarding.viewModel.UserViewModelFactory
@@ -71,18 +73,34 @@ class WelcomeScreenActivity : AppCompatActivity() {
         loginBtn?.setOnClickListener {
             val email = emailEditText?.text.toString()
             val password = passwordEditText?.text.toString()
+            // TODO add validation
             viewModel.loginUser(email, password)
         }
 
-        viewModel.loginResponse.observe(this) {
-            Log.e("code", it.code().toString())
-            if (it.body() != null && it.body()!!.status == 200) {
-                Log.e("Nice", it.toString())
-            } else {
-                val errorResponse: BaseErrorResponse? = it.body() as? BaseErrorResponse
-                Log.e("Error", errorResponse!!.errors[0])
-
-            }
+        viewModel.loginResponse.observe(this) { response ->
+            handleRequest(
+                response = response,
+                onSuccess = { loginResponse ->
+                    if (loginResponse.status == 200) {
+                        Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                onError = { errorResponse ->
+                    val message = errorResponse?.errors?.firstOrNull() ?: "An error occurred"
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                }
+            )
         }
+
     }
 }
+
+inline fun <reified T> parseErrorBody(errorBody: String?): T? {
+    return try {
+        Gson().fromJson(errorBody, T::class.java)
+    } catch (e: JsonSyntaxException) {
+        null
+    }
+}
+
+

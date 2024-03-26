@@ -1,6 +1,5 @@
 package com.modarb.android.ui.onboarding.viewModel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,7 @@ import retrofit2.Response
 class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _loginResponse = MutableLiveData<Response<LoginResponse>>()
-    val loginResponse: LiveData<Response<LoginResponse>> = _loginResponse
+    val loginResponse: MutableLiveData<Response<LoginResponse>> = _loginResponse
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
