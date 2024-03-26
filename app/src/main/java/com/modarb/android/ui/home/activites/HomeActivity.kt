@@ -1,7 +1,7 @@
 package com.modarb.android.ui.home.activites
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.R
 
 class HomeActivity : AppCompatActivity() {

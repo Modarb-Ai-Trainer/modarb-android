@@ -85,7 +85,8 @@ class WelcomeScreenActivity : AppCompatActivity() {
                 },
                 onError = { errorResponse ->
                     val defaultErrorMessage = getString(R.string.an_error_occurred)
-                    val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error ?: defaultErrorMessage
+                    val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
+                    ?: defaultErrorMessage
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 }
             )
