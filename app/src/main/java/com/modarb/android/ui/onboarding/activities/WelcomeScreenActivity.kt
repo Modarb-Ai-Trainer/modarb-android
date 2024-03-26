@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
-import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWelcomeScreenBinding
 import com.modarb.android.network.RetrofitService
@@ -95,12 +93,5 @@ class WelcomeScreenActivity : AppCompatActivity() {
     }
 }
 
-inline fun <reified T> parseErrorBody(errorBody: String?): T? {
-    return try {
-        Gson().fromJson(errorBody, T::class.java)
-    } catch (e: JsonSyntaxException) {
-        null
-    }
-}
 
 
