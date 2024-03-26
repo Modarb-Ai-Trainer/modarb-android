@@ -12,6 +12,7 @@ import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWelcomeScreenBinding
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.network.RetrofitService.handleRequest
+import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.onboarding.viewModel.UserRepository
 import com.modarb.android.ui.onboarding.viewModel.UserViewModel
 import com.modarb.android.ui.onboarding.viewModel.UserViewModelFactory
@@ -80,6 +81,8 @@ class WelcomeScreenActivity : AppCompatActivity() {
                 response = response,
                 onSuccess = { loginResponse ->
                     if (loginResponse.status == 200) {
+                        UserPrefUtil.saveUserData(this, loginResponse.data)
+                        UserPrefUtil.setUserLoggedIn(this, true)
                         Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
                     }
                 },
