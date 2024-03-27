@@ -1,5 +1,6 @@
 package com.modarb.android.ui.onboarding.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,15 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.onboarding.models.ItemSelectionModel
+import com.modarb.android.ui.onboarding.models.UserRegisterData
+import com.modarb.android.ui.onboarding.utils.Data
 
 class SelectedItemsAdapter(
-    private val items: List<ItemSelectionModel>, private val listener: OnItemClickListener
+    private val items: List<ItemSelectionModel>,
+    private val listener: OnItemClickListener,
+    private val type: String
 ) : RecyclerView.Adapter<SelectedItemsAdapter.ViewHolder>() {
+    val selected = mutableListOf<String>()
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
@@ -28,6 +34,7 @@ class SelectedItemsAdapter(
                     listener.onItemClick(-(adapterPosition + 1))
                 }
                 updateUI(checkBox)
+                Log.d("SelectedItems", selected.toString())
             }
         }
     }
@@ -40,9 +47,21 @@ class SelectedItemsAdapter(
 
     private fun updateUI(checkBox: CheckBox) {
         if (checkBox.isChecked) {
+            selected.add(Data.getSelected(checkBox))
             checkBox.setBackgroundResource(R.drawable.neon_blue_shape)
         } else {
+            selected.remove(Data.getSelected(checkBox))
             checkBox.setBackgroundResource(R.drawable.neon_blue_edges)
+        }
+        saveData()
+    }
+
+    private fun saveData() {
+        // setting selected data to the pref
+        if (type == "preferred_equipment") {
+            UserRegisterData.registerRequest.preferences.preferred_equipment = selected
+        } else {
+            UserRegisterData.registerRequest.injuries = selected
         }
     }
 

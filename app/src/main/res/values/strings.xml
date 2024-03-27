@@ -64,5 +64,13 @@
     <string name="workoutDescription">Description</string>
     <string name="button">button</string>
     <string name="an_error_occurred">An error occurred</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="please_fill_all_the_data">Please fill all the data</string>
+    <string name="write_a_valid_email">Write a valid email</string>
+    <string name="enter_at_least_8_characters">Enter at least 8 characters</string>
+    <string name="password_don_t_match">Password don\'t match</string>
 
 </resources>

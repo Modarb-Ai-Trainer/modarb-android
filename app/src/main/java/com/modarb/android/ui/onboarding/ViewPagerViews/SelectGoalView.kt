@@ -1,10 +1,13 @@
 package com.modarb.android.ui.onboarding.ViewPagerViews
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.modarb.android.R
+import com.modarb.android.ui.onboarding.models.UserRegisterData
+import com.modarb.android.ui.onboarding.utils.Data
 
 class SelectGoalView(private var view: View, private var ctx: Context) {
 
@@ -85,25 +88,21 @@ class SelectGoalView(private var view: View, private var ctx: Context) {
         thirdItem: LinearLayout
     ) {
         container.setOnClickListener {
-            when (container.id) {
-                R.id.container1 -> {
-                    setViewBackgrounds(
-                        secondItem, firstItem, thirdItem
-                    )
-                }
-
-                R.id.container2 -> {
-                    setViewBackgrounds(
-                        thirdItem, firstItem, secondItem
-                    )
-                }
-
-                R.id.container3 -> {
-                    setViewBackgrounds(
-                        firstItem, secondItem, thirdItem
-                    )
-                }
+            val selectGoalTxt = when (container.id) {
+                R.id.container1 -> Data.getSelected(view.findViewById(R.id.containerOneTitle))
+                R.id.container2 -> Data.getSelected(view.findViewById(R.id.containerTwoTitle))
+                R.id.container3 -> Data.getSelected(view.findViewById(R.id.containerThreeTitle))
+                else -> ""
             }
+            UserRegisterData.registerRequest.preferences.fitness_goal = selectGoalTxt
+            val (selected, unselected1, unselected2) = when (container.id) {
+                R.id.container1 -> Triple(secondItem, firstItem, thirdItem)
+                R.id.container2 -> Triple(thirdItem, firstItem, secondItem)
+                R.id.container3 -> Triple(firstItem, secondItem, thirdItem)
+                else -> Triple(firstItem, secondItem, thirdItem)
+            }
+            Log.d("Goal", selectGoalTxt)
+            setViewBackgrounds(selected, unselected1, unselected2)
         }
     }
 
@@ -111,5 +110,6 @@ class SelectGoalView(private var view: View, private var ctx: Context) {
         selectedView.setBackgroundResource(R.drawable.neon_blue_shape)
         otherViews.forEach { it.setBackgroundResource(R.drawable.neon_blue_edges) }
     }
+
 
 }

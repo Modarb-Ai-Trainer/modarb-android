@@ -1,6 +1,7 @@
 package com.modarb.android.ui.onboarding.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.activity.OnBackPressedCallback
@@ -46,6 +47,13 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun handleButtons() {
         binding.nextButton.setOnClickListener {
+            if (binding.nextButton.text == getString(R.string.continue_)) {
+                // TODO validate all the data here
+
+                val i = Intent(this@OnBoardingActivity, RegisterScreenActivity::class.java)
+                startActivity(i)
+                return@setOnClickListener
+            }
             goNext()
         }
 

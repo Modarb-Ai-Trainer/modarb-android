@@ -14,7 +14,8 @@ class ItemSelectionView(
     view: View,
     ctx: Context,
     private var itemList: List<ItemSelectionModel>,
-    var title: Int
+    var title: Int,
+    var type: String
 ) : SelectedItemsAdapter.OnItemClickListener {
 
     init {
@@ -22,7 +23,7 @@ class ItemSelectionView(
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         val layoutManager = LinearLayoutManager(ctx)
         recyclerView.layoutManager = layoutManager
-        val adapter = SelectedItemsAdapter(itemList, this)
+        val adapter = SelectedItemsAdapter(itemList, this, type)
         recyclerView.adapter = adapter
 
 

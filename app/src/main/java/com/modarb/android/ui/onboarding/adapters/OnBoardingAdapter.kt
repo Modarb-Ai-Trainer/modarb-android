@@ -77,12 +77,22 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
 
                 6 -> {
                     ItemSelectionView(
-                        view, ctx, Data.getEquipmentList(), R.string.what_equipment_do_you_have
+                        view,
+                        ctx,
+                        Data.getEquipmentList(),
+                        R.string.what_equipment_do_you_have,
+                        "preferred_equipment"
                     )
                 }
 
                 7 -> {
-                    ItemSelectionView(view, ctx, Data.getPainPositions(), R.string.do_you_have_pain)
+                    ItemSelectionView(
+                        view,
+                        ctx,
+                        Data.getPainPositions(),
+                        R.string.do_you_have_pain,
+                        "injuries"
+                    )
                 }
 
                 8 -> {

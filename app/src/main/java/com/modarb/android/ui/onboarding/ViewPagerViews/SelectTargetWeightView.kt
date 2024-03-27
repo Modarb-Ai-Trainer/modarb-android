@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import com.modarb.android.R
+import com.modarb.android.ui.onboarding.models.UserRegisterData
 import com.modarb.android.ui.onboarding.utils.CustomViews.RulerView
 
 class SelectTargetWeightView(private val view: View, private val context: Context) {
@@ -30,6 +31,10 @@ class SelectTargetWeightView(private val view: View, private val context: Contex
             textView.text = "${it + getDefaultOffset(rulerId)} ${getUnit(rulerId)}"
             valueCallback.invoke(it)
         }
+
+        UserRegisterData.registerRequest.height = getHeightValue().toInt()
+        UserRegisterData.registerRequest.weight = getWeightValue().toInt()
+        UserRegisterData.registerRequest.preferences.target_weight = getTargetWeightValue().toInt()
     }
 
     private fun getDefaultText(rulerId: Int): String {

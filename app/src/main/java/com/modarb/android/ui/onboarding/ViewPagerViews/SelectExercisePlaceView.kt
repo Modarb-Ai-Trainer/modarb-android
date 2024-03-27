@@ -1,11 +1,14 @@
 package com.modarb.android.ui.onboarding.ViewPagerViews
 
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.modarb.android.R
+import com.modarb.android.ui.onboarding.models.UserRegisterData
+import com.modarb.android.ui.onboarding.utils.Data
 
 
 class SelectExercisePlaceView(private var view: View, private var ctx: Context) {
@@ -74,25 +77,21 @@ class SelectExercisePlaceView(private var view: View, private var ctx: Context) 
         thirdItem: LinearLayout
     ) {
         container.setOnClickListener {
-            when (container.id) {
-                R.id.container1 -> {
-                    setViewBackgrounds(
-                        secondItem, firstItem, thirdItem
-                    )
-                }
-
-                R.id.container2 -> {
-                    setViewBackgrounds(
-                        thirdItem, firstItem, secondItem
-                    )
-                }
-
-                R.id.container3 -> {
-                    setViewBackgrounds(
-                        firstItem, secondItem, thirdItem
-                    )
-                }
+            val placeTxt = when (container.id) {
+                R.id.container1 -> Data.getSelected(view.findViewById(R.id.containerOneTitle))
+                R.id.container2 -> Data.getSelected(view.findViewById(R.id.containerTwoTitle))
+                R.id.container3 -> Data.getSelected(view.findViewById(R.id.containerThreeTitle))
+                else -> ""
             }
+            UserRegisterData.registerRequest.preferences.workout_place = placeTxt
+            val (selected, unselected1, unselected2) = when (container.id) {
+                R.id.container1 -> Triple(secondItem, firstItem, thirdItem)
+                R.id.container2 -> Triple(thirdItem, firstItem, secondItem)
+                R.id.container3 -> Triple(firstItem, secondItem, thirdItem)
+                else -> Triple(firstItem, secondItem, thirdItem)
+            }
+            Log.d("Place = ", placeTxt)
+            setViewBackgrounds(selected, unselected1, unselected2)
         }
     }
 

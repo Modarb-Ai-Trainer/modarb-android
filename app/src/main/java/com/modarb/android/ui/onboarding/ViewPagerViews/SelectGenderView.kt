@@ -3,6 +3,7 @@ package com.modarb.android.ui.onboarding.ViewPagerViews
 import android.view.View
 import android.widget.NumberPicker
 import com.modarb.android.R
+import com.modarb.android.ui.onboarding.models.UserRegisterData
 
 class SelectGenderView(view: View) {
 
@@ -17,11 +18,13 @@ class SelectGenderView(view: View) {
 
     private fun setupClickListeners() {
         maleView.setOnClickListener {
+            UserRegisterData.registerRequest.gender = "male"
             updateBackgroundDrawable(maleView, R.drawable.circular_background_neon)
             updateBackgroundDrawable(femaleView, R.drawable.circular_background)
         }
 
         femaleView.setOnClickListener {
+            UserRegisterData.registerRequest.gender = "female"
             updateBackgroundDrawable(femaleView, R.drawable.circular_background_neon)
             updateBackgroundDrawable(maleView, R.drawable.circular_background)
         }
@@ -30,6 +33,8 @@ class SelectGenderView(view: View) {
     private fun setupNumberPicker() {
         numberPicker.minValue = 6
         numberPicker.maxValue = 100
+
+        //TODO ADD DATE PICKER
     }
 
     private fun updateBackgroundDrawable(view: View, drawableId: Int) {
