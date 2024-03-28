@@ -2,29 +2,26 @@ package com.modarb.android.ui.onboarding.utils
 
 import android.widget.TextView
 import com.modarb.android.ui.onboarding.models.ItemSelectionModel
+import java.util.Locale
 
 class Data {
 
     companion object {
-        fun getEquipmentList(): List<ItemSelectionModel> {
-            return listOf(
-                ItemSelectionModel("Barbells"),
-                ItemSelectionModel("Dumbbells"),
-                ItemSelectionModel("Gym machines"),
-                ItemSelectionModel("Resistance band"),
-                ItemSelectionModel("Body weight")
-            )
-        }
+        val equipmentList: MutableList<ItemSelectionModel> = mutableListOf(
+            ItemSelectionModel("Barbells"),
+            ItemSelectionModel("Dumbbells"),
+            ItemSelectionModel("Gym machines"),
+            ItemSelectionModel("Resistance band"),
+            ItemSelectionModel("Body weight")
+        )
 
-        fun getPainPositions(): List<ItemSelectionModel> {
-            return listOf(
-                ItemSelectionModel("Neek"),
-                ItemSelectionModel("Shoulders"),
-                ItemSelectionModel("Back"),
-                ItemSelectionModel("Arms"),
-                ItemSelectionModel("Knees")
-            )
-        }
+        val painPositionsList: MutableList<ItemSelectionModel> = mutableListOf(
+            ItemSelectionModel("Neck"),
+            ItemSelectionModel("Shoulders"),
+            ItemSelectionModel("Back"),
+            ItemSelectionModel("Arms"),
+            ItemSelectionModel("Knees")
+        )
 
         fun getBMIData(): List<String> {
             val bmi = 22.23
@@ -43,7 +40,19 @@ class Data {
         }
 
         fun getSelected(selected: TextView): String {
-            return selected.text.toString().lowercase()
+            var selectedText = selected.text.toString().trim().lowercase(Locale.ROOT)
+            if (selectedText == "body weight") {
+                selectedText = "bodyweight"
+            }
+            return selectedText
+        }
+
+        fun getSelected(selected: String): String {
+            var selectedText = selected
+            if (selectedText == "body weight") {
+                selectedText = "bodyweight"
+            }
+            return selectedText.lowercase(Locale.ROOT)
         }
     }
 

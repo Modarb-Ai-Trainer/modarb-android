@@ -1,5 +1,6 @@
 package com.modarb.android.ui.onboarding.adapters
 
+import ItemSelectionView
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.onboarding.ViewPagerViews.ItemSelectionView
 import com.modarb.android.ui.onboarding.ViewPagerViews.MessageView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectExercisePlaceView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectFitnessLevelView
@@ -16,8 +16,11 @@ import com.modarb.android.ui.onboarding.ViewPagerViews.SelectGoalView
 import com.modarb.android.ui.onboarding.ViewPagerViews.SelectTargetWeightView
 import com.modarb.android.ui.onboarding.utils.Data
 
-class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
-    RecyclerView.Adapter<OnBoardingAdapter.ViewHolder>() {
+class OnBoardingAdapter(
+    private val views: List<View>,
+    val ctx: Context,
+) : RecyclerView.Adapter<OnBoardingAdapter.ViewHolder>() {
+    val viewStateMap: MutableMap<Int, Any> = mutableMapOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_page, parent, false)
@@ -76,23 +79,11 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
                 }
 
                 6 -> {
-                    ItemSelectionView(
-                        view,
-                        ctx,
-                        Data.getEquipmentList(),
-                        R.string.what_equipment_do_you_have,
-                        "preferred_equipment"
-                    )
+                    initEquipView(view, type)
                 }
 
                 7 -> {
-                    ItemSelectionView(
-                        view,
-                        ctx,
-                        Data.getPainPositions(),
-                        R.string.do_you_have_pain,
-                        "injuries"
-                    )
+                    initInjView(view, type)
                 }
 
                 8 -> {
@@ -101,6 +92,40 @@ class OnBoardingAdapter(private val views: List<View>, val ctx: Context) :
             }
 
         }
+    }
+
+    fun initEquipView(view: View, id: Int) {
+        if (viewStateMap.containsKey(id)) {
+            viewStateMap[id]
+        } else {
+            viewStateMap[id] = ItemSelectionView(
+                view,
+                this.ctx,
+                R.string.what_equipment_do_you_have,
+                "preferred_equipment",
+            )
+        }
+    }
+
+    fun initInjView(view: View, id: Int) {
+        if (viewStateMap.containsKey(id)) {
+            viewStateMap[id]
+        } else {
+            ItemSelectionView(
+                view,
+                ctx,
+                R.string.do_you_have_pain,
+                "injuries",
+            )
+        }
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
 

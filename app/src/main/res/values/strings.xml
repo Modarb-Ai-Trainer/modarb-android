@@ -72,5 +72,6 @@
     <string name="write_a_valid_email">Write a valid email</string>
     <string name="enter_at_least_8_characters">Enter at least 8 characters</string>
     <string name="password_don_t_match">Password don\'t match</string>
+    <string name="welcome_please_login_to_complete_your_register">Welcome, please login to complete your register</string>
 
 </resources>

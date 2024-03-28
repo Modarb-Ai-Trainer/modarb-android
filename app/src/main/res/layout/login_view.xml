@@ -6,6 +6,7 @@
     android:background="@drawable/curved_bottom_sheet"
     android:padding="16dp">
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@id/textInputLayout1"
         android:layout_width="match_parent"
@@ -21,8 +22,8 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:hint="@string/email"
+            android:maxLines="1"
             android:textColor="@color/white"
             android:textColorHint="@color/white">
 
@@ -38,10 +39,10 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:passwordToggleTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
@@ -73,4 +74,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="40dp"
+        android:indeterminateTint="@color/white"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/loginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/loginBtn" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

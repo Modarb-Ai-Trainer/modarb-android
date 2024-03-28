@@ -4,17 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityOnBoardingBinding
 import com.modarb.android.ui.onboarding.adapters.OnBoardingAdapter
+import com.modarb.android.ui.onboarding.models.UserRegisterData
+import com.modarb.android.ui.onboarding.utils.ValidationUtil
 
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
     private var currPos: Int = 0
     private var curPage: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
@@ -38,21 +42,32 @@ class OnBoardingActivity : AppCompatActivity() {
         val view8 = layoutInflater.inflate(R.layout.multiple_selection_view, null)
         val view9 = layoutInflater.inflate(R.layout.message_view, null)
 
+
         val adapter = OnBoardingAdapter(
-            listOf(view1, view2, view3, view4, view5, view6, view7, view8, view9), this
+            listOf(
+                view1, view2, view3, view4, view5, view6, view7, view8, view9
+            ), this
         )
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = adapter
+
+
     }
 
     private fun handleButtons() {
         binding.nextButton.setOnClickListener {
             if (binding.nextButton.text == getString(R.string.continue_)) {
-                // TODO validate all the data here
+                UserRegisterData.printData()
+                if (ValidationUtil.validateRegistrationData(UserRegisterData.registerRequest)) {
+                    val i = Intent(this@OnBoardingActivity, RegisterScreenActivity::class.java)
+                    startActivity(i)
+                    return@setOnClickListener
+                } else {
+                    Toast.makeText(
+                        this, getString(R.string.please_fill_all_the_data), Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-                val i = Intent(this@OnBoardingActivity, RegisterScreenActivity::class.java)
-                startActivity(i)
-                return@setOnClickListener
             }
             goNext()
         }
@@ -90,7 +105,6 @@ class OnBoardingActivity : AppCompatActivity() {
             binding.viewPager.currentItem = currPos - 1
             curPage--
         }
-
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -99,6 +113,5 @@ class OnBoardingActivity : AppCompatActivity() {
         }
         return super.onKeyDown(keyCode, event)
     }
-
 
 }
