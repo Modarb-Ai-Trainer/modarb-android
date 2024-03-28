@@ -28,11 +28,4 @@ jobs:
     - name: Android Build
       uses: vgaidarji/android-github-actions-build@v1.0.1
 
-    - name: Gradle Android
-      uses: Raul6469/android-gradle-action@2.0.0
-      with:
-        script: |
-          export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk
-          ./gradlew build
-
-        android-licence: ${{ secrets.ANDROID_LICENSES }}
+    
