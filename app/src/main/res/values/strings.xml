@@ -73,5 +73,27 @@
     <string name="enter_at_least_8_characters">Enter at least 8 characters</string>
     <string name="password_don_t_match">Password don\'t match</string>
     <string name="welcome_please_login_to_complete_your_register">Welcome, please login to complete your register</string>
+    <string name="your_smart_trainer">Your smart trainer</string>
+    <string name="dynamic_workouts_personalized_advice_and_constant_evolution_with_your_progress">Dynamic workouts, personalized \nadvice, and constant evolution \nwith your progress</string>
+    <string name="my_plan">My plan</string>
+    <string name="custom_workout">Custom workout</string>
+    <string name="block1_establishing_the_foundation">Block 1: Establishing the Foundation</string>
+    <string name="description_of_establishing_the_foundation">Your first phase spans 6 weeks, focusing on \nbuilding a solid foundation. Through diverse \nand targeted workouts, you\'ll enhance \nstrength, improve endurance, and set the \nstage for sustainable muscle growth. The \ncompletion of each week unlocks new \nlevels, preparing you for the next stage.</string>
+    <string name="overview">Overview</string>
+    <string name="overview_fitness_level">Fitness level :</string>
+    <string name="fitness_level_des">intermediate</string>
+    <string name="goal">Goal :</string>
+    <string name="about_the_plan">About the plan</string>
+    <string name="home_gym">home &amp; gym</string>
+    <string name="thirty_min_day">30 min / day</string>
+    <string name="equipment_diversity">Equipment Diversity</string>
+    <string name="sixteen">16 day</string>
+    <string name="today_workout">Today’s workout</string>
+    <string name="full_body">full-body</string>
+    <string name="thirty_min">30 min</string>
+    <string name="six_excersise">six_excersise</string>
+    <string name="Block1_your_personalized_plan">Block 1 : Your personalized plan</string>
+    <string name="Week1_foundation">Week 1 : Foundation</string>
+    <string name="Week1_description">Start easy in the first week to let your body get used to the workout. It sets the baseline for your progress in the weeks ahead.</string>
 
 </resources>
