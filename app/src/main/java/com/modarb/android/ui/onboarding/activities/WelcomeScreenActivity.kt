@@ -25,7 +25,7 @@ import com.modarb.android.ui.onboarding.viewModel.UserViewModelFactory
 class WelcomeScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeScreenBinding
     private lateinit var bottomSheet: BottomSheetDialog
-    private lateinit var viewModel: UserViewModel
+    lateinit var viewModel: UserViewModel
     private lateinit var progress: ProgressBar
     private lateinit var loginBtn: Button
 
