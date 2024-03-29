@@ -1,8 +1,6 @@
 name: Android CI
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -27,5 +25,11 @@ jobs:
 
     - name: Android Build
       uses: vgaidarji/android-github-actions-build@v1.0.1
+
+
+    - name: Android Emulator
+      uses: vgaidarji/android-github-actions-emulator@v1.0.1
+          
+          
 
     
