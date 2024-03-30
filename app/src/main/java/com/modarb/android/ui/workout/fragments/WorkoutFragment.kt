@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.activites
+package com.modarb.android.ui.workout.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle

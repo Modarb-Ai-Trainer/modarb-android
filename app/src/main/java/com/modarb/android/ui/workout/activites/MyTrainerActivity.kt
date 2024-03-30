@@ -1,10 +1,11 @@
 package com.modarb.android.ui.workout.activites
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.modarb.android.R
+import com.modarb.android.ui.workout.fragments.WorkoutFragment
 
 class MyTrainerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
