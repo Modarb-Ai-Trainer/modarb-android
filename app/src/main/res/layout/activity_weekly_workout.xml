@@ -141,7 +141,7 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="@string/Day1_4_Full_body"
+                tools:text="Day 1 / 4 -Full-body"
                 android:textColor="@color/primary_50"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"

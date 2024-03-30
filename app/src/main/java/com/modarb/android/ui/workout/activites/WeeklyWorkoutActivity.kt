@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.workout.adapters.WorkoutAdapter
 import com.modarb.android.ui.workout.models.WorkoutModel
-//import com.modarb.android.ui.workout.models.YourItem2
+import com.modarb.android.ui.workout.models.YourItem2
 
 class WeeklyWorkoutActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -38,11 +38,11 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
 
 
 
-//        val itemList2: ArrayList<YourItem2> = ArrayList()
-//        itemList2.add(YourItem2("D1"))
-//        itemList2.add(YourItem2("D2"))
-//        itemList2.add(YourItem2("D3"))
-//        itemList2.add(YourItem2("D4"))
+        val itemList2: ArrayList<YourItem2> = ArrayList()
+        itemList2.add(YourItem2("D1"))
+        itemList2.add(YourItem2("D2"))
+        itemList2.add(YourItem2("D3"))
+        itemList2.add(YourItem2("D4"))
 
     }
 }
