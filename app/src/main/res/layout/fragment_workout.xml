@@ -66,29 +66,44 @@
                 app:srcCompat="@drawable/person"
                 tools:ignore="ContentDescription" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="@color/button"
-                android:text="@string/my_plan"
-                app:layout_constraintEnd_toStartOf="@+id/button5"
-                app:layout_constraintHorizontal_bias="0.354"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggle_button_group"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="60dp"
-                android:backgroundTint="@color/button"
-                android:text="@string/custom_workout"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/myPlanBtn"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textColor="@color/white"
+                    android:text="@string/my_plan"
+                    app:backgroundTint="@color/toggle_button"
+                    app:cornerRadius="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/customWorkOut"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="0.5"
+                    android:text="@string/custom_workout"
+                    app:backgroundTint="@color/toggle_button"
+                    app:cornerRadius="8dp" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
 
             <androidx.cardview.widget.CardView
@@ -96,13 +111,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:clipToPadding="true"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button4">
+                app:layout_constraintTop_toBottomOf="@+id/toggle_button_group">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -125,12 +140,12 @@
                     <ImageView
                         android:id="@+id/imageView10"
                         android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="9dp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/line1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView8"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -437,12 +452,12 @@
                         android:layout_marginTop="8dp"
                         android:gravity="start"
                         android:paddingTop="2dp"
-                        tools:text="full-body"
                         android:textColor="@color/grey_500"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView28"
+                        tools:text="full-body" />
 
 
                     <TextView
@@ -452,12 +467,12 @@
                         android:layout_marginTop="8dp"
                         android:background="@drawable/neon_blue_shape"
                         android:gravity="center"
-                        tools:text="30 min"
                         android:textColor="@color/white_500"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView29"
                         app:layout_constraintStart_toStartOf="@+id/textView29"
-                        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView29"
+                        tools:text="30 min" />
 
 
                     <TextView
@@ -468,20 +483,20 @@
                         android:background="@drawable/neon_blue_shape"
                         android:gravity="center"
                         android:paddingTop="2dp"
-                        tools:text="6 excersise"
                         android:textColor="@color/white_500"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView30"
                         app:layout_constraintStart_toStartOf="@+id/textView30"
-                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView30"
+                        tools:text="6 excersise" />
 
                     <Button
                         android:id="@+id/button6"
                         android:layout_width="180dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="8dp"
-                        android:padding="-4dp"
                         android:backgroundTint="@color/button"
+                        android:padding="-4dp"
                         android:text="@string/start_workout"
                         android:textSize="16sp"
                         android:textStyle="bold"

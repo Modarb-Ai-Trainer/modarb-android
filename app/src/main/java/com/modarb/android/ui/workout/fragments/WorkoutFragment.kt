@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.modarb.android.R
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 import com.modarb.android.ui.workout.models.YourItem
+
 
 class WorkoutFragment : Fragment() {
 
@@ -48,6 +50,9 @@ class WorkoutFragment : Fragment() {
         )
 
         adapter.notifyDataSetChanged()
+
+        val toggleGroup: MaterialButtonToggleGroup = view.findViewById(R.id.toggle_button_group)
+        toggleGroup.check(R.id.myPlanBtn)
 
         return view
     }
