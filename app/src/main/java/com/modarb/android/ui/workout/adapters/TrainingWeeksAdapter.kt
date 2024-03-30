@@ -9,7 +9,8 @@ import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
 import com.modarb.android.ui.workout.models.YourItem
 
-class TimelineAdapter(private val dataList: List<YourItem>) : RecyclerView.Adapter<TimelineAdapter.YourViewHolder>() {
+class TrainingWeeksAdapter(private val dataList: List<YourItem>) :
+    RecyclerView.Adapter<TrainingWeeksAdapter.YourViewHolder>() {
 
     inner class YourViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         private val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
