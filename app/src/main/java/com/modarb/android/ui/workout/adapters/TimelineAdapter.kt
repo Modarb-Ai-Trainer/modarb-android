@@ -21,6 +21,7 @@ class TimelineAdapter(private val dataList: List<YourItem>) : RecyclerView.Adapt
         }
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_timeline, parent, false)
         return YourViewHolder(view, viewType)

@@ -125,12 +125,12 @@
                     <ImageView
                         android:id="@+id/imageView10"
                         android:layout_width="32dp"
-                        android:layout_height="49dp"
-                        android:layout_marginStart="9dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/line1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/imageView8"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -437,7 +437,7 @@
                         android:layout_marginTop="8dp"
                         android:gravity="start"
                         android:paddingTop="2dp"
-                        android:text="@string/full_body"
+                        tools:text="full-body"
                         android:textColor="@color/grey_500"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -447,15 +447,14 @@
 
                     <TextView
                         android:id="@+id/textView30"
-                        android:layout_width="80dp"
-                        android:layout_height="28dp"
+                        android:layout_width="70dp"
+                        android:layout_height="25dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/neon_blue_shape"
                         android:gravity="center"
-                        android:paddingTop="2dp"
-                        android:text="@string/thirty_min"
+                        tools:text="30 min"
                         android:textColor="@color/white_500"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView29"
                         app:layout_constraintStart_toStartOf="@+id/textView29"
                         app:layout_constraintTop_toBottomOf="@+id/textView29" />
@@ -463,13 +462,13 @@
 
                     <TextView
                         android:id="@+id/textView31"
-                        android:layout_width="125dp"
-                        android:layout_height="28dp"
+                        android:layout_width="100dp"
+                        android:layout_height="25dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/neon_blue_shape"
                         android:gravity="center"
                         android:paddingTop="2dp"
-                        android:text="@string/six_excersise"
+                        tools:text="6 excersise"
                         android:textColor="@color/white_500"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView30"
@@ -478,14 +477,15 @@
 
                     <Button
                         android:id="@+id/button6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="180dp"
+                        android:layout_height="40dp"
                         android:layout_marginTop="8dp"
+                        android:padding="-4dp"
                         android:backgroundTint="@color/button"
                         android:text="@string/start_workout"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
-                        app:cornerRadius="12dp"
+                        app:cornerRadius="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView31" />

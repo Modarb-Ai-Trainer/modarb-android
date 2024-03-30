@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,20 +8,16 @@
     <com.github.vipulasri.timelineview.TimelineView
         android:id="@+id/timeline"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:endLineColor="@color/tropical_indigo"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:endLineColor="@color/han_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lineOrientation="vertical"
-        app:linePadding="4dp"
-        app:lineStyle="normal"
-        app:lineWidth="2dp"
-        app:marker="@drawable/marker"
-        app:markerInCenter="true"
+        app:lineStyle="dash"
+        app:lineWidth="3dp"
         app:markerSize="20dp"
-        app:startLineColor="@color/tropical_indigo" />
+        app:startLineColor="@color/han_purple" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -41,34 +36,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@drawable/neon_blue_edges"
+            android:orientation="vertical"
             android:padding="16dp">
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
-              <ImageView
-                android:id="@+id/imageView18"
-                android:layout_width="22dp"
-                android:layout_height="36dp"
-                app:srcCompat="@drawable/line1"
-                tools:ignore="ContentDescription" />
+                <ImageView
+                    android:id="@+id/imageView18"
+                    android:layout_width="22dp"
+                    android:layout_height="36dp"
+                    app:srcCompat="@drawable/line1"
+                    tools:ignore="ContentDescription" />
 
-              <TextView
-                android:id="@+id/firstTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/Week1_foundation"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/firstTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/Week1_foundation"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
             </LinearLayout>
 
-              <TextView
+            <TextView
                 android:id="@+id/secondTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
