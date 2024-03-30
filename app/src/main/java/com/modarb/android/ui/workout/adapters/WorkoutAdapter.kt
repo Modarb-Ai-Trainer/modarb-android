@@ -22,7 +22,7 @@ class WorkoutAdapter(private val itemList: List<WorkoutModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.workout_details, parent, false)
+            .inflate(R.layout.item_workout_details, parent, false)
         return ViewHolder(view)
     }
 
