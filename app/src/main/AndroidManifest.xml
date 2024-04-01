@@ -26,12 +26,10 @@
         <activity
             android:name=".ui.onboarding.activities.RegisterScreenActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.workout.activites.MyTrainerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
+
+        <!--        <activity-->
+        <!--            android:name=".ui.home.HomeActivity"-->
+        <!--            android:exported="false" />-->
         <activity
             android:name=".ui.onboarding.activities.OnBoardingSplashActivity"
             android:exported="false" />
@@ -42,7 +40,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.workout.activites.WeeklyWorkoutActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

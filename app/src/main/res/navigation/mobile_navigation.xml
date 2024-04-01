@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.modarb.android.ui.home.ui.home.HomeFragment"
+        android:name="com.modarb.android.ui.workout.fragments.WorkoutFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_workout" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
