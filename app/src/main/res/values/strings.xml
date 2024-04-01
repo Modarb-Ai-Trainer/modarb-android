@@ -92,5 +92,9 @@
     <string name="Block1_your_personalized_plan">Block 1 : Your personalized plan</string>
     <string name="Week1_foundation">Week 1 : Foundation</string>
     <string name="Week1_description">Start easy in the first week to let your body get used to the workout. It sets the baseline for your progress in the weeks ahead.</string>
+    <string name="my_plans">My plans\n</string>
+    <string name="workout_plan">workout plan</string>
+    <string name="nutrition_plan">nutrition plan</string>
+    <string name="crush_today_s_workout">Crush Today’s Workout</string>
 
 </resources>

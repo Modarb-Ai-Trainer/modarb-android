@@ -27,5 +27,6 @@
     <color name="grey_900">#151515</color>
     <color name="lavender_blue">#D0C2FF</color>
     <color name="grey_500">#313131</color>
+    <color name="primary_100">#D0C2FF</color>
 
 </resources>
