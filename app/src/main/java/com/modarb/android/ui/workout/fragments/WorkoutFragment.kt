@@ -1,4 +1,4 @@
-package com.modarb.android.ui.home.ui.workout.fragments
+package com.modarb.android.ui.workout.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.modarb.android.R
-import com.modarb.android.ui.home.ui.workout.adapters.TrainingWeeksAdapter
-import com.modarb.android.ui.home.ui.workout.models.YourItem
+import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
+import com.modarb.android.ui.workout.models.YourItem
 
 
 class WorkoutFragment : Fragment() {

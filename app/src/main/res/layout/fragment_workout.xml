@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.home.ui.workout.fragments.WorkoutFragment">
+    tools:context=".ui.workout.fragments.WorkoutFragment">
 
     <FrameLayout
         android:id="@+id/Frame1"

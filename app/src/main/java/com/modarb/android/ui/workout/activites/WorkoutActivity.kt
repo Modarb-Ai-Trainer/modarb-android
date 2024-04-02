@@ -1,48 +1,41 @@
-package com.modarb.android.ui.home.ui.workout.activites
+package com.modarb.android.ui.workout.activites
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.home.ui.workout.adapters.WorkoutAdapter
-import com.modarb.android.ui.home.ui.workout.models.WorkoutModel
-import com.modarb.android.ui.home.ui.workout.models.YourItem2
+import com.modarb.android.ui.workout.adapters.WorkoutAdapter
+import com.modarb.android.ui.workout.models.WorkoutModel
 
-class WeeklyWorkoutActivity : AppCompatActivity() {
+class WorkoutActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
+    private lateinit var startButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_weekly_workout)
-
+        setContentView(R.layout.activity_workout)
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView.visibility = View.VISIBLE
-
         val itemList: ArrayList<WorkoutModel> = ArrayList()
 
         val workout1 = WorkoutModel(R.drawable.chest_press, "chest press", "4 sets x  12-15 reps", "chest")
         val workout2 = WorkoutModel(R.drawable.deadlift, "Deadlift", "4 sets x  10-12 reps", "full body")
+        // Add more items as needed
+
 
         itemList.add(workout1)
         itemList.add(workout2)
-
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
 
         val adapter = WorkoutAdapter(itemList)
         recyclerView.adapter = adapter
 
 
-
-        val itemList2: ArrayList<YourItem2> = ArrayList()
-        itemList2.add(YourItem2("D1"))
-        itemList2.add(YourItem2("D2"))
-        itemList2.add(YourItem2("D3"))
-        itemList2.add(YourItem2("D4"))
-
+        startButton = findViewById(R.id.startButton)
+        startButton.setOnClickListener {
+            recyclerView.visibility = View.VISIBLE
+        }
     }
 }
