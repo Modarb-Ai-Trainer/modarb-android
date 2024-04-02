@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.adapters
+package com.modarb.android.ui.home.ui.workout.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.workout.models.WorkoutModel
+import com.modarb.android.ui.home.ui.workout.models.WorkoutModel
 
 class WorkoutAdapter(private val itemList: List<WorkoutModel>) :
     RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {

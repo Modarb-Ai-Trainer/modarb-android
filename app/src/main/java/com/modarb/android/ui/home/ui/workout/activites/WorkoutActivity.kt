@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.activites
+package com.modarb.android.ui.home.ui.workout.activites
 
 import android.os.Bundle
 import android.view.View
@@ -7,15 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.workout.adapters.WorkoutAdapter
-import com.modarb.android.ui.workout.models.WorkoutModel
+import com.modarb.android.ui.home.ui.workout.adapters.WorkoutAdapter
+import com.modarb.android.ui.home.ui.workout.models.WorkoutModel
 
-class TodayWorkoutActivity : AppCompatActivity() {
+class WorkoutActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var startButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_today_workout)
+        setContentView(R.layout.activity_workout)
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -23,6 +23,8 @@ class TodayWorkoutActivity : AppCompatActivity() {
 
         val workout1 = WorkoutModel(R.drawable.chest_press, "chest press", "4 sets x  12-15 reps", "chest")
         val workout2 = WorkoutModel(R.drawable.deadlift, "Deadlift", "4 sets x  10-12 reps", "full body")
+        // Add more items as needed
+
 
         itemList.add(workout1)
         itemList.add(workout2)

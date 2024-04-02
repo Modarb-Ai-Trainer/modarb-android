@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.adapters
+package com.modarb.android.ui.home.ui.workout.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,31 +7,27 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
-import com.modarb.android.ui.workout.models.YourItem
+import com.modarb.android.ui.home.ui.workout.models.YourItem2
 
-class TrainingWeeksAdapter(private val dataList: List<YourItem>) :
-    RecyclerView.Adapter<TrainingWeeksAdapter.YourViewHolder>() {
+class TimelineWeeklyWorkoutAdapter (private val dataList: List<YourItem2>) : RecyclerView.Adapter<TimelineWeeklyWorkoutAdapter.YourViewHolder>() {
 
     inner class YourViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         private val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
-        val firstTextView: TextView = itemView.findViewById(R.id.firstTextView)
-        val secondTextView: TextView = itemView.findViewById(R.id.secondTextView)
+        val textView: TextView = itemView.findViewById(R.id.textView)
 
         init {
             timelineView.initLine(viewType)
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_timeline, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_timeline2, parent, false)
         return YourViewHolder(view, viewType)
     }
 
     override fun onBindViewHolder(holder: YourViewHolder, position: Int) {
         val currentItem = dataList[position]
-        holder.firstTextView.text = currentItem.firstText
-        holder.secondTextView.text = currentItem.secondText
+        holder.textView.text = currentItem.textView
     }
 
     override fun getItemCount() = dataList.size
