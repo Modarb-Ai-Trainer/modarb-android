@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.modarb.android.ui.workout.fragments.MyPlanFragment"
+        android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_my_plan" />
 
