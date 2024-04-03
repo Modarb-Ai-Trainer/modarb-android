@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.modarb.android.ui.workout.fragments.WorkoutFragment"
+        android:name="com.modarb.android.ui.workout.fragments.MyPlanFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_workout" />
+        tools:layout="@layout/fragment_my_plan" />
 
     <fragment
         android:id="@+id/navigation_notifications"

@@ -14,7 +14,7 @@ import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 import com.modarb.android.ui.workout.models.YourItem
 
 
-class WorkoutFragment : Fragment() {
+class MyPlanFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TrainingWeeksAdapter
@@ -27,7 +27,7 @@ class WorkoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_workout, container, false)
+        val view = inflater.inflate(R.layout.fragment_my_plan, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
