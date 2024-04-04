@@ -59,7 +59,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-basement:18.3.0")
     // json helper
     implementation("com.google.code.gson:gson:2.10")
-    implementation("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
