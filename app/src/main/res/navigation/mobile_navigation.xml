@@ -22,4 +22,5 @@
         android:name="com.modarb.android.ui.home.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
 </navigation>
