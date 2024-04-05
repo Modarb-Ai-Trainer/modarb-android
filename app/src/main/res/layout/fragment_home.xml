@@ -269,6 +269,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/textView35">
@@ -305,7 +306,7 @@
                 android:id="@+id/mealDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="2dp"
                 android:elevation="9dp"
                 android:text="3 meals  1 snack"
                 android:textColor="@color/white"
@@ -321,6 +322,7 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:text="@string/view"
+                android:textColor="@color/neon_blue"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView19"
@@ -328,7 +330,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mealDetails"
                 app:strokeColor="@color/neon_blue"
-                android:textColor="@color/neon_blue"
                 app:strokeWidth="2dp" />
 
             <TextView
@@ -337,12 +338,12 @@
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/neon_blue_shape"
                 android:gravity="center"
-                android:textColor="@color/white_500"
 
+                android:textColor="@color/white_500"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/button2"
                 app:layout_constraintEnd_toEndOf="@+id/imageView19"
-                app:layout_constraintHorizontal_bias="0.85"
+                app:layout_constraintHorizontal_bias="0.8"
                 app:layout_constraintStart_toStartOf="@+id/imageView19"
                 app:layout_constraintTop_toTopOf="@+id/mealDetails"
                 app:layout_constraintVertical_bias="0.0"
@@ -350,7 +351,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Macro Tracker: Your Daily Intake"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
