@@ -319,8 +319,8 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button2"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
                 android:text="@string/view"
                 android:textColor="@color/neon_blue"
                 app:backgroundTint="@android:color/transparent"

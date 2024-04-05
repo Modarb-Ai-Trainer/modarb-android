@@ -98,5 +98,9 @@
     <string name="crush_today_s_workout">Crush Today’s Workout</string>
     <string name="today_s_diet">Today’s diet</string>
     <string name="view">view</string>
+    <string name="my_trainer">my trainer</string>
+    <string name="workouts">Workouts</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="more">More</string>
 
 </resources>

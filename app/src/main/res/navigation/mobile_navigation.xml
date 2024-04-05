@@ -12,15 +12,29 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_my_plan"
         android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/my_plan"
         tools:layout="@layout/fragment_my_plan" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_workouts"
         android:name="com.modarb.android.ui.home.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/workouts"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_nutrition"
+        android:name="com.modarb.android.ui.home.ui.notifications.NotificationsFragment"
+        android:label="@string/nutrition"
+        tools:layout="@layout/fragment_notifications" />
+
+
+    <fragment
+        android:id="@+id/navigation_more"
+        android:name="com.modarb.android.ui.home.ui.notifications.NotificationsFragment"
+        android:label="@string/more"
+        tools:layout="@layout/fragment_notifications" />
+
 
 </navigation>
