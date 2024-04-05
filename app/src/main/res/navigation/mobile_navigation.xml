@@ -19,22 +19,22 @@
 
     <fragment
         android:id="@+id/navigation_workouts"
-        android:name="com.modarb.android.ui.home.ui.notifications.NotificationsFragment"
+        android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
         android:label="@string/workouts"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_my_plan" />
 
     <fragment
         android:id="@+id/navigation_nutrition"
-        android:name="com.modarb.android.ui.home.ui.notifications.NotificationsFragment"
+        android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
         android:label="@string/nutrition"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_my_plan" />
 
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="com.modarb.android.ui.home.ui.notifications.NotificationsFragment"
+        android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
         android:label="@string/more"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_my_plan" />
 
 
 </navigation>
