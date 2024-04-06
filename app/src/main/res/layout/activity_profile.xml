@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.home.ui.plan.fragments.MyPlanFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+
+          <ImageView
+            android:id="@+id/myProfileView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/icon_profile0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/profileNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:gravity="start"
+                android:text="@string/test"
+                tools:text="Name"
+                android:textColor="@color/gray_92"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/myProfileView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+          <TextView
+              android:id="@+id/workoutWarriorTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="8dp"
+              android:layout_marginTop="24dp"
+              android:gravity="start"
+              android:text="@string/test"
+              android:textColor="@color/white_700"
+              android:textSize="16sp"
+              app:layout_constraintStart_toEndOf="@+id/profileNameTextView"
+              app:layout_constraintTop_toTopOf="parent"
+              tools:text="(Workout Warrior)" />
+
+            <ImageView
+                android:id="@+id/dotsView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/dots_horizontal_outline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/workoutWarriorTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+          <TextView
+              android:id="@+id/profileLevelTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="start"
+              android:text="@string/test"
+              android:textColor="@color/white_500"
+              android:textSize="16sp"
+              app:layout_constraintStart_toStartOf="@+id/profileNameTextView"
+              app:layout_constraintTop_toBottomOf="@+id/profileNameTextView"
+              tools:text="Lvl 78" />
+
+          <TextView
+              android:id="@+id/profileLevelTextView2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="start"
+              android:text="@string/test"
+              android:textColor="@color/white_500"
+              android:textSize="16sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.2"
+              app:layout_constraintStart_toEndOf="@+id/profileLevelTextView"
+              app:layout_constraintTop_toBottomOf="@+id/workoutWarriorTextView"
+              tools:text="Fitness genius" />
+
+          <TextView
+                android:id="@+id/profileDetailsTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/test"
+                android:textColor="@color/white_700"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/profileNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/profileLevelTextView"
+                tools:text="60\nworkouts" />
+
+            <TextView
+                android:id="@+id/profileDetailsTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/test"
+                android:textColor="@color/white_700"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/profileDetailsTextView1"
+                app:layout_constraintTop_toBottomOf="@+id/profileLevelTextView"
+                tools:text="+2.5 kg\nweight" />
+
+            <ImageView
+                android:id="@+id/badgeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/icon_badge"
+                app:layout_constraintEnd_toEndOf="@+id/badgeTextView"
+                app:layout_constraintStart_toStartOf="@+id/badgeTextView"
+                app:layout_constraintTop_toBottomOf="@+id/profileLevelTextView"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/badgeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:gravity="center"
+                android:text="@string/badge"
+                android:textColor="@color/white_700"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/profileDetailsTextView2"
+                app:layout_constraintTop_toBottomOf="@+id/badgeView" />
+
+            <TextView
+                android:id="@+id/achievementsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:gravity="start"
+                android:text="@string/achievements"
+                android:textColor="@color/gray_92"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileDetailsTextView1" />
+
+            <ImageView
+                android:id="@+id/achievementsView1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/icon_profile1"
+                app:layout_constraintEnd_toStartOf="@id/achievementsView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsTextView"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/achievementsView2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/icon_profile2"
+                app:layout_constraintEnd_toStartOf="@id/achievementsView3"
+                app:layout_constraintStart_toEndOf="@+id/achievementsView1"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsTextView"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/achievementsView3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/icon_profile3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/achievementsView2"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsTextView"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/achievementsTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/challenge_champion"
+                android:textColor="@color/white_700"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/achievementsView1"
+                app:layout_constraintStart_toStartOf="@+id/achievementsView1"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsView1" />
+
+            <TextView
+                android:id="@+id/achievementsTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/test"
+                android:textColor="@color/white_700"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/achievementsView2"
+                app:layout_constraintStart_toStartOf="@+id/achievementsView2"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsView2"
+                tools:text="15 days\nstreak" />
+
+            <TextView
+                android:id="@+id/achievementsTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/record_breaker"
+                android:textColor="@color/white_700"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/achievementsView3"
+                app:layout_constraintStart_toStartOf="@+id/achievementsView3"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsView3" />
+
+            <TextView
+                android:id="@+id/personalInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:gravity="start"
+                android:text="@string/personal_info"
+                android:textColor="@color/gray_92"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsTextView3" />
+
+            <TextView
+                android:id="@+id/editTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:text="@string/edit"
+                android:textColor="@color/white_700"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/personalInfoTextView"
+                app:layout_constraintTop_toBottomOf="@+id/achievementsTextView3" />
+
+          <androidx.cardview.widget.CardView
+              android:id="@+id/cardView"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
+              android:layout_marginTop="24dp"
+              android:layout_marginEnd="16dp"
+              android:clipToPadding="true"
+              app:cardCornerRadius="15dp"
+              android:backgroundTint="@color/gray_700"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/editTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <TextView
+                  android:id="@+id/personalInfoTextView1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/gender"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView3"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView1"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView4"
+                  tools:text="Female" />
+
+
+              <TextView
+                  android:id="@+id/personalInfoTextView3"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/age"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView5"
+                  app:layout_constraintTop_toBottomOf="@+id/personalInfoTextView1" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView4"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView3"
+                  app:layout_constraintTop_toBottomOf="@id/personalInfoTextView2"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView6"
+                  tools:text="23" />
+
+
+              <TextView
+                  android:id="@+id/personalInfoTextView5"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/weight"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView7"
+                  app:layout_constraintTop_toBottomOf="@+id/personalInfoTextView3" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView6"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView5"
+                  app:layout_constraintTop_toBottomOf="@id/personalInfoTextView4"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView8"
+                  tools:text="55 kg" />
+
+
+              <TextView
+                  android:id="@+id/personalInfoTextView7"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:gravity="start"
+                  android:text="@string/height"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/personalInfoTextView5" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView8"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView7"
+                  app:layout_constraintTop_toBottomOf="@id/personalInfoTextView6"
+                  tools:text="160cm" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+          <androidx.cardview.widget.CardView
+              android:id="@+id/cardView2"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
+              android:layout_marginTop="12dp"
+              android:layout_marginEnd="16dp"
+              android:backgroundTint="@color/gray_700"
+              android:clipToPadding="true"
+              app:cardCornerRadius="15dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/cardView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+              <TextView
+                  android:id="@+id/personalInfoTextView9"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/goal1"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView11"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView10"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/get_fitter"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView12"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView11"
+                  app:layout_constraintTop_toTopOf="parent"
+                  tools:text="Get fitter" />
+
+
+              <TextView
+                  android:id="@+id/personalInfoTextView11"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/fitness_level1"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView13"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/personalInfoTextView9" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView12"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/intermediate1"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView14"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView11"
+                  app:layout_constraintTop_toBottomOf="@id/personalInfoTextView10"
+                  tools:text="intermediate" />
+
+
+              <TextView
+                  android:id="@+id/personalInfoTextView13"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/bmi"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView15"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/personalInfoTextView11" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView14"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toTopOf="@+id/personalInfoTextView16"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView13"
+                  app:layout_constraintTop_toBottomOf="@id/personalInfoTextView12"
+                  tools:text="20.3" />
+
+
+              <TextView
+                  android:id="@+id/personalInfoTextView15"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:gravity="start"
+                  android:text="@string/daily_calories"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/personalInfoTextView13" />
+
+              <TextView
+                  android:id="@+id/personalInfoTextView16"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/personalInfoTextView15"
+                  app:layout_constraintTop_toBottomOf="@id/personalInfoTextView14"
+                  tools:text="2100 kcal" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+          </androidx.cardview.widget.CardView>
+
+
+          <TextView
+              android:id="@+id/myPlanTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="24dp"
+              android:layout_marginTop="24dp"
+              android:gravity="start"
+              android:text="@string/my_plan"
+              android:textColor="@color/gray_92"
+              android:textSize="20sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+          <TextView
+              android:id="@+id/modifyTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="24dp"
+              android:layout_marginEnd="24dp"
+              android:gravity="center"
+              android:text="@string/modify"
+              android:textColor="@color/white_700"
+              android:textStyle="bold"
+              android:textSize="14sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="1.0"
+              app:layout_constraintStart_toEndOf="@+id/myPlanTextView"
+              app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+
+          <androidx.cardview.widget.CardView
+              android:id="@+id/cardView3"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
+              android:layout_marginTop="12dp"
+              android:layout_marginEnd="16dp"
+              android:backgroundTint="@color/gray_700"
+              android:clipToPadding="true"
+              app:cardCornerRadius="15dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/myPlanTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+              <TextView
+                  android:id="@+id/myPlanTextView1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/exercise"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toTopOf="@+id/myPlanTextView3"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <TextView
+                  android:id="@+id/myPlanTextView2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toTopOf="@+id/myPlanTextView4"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/myPlanTextView1"
+                  app:layout_constraintTop_toTopOf="parent"
+                  tools:text="1-4 times a week" />
+
+
+              <TextView
+                  android:id="@+id/myPlanTextView3"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:gravity="start"
+                  android:text="@string/nutrition"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toTopOf="@+id/myPlanTextView5"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/myPlanTextView1" />
+
+              <TextView
+                  android:id="@+id/myPlanTextView4"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toBottomOf="@+id/myPlanTextView6"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/myPlanTextView3"
+                  app:layout_constraintTop_toBottomOf="@id/myPlanTextView2"
+                  tools:text="standard" />
+
+
+              <TextView
+                  android:id="@+id/myPlanTextView5"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:gravity="start"
+                  android:text="@string/goal1"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/myPlanTextView3" />
+
+              <TextView
+                  android:id="@+id/myPlanTextView6"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:gravity="start"
+                  android:text="@string/test"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/myPlanTextView5"
+                  app:layout_constraintTop_toBottomOf="@id/myPlanTextView4"
+                  tools:text="Gain_muscles_Mass" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+          </androidx.cardview.widget.CardView>
+
+
+          <TextView
+              android:id="@+id/myTargetValuesTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="24dp"
+              android:layout_marginTop="24dp"
+              android:gravity="start"
+              android:text="@string/my_target_values"
+              android:textColor="@color/gray_92"
+              android:textSize="20sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+          <androidx.cardview.widget.CardView
+              android:id="@+id/cardView4"
+              android:layout_width="330dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
+              android:layout_marginTop="12dp"
+              android:layout_marginEnd="16dp"
+              android:clipToPadding="true"
+              app:cardCornerRadius="15dp"
+              app:cardBackgroundColor="@android:color/transparent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/myTargetValuesTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+              <ImageView
+                  android:id="@+id/profile"
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:clipToPadding="true"
+                  android:scaleType="centerCrop"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:srcCompat="@drawable/rounded_gradient_rectangle"
+                  tools:ignore="ContentDescription" />
+
+              <TextView
+                  android:id="@+id/myTargetValuesTextView1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:text="@string/test"
+                  android:textStyle="bold"
+                  android:textColor="@color/gray_92"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toTopOf="@+id/myTargetValuesTextView3"
+                  app:layout_constraintEnd_toEndOf="@+id/myTargetValuesTextView3"
+                  app:layout_constraintStart_toStartOf="@+id/myTargetValuesTextView3"
+                  app:layout_constraintTop_toTopOf="parent"
+                  tools:text="58 kg" />
+
+              <TextView
+                  android:id="@+id/myTargetValuesTextView2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:text="@string/test"
+                  android:textStyle="bold"
+                  android:textColor="@color/gray_92"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toTopOf="@+id/myTargetValuesTextView4"
+                  app:layout_constraintEnd_toEndOf="@+id/myTargetValuesTextView4"
+                  app:layout_constraintStart_toStartOf="@+id/myTargetValuesTextView4"
+                  app:layout_constraintTop_toTopOf="parent"
+                  tools:text="2300kcal" />
+
+
+              <TextView
+                  android:id="@+id/myTargetValuesTextView3"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="16dp"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:text="@string/target_weight"
+                  android:textStyle="bold"
+                  android:textColor="@color/white_700"
+                  android:textSize="16sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/myTargetValuesTextView1" />
+
+              <TextView
+                  android:id="@+id/myTargetValuesTextView4"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="16dp"
+                  android:layout_marginEnd="16dp"
+                  android:layout_marginBottom="16dp"
+                  android:text="@string/target_calories"
+                  android:textStyle="bold"
+                  android:textColor="@color/white_700"
+                  android:textSize="14sp"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="1.0"
+                  app:layout_constraintStart_toEndOf="@+id/myTargetValuesTextView3"
+                  app:layout_constraintTop_toBottomOf="@id/myTargetValuesTextView2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
+
+          <TextView
+              android:id="@+id/myActivityTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="24dp"
+              android:layout_marginTop="24dp"
+              android:gravity="start"
+              android:text="@string/my_activity"
+              android:textColor="@color/gray_92"
+              android:textSize="20sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+
+          <TextView
+              android:id="@+id/viewAllTextView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="24dp"
+              android:layout_marginEnd="24dp"
+              android:gravity="center"
+              android:text="@string/view_all"
+              android:textColor="@color/white_700"
+              android:textStyle="bold"
+              android:textSize="14sp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="1.0"
+              app:layout_constraintStart_toEndOf="@+id/myActivityTextView"
+              app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+
+
+          <CalendarView
+              android:id="@+id/calendarView"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="16dp"
+              android:layout_marginTop="12dp"
+              android:layout_marginEnd="16dp"
+              android:layout_marginBottom="24dp"
+              android:background="@drawable/rounded_gradient_rectangle2"
+              android:dateTextAppearance="@style/CustomDateTextAppearance"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/myActivityTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
