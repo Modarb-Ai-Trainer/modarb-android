@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
+        <!--        <activity-->
+        <!--            android:name=".ui.workout.activites.ExcersiceInfoActivity"-->
+        <!--            android:exported="false" />-->
         <activity
             android:name=".ui.menu.activities.EditProfileActivity"
             android:exported="false" />
@@ -23,15 +26,14 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.workout.activites.TodayWorkoutActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.onboarding.activities.WelcomeScreenActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.onboarding.activities.RegisterScreenActivity"
             android:exported="false" />
+
+        <!--        <activity-->
+        <!--            android:name=".ui.home.HomeActivity"-->
+        <!--            android:exported="false" />-->
         <activity
             android:name=".ui.onboarding.activities.OnBoardingSplashActivity"
             android:exported="false" />
@@ -42,7 +44,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.menu.activities.MenuActivity"
+            android:name=".ui.workout.activities.ExerciseInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

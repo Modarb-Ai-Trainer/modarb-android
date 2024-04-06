@@ -135,6 +135,11 @@
     <string name="age_hint">age</string>
     <string name="weight_hint">weight</string>
     <string name="height_hint">height</string>
+    <string name="muscles_worked">Muscles Worked</string>
+    <string name="target_muscle">Target muscle</string>
+    <string name="instructions">Instructions</string>
+    <string name="equipment">Equipment</string>
+    <string name="benefits">Benefits</string>
 
 
 </resources>
