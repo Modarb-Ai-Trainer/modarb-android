@@ -102,5 +102,39 @@
     <string name="workouts">Workouts</string>
     <string name="nutrition">Nutrition</string>
     <string name="more">More</string>
+    <string name="save">Save</string>
+    <string name="gender">Gender</string>
+    <string name="age">Age</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="my_profile">My profile</string>
+    <string name="progress">Progress</string>
+    <string name="injury_care_center">Injury Care Center</string>
+    <string name="challenges">Challenges</string>
+    <string name="reminders">Reminders</string>
+    <string name="settings">Settings</string>
+    <string name="test">test</string>
+    <string name="achievements">Achievements</string>
+    <string name="badge">Badge</string>
+    <string name="challenge_champion">Challenge\nChampion</string>
+    <string name="record_breaker">Record\nBreaker</string>
+    <string name="personal_info">Personal info</string>
+    <string name="edit">Edit</string>
+    <string name="goal1">Goal</string>
+    <string name="fitness_level1">fitness level</string>
+    <string name="intermediate1">intermediate</string>
+    <string name="bmi">Bmi</string>
+    <string name="daily_calories">daily calories</string>
+    <string name="modify">Modify</string>
+    <string name="exercise">Exercise</string>
+    <string name="my_target_values">My target values</string>
+    <string name="target_weight">Target weight</string>
+    <string name="target_calories">Target calories</string>
+    <string name="my_activity">My Activity</string>
+    <string name="view_all">view all</string>
+    <string name="age_hint">age</string>
+    <string name="weight_hint">weight</string>
+    <string name="height_hint">height</string>
+
 
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDateTextAppearance" parent="android:TextAppearance.Widget.TextView">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+</resources>
