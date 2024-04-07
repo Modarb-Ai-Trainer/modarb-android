@@ -21,8 +21,6 @@ class ExerciseInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise_info)
 
-
-
         viewPager = findViewById(R.id.viewPager)
         toggleButtonGroup = findViewById(R.id.toggle_button_group)
 
