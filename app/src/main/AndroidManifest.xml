@@ -18,14 +18,14 @@
         <!--            android:name=".ui.workout.activites.ExcersiceInfoActivity"-->
         <!--            android:exported="false" />-->
         <activity
-            android:name=".ui.menu.activities.EditProfileActivity"
+            android:name=".ui.home.ui.more.activities.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.menu.activities.ProfileActivity"
+            android:name=".ui.home.ui.more.activities.ProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
+        <!--        <activity-->
+        <!--            android:name=".ui.home.HomeActivity"-->
+        <!--            android:exported="false" />-->
 
         <activity
             android:name=".ui.onboarding.activities.RegisterScreenActivity"
@@ -44,7 +44,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.workout.activities.ExerciseInfoActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
