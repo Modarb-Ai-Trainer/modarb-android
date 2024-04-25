@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menu.activities.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu.activities.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu.activities.AppAppearanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu.activities.MenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.menu.activities.EditProfileActivity"
             android:exported="false" />
         <activity
@@ -42,7 +54,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.menu.activities.MenuActivity"
+            android:name=".ui.menu.activities.ReminderActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
