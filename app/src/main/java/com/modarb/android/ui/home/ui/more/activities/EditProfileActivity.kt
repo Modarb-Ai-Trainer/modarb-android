@@ -1,12 +1,12 @@
-package com.modarb.android.ui.menu.activities
+package com.modarb.android.ui.home.ui.more.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.R
 
 class EditProfileActivity : AppCompatActivity() {

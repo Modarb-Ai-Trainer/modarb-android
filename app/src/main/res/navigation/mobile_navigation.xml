@@ -32,9 +32,9 @@
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
+        android:name="com.modarb.android.ui.home.ui.more.fragments.MoreFragment"
         android:label="@string/more"
-        tools:layout="@layout/fragment_my_plan" />
+        tools:layout="@layout/fragment_more" />
 
 
 </navigation>
