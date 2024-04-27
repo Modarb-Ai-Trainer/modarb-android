@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.activities
+package com.modarb.android.ui.workout.activites
 
 import android.os.Bundle
 import android.view.View
