@@ -140,7 +140,31 @@
     <string name="instructions">Instructions</string>
     <string name="equipment">Equipment</string>
     <string name="benefits">Benefits</string>
-    <string name="your_saved_templates">Your saved templates</string>
+
+    <string name="notifications">Notifications</string>
+    <string name="app_appearance">App Appearance</string>
+    <string name="privacy">Privacy</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="terms_conditions">Terms and conditions</string>
+    <string name="log_out">Log out</string>
+    <string name="select_theme">Select Theme</string>
+    <string name="system_default">System Default</string>
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="meals">Meals</string>
+    <string name="workout">Workout</string>
+    <string name="feed_posts">Feed posts</string>
+    <string name="days_for_your_preferred_reminders">Days for your preferred reminders</string>
+    <string name="mo">Mo</string>
+    <string name="tu">Tu</string>
+    <string name="we">We</string>
+    <string name="th">Th</string>
+    <string name="fr">Fr</string>
+    <string name="sa">Sa</string>
+    <string name="su">Su</string>
+    <string name="button_not_checked">not checked</string>
+
+<string name="your_saved_templates">Your saved templates</string>
     <string name="custom_workout_builder">Custom workout builder</string>
 
 

@@ -1,11 +1,14 @@
 package com.modarb.android.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityHomeBinding
+import com.modarb.android.ui.menu.activities.NotificationActivity
 
 
 class HomeActivity : AppCompatActivity() {
@@ -31,5 +34,11 @@ class HomeActivity : AppCompatActivity() {
 
 
         navView.setupWithNavController(navController)
+
+        val imageView = findViewById<View>(R.id.notificationBtn)
+        imageView.setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
