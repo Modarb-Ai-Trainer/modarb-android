@@ -1,10 +1,10 @@
-package com.modarb.android.ui.menu.activities
+package com.modarb.android.ui.home.ui.more.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
+import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.R
 
 class AppAppearanceActivity : AppCompatActivity() {

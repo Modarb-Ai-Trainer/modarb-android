@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
@@ -23,6 +24,7 @@ class MyPlanFragment : Fragment() {
     private lateinit var toggleButtonGroup: MaterialButtonToggleGroup
     private val dataList = mutableListOf<YourItem>()
     private lateinit var addCustomWorkout: FloatingActionButton
+    private lateinit var bottomSheet: BottomSheetDialog
 
     @SuppressLint("NotifyDataSetChanged")
     override
@@ -40,12 +42,24 @@ class MyPlanFragment : Fragment() {
         initViewPager(view)
         handleAddCustomWorkout(view)
 
+
+        initBottomSheet()
         return view
     }
 
     private fun handleAddCustomWorkout(view: View) {
 
         addCustomWorkout = view.findViewById(R.id.addCustomWorkOut)
+    }
+
+    private fun initBottomSheet() {
+//        bottomSheet = BottomSheetDialog(requireContext())
+//
+//        bottomSheet.setContentView(R.layout.login_view)
+//        bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+//        bottomSheet.show()
+//
+//        bottomSheet.show()
     }
 
     private fun initViewPager(view: View) {

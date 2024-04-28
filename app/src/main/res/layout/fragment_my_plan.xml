@@ -130,7 +130,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/toggle_button_group"
                     app:layout_constraintVertical_bias="0.0" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
     </ScrollView>
@@ -141,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription=""
+        android:contentDescription="TODO"
         android:importantForAccessibility="no"
         android:src="@drawable/baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"

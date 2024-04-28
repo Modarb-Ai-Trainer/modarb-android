@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityHomeBinding
-import com.modarb.android.ui.menu.activities.NotificationActivity
+import com.modarb.android.ui.home.ui.more.activities.NotificationActivity
 
 
 class HomeActivity : AppCompatActivity() {

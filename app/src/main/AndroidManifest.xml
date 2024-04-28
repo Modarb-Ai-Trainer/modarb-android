@@ -15,35 +15,30 @@
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
         <activity
-            android:name=".ui.menu.activities.NotificationActivity"
+            android:name=".ui.home.ui.more.activities.NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.menu.activities.SettingActivity"
+            android:name=".ui.home.ui.more.activities.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.menu.activities.AppAppearanceActivity"
+            android:name=".ui.home.ui.more.activities.AppAppearanceActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.menu.activities.MenuActivity"
+            android:name=".ui.home.ui.more.activities.MenuActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.menu.activities.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.menu.activities.ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.menu.activities.ReminderActivity"
-            android:exported="false" />
-        <!--        <activity-->
-        <!--            android:name=".ui.workout.activites.ExcersiceInfoActivity"-->
-        <!--            android:exported="false" />-->
         <activity
             android:name=".ui.home.ui.more.activities.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.home.ui.more.activities.ProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.home.ui.more.activities.ReminderActivity"
+            android:exported="false" />
+        <!--        <activity-->
+        <!--            android:name=".ui.workout.activites.ExcersiceInfoActivity"-->
+        <!--            android:exported="false" />-->
+
         <!--        <activity-->
         <!--            android:name=".ui.home.HomeActivity"-->
         <!--            android:exported="false" />-->

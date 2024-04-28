@@ -1,12 +1,12 @@
-package com.modarb.android.ui.menu.activities
+package com.modarb.android.ui.home.ui.more.activities
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import com.modarb.android.R
 
 class ReminderActivity : AppCompatActivity() {
