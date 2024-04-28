@@ -140,6 +140,8 @@
     <string name="instructions">Instructions</string>
     <string name="equipment">Equipment</string>
     <string name="benefits">Benefits</string>
+    <string name="your_saved_templates">Your saved templates</string>
+    <string name="custom_workout_builder">Custom workout builder</string>
 
 
 </resources>

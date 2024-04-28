@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 import com.modarb.android.ui.workout.models.YourItem
@@ -21,9 +22,12 @@ class MyPlanFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
     private lateinit var toggleButtonGroup: MaterialButtonToggleGroup
     private val dataList = mutableListOf<YourItem>()
+    private lateinit var addCustomWorkout: FloatingActionButton
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onCreateView(
+    override
+
+    fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
@@ -34,8 +38,14 @@ class MyPlanFragment : Fragment() {
         toggleGroup.check(R.id.myPlanBtn)
 
         initViewPager(view)
+        handleAddCustomWorkout(view)
 
         return view
+    }
+
+    private fun handleAddCustomWorkout(view: View) {
+
+        addCustomWorkout = view.findViewById(R.id.addCustomWorkOut)
     }
 
     private fun initViewPager(view: View) {
@@ -63,6 +73,11 @@ class MyPlanFragment : Fragment() {
                         else -> View.NO_ID
                     }
                 )
+                if (position == 0) {
+                    addCustomWorkout.hide()
+                } else {
+                    addCustomWorkout.show()
+                }
             }
         })
     }
@@ -92,6 +107,8 @@ class MyPlanFragment : Fragment() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
                 is MyPlanViewHolder -> holder.bind()
+                is CustomWorkoutViewHolder -> holder.bind()
+
             }
         }
 
@@ -108,8 +125,7 @@ class MyPlanFragment : Fragment() {
         fun bind() {
             recyclerView.layoutManager = LinearLayoutManager(context)
 
-            adapter = TrainingWeeksAdapter(dataList)
-            recyclerView.adapter = adapter
+
 
             dataList.add(
                 YourItem(
@@ -124,15 +140,13 @@ class MyPlanFragment : Fragment() {
                 )
             )
 
-            adapter.notifyDataSetChanged()
+            adapter = TrainingWeeksAdapter(dataList)
+            recyclerView.adapter = adapter
         }
     }
 
     inner class CustomWorkoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        private val textView: TextView = view.findViewById(R.id.textViewCustomWorkout)
-//
-//        fun bind(text: String) {
-//            textView.text = text
-//        }
+        fun bind() {
+        }
     }
 }
