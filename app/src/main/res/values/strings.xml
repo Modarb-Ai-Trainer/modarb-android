@@ -140,6 +140,7 @@
     <string name="instructions">Instructions</string>
     <string name="equipment">Equipment</string>
     <string name="benefits">Benefits</string>
+
     <string name="notifications">Notifications</string>
     <string name="app_appearance">App Appearance</string>
     <string name="privacy">Privacy</string>
@@ -161,22 +162,5 @@
     <string name="fr">Fr</string>
     <string name="sa">Sa</string>
     <string name="su">Su</string>
-    <string name="post_a_challenge">post a challenge</string>
-    <string name="post_your_rewards">post Your rewards</string>
-    <string name="available_challenges">Available challenges</string>
-    <string name="join">join</string>
-    <string name="plank_challenge">Plank\nChallenge</string>
-    <string name="push_up_power_challenge">Push-Up Power\nChallenge</string>
-    <string name="flex_friday_photo_challenge">Flex Friday Photo\nChallenge</string>
-    <string name="squat_squad_challenge">Squat Squad\nChallenge</string>
-    <string name="top_ranked_users">Top Ranked users</string>
-    <string name="one">1</string>
-    <string name="two">2</string>
-    <string name="three">3</string>
-    <string name="four">4</string>
-    <string name="see_all">see All</string>
-    <string name="all">All</string>
-    <string name="active_users">Active users</string>
-    <string name="challenge">Challenge</string>
-
+    <string name="button_not_checked">not checked</string>
 </resources>
