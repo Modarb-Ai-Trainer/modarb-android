@@ -75,8 +75,10 @@ class ViewPagerAdapter(private val context: Context) :
         }
     }
 
+
     inner class CustomWorkoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
+
         private val data = mutableListOf<String>()
 
         fun bind(context: Context) {
@@ -91,7 +93,10 @@ class ViewPagerAdapter(private val context: Context) :
 
             val adapter = CustomWorkoutTemplateAdapter(context, data)
             recyclerView.adapter = adapter
+
+
         }
     }
+
 }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -58,6 +59,8 @@ class MyPlanFragment : Fragment() {
         bottomSheet.setContentView(R.layout.add_excersice_view)
 
         val closeBtn: ImageButton? = bottomSheet.findViewById(R.id.closeBtn)
+        val addExercise: View? = bottomSheet.findViewById(R.id.addExerciseView)
+
         bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheet.setOnShowListener {
             val bottomSheetDialog = it as BottomSheetDialog
@@ -75,6 +78,11 @@ class MyPlanFragment : Fragment() {
 
         closeBtn?.setOnClickListener {
             bottomSheet.hide()
+        }
+
+
+        addExercise?.setOnClickListener {
+            Toast.makeText(context, "Hey", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -317,13 +317,13 @@
                 android:textColor="@color/gray_92"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/toggle_button_group"
-                app:layout_constraintEnd_toStartOf="@id/textView9"
+                app:layout_constraintEnd_toStartOf="@id/exerciseTitle"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@id/textView6"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/exerciseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -351,13 +351,13 @@
                 android:textColor="@color/gray_92"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/toggle_button_group"
-                app:layout_constraintEnd_toStartOf="@id/textView11"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintEnd_toStartOf="@id/exerciseDesc"
+                app:layout_constraintStart_toEndOf="@+id/exerciseTitle"
                 app:layout_constraintTop_toBottomOf="@id/textView6"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/exerciseDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -386,7 +386,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/toggle_button_group"
                 app:layout_constraintEnd_toStartOf="@id/textView13"
-                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintStart_toEndOf="@+id/exerciseDesc"
                 app:layout_constraintTop_toBottomOf="@id/textView6"
                 app:layout_constraintVertical_bias="0.0" />
 

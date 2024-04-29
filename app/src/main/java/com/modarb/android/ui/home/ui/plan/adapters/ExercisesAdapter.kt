@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.adapters
+package com.modarb.android.ui.home.ui.plan.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.workout.models.WorkoutModel
 
-class WorkoutAdapter(private val itemList: List<WorkoutModel>) :
-    RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
+class ExercisesAdapter(private val itemList: List<WorkoutModel>) :
+    RecyclerView.Adapter<ExercisesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var workoutImage: ImageView = itemView.findViewById(R.id.imageView6)
@@ -22,7 +22,7 @@ class WorkoutAdapter(private val itemList: List<WorkoutModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_workout_details, parent, false)
+            .inflate(R.layout.item_exercise_selection_details, parent, false)
         return ViewHolder(view)
     }
 
@@ -33,8 +33,10 @@ class WorkoutAdapter(private val itemList: List<WorkoutModel>) :
         holder.workoutTitle.text = item.title
         holder.workoutDescription.text = item.description
         holder.workoutButton.text = item.button
+
         holder.workoutButton.setOnClickListener {
-            // Handle button click
+
+            // TODO handle add and remove of an exercise
         }
     }
 
