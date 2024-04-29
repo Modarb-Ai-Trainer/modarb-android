@@ -8,25 +8,19 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
-import com.modarb.android.ui.home.ui.plan.adapters.CustomWorkoutTemplateAdapter
-import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
-import com.modarb.android.ui.workout.models.YourItem
+import com.modarb.android.ui.home.ui.plan.adapters.ViewPagerAdapter
 
 
 class MyPlanFragment : Fragment() {
 
-    private lateinit var adapter: TrainingWeeksAdapter
     private lateinit var viewPager: ViewPager2
     private lateinit var toggleButtonGroup: MaterialButtonToggleGroup
-    private val dataList = mutableListOf<YourItem>()
     private lateinit var addCustomWorkout: FloatingActionButton
     private lateinit var bottomSheet: BottomSheetDialog
 
@@ -88,7 +82,7 @@ class MyPlanFragment : Fragment() {
         viewPager = view.findViewById(R.id.viewPager)
         toggleButtonGroup = view.findViewById(R.id.toggle_button_group)
 
-        val adapter = ViewPagerAdapter()
+        val adapter = ViewPagerAdapter(requireContext())
         viewPager.adapter = adapter
 
         toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
@@ -119,85 +113,5 @@ class MyPlanFragment : Fragment() {
         })
     }
 
-    inner class ViewPagerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val inflater = LayoutInflater.from(parent.context)
-            return when (viewType) {
-                0 -> MyPlanViewHolder(
-                    inflater.inflate(
-                        R.layout.my_plan_view, parent, false
-                    )
-                )
-
-                1 -> CustomWorkoutViewHolder(
-                    inflater.inflate(
-                        R.layout.custom_workout_view, parent, false
-                    )
-                )
-
-
-                else -> throw IllegalArgumentException("Invalid view type")
-            }
-        }
-
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            when (holder) {
-                is MyPlanViewHolder -> holder.bind()
-                is CustomWorkoutViewHolder -> holder.bind()
-
-            }
-        }
-
-        override fun getItemCount(): Int = 2
-
-        override fun getItemViewType(position: Int): Int {
-            return position
-        }
-    }
-
-    inner class MyPlanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-
-        fun bind() {
-            recyclerView.layoutManager = LinearLayoutManager(context)
-
-
-
-            dataList.add(
-                YourItem(
-                    "Week 1 : Foundation",
-                    "Start easy in the first week to let your body get used to the workout. It sets the baseline for your progress in the weeks ahead."
-                )
-            )
-            dataList.add(
-                YourItem(
-                    "Week 2 : Foundation",
-                    "Start easy in the first week to let your body get used to the workout."
-                )
-            )
-
-            adapter = TrainingWeeksAdapter(dataList)
-            recyclerView.adapter = adapter
-        }
-    }
-
-    inner class CustomWorkoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var recyclerView: RecyclerView = view.findViewById(R.id.recycleView)
-        private val data = mutableListOf<String>()
-
-        fun bind() {
-            recyclerView.layoutManager = LinearLayoutManager(context)
-
-
-            for (i in 0..3) {
-                data.add(
-                    "test"
-                )
-            }
-
-            val adapter = CustomWorkoutTemplateAdapter(requireContext(), data)
-            recyclerView.adapter = adapter
-        }
-    }
 }
