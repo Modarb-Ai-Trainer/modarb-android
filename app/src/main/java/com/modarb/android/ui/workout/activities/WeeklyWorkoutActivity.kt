@@ -23,8 +23,10 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
 
         val itemList: ArrayList<WorkoutModel> = ArrayList()
 
-        val workout1 = WorkoutModel(R.drawable.chest_press, "chest press", "4 sets x  12-15 reps", "chest")
-        val workout2 = WorkoutModel(R.drawable.deadlift, "Deadlift", "4 sets x  10-12 reps", "full body")
+        val workout1 =
+            WorkoutModel(R.drawable.chest_press, "chest press", "4 sets x  12-15 reps", "chest", 1)
+        val workout2 =
+            WorkoutModel(R.drawable.deadlift, "Deadlift", "4 sets x  10-12 reps", "full body", 2)
 
         itemList.add(workout1)
         itemList.add(workout2)
@@ -35,7 +37,6 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
 
         val adapter = WorkoutAdapter(itemList)
         recyclerView.adapter = adapter
-
 
 
         val itemList2: ArrayList<YourItem2> = ArrayList()

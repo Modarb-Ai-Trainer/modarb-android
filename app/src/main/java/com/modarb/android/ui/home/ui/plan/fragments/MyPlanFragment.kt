@@ -7,15 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.ViewPagerAdapter
+import com.modarb.android.ui.workout.models.WorkoutModel
 
 
 class MyPlanFragment : Fragment() {
@@ -24,6 +27,7 @@ class MyPlanFragment : Fragment() {
     private lateinit var toggleButtonGroup: MaterialButtonToggleGroup
     private lateinit var addCustomWorkout: FloatingActionButton
     private lateinit var bottomSheet: BottomSheetDialog
+    private lateinit var selectExerciseBottomSheet: BottomSheetDialog
 
     @SuppressLint("NotifyDataSetChanged")
     override
@@ -41,6 +45,7 @@ class MyPlanFragment : Fragment() {
         initViewPager(view)
         initBottomSheet()
         handleAddCustomWorkout(view)
+        initSelectBottomSheet()
         return view
     }
 
@@ -82,8 +87,47 @@ class MyPlanFragment : Fragment() {
 
 
         addExercise?.setOnClickListener {
-            Toast.makeText(context, "Hey", Toast.LENGTH_SHORT).show()
+            selectExerciseBottomSheet.show()
         }
+    }
+
+
+    private fun initSelectBottomSheet() {
+        selectExerciseBottomSheet = BottomSheetDialog(requireContext())
+        selectExerciseBottomSheet.setContentView(R.layout.select_exersice_view)
+
+        val closeBtn: ImageButton? = selectExerciseBottomSheet.findViewById(R.id.closeBtn)
+        val recyclerView: RecyclerView? = selectExerciseBottomSheet.findViewById(R.id.recyclerView)
+
+        selectExerciseBottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        selectExerciseBottomSheet.setOnShowListener {
+            val bottomSheetDialog = it as BottomSheetDialog
+            val parentLayout = bottomSheetDialog.findViewById<View>(
+                com.google.android.material.R.id.design_bottom_sheet
+            )
+            parentLayout?.let { bottomSheet ->
+                val behaviour = BottomSheetBehavior.from(bottomSheet)
+                val layoutParams = bottomSheet.layoutParams
+                layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+                bottomSheet.layoutParams = layoutParams
+                behaviour.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+
+        closeBtn?.setOnClickListener {
+            selectExerciseBottomSheet.hide()
+        }
+
+        recyclerView!!.layoutManager = LinearLayoutManager(context)
+
+        val data = mutableListOf<WorkoutModel>()
+
+        for (i in 0..3) {
+            data.add(WorkoutModel(1, "test", "test", "test", i + 1))
+        }
+
+        val adapter = ExercisesAddAdapter(data)
+        recyclerView.adapter = adapter
     }
 
     private fun initViewPager(view: View) {

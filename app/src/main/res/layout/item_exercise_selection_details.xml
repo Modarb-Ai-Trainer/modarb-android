@@ -3,7 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="90dp">
+
+    <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent_overlay"
+        android:elevation="3dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/checkMark"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="TODO"
+        android:elevation="4dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/baseline_check_24"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/exerciseImage"
+        app:layout_constraintEnd_toEndOf="@+id/overlay"
+        app:layout_constraintTop_toTopOf="@+id/exerciseImage" />
 
     <ImageView
         android:id="@+id/exerciseImage"
@@ -32,7 +59,7 @@
         android:textColor="@color/white_500"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/exerciseImage"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/checkMark"
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toEndOf="@+id/exerciseImage"
         app:layout_constraintTop_toTopOf="@+id/exerciseImage"
@@ -49,9 +76,10 @@
         android:textColor="@color/lavender_blue"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/exerciseImage"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/checkMark"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/exerciseImage"
         app:layout_constraintTop_toBottomOf="@+id/exerciseTitle" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
