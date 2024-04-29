@@ -9,6 +9,7 @@ import com.modarb.android.R
 
 class CustomWorkoutTemplateAdapter(
     private val context: Context,
+    private val data: MutableList<String>
 ) : RecyclerView.Adapter<CustomWorkoutTemplateAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -24,6 +25,6 @@ class CustomWorkoutTemplateAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 0
+        return data.size
     }
 }

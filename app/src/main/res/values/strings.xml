@@ -166,6 +166,7 @@
 
 <string name="your_saved_templates">Your saved templates</string>
     <string name="custom_workout_builder">Custom workout builder</string>
+    <string name="add_exercise">Add exercise</string>
 
 
 </resources>
