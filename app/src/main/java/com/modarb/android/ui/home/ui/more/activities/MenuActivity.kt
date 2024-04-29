@@ -15,12 +15,16 @@ class MenuActivity : AppCompatActivity() {
         cardView.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
-        val cardView2 = findViewById<View>(R.id.cardView5)
+        val cardView2 = findViewById<View>(R.id.cardView4)
         cardView2.setOnClickListener {
+            startActivity(Intent(this, ChallengeActivity::class.java))
+        }
+        val cardView3 = findViewById<View>(R.id.cardView5)
+        cardView3.setOnClickListener {
             startActivity(Intent(this, ReminderActivity::class.java))
         }
-        val cardView3 = findViewById<View>(R.id.cardView6)
-        cardView3.setOnClickListener {
+        val cardView4 = findViewById<View>(R.id.cardView6)
+        cardView4.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
         }
     }

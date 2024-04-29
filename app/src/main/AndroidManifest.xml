@@ -15,6 +15,16 @@
         android:theme="@style/Theme.Modarb"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menu.activities.ChallengeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu.activities.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu.activities.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu.activities.AppAppearanceActivity"
             android:name=".ui.workout.activities.WorkoutInsightsActivity"
             android:exported="false" />
         <activity
@@ -27,6 +37,10 @@
             android:name=".ui.home.ui.more.activities.AppAppearanceActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.menu.activities.ReminderActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".ui.workout.activites.ExcersiceInfoActivity" -->
+        <!-- android:exported="false" /> -->
             android:name=".ui.home.ui.more.activities.MenuActivity"
             android:exported="false" />
         <activity
@@ -34,6 +48,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.home.ui.more.activities.ProfileActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".ui.home.HomeActivity" -->
+        <!-- android:exported="false" /> -->
             android:exported="false" />
         <activity
             android:name=".ui.home.ui.more.activities.ReminderActivity"
