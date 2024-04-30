@@ -1,25 +1,24 @@
 package com.modarb.android.ui.menu.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.home.ui.more.activities.MenuActivity
-import com.modarb.android.ui.menu.Adapters.ActiveUsersAdapter
-import com.modarb.android.ui.menu.models.User
+import com.modarb.android.ui.home.ui.more.adapters.ActiveUsersAdapter
+import com.modarb.android.ui.home.ui.more.models.User
 
 class ChallengeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge)
 
+
+        // TODO refactor
         val imageView = findViewById<View>(R.id.backButton)
         imageView.setOnClickListener {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)

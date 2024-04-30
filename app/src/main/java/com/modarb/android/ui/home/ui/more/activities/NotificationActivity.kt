@@ -12,6 +12,8 @@ class NotificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
 
+
+        // TODO refactor
         val imageView = findViewById<View>(R.id.backButton)
         imageView.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)

@@ -11,6 +11,7 @@ class AppAppearanceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_appearance)
+        // TODO refactor
 
         val imageView = findViewById<View>(R.id.backButton)
         imageView.setOnClickListener {

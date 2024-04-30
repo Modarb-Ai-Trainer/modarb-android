@@ -11,10 +11,10 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
+        // TODO refactor
         val imageView = findViewById<View>(R.id.backButton)
         imageView.setOnClickListener {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         val cardView = findViewById<View>(R.id.appAppearanceCardView)
         cardView.setOnClickListener {

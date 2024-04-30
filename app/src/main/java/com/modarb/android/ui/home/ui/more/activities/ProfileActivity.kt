@@ -11,6 +11,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        // TODO Refactor
         val editTextView = findViewById<View>(R.id.editTextView)
         editTextView.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)

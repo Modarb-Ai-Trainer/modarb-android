@@ -1,4 +1,4 @@
-package com.modarb.android.ui.menu.Adapters
+package com.modarb.android.ui.home.ui.more.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.menu.models.User
+import com.modarb.android.ui.home.ui.more.models.User
 
 class ActiveUsersAdapter(private val userList: List<User>) :
     RecyclerView.Adapter<ActiveUsersAdapter.ViewHolder>() {

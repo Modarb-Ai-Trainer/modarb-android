@@ -13,6 +13,7 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+        // TODO refactor
 
         val genderButton: Button = findViewById(R.id.genderButton)
         val genders = arrayOf("Male", "Female")

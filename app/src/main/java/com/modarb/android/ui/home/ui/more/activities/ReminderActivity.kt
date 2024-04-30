@@ -1,6 +1,5 @@
 package com.modarb.android.ui.home.ui.more.activities
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
@@ -16,8 +15,7 @@ class ReminderActivity : AppCompatActivity() {
 
         val imageView = findViewById<View>(R.id.backButton)
         imageView.setOnClickListener {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         val mealsSwitch: SwitchCompat = findViewById(R.id.mealsSwitch)
