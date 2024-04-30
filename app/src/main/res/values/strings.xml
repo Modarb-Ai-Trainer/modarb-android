@@ -169,6 +169,9 @@
     <string name="add_exercise">Add exercise</string>
     <string name="add">ADD</string>
     <string name="search">Search</string>
+    <string name="workout_n_insights">Workout \n insights</string>
+    <string name="post_workout_meal">Post Workout meal</string>
+    <string name="finish">Finish</string>
 
 
 </resources>
