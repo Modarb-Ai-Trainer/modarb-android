@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ArrayAdapter
 import android.widget.ImageButton
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -93,11 +95,14 @@ class MyPlanFragment : Fragment() {
 
 
     private fun initSelectBottomSheet() {
+        // TODO refactor this shit
         selectExerciseBottomSheet = BottomSheetDialog(requireContext())
         selectExerciseBottomSheet.setContentView(R.layout.select_exersice_view)
 
         val closeBtn: ImageButton? = selectExerciseBottomSheet.findViewById(R.id.closeBtn)
         val recyclerView: RecyclerView? = selectExerciseBottomSheet.findViewById(R.id.recyclerView)
+
+        val spinner: Spinner? = selectExerciseBottomSheet.findViewById(R.id.typeSpinner)
 
         selectExerciseBottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         selectExerciseBottomSheet.setOnShowListener {
@@ -128,6 +133,18 @@ class MyPlanFragment : Fragment() {
 
         val adapter = ExercisesAddAdapter(data)
         recyclerView.adapter = adapter
+
+
+        // spinner
+        val items = arrayOf("All", "Body", "Chest")
+
+        val spinnerAdapter = ArrayAdapter(
+            requireContext(), R.layout.custom_spinner_item, items
+        )
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner!!.setSelection(0)
+
+        spinner.adapter = spinnerAdapter
     }
 
     private fun initViewPager(view: View) {

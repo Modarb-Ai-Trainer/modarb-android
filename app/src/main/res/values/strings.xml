@@ -164,9 +164,11 @@
     <string name="su">Su</string>
     <string name="button_not_checked">not checked</string>
 
-<string name="your_saved_templates">Your saved templates</string>
+    <string name="your_saved_templates">Your saved templates</string>
     <string name="custom_workout_builder">Custom workout builder</string>
     <string name="add_exercise">Add exercise</string>
+    <string name="add">ADD</string>
+    <string name="search">Search</string>
 
 
 </resources>
