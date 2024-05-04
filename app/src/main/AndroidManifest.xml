@@ -19,7 +19,13 @@
             android:name=".ui.onboarding.activities.WelcomeScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.menu.activities.ChallengeActivity"
+            android:name=".ui.home.ui.more.activities.InjuryTodayWorkoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.ui.more.activities.InjuryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.ui.more.activities.ChallengeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.home.ui.more.activities.NotificationActivity"

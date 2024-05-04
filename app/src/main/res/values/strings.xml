@@ -188,5 +188,8 @@
     <string name="finish">Finish</string>
     <string name="your_saved_templates">Your saved templates</string>
 
+    <string name="your_recovery_plan">Your recovery plan</string>
+    <string name="common_injuries">Common Injuries </string>
+    <string name="your_daily_recovery_session">Your Daily\nRecovery Session </string>
 
 </resources>
