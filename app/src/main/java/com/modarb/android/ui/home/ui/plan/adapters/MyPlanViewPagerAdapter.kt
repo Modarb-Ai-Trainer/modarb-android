@@ -10,7 +10,7 @@ import com.modarb.android.R
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 import com.modarb.android.ui.workout.models.YourItem
 
-class ViewPagerAdapter(private val context: Context) :
+class MyPlanViewPagerAdapter(private val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

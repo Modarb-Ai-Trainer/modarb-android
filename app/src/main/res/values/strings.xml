@@ -187,6 +187,8 @@
     <string name="post_workout_meal">Post Workout meal</string>
     <string name="finish">Finish</string>
     <string name="your_saved_templates">Your saved templates</string>
+    <string name="exercise_library">Exercise library</string>
+    <string name="workout_programs">Workout programs</string>
 
 
 </resources>

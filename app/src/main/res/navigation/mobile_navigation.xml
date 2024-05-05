@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_workouts"
-        android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
+        android:name="com.modarb.android.ui.home.ui.workouts.WorkoutsFragment"
         android:label="@string/workouts"
-        tools:layout="@layout/fragment_my_plan" />
+        tools:layout="@layout/fragment_workouts" />
 
     <fragment
         android:id="@+id/navigation_nutrition"

@@ -61,6 +61,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10")
     // progress indicators
     implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
 
     testImplementation("junit:junit:4.13.2")

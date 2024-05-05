@@ -19,7 +19,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
-import com.modarb.android.ui.home.ui.plan.adapters.ViewPagerAdapter
+import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
 import com.modarb.android.ui.workout.models.WorkoutModel
 
 
@@ -151,7 +151,7 @@ class MyPlanFragment : Fragment() {
         viewPager = view.findViewById(R.id.viewPager)
         toggleButtonGroup = view.findViewById(R.id.toggle_button_group)
 
-        val adapter = ViewPagerAdapter(requireContext())
+        val adapter = MyPlanViewPagerAdapter(requireContext())
         viewPager.adapter = adapter
 
         toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
