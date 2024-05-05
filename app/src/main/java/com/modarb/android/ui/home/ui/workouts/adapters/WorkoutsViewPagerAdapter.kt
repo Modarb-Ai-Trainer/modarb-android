@@ -2,10 +2,11 @@ package com.modarb.android.ui.home.ui.workouts.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.workouts.holders.ExerciseLibViewHolder
+import com.modarb.android.ui.home.ui.workouts.holders.WorkoutProgramsViewHolder
 
 class WorkoutsViewPagerAdapter(private val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -16,14 +17,14 @@ class WorkoutsViewPagerAdapter(private val context: Context) :
             0 -> ExerciseLibViewHolder(
                 inflater.inflate(
                     R.layout.exercise_library_view, parent, false
-                )
+                ), context
             )
 
             1 -> WorkoutProgramsViewHolder(
                 // TODO CREATE VIEW FOR THIS
                 inflater.inflate(
                     R.layout.exercise_library_view, parent, false
-                )
+                ), context
             )
 
 
@@ -33,7 +34,7 @@ class WorkoutsViewPagerAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ExerciseLibViewHolder -> holder.bind(context)
+            is ExerciseLibViewHolder -> holder.bind()
             is WorkoutProgramsViewHolder -> holder.bind(context)
 
         }
@@ -43,23 +44,6 @@ class WorkoutsViewPagerAdapter(private val context: Context) :
 
     override fun getItemViewType(position: Int): Int {
         return position
-    }
-
-    inner class ExerciseLibViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-
-        fun bind(context: Context) {
-
-        }
-    }
-
-
-    inner class WorkoutProgramsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        fun bind(context: Context) {
-
-
-        }
     }
 
 }
