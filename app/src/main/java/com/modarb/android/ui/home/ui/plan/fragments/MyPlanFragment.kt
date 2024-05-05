@@ -141,7 +141,6 @@ class MyPlanFragment : Fragment() {
         val spinnerAdapter = ArrayAdapter(
             requireContext(), R.layout.custom_spinner_item, items
         )
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner!!.setSelection(0)
 
         spinner.adapter = spinnerAdapter
