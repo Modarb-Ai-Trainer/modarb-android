@@ -34,7 +34,7 @@ class WorkoutsViewPagerAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ExerciseLibViewHolder -> holder.bind()
+            is ExerciseLibViewHolder -> holder.bind(context)
             is WorkoutProgramsViewHolder -> holder.bind(context)
 
         }

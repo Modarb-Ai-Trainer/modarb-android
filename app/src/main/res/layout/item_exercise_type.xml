@@ -14,7 +14,7 @@
 
 
         <ImageView
-            android:id="@+id/exe"
+            android:id="@+id/exerciseImage"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
@@ -24,6 +24,7 @@
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
+            android:id="@+id/exerciseName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -36,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/exe"
+            app:layout_constraintTop_toBottomOf="@+id/exerciseImage"
             tools:text="Dumbbell Shoulder press" />
 
 
