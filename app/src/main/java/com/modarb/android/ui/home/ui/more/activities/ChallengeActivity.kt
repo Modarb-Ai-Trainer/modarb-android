@@ -1,4 +1,4 @@
-package com.modarb.android.ui.menu.activities
+package com.modarb.android.ui.home.ui.more.activities
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.home.ui.more.adapters.ActiveUsersAdapter
+import com.modarb.android.ui.home.ui.more.adapters.ChallengeAdapter
+import com.modarb.android.ui.home.ui.more.models.ChallengeModel
 import com.modarb.android.ui.home.ui.more.models.User
 
 class ChallengeActivity : AppCompatActivity() {
@@ -33,5 +35,19 @@ class ChallengeActivity : AppCompatActivity() {
 
         val adapter = ActiveUsersAdapter(userList)
         recyclerView.adapter = adapter
+
+
+        val recyclerView2: RecyclerView = findViewById(R.id.availableChallengesRecyclerView)
+        recyclerView2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        val challengeList = listOf(
+            ChallengeModel("Plank\nChallenge", R.drawable.rounded_gradient_rectangle2, "Join"),
+            ChallengeModel("Push-Up Power\nChallenge", R.drawable.rounded_gradient_rectangle3, "Join"),
+            ChallengeModel("Flex Friday Photo\nChallenge", R.drawable.rounded_gradient_rectangle4, "Join"),
+            ChallengeModel("Squat Squad\nChallenge", R.drawable.rounded_gradient_rectangle5, "Join")
+        )
+
+        recyclerView2.adapter = ChallengeAdapter(challengeList)
+
     }
 }

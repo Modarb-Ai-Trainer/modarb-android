@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.more.activities.InjuryActivity
 import com.modarb.android.ui.home.ui.more.activities.ProfileActivity
 import com.modarb.android.ui.home.ui.more.activities.ReminderActivity
 import com.modarb.android.ui.home.ui.more.activities.SettingActivity
-import com.modarb.android.ui.menu.activities.ChallengeActivity
+import com.modarb.android.ui.home.ui.more.activities.ChallengeActivity
 
 class MoreFragment : Fragment() {
 
@@ -27,18 +28,20 @@ class MoreFragment : Fragment() {
         cardView.setOnClickListener {
             startActivity(Intent(requireContext(), ProfileActivity::class.java))
         }
-
-
-        val cardView2 = view.findViewById<View>(R.id.cardView4)
+        val cardView2 = view.findViewById<View>(R.id.cardView3)
         cardView2.setOnClickListener {
+            startActivity(Intent(requireContext(), InjuryActivity::class.java))
+        }
+        val cardView3 = view.findViewById<View>(R.id.cardView4)
+        cardView3.setOnClickListener {
             startActivity(Intent(requireContext(), ChallengeActivity::class.java))
         }
-        val cardView3 = view.findViewById<View>(R.id.cardView5)
-        cardView3.setOnClickListener {
+        val cardView4 = view.findViewById<View>(R.id.cardView5)
+        cardView4.setOnClickListener {
             startActivity(Intent(requireContext(), ReminderActivity::class.java))
         }
-        val cardView4 = view.findViewById<View>(R.id.cardView6)
-        cardView4.setOnClickListener {
+        val cardView5 = view.findViewById<View>(R.id.cardView6)
+        cardView5.setOnClickListener {
             startActivity(Intent(requireContext(), SettingActivity::class.java))
         }
     }
