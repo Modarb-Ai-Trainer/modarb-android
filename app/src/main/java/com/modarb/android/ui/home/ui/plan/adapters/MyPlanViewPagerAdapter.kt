@@ -4,13 +4,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.home.models.HomePageResponse
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 import com.modarb.android.ui.workout.models.YourItem
 
-class MyPlanViewPagerAdapter(private val context: Context) :
+class MyPlanViewPagerAdapter(
+    private val context: Context,
+    private var homePageResponse: HomePageResponse
+) :
+
+
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -49,6 +56,11 @@ class MyPlanViewPagerAdapter(private val context: Context) :
 
     inner class MyPlanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        var planDescription: TextView = view.findViewById(R.id.planDesc)
+
+
+
+
         private val dataList = mutableListOf<YourItem>()
         private lateinit var adapter: TrainingWeeksAdapter
 
@@ -72,7 +84,11 @@ class MyPlanViewPagerAdapter(private val context: Context) :
 
             adapter = TrainingWeeksAdapter(dataList)
             recyclerView.adapter = adapter
+
+            planDescription.text = homePageResponse.data.workout.description
         }
+
+
     }
 
 

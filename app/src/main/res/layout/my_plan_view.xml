@@ -158,7 +158,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/planDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -179,7 +179,7 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/line1"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/planDesc"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -195,7 +195,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toEndOf="@+id/imageView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/planDesc" />
 
     <ImageView
         android:id="@+id/imageView13"

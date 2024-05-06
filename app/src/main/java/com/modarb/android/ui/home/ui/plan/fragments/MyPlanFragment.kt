@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +19,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
+import com.modarb.android.network.RetrofitService
+import com.modarb.android.ui.home.ui.home.logic.HomeRepository
+import com.modarb.android.ui.home.ui.home.logic.HomeViewModel
+import com.modarb.android.ui.home.ui.home.logic.HomeViewModelFactory
+import com.modarb.android.ui.home.ui.home.models.HomePageResponse
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
 import com.modarb.android.ui.workout.models.WorkoutModel
@@ -30,6 +36,7 @@ class MyPlanFragment : Fragment() {
     private lateinit var addCustomWorkout: FloatingActionButton
     private lateinit var bottomSheet: BottomSheetDialog
     private lateinit var selectExerciseBottomSheet: BottomSheetDialog
+    private lateinit var homePageResponse: HomePageResponse
 
     @SuppressLint("NotifyDataSetChanged")
     override
@@ -44,7 +51,7 @@ class MyPlanFragment : Fragment() {
         val toggleGroup: MaterialButtonToggleGroup = view.findViewById(R.id.toggle_button_group)
         toggleGroup.check(R.id.myPlanBtn)
 
-        initViewPager(view)
+        getData(view)
         initBottomSheet()
         handleAddCustomWorkout(view)
         initSelectBottomSheet()
@@ -58,6 +65,20 @@ class MyPlanFragment : Fragment() {
 
         addCustomWorkout.setOnClickListener {
             bottomSheet.show()
+        }
+    }
+
+    private fun getData(view: View) {
+        val homeRepository = HomeRepository(RetrofitService.createService())
+        val viewModel = ViewModelProvider(
+            requireActivity(),
+            HomeViewModelFactory(homeRepository)
+        )[HomeViewModel::class.java]
+
+        viewModel.getUserHomePage(requireContext())
+
+        viewModel.homeResponse.observe(viewLifecycleOwner) { data ->
+            initViewPager(view, data.body()!!)
         }
     }
 
@@ -146,11 +167,11 @@ class MyPlanFragment : Fragment() {
         spinner.adapter = spinnerAdapter
     }
 
-    private fun initViewPager(view: View) {
+    private fun initViewPager(view: View, homePageResponse: HomePageResponse) {
         viewPager = view.findViewById(R.id.viewPager)
         toggleButtonGroup = view.findViewById(R.id.toggle_button_group)
 
-        val adapter = MyPlanViewPagerAdapter(requireContext())
+        val adapter = MyPlanViewPagerAdapter(requireContext(), homePageResponse)
         viewPager.adapter = adapter
 
         toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->

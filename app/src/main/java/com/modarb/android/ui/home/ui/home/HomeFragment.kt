@@ -1,5 +1,7 @@
 package com.modarb.android.ui.home.ui.home
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.RetrofitService
@@ -23,8 +26,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     lateinit var viewModel: HomeViewModel
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
         initViewModels()
         getHomeData()
         initLogout()
+        initActions()
         return root
     }
 
@@ -69,9 +71,20 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun initActions() {
+
+        binding.workoutPlanView.setOnClickListener {
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.navigation_my_plan)
+        }
+
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun setData(response: HomePageResponse) {
 
         binding.todayWorkoutName.text = response.data.workout.name
+        binding.time.text = formatWorkoutTime(response.data.workout.min_per_day, requireContext())
 
     }
 
@@ -79,4 +92,9 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun formatWorkoutTime(minutesPerDay: Int, context: Context): String {
+        return "$minutesPerDay ${context.getString(R.string.min)}"
+    }
+
 }
