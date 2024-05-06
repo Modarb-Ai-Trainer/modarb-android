@@ -10,6 +10,8 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.databinding.ActivitySplashBinding
+import com.modarb.android.ui.home.HomeActivity
+import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 
 
 class SplashActivity : AppCompatActivity() {
@@ -52,7 +54,20 @@ class SplashActivity : AppCompatActivity() {
             override fun onAnimationEnd(animation: Animator) {
 
                 handler.postDelayed({
-                    startActivity(Intent(this@SplashActivity, WelcomeScreenActivity::class.java))
+                    if (!UserPrefUtil.isUserLoggedIn(this@SplashActivity)) {
+                        startActivity(
+                            Intent(
+                                this@SplashActivity, WelcomeScreenActivity::class.java
+                            )
+                        )
+                    } else {
+                        startActivity(
+                            Intent(
+                                this@SplashActivity, HomeActivity::class.java
+                            )
+                        )
+                    }
+                    finish()
                 }, 200)
 
             }

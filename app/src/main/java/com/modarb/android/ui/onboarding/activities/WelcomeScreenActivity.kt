@@ -15,6 +15,7 @@ import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWelcomeScreenBinding
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.network.RetrofitService.handleRequest
+import com.modarb.android.ui.home.HomeActivity
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.onboarding.utils.ValidationUtil
 import com.modarb.android.ui.onboarding.viewModel.UserRepository
@@ -85,9 +86,7 @@ class WelcomeScreenActivity : AppCompatActivity() {
             val password = passwordEditText?.text.toString()
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(
-                    this,
-                    getString(R.string.please_fill_all_the_data),
-                    Toast.LENGTH_SHORT
+                    this, getString(R.string.please_fill_all_the_data), Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
             }
@@ -109,7 +108,13 @@ class WelcomeScreenActivity : AppCompatActivity() {
                 if (loginResponse.status == 200) {
                     UserPrefUtil.saveUserData(this, loginResponse.data)
                     UserPrefUtil.setUserLoggedIn(this, true)
+                    startActivity(
+                        Intent(
+                            this@WelcomeScreenActivity, HomeActivity::class.java
+                        )
+                    )
                     Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
             }, onError = { errorResponse ->
                 val defaultErrorMessage = getString(R.string.an_error_occurred)

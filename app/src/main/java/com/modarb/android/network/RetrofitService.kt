@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitService {
 
-    private const val BASE_URL = "https://modarb-backend.onrender.com/"
+    private const val BASE_URL = "http://10.0.2.2:4000/"
     inline fun <reified T> handleRequest(
         response: Response<T>,
         onSuccess: (T) -> Unit,

@@ -193,7 +193,7 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/textView33"
+                android:id="@+id/todayWorkoutName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -208,7 +208,7 @@
                 tools:text="@string/full_body_workout" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/time"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="16dp"
@@ -217,8 +217,8 @@
                 android:textColor="@color/white_500"
 
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/textView33"
-                app:layout_constraintTop_toBottomOf="@+id/textView33"
+                app:layout_constraintStart_toStartOf="@+id/todayWorkoutName"
+                app:layout_constraintTop_toBottomOf="@+id/todayWorkoutName"
                 tools:text="30 min" />
 
 
@@ -232,11 +232,12 @@
                 android:gravity="center"
                 android:textColor="@color/white_500"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/textView30"
-                app:layout_constraintTop_toBottomOf="@+id/textView33"
+                app:layout_constraintStart_toEndOf="@+id/time"
+                app:layout_constraintTop_toBottomOf="@+id/todayWorkoutName"
                 tools:text="6 excersise " />
 
             <Button
+                android:id="@+id/continueBtn"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

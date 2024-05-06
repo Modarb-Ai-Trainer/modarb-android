@@ -363,7 +363,7 @@
 
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/time"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="8dp"
@@ -387,9 +387,9 @@
                 android:paddingTop="2dp"
                 android:textColor="@color/white_500"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView30"
-                app:layout_constraintStart_toStartOf="@+id/textView30"
-                app:layout_constraintTop_toBottomOf="@+id/textView30"
+                app:layout_constraintEnd_toEndOf="@+id/time"
+                app:layout_constraintStart_toStartOf="@+id/time"
+                app:layout_constraintTop_toBottomOf="@+id/time"
                 tools:text="6 excersise" />
 
             <Button
