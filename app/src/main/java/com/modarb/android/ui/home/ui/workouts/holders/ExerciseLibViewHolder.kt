@@ -1,7 +1,6 @@
 package com.modarb.android.ui.home.ui.workouts.holders
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
@@ -26,7 +25,6 @@ class ExerciseLibViewHolder(view: View, context: Context) : RecyclerView.ViewHol
     fun bind(context: Context) {
         initBottomSheet(context)
         btnTest.setOnClickListener {
-            Log.e("Test", "test")
             bottomSheet.show()
         }
     }
