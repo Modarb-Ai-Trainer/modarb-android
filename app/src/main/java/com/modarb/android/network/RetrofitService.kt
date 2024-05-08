@@ -9,18 +9,24 @@ object RetrofitService {
 
     private const val BASE_URL = "http://10.0.2.2:4000/"
     inline fun <reified T> handleRequest(
-        response: Response<T>,
-        onSuccess: (T) -> Unit,
-        onError: (T?) -> Unit
+        response: Response<T>, onSuccess: (T) -> Unit, onError: (T?) -> Unit
     ) {
         if (response.isSuccessful) {
-            response.body()?.let {
-                onSuccess(it)
-            } ?: onError(null)
+            try {
+                response.body()?.let {
+                    onSuccess(it)
+                } ?: onError(null)
+            } catch (e: Exception) {
+                onError(null)
+            }
         } else {
-            val errorBody = response.errorBody()?.string()
-            val errorData: T? = errorBody?.let { parseErrorBody(it) }
-            onError(errorData)
+            try {
+                val errorBody = response.errorBody()?.string()
+                val errorData: T? = errorBody?.let { parseErrorBody(it) }
+                onError(errorData)
+            } catch (e: Exception) {
+                onError(null)
+            }
         }
     }
 
@@ -33,10 +39,14 @@ object RetrofitService {
     }
 
     fun createService(): ApiService {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
+        try {
+            return Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create()).build()
+                .create(ApiService::class.java)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
+
 }

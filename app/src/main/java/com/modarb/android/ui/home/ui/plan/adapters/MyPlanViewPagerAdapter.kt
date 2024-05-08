@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
+import com.modarb.android.ui.home.ui.plan.models.Data
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 import com.modarb.android.ui.workout.models.YourItem
 
 class MyPlanViewPagerAdapter(
-    private val context: Context,
-    private var viewModel: PlanViewModel
+    private val context: Context, private var viewModel: PlanViewModel
 ) :
 
 
@@ -55,17 +56,22 @@ class MyPlanViewPagerAdapter(
     }
 
     inner class MyPlanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        var planDescription: TextView = view.findViewById(R.id.planDesc)
-
-
+        private var recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        private val fitLevel: TextView = view.findViewById(R.id.fitLevel)
+        private val fitGoal: TextView = view.findViewById(R.id.fitGoal)
+        private val planDesc: TextView = view.findViewById(R.id.planDesc)
+        private val workPlace: TextView = view.findViewById(R.id.workPlace)
+        private val workEquip: TextView = view.findViewById(R.id.workEquip)
+        private val workTime: TextView = view.findViewById(R.id.workTime)
+        private val workDays: TextView = view.findViewById(R.id.workDays)
+        private val todayWorkoutTime: TextView = view.findViewById(R.id.todayWorkoutTime)
+        private val exerciseCount: TextView = view.findViewById(R.id.exerciseCount)
         private val dataList = mutableListOf<YourItem>()
         private lateinit var adapter: TrainingWeeksAdapter
 
-        fun bind(context: Context) {
+
+        private fun setupRecyclerView(context: Context) {
             recyclerView.layoutManager = LinearLayoutManager(context)
-
-
 
             dataList.add(
                 YourItem(
@@ -79,18 +85,38 @@ class MyPlanViewPagerAdapter(
                     "Start easy in the first week to let your body get used to the workout."
                 )
             )
+            if (!::adapter.isInitialized) {
+                adapter = TrainingWeeksAdapter(dataList)
+                recyclerView.adapter = adapter
+            }
+        }
 
-            adapter = TrainingWeeksAdapter(dataList)
-            recyclerView.adapter = adapter
+        private fun loadDataIntoViews(context: Context) {
+            viewModel.planResponse.value?.body()?.data?.let { data ->
+                updateTextViews(data, context)
+            } ?: run {
+                Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        private fun updateTextViews(data: Data, context: Context) {
+            planDesc.text = data.workout.description
+            fitGoal.text = data.workout.fitness_goal
+            fitLevel.text = data.workout.fitness_level
+            workPlace.text = data.workout.place.joinToString(separator = ", ")
+            workTime.text = "${data.workout.min_per_day} ${context.getString(R.string.min)}"
+            todayWorkoutTime.text = "${data.workout.min_per_day} ${context.getString(R.string.min)}"
+        }
 
 
-            //Log.e("amrrr", viewModel.planResponse.value!!.body()!!.data.workout.description)
-
+        fun bind(context: Context) {
+            setupRecyclerView(context)
+            loadDataIntoViews(context)
         }
 
 
     }
-
 
     inner class CustomWorkoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var recyclerView: RecyclerView = view.findViewById(R.id.recycleView)

@@ -2,6 +2,7 @@ package com.modarb.android.ui.home.ui.plan.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
 import com.modarb.android.network.RetrofitService
+import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
 import com.modarb.android.ui.home.ui.plan.logic.PlanRepository
@@ -60,6 +62,7 @@ class MyPlanFragment : Fragment() {
     }
 
     private fun initViewModels() {
+        Log.e("workoutID", WorkoutData.workoutId)
         val planRepository = PlanRepository(RetrofitService.createService())
         viewModel = ViewModelProvider(
             this, PlanViewModelFactory(planRepository)
@@ -69,7 +72,7 @@ class MyPlanFragment : Fragment() {
 
     private fun getDataFromViewModel(view: View) {
         viewModel.getPlanPage(requireContext())
-        viewModel.planResponse.observe(requireActivity()) { response ->
+        viewModel.planResponse.observe(viewLifecycleOwner) { response ->
             RetrofitService.handleRequest(response = response, onSuccess = { res ->
                 initViewPager(view, viewModel)
             }, onError = { errorResponse ->

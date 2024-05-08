@@ -89,7 +89,8 @@ class HomeFragment : Fragment() {
     private fun setData(response: HomePageResponse) {
 
         binding.todayWorkoutName.text = response.data.workout.name
-        binding.time.text = formatWorkoutTime(response.data.workout.min_per_day, requireContext())
+        binding.workouttime.text =
+            formatWorkoutTime(response.data.workout.min_per_day, requireContext())
 
     }
 

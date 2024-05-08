@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/fitLevel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -106,7 +106,7 @@
                 app:layout_constraintVertical_bias="0.189" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/fitGoal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -208,7 +208,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/workPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -225,15 +225,15 @@
         android:id="@+id/imageView14"
         android:layout_width="26dp"
         android:layout_height="23dp"
-        android:layout_marginStart="40dp"
         android:src="@drawable/icon_workout2"
-        app:layout_constraintBottom_toBottomOf="@+id/textView24"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toTopOf="@+id/textView24"
+        app:layout_constraintBottom_toBottomOf="@+id/workPlace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/workPlace"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/workEquip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -260,7 +260,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/workTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -278,18 +278,19 @@
         android:id="@+id/imageView16"
         android:layout_width="27dp"
         android:layout_height="24dp"
-        android:layout_marginStart="44dp"
         android:src="@drawable/icon_workout4"
-        app:layout_constraintBottom_toBottomOf="@+id/textView25"
-        app:layout_constraintStart_toEndOf="@+id/textView25"
-        app:layout_constraintTop_toTopOf="@+id/textView25"
+        app:layout_constraintBottom_toBottomOf="@+id/workTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/workTime"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/workDays"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
         android:gravity="start"
         android:paddingTop="2dp"
         android:text="@string/sixteen"
@@ -313,7 +314,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25">
+        app:layout_constraintTop_toBottomOf="@+id/workTime">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -363,7 +364,7 @@
 
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/todayWorkoutTime"
                 android:layout_width="70dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="8dp"
@@ -378,7 +379,7 @@
 
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/exerciseCount"
                 android:layout_width="100dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="8dp"
@@ -387,13 +388,13 @@
                 android:paddingTop="2dp"
                 android:textColor="@color/white_500"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/time"
-                app:layout_constraintStart_toStartOf="@+id/time"
-                app:layout_constraintTop_toBottomOf="@+id/time"
+                app:layout_constraintEnd_toEndOf="@+id/todayWorkoutTime"
+                app:layout_constraintStart_toStartOf="@+id/todayWorkoutTime"
+                app:layout_constraintTop_toBottomOf="@+id/todayWorkoutTime"
                 tools:text="6 excersise" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/startWorkoutBtn"
                 android:layout_width="180dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
@@ -405,7 +406,7 @@
                 app:cornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintTop_toBottomOf="@+id/exerciseCount" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
