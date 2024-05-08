@@ -22,17 +22,16 @@ interface ApiService {
 
 
     // home page
-    @GET("api/v1/user/myWorkouts/home/{userId}")
+    @GET("api/v1/user/homePage/")
     suspend fun getHomePage(
-        @Path("userId") userId: String, @Header("Authorization") token: String
+        @Header("Authorization") token: String
     ): Response<HomePageResponse>
 
 
     // my plan page
     @GET("api/v1/user/myWorkouts/{id}")
     suspend fun getPlanPage(
-        @Path("id") userId: String,
-        @Header("Authorization") token: String
+        @Path("id") userId: String, @Header("Authorization") token: String
     ): Response<PlanPageResponse>
 }
 

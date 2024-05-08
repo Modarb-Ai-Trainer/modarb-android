@@ -66,7 +66,7 @@ class HomeFragment : Fragment() {
         viewModel.homeResponse.observe(requireActivity()) { response ->
             RetrofitService.handleRequest(response = response, onSuccess = { res ->
                 setData(res)
-                WorkoutData.workoutId = res.data.id
+                WorkoutData.workoutId = res.data.myWorkout.id
             }, onError = { errorResponse ->
                 val defaultErrorMessage = getString(R.string.an_error_occurred)
                 val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
@@ -88,9 +88,9 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setData(response: HomePageResponse) {
 
-        binding.todayWorkoutName.text = response.data.workout.name
+        binding.todayWorkoutName.text = response.data.myWorkout.workout.name
         binding.workouttime.text =
-            formatWorkoutTime(response.data.workout.min_per_day, requireContext())
+            formatWorkoutTime(response.data.myWorkout.workout.min_per_day, requireContext())
 
     }
 

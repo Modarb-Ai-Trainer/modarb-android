@@ -1,11 +1,11 @@
 package com.modarb.android.ui.home.ui.plan.models
 
 data class Workout(
-    val __v: Int,
-    val _id: String,
+    val created_by: String,
     val description: String,
     val fitness_goal: String,
     val fitness_level: String,
+    val id: String,
     val image: String,
     val min_per_day: Int,
     val name: String,

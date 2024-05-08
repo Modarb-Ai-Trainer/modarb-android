@@ -10,7 +10,6 @@ class HomeRepository(private val apiService: ApiService) {
 
     suspend fun getUserHomePage(context: Context): Response<HomePageResponse> {
         return apiService.getHomePage(
-            UserPrefUtil.getUserData(context)!!.user.id,
             "Bearer " + UserPrefUtil.getUserData(context)!!.token
         )
     }

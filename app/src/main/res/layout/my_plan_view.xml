@@ -349,7 +349,7 @@
 
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/todayWorkoutNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -372,9 +372,9 @@
                 android:gravity="center"
                 android:textColor="@color/white_500"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView29"
-                app:layout_constraintStart_toStartOf="@+id/textView29"
-                app:layout_constraintTop_toBottomOf="@+id/textView29"
+                app:layout_constraintEnd_toEndOf="@+id/todayWorkoutNameTxt"
+                app:layout_constraintStart_toStartOf="@+id/todayWorkoutNameTxt"
+                app:layout_constraintTop_toBottomOf="@+id/todayWorkoutNameTxt"
                 tools:text="30 min" />
 
 

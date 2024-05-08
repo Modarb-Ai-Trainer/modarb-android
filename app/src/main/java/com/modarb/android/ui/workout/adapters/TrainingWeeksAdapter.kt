@@ -7,15 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
-import com.modarb.android.ui.workout.models.YourItem
+import com.modarb.android.ui.home.ui.plan.models.Week
 
-class TrainingWeeksAdapter(private val dataList: List<YourItem>) :
+class TrainingWeeksAdapter(private val dataList: List<Week>) :
     RecyclerView.Adapter<TrainingWeeksAdapter.YourViewHolder>() {
 
     inner class YourViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
-        private val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
-        val firstTextView: TextView = itemView.findViewById(R.id.firstTextView)
-        val secondTextView: TextView = itemView.findViewById(R.id.secondTextView)
+        val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
+        val weekName: TextView = itemView.findViewById(R.id.weekName)
+        val weekDesc: TextView = itemView.findViewById(R.id.weekDesc)
 
         init {
             timelineView.initLine(viewType)
@@ -30,9 +30,10 @@ class TrainingWeeksAdapter(private val dataList: List<YourItem>) :
     }
 
     override fun onBindViewHolder(holder: YourViewHolder, position: Int) {
-        val currentItem = dataList[position]
-        holder.firstTextView.text = currentItem.firstText
-        holder.secondTextView.text = currentItem.secondText
+        val weekData = dataList[position]
+        holder.weekName.text = weekData.week_name
+        holder.weekDesc.text = weekData.week_description
+//        if (!weekData.is_done) holder.timelineView.marker = TimelineView.lineMarker()
     }
 
     override fun getItemCount() = dataList.size

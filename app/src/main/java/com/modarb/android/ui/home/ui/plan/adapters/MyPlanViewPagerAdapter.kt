@@ -1,5 +1,6 @@
 package com.modarb.android.ui.home.ui.plan.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
 import com.modarb.android.ui.home.ui.plan.models.Data
+import com.modarb.android.ui.home.ui.plan.models.Day
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
-import com.modarb.android.ui.workout.models.YourItem
 
 class MyPlanViewPagerAdapter(
     private val context: Context, private var viewModel: PlanViewModel
@@ -63,30 +64,19 @@ class MyPlanViewPagerAdapter(
         private val workPlace: TextView = view.findViewById(R.id.workPlace)
         private val workEquip: TextView = view.findViewById(R.id.workEquip)
         private val workTime: TextView = view.findViewById(R.id.workTime)
-        private val workDays: TextView = view.findViewById(R.id.workDays)
+        private val workoutTotalDays: TextView = view.findViewById(R.id.workDays)
         private val todayWorkoutTime: TextView = view.findViewById(R.id.todayWorkoutTime)
+        private val todayWorkoutName: TextView = view.findViewById(R.id.todayWorkoutNameTxt)
         private val exerciseCount: TextView = view.findViewById(R.id.exerciseCount)
-        private val dataList = mutableListOf<YourItem>()
         private lateinit var adapter: TrainingWeeksAdapter
 
 
         private fun setupRecyclerView(context: Context) {
             recyclerView.layoutManager = LinearLayoutManager(context)
 
-            dataList.add(
-                YourItem(
-                    "Week 1 : Foundation",
-                    "Start easy in the first week to let your body get used to the workout. It sets the baseline for your progress in the weeks ahead."
-                )
-            )
-            dataList.add(
-                YourItem(
-                    "Week 2 : Foundation",
-                    "Start easy in the first week to let your body get used to the workout."
-                )
-            )
+
             if (!::adapter.isInitialized) {
-                adapter = TrainingWeeksAdapter(dataList)
+                adapter = TrainingWeeksAdapter(viewModel.planResponse.value?.body()?.data!!.weeks)
                 recyclerView.adapter = adapter
             }
         }
@@ -100,13 +90,41 @@ class MyPlanViewPagerAdapter(
             }
         }
 
+        @SuppressLint("SetTextI18n")
         private fun updateTextViews(data: Data, context: Context) {
+            todayWorkoutName.text = getTodayWorkout()?.day_type
             planDesc.text = data.workout.description
             fitGoal.text = data.workout.fitness_goal
             fitLevel.text = data.workout.fitness_level
             workPlace.text = data.workout.place.joinToString(separator = ", ")
-            workTime.text = "${data.workout.min_per_day} ${context.getString(R.string.min)}"
+            workTime.text = "${data.workout.min_per_day} ${context.getString(R.string.min)} / day"
             todayWorkoutTime.text = "${data.workout.min_per_day} ${context.getString(R.string.min)}"
+            exerciseCount.text =
+                getTodayWorkout()?.total_number_exercises.toString() + " " + context.getString(R.string.exercise)
+            workEquip.text = data.workout.type
+            workoutTotalDays.text =
+                data.weeks.size.toString() + " " + context.getString(R.string.days)
+        }
+
+        /*
+    Function that will get today workout by finding the first is done = false week
+    then find the first undone exercise day
+
+     */
+        private fun getTodayWorkout(): Day? {
+            var weekList = viewModel.planResponse.value!!.body()!!.data.weeks
+
+            for (week in weekList) {
+                if (!week.is_done) {
+                    for (day in week.days) {
+                        if (!day.is_done) {
+                            return day
+                        }
+                    }
+                    break
+                }
+            }
+            return null
         }
 
 

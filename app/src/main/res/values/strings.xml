@@ -195,5 +195,6 @@
     <string name="common_injuries">Common Injuries </string>
     <string name="your_daily_recovery_session">Your Daily\nRecovery Session </string>
     <string name="error">Error</string>
+    <string name="days">days</string>
 
 </resources>
