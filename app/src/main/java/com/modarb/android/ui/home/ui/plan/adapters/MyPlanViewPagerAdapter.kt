@@ -8,13 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.home.ui.home.models.HomePageResponse
+import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 import com.modarb.android.ui.workout.models.YourItem
 
 class MyPlanViewPagerAdapter(
     private val context: Context,
-    private var homePageResponse: HomePageResponse
+    private var viewModel: PlanViewModel
 ) :
 
 
@@ -59,8 +59,6 @@ class MyPlanViewPagerAdapter(
         var planDescription: TextView = view.findViewById(R.id.planDesc)
 
 
-
-
         private val dataList = mutableListOf<YourItem>()
         private lateinit var adapter: TrainingWeeksAdapter
 
@@ -85,7 +83,9 @@ class MyPlanViewPagerAdapter(
             adapter = TrainingWeeksAdapter(dataList)
             recyclerView.adapter = adapter
 
-            planDescription.text = homePageResponse.data.workout.description
+
+            //Log.e("amrrr", viewModel.planResponse.value!!.body()!!.data.workout.description)
+
         }
 
 

@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,12 +21,11 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
 import com.modarb.android.network.RetrofitService
-import com.modarb.android.ui.home.ui.home.logic.HomeRepository
-import com.modarb.android.ui.home.ui.home.logic.HomeViewModel
-import com.modarb.android.ui.home.ui.home.logic.HomeViewModelFactory
-import com.modarb.android.ui.home.ui.home.models.HomePageResponse
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
+import com.modarb.android.ui.home.ui.plan.logic.PlanRepository
+import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
+import com.modarb.android.ui.home.ui.plan.logic.PlanViewModelFactory
 import com.modarb.android.ui.workout.models.WorkoutModel
 
 
@@ -36,7 +36,7 @@ class MyPlanFragment : Fragment() {
     private lateinit var addCustomWorkout: FloatingActionButton
     private lateinit var bottomSheet: BottomSheetDialog
     private lateinit var selectExerciseBottomSheet: BottomSheetDialog
-    private lateinit var homePageResponse: HomePageResponse
+    lateinit var viewModel: PlanViewModel
 
     @SuppressLint("NotifyDataSetChanged")
     override
@@ -51,11 +51,34 @@ class MyPlanFragment : Fragment() {
         val toggleGroup: MaterialButtonToggleGroup = view.findViewById(R.id.toggle_button_group)
         toggleGroup.check(R.id.myPlanBtn)
 
-        getData(view)
+        initViewModels()
+        getDataFromViewModel(view)
         initBottomSheet()
         handleAddCustomWorkout(view)
         initSelectBottomSheet()
         return view
+    }
+
+    private fun initViewModels() {
+        val planRepository = PlanRepository(RetrofitService.createService())
+        viewModel = ViewModelProvider(
+            this, PlanViewModelFactory(planRepository)
+        )[PlanViewModel::class.java]
+    }
+
+
+    private fun getDataFromViewModel(view: View) {
+        viewModel.getPlanPage(requireContext())
+        viewModel.planResponse.observe(requireActivity()) { response ->
+            RetrofitService.handleRequest(response = response, onSuccess = { res ->
+                initViewPager(view, viewModel)
+            }, onError = { errorResponse ->
+                val defaultErrorMessage = getString(R.string.an_error_occurred)
+                val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
+                ?: defaultErrorMessage
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            })
+        }
     }
 
     private fun handleAddCustomWorkout(view: View) {
@@ -68,19 +91,6 @@ class MyPlanFragment : Fragment() {
         }
     }
 
-    private fun getData(view: View) {
-        val homeRepository = HomeRepository(RetrofitService.createService())
-        val viewModel = ViewModelProvider(
-            requireActivity(),
-            HomeViewModelFactory(homeRepository)
-        )[HomeViewModel::class.java]
-
-        viewModel.getUserHomePage(requireContext())
-
-        viewModel.homeResponse.observe(viewLifecycleOwner) { data ->
-            initViewPager(view, data.body()!!)
-        }
-    }
 
     private fun initBottomSheet() {
         bottomSheet = BottomSheetDialog(requireContext())
@@ -167,11 +177,11 @@ class MyPlanFragment : Fragment() {
         spinner.adapter = spinnerAdapter
     }
 
-    private fun initViewPager(view: View, homePageResponse: HomePageResponse) {
+    private fun initViewPager(view: View, viewModel: PlanViewModel) {
         viewPager = view.findViewById(R.id.viewPager)
         toggleButtonGroup = view.findViewById(R.id.toggle_button_group)
 
-        val adapter = MyPlanViewPagerAdapter(requireContext(), homePageResponse)
+        val adapter = MyPlanViewPagerAdapter(requireContext(), viewModel)
         viewPager.adapter = adapter
 
         toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->

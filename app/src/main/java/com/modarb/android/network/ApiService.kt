@@ -1,6 +1,7 @@
 package com.modarb.android.network
 
 import com.modarb.android.ui.home.ui.home.models.HomePageResponse
+import com.modarb.android.ui.home.ui.plan.models.PlanPageResponse
 import com.modarb.android.ui.onboarding.models.LoginResponse
 import com.modarb.android.ui.onboarding.models.RequestModels.LoginRequest
 import com.modarb.android.ui.onboarding.models.RequestModels.RegisterRequest
@@ -19,9 +20,19 @@ interface ApiService {
     @POST("/api/v1/user/auth/register")
     suspend fun registerUser(@Body registerRequest: RegisterRequest): Response<LoginResponse>
 
+
+    // home page
     @GET("api/v1/user/myWorkouts/home/{userId}")
     suspend fun getHomePage(
         @Path("userId") userId: String, @Header("Authorization") token: String
     ): Response<HomePageResponse>
+
+
+    // my plan page
+    @GET("api/v1/user/myWorkouts/{id}")
+    suspend fun getPlanPage(
+        @Path("id") userId: String,
+        @Header("Authorization") token: String
+    ): Response<PlanPageResponse>
 }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.RetrofitService
+import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.home.logic.HomeRepository
 import com.modarb.android.ui.home.ui.home.logic.HomeViewModel
 import com.modarb.android.ui.home.ui.home.logic.HomeViewModelFactory
@@ -37,6 +39,8 @@ class HomeFragment : Fragment() {
         getHomeData()
         initLogout()
         initActions()
+
+        Log.e("User ID", UserPrefUtil.getUserData(requireContext())!!.user.id)
         return root
     }
 
@@ -62,6 +66,7 @@ class HomeFragment : Fragment() {
         viewModel.homeResponse.observe(requireActivity()) { response ->
             RetrofitService.handleRequest(response = response, onSuccess = { res ->
                 setData(res)
+                WorkoutData.workoutId = res.data.id
             }, onError = { errorResponse ->
                 val defaultErrorMessage = getString(R.string.an_error_occurred)
                 val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
