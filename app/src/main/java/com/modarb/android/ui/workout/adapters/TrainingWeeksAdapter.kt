@@ -11,10 +11,11 @@ import com.modarb.android.R
 import com.modarb.android.ui.home.ui.plan.models.Week
 
 class TrainingWeeksAdapter(private val dataList: List<Week>) :
-    RecyclerView.Adapter<TrainingWeeksAdapter.YourViewHolder>() {
+    RecyclerView.Adapter<TrainingWeeksAdapter.TrainingWeeksAdapter>() {
     private var isTheCurrentWeekFound: Boolean = false
 
-    inner class YourViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
+    inner class TrainingWeeksAdapter(itemView: View, viewType: Int) :
+        RecyclerView.ViewHolder(itemView) {
         val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
         val weekName: TextView = itemView.findViewById(R.id.weekName)
         val weekDesc: TextView = itemView.findViewById(R.id.weekDesc)
@@ -25,13 +26,13 @@ class TrainingWeeksAdapter(private val dataList: List<Week>) :
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingWeeksAdapter {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_timeline, parent, false)
-        return YourViewHolder(view, viewType)
+        return TrainingWeeksAdapter(view, viewType)
     }
 
-    override fun onBindViewHolder(holder: YourViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrainingWeeksAdapter, position: Int) {
         val weekData = dataList[position]
 
         holder.weekName.text = weekData.week_name
@@ -47,7 +48,7 @@ class TrainingWeeksAdapter(private val dataList: List<Week>) :
         }
     }
 
-    private fun setMarker(holder: YourViewHolder, drawableResId: Int) {
+    private fun setMarker(holder: TrainingWeeksAdapter, drawableResId: Int) {
         holder.timelineView.marker = getDrawable(holder.itemView.context, drawableResId)
     }
 
