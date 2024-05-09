@@ -23,6 +23,7 @@ import com.modarb.android.ui.home.ui.home.models.Day
 import com.modarb.android.ui.home.ui.home.models.HomePageResponse
 import com.modarb.android.ui.onboarding.activities.SplashActivity
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
+import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
 
 class HomeFragment : Fragment() {
 
@@ -40,9 +41,16 @@ class HomeFragment : Fragment() {
         getHomeData()
         initLogout()
         initActions()
+        handleClick()
 
         Log.e("User ID", UserPrefUtil.getUserData(requireContext())!!.user.id)
         return root
+    }
+
+    private fun handleClick() {
+        binding.continueBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), TodayWorkoutActivity::class.java))
+        }
     }
 
     private fun initLogout() {
