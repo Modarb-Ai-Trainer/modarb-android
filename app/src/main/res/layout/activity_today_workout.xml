@@ -26,7 +26,6 @@
         android:id="@+id/timeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
@@ -34,29 +33,28 @@
         android:text="@string/Duration_40_50_min"
         android:textColor="@color/white_smoke"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintBottom_toBottomOf="@+id/setsCount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/setsCount"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/setsCount"
         app:layout_constraintVertical_bias="0.55" />
 
     <TextView
         android:id="@+id/setsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:padding="8dp"
         android:text="@string/sets_20"
         android:textColor="@color/white_smoke"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintBottom_toBottomOf="@+id/exerciseCount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toEndOf="@+id/exerciseCount"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/exerciseCount"
         app:layout_constraintVertical_bias="0.54" />
 
     <TextView
