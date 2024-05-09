@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
@@ -11,6 +12,7 @@ import com.modarb.android.ui.home.ui.plan.models.Week
 
 class TrainingWeeksAdapter(private val dataList: List<Week>) :
     RecyclerView.Adapter<TrainingWeeksAdapter.YourViewHolder>() {
+    private var isTheCurrentWeekFound: Boolean = false
 
     inner class YourViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
         val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
@@ -31,9 +33,22 @@ class TrainingWeeksAdapter(private val dataList: List<Week>) :
 
     override fun onBindViewHolder(holder: YourViewHolder, position: Int) {
         val weekData = dataList[position]
+
         holder.weekName.text = weekData.week_name
-        holder.weekDesc.text = weekData.week_description
-//        if (!weekData.is_done) holder.timelineView.marker = TimelineView.lineMarker()
+        setMarker(holder, R.drawable.ic_marker_inactive)
+
+        if (!weekData.is_done) {
+            // This is the current week
+            if (!isTheCurrentWeekFound) {
+                setMarker(holder, R.drawable.ic_marker)
+                holder.weekDesc.text = weekData.week_description
+            }
+            isTheCurrentWeekFound = true
+        }
+    }
+
+    private fun setMarker(holder: YourViewHolder, drawableResId: Int) {
+        holder.timelineView.marker = getDrawable(holder.itemView.context, drawableResId)
     }
 
     override fun getItemCount() = dataList.size

@@ -58,18 +58,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@string/Week1_foundation"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    tools:text="@string/Week1_foundation" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/weekDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Week1_description"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="@string/Week1_description" />
 
 
         </LinearLayout>
