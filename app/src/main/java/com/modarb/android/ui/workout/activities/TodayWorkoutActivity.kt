@@ -17,7 +17,11 @@ class TodayWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTodayWorkoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setRecyclerView()
+        handleBackBtn()
+    }
 
+    private fun setRecyclerView() {
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val itemList: ArrayList<WorkoutModel> = ArrayList()
@@ -35,8 +39,12 @@ class TodayWorkoutActivity : AppCompatActivity() {
 
 
         startButton = findViewById(R.id.startButton)
-        startButton.setOnClickListener {
-            binding.recyclerView.visibility = View.VISIBLE
+        binding.recyclerView.visibility = View.VISIBLE
+    }
+
+    private fun handleBackBtn() {
+        binding.backBtn.setOnClickListener {
+            finish()
         }
     }
 }
