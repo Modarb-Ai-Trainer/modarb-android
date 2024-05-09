@@ -31,7 +31,12 @@ interface ApiService {
     // my plan page
     @GET("api/v1/user/myWorkouts/{id}")
     suspend fun getPlanPage(
-        @Path("id") userId: String, @Header("Authorization") token: String
+        @Path("id") myWorkoutId: String, @Header("Authorization") token: String
+    ): Response<PlanPageResponse>
+
+    @GET("api/v1/user/workouts/{id}")
+    suspend fun getWorkouts(
+        @Path("id") workoutId: String, @Header("Authorization") token: String
     ): Response<PlanPageResponse>
 }
 

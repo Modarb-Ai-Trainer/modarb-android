@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityTodayWorkoutBinding
 import com.modarb.android.ui.workout.adapters.WorkoutAdapter
-import com.modarb.android.ui.workout.models.WorkoutModel
 
 class TodayWorkoutActivity : AppCompatActivity() {
     private lateinit var startButton: Button

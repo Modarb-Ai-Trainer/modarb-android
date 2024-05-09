@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.workout.adapters.WorkoutAdapter
-import com.modarb.android.ui.workout.models.WorkoutModel
-import com.modarb.android.ui.workout.models.YourItem2
 
 class WeeklyWorkoutActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.workout.models.WorkoutModel
 
 class ExercisesAddAdapter(private val itemList: List<WorkoutModel>) :
     RecyclerView.Adapter<ExercisesAddAdapter.ViewHolder>() {
