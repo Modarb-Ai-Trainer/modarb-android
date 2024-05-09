@@ -5,20 +5,21 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.databinding.ActivityTodayWorkoutBinding
 import com.modarb.android.ui.workout.adapters.WorkoutAdapter
 import com.modarb.android.ui.workout.models.WorkoutModel
 
 class TodayWorkoutActivity : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
     private lateinit var startButton: Button
+    private lateinit var binding: ActivityTodayWorkoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_today_workout)
+        binding = ActivityTodayWorkoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val itemList: ArrayList<WorkoutModel> = ArrayList()
 
         val workout1 =
@@ -30,12 +31,12 @@ class TodayWorkoutActivity : AppCompatActivity() {
         itemList.add(workout2)
 
         val adapter = WorkoutAdapter(itemList)
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
 
         startButton = findViewById(R.id.startButton)
         startButton.setOnClickListener {
-            recyclerView.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.VISIBLE
         }
     }
 }
