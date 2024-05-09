@@ -27,15 +27,14 @@ import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
     lateinit var viewModel: HomeViewModel
 
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         initViewModels()
         getHomeData()
@@ -86,6 +85,7 @@ class HomeFragment : Fragment() {
 
 
     private fun getHomeData() {
+        binding.progressView.progressOverlay.visibility = View.VISIBLE
         viewModel.getUserHomePage(requireContext())
 
         viewModel.homeResponse.observe(requireActivity()) { response ->
@@ -98,6 +98,7 @@ class HomeFragment : Fragment() {
                 ?: defaultErrorMessage
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             })
+            binding.progressView.progressOverlay.visibility = View.GONE
         }
     }
 
@@ -117,11 +118,6 @@ class HomeFragment : Fragment() {
             formatWorkoutTime(response.data.myWorkout.workout.min_per_day, requireContext())
         binding.exerciseCountTxt.text =
             getTodayWorkout()?.total_number_exercises.toString() + " " + getString(R.string.exercise)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun formatWorkoutTime(minutesPerDay: Int, context: Context): String {
