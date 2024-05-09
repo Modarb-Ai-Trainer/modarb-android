@@ -28,6 +28,7 @@ import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
 import com.modarb.android.ui.home.ui.plan.logic.PlanRepository
 import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
 import com.modarb.android.ui.home.ui.plan.logic.PlanViewModelFactory
+import com.modarb.android.ui.workout.models.WorkoutModel
 
 
 class MyPlanFragment : Fragment() {
