@@ -72,6 +72,14 @@
                 tools:text="@string/Week1_description" />
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

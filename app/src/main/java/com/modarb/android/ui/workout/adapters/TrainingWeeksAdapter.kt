@@ -1,16 +1,20 @@
 package com.modarb.android.ui.workout.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.plan.models.Day
 import com.modarb.android.ui.home.ui.plan.models.Week
 
-class TrainingWeeksAdapter(private val dataList: List<Week>) :
+
+class TrainingWeeksAdapter(private val dataList: List<Week>, private var context: Context) :
     RecyclerView.Adapter<TrainingWeeksAdapter.TrainingWeeksAdapter>() {
     private var isTheCurrentWeekFound: Boolean = false
 
@@ -19,6 +23,7 @@ class TrainingWeeksAdapter(private val dataList: List<Week>) :
         val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
         val weekName: TextView = itemView.findViewById(R.id.weekName)
         val weekDesc: TextView = itemView.findViewById(R.id.weekDesc)
+        val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
 
         init {
             timelineView.initLine(viewType)
@@ -37,15 +42,28 @@ class TrainingWeeksAdapter(private val dataList: List<Week>) :
 
         holder.weekName.text = weekData.week_name
         setMarker(holder, R.drawable.ic_marker_inactive)
+        bindDaysAdapter(holder, weekData.days, false)
 
         if (!weekData.is_done) {
             // This is the current week
             if (!isTheCurrentWeekFound) {
                 setMarker(holder, R.drawable.ic_marker)
+                bindDaysAdapter(holder, weekData.days, true)
                 holder.weekDesc.text = weekData.week_description
             }
             isTheCurrentWeekFound = true
         }
+    }
+
+    private fun bindDaysAdapter(
+        holder: TrainingWeeksAdapter,
+        days: List<Day>,
+        isTheCurrentWeek: Boolean
+    ) {
+        val adapter = DaysAdapter(days, isTheCurrentWeek)
+        holder.recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        holder.recyclerView.adapter = adapter
     }
 
     private fun setMarker(holder: TrainingWeeksAdapter, drawableResId: Int) {

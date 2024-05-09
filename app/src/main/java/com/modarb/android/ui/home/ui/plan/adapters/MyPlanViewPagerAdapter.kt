@@ -76,7 +76,9 @@ class MyPlanViewPagerAdapter(
 
 
             if (!::adapter.isInitialized) {
-                adapter = TrainingWeeksAdapter(viewModel.planResponse.value?.body()?.data!!.weeks)
+                adapter = TrainingWeeksAdapter(
+                    viewModel.planResponse.value?.body()?.data!!.weeks, context
+                )
                 recyclerView.adapter = adapter
             }
         }
