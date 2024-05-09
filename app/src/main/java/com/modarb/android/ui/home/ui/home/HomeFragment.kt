@@ -19,6 +19,7 @@ import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.home.logic.HomeRepository
 import com.modarb.android.ui.home.ui.home.logic.HomeViewModel
 import com.modarb.android.ui.home.ui.home.logic.HomeViewModelFactory
+import com.modarb.android.ui.home.ui.home.models.Day
 import com.modarb.android.ui.home.ui.home.models.HomePageResponse
 import com.modarb.android.ui.onboarding.activities.SplashActivity
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
@@ -59,6 +60,22 @@ class HomeFragment : Fragment() {
         )[HomeViewModel::class.java]
     }
 
+    private fun getTodayWorkout(): Day? {
+        val weekList = viewModel.homeResponse.value!!.body()!!.data.myWorkout.weeks
+
+        for (week in weekList) {
+            if (!week.is_done) {
+                for (day in week.days) {
+                    if (!day.is_done) {
+                        return day
+                    }
+                }
+                break
+            }
+        }
+        return null
+    }
+
 
     private fun getHomeData() {
         viewModel.getUserHomePage(requireContext())
@@ -87,11 +104,11 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun setData(response: HomePageResponse) {
-
         binding.todayWorkoutName.text = response.data.myWorkout.workout.name
         binding.workouttime.text =
             formatWorkoutTime(response.data.myWorkout.workout.min_per_day, requireContext())
-
+        binding.exerciseCountTxt.text =
+            getTodayWorkout()?.total_number_exercises.toString() + " " + getString(R.string.exercise)
     }
 
     override fun onDestroyView() {
