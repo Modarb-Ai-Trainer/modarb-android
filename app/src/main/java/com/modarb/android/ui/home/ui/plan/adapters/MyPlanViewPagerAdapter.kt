@@ -2,9 +2,11 @@ package com.modarb.android.ui.home.ui.plan.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.modarb.android.R
 import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
 import com.modarb.android.ui.home.ui.plan.models.Data
 import com.modarb.android.ui.home.ui.plan.models.Day
+import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 
 class MyPlanViewPagerAdapter(
@@ -68,6 +71,7 @@ class MyPlanViewPagerAdapter(
         private val todayWorkoutTime: TextView = view.findViewById(R.id.todayWorkoutTime)
         private val todayWorkoutName: TextView = view.findViewById(R.id.todayWorkoutNameTxt)
         private val exerciseCount: TextView = view.findViewById(R.id.exerciseCount)
+        private val startWorkout: Button = view.findViewById(R.id.startWorkoutBtn)
         private lateinit var adapter: TrainingWeeksAdapter
 
 
@@ -114,7 +118,7 @@ class MyPlanViewPagerAdapter(
 
      */
         private fun getTodayWorkout(): Day? {
-            var weekList = viewModel.planResponse.value!!.body()!!.data.weeks
+            val weekList = viewModel.planResponse.value!!.body()!!.data.weeks
 
             for (week in weekList) {
                 if (!week.is_done) {
@@ -129,10 +133,17 @@ class MyPlanViewPagerAdapter(
             return null
         }
 
+        private fun startWorkout() {
+            startWorkout.setOnClickListener {
+                context.startActivity(Intent(context, TodayWorkoutActivity::class.java))
+
+            }
+        }
 
         fun bind(context: Context) {
             setupRecyclerView(context)
             loadDataIntoViews(context)
+            startWorkout()
         }
 
 
