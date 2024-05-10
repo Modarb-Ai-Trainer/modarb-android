@@ -31,7 +31,7 @@ class WorkoutAdapter(private val data: Day?) :
 
         // holder.workoutImage.setImageResource(item.imageResId)
         holder.workoutTitle.text = item!!.name
-        holder.workoutDescription.text = item.instructions
+        holder.workoutDescription.text = "${item.sets} sets x ${item.reps} reps"
         holder.workoutButton.text = item.category
         holder.workoutButton.setOnClickListener {
         }

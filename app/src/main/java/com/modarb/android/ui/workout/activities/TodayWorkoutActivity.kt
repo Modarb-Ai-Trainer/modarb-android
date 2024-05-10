@@ -27,8 +27,21 @@ class TodayWorkoutActivity : AppCompatActivity() {
 
         val adapter = WorkoutAdapter(WorkoutData.getTodayWorkout())
         binding.recyclerView.adapter = adapter
+        setData()
 
         startButton = findViewById(R.id.startButton)
+    }
+
+    private fun setData() {
+        var totalSets = 0
+        val workoutData = WorkoutData.getTodayWorkout()
+
+        for (i in workoutData!!.exercises) {
+            totalSets += i.sets
+        }
+        binding.exerciseCount.text = "Exercises \n ${workoutData.total_number_exercises}"
+        binding.setsCount.text = "Sets \n ${totalSets}"
+        binding.timeCount.text = "Duration \n ${workoutData.exercises!!.get(0).duration} min"
     }
 
     private fun handleBackBtn() {
