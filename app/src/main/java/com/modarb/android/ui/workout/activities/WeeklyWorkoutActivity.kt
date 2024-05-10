@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.modarb.android.R
+import com.modarb.android.databinding.ActivityWeeklyWorkoutBinding
 
 class WeeklyWorkoutActivity : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
+
+    private lateinit var binding: ActivityWeeklyWorkoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_weekly_workout)
+        binding = ActivityWeeklyWorkoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView.visibility = View.VISIBLE
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.visibility = View.VISIBLE
 
 //        val itemList: ArrayList<WorkoutModel> = ArrayList()
 //
