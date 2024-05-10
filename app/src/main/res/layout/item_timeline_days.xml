@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="70dp"
     android:layout_height="wrap_content">
 
 
@@ -11,13 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:background="@drawable/view_line_dotted"
-        app:layout_constraintBottom_toBottomOf="@+id/textView21"
-        app:layout_constraintEnd_toStartOf="@+id/textView21"
+        app:layout_constraintBottom_toBottomOf="@+id/dayText"
+        app:layout_constraintEnd_toStartOf="@+id/dayText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView21" />
+        app:layout_constraintTop_toTopOf="@+id/dayText" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/dayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -36,15 +36,34 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="D1" />
 
+    <ImageView
+        android:id="@+id/endImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="end image"
+        android:importantForAccessibility="no"
+        android:src="@drawable/icon_set_filled"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/rightDashed"
         android:layout_width="0dp"
         android:layout_height="20dp"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/view_line_dotted"
-        app:layout_constraintBottom_toBottomOf="@+id/textView21"
+        app:layout_constraintBottom_toBottomOf="@+id/dayText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/textView21" />
+        app:layout_constraintStart_toEndOf="@+id/dayText"
+        app:layout_constraintTop_toTopOf="@+id/dayText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

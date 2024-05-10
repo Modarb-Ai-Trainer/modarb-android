@@ -31,6 +31,7 @@
 
         <activity
             android:name=".ui.workout.activities.WeeklyWorkoutActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".ui.home.ui.more.activities.ChallengeActivity"

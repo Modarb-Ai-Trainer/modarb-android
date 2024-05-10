@@ -61,42 +61,28 @@
         app:layout_constraintTop_toBottomOf="@+id/weekTitle" />
 
 
-    <com.github.vipulasri.timelineview.TimelineView
-        android:id="@+id/timeline"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/timelineRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:endLineColor="@color/primary_400"
-        app:lineOrientation="horizontal"
-        app:markerInCenter="true"
-        app:lineStyle="dash"
-        app:lineStyleDashGap="4dp"
-        app:lineStyleDashLength="8dp"
-        app:lineWidth="2dp"
-        app:markerPaddingBottom="16dp"
-        app:markerPaddingLeft="16dp"
-        app:markerPaddingRight="16dp"
-        app:markerPaddingTop="16dp"
-        app:markerSize="20dp"
-        app:startLineColor="@color/primary_400"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weekDesc"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/weekDesc" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/grey700_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weekDesc">
+        app:layout_constraintTop_toBottomOf="@+id/timelineRecyclerView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -110,12 +96,12 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center"
                 android:padding="8dp"
-                tools:text="Sets \n 20"
                 android:textColor="@color/white_smoke"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/expectedTime"
                 app:layout_constraintStart_toEndOf="@+id/exerciseCount"
-                app:layout_constraintTop_toBottomOf="@+id/dayDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/dayDetails"
+                tools:text="Sets \n 20" />
 
             <TextView
                 android:id="@+id/exerciseCount"
@@ -126,11 +112,11 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center"
                 android:padding="8dp"
-                tools:text="@string/exercises_6"
                 android:textColor="@color/white_smoke"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dayDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/dayDetails"
+                tools:text="@string/exercises_6" />
 
             <TextView
                 android:id="@+id/expectedTime"
@@ -141,11 +127,11 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center"
                 android:padding="8dp"
-                tools:text="@string/Duration_40_50_min"
                 android:textColor="@color/white_smoke"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dayDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/dayDetails"
+                tools:text="@string/Duration_40_50_min" />
 
             <TextView
                 android:id="@+id/dayDetails"
@@ -155,13 +141,13 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center"
                 android:padding="8dp"
-                tools:text="Day 1 / 4 -Full-body"
                 android:textColor="@color/primary_50"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Day 1 / 4 -Full-body" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
