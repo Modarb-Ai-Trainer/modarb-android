@@ -18,9 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButtonToggleGroup
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.modarb.android.R
+import com.modarb.android.databinding.FragmentMyPlanBinding
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
@@ -33,32 +32,30 @@ import com.modarb.android.ui.workout.models.WorkoutModel
 
 class MyPlanFragment : Fragment() {
 
-    private lateinit var viewPager: ViewPager2
-    private lateinit var toggleButtonGroup: MaterialButtonToggleGroup
-    private lateinit var addCustomWorkout: FloatingActionButton
     private lateinit var bottomSheet: BottomSheetDialog
     private lateinit var selectExerciseBottomSheet: BottomSheetDialog
     lateinit var viewModel: PlanViewModel
+    private lateinit var binding: FragmentMyPlanBinding
+
 
     @SuppressLint("NotifyDataSetChanged")
     override
 
     fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        val view = inflater.inflate(R.layout.fragment_my_plan, container, false)
+        binding = FragmentMyPlanBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-
-        val toggleGroup: MaterialButtonToggleGroup = view.findViewById(R.id.toggle_button_group)
-        toggleGroup.check(R.id.myPlanBtn)
+        binding.toggleButtonGroup.check(R.id.myPlanBtn)
 
         initViewModels()
-        getDataFromViewModel(view)
+        getDataFromViewModel()
         initBottomSheet()
-        handleAddCustomWorkout(view)
+        handleAddCustomWorkout()
         initSelectBottomSheet()
-        return view
+        return root
     }
 
     private fun initViewModels() {
@@ -70,11 +67,11 @@ class MyPlanFragment : Fragment() {
     }
 
 
-    private fun getDataFromViewModel(view: View) {
+    private fun getDataFromViewModel() {
         viewModel.getPlanPage(requireContext())
         viewModel.planResponse.observe(viewLifecycleOwner) { response ->
             RetrofitService.handleRequest(response = response, onSuccess = { res ->
-                initViewPager(view, viewModel)
+                initViewPager(viewModel)
                 WorkoutData.weekList = viewModel.planResponse.value?.body()?.data!!.weeks
             }, onError = { errorResponse ->
                 val defaultErrorMessage = getString(R.string.an_error_occurred)
@@ -82,15 +79,12 @@ class MyPlanFragment : Fragment() {
                 ?: defaultErrorMessage
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             })
+            binding.progress.progressOverlay.visibility = View.GONE
         }
     }
 
-    private fun handleAddCustomWorkout(view: View) {
-
-        addCustomWorkout = view.findViewById(R.id.addCustomWorkOut)
-
-
-        addCustomWorkout.setOnClickListener {
+    private fun handleAddCustomWorkout() {
+        binding.addCustomWorkOut.setOnClickListener {
             bottomSheet.show()
         }
     }
@@ -181,25 +175,24 @@ class MyPlanFragment : Fragment() {
         spinner.adapter = spinnerAdapter
     }
 
-    private fun initViewPager(view: View, viewModel: PlanViewModel) {
-        viewPager = view.findViewById(R.id.viewPager)
-        toggleButtonGroup = view.findViewById(R.id.toggle_button_group)
+    private fun initViewPager(viewModel: PlanViewModel) {
+
 
         val adapter = MyPlanViewPagerAdapter(requireContext(), viewModel)
-        viewPager.adapter = adapter
+        binding.viewPager.adapter = adapter
 
-        toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+        binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
-                    R.id.myPlanBtn -> viewPager.currentItem = 0
-                    R.id.customWorkOut -> viewPager.currentItem = 1
+                    R.id.myPlanBtn -> binding.viewPager.currentItem = 0
+                    R.id.customWorkOut -> binding.viewPager.currentItem = 1
                 }
             }
         }
 
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                toggleButtonGroup.check(
+                binding.toggleButtonGroup.check(
                     when (position) {
                         0 -> R.id.myPlanBtn
                         1 -> R.id.customWorkOut
@@ -207,10 +200,10 @@ class MyPlanFragment : Fragment() {
                     }
                 )
                 if (position == 0) {
-                    addCustomWorkout.hide()
+                    binding.addCustomWorkOut.hide()
                     bottomSheet.hide()
                 } else {
-                    addCustomWorkout.show()
+                    binding.addCustomWorkOut.show()
                 }
             }
         })
