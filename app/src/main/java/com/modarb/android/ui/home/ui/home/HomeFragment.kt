@@ -21,6 +21,9 @@ import com.modarb.android.ui.home.ui.home.logic.HomeViewModel
 import com.modarb.android.ui.home.ui.home.logic.HomeViewModelFactory
 import com.modarb.android.ui.home.ui.home.models.Day
 import com.modarb.android.ui.home.ui.home.models.HomePageResponse
+import com.modarb.android.ui.home.ui.plan.logic.PlanRepository
+import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
+import com.modarb.android.ui.home.ui.plan.logic.PlanViewModelFactory
 import com.modarb.android.ui.onboarding.activities.SplashActivity
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
@@ -41,6 +44,8 @@ class HomeFragment : Fragment() {
         initLogout()
         initActions()
         handleClick()
+
+
 
         Log.e("User ID", UserPrefUtil.getUserData(requireContext())!!.user.id)
         return root
@@ -92,6 +97,7 @@ class HomeFragment : Fragment() {
             RetrofitService.handleRequest(response = response, onSuccess = { res ->
                 setData(res)
                 WorkoutData.workoutId = res.data.myWorkout.id
+                getPlanData()
             }, onError = { errorResponse ->
                 val defaultErrorMessage = getString(R.string.an_error_occurred)
                 val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
@@ -99,6 +105,25 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             })
             binding.progressView.progressOverlay.visibility = View.GONE
+        }
+    }
+
+    private fun getPlanData() {
+        val planRepository = PlanRepository(RetrofitService.createService())
+        val planViewModel = ViewModelProvider(
+            this, PlanViewModelFactory(planRepository)
+        )[PlanViewModel::class.java]
+
+        planViewModel.getPlanPage(requireContext())
+        planViewModel.planResponse.observe(this) { response ->
+            RetrofitService.handleRequest(response = response, onSuccess = { res ->
+                WorkoutData.weekList = planViewModel.planResponse.value?.body()?.data!!.weeks
+            }, onError = { errorResponse ->
+                val defaultErrorMessage = getString(R.string.an_error_occurred)
+                val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
+                ?: defaultErrorMessage
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            })
         }
     }
 

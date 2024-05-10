@@ -75,6 +75,7 @@ class MyPlanFragment : Fragment() {
         viewModel.planResponse.observe(viewLifecycleOwner) { response ->
             RetrofitService.handleRequest(response = response, onSuccess = { res ->
                 initViewPager(view, viewModel)
+                WorkoutData.weekList = viewModel.planResponse.value?.body()?.data!!.weeks
             }, onError = { errorResponse ->
                 val defaultErrorMessage = getString(R.string.an_error_occurred)
                 val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error

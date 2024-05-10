@@ -8,9 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.workout.models.WorkoutModel
+import com.modarb.android.ui.home.ui.plan.models.Day
 
-class WorkoutAdapter(private val itemList: List<WorkoutModel>) :
+class WorkoutAdapter(private val data: Day?) :
     RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,18 +27,17 @@ class WorkoutAdapter(private val itemList: List<WorkoutModel>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = itemList[position]
+        val item = data?.exercises?.get(position)
 
-        holder.workoutImage.setImageResource(item.imageResId)
-        holder.workoutTitle.text = item.title
-        holder.workoutDescription.text = item.description
-        holder.workoutButton.text = item.button
+        // holder.workoutImage.setImageResource(item.imageResId)
+        holder.workoutTitle.text = item!!.name
+        holder.workoutDescription.text = item.instructions
+        holder.workoutButton.text = item.category
         holder.workoutButton.setOnClickListener {
-            // Handle button click
         }
     }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return data?.exercises?.size!!
     }
 }
