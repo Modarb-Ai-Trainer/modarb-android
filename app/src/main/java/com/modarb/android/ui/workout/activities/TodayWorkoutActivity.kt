@@ -28,7 +28,6 @@ class TodayWorkoutActivity : AppCompatActivity() {
         val adapter = WorkoutAdapter(WorkoutData.getTodayWorkout())
         binding.recyclerView.adapter = adapter
 
-
         startButton = findViewById(R.id.startButton)
     }
 
