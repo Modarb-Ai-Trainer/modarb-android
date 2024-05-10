@@ -1,6 +1,7 @@
 package com.modarb.android.ui.workout.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
+import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.models.Day
 import com.modarb.android.ui.home.ui.plan.models.Week
+import com.modarb.android.ui.workout.activities.WeeklyWorkoutActivity
 
 
 class TrainingWeeksAdapter(private val dataList: List<Week>, private var context: Context) :
@@ -47,9 +50,13 @@ class TrainingWeeksAdapter(private val dataList: List<Week>, private var context
         if (!weekData.is_done) {
             // This is the current week
             if (!isTheCurrentWeekFound) {
+                WorkoutData.currentWeekPosition = position
                 setMarker(holder, R.drawable.ic_marker)
                 bindDaysAdapter(holder, weekData.days, true)
                 holder.weekDesc.text = weekData.week_description
+                holder.itemView.setOnClickListener {
+                    context.startActivity(Intent(context, WeeklyWorkoutActivity::class.java))
+                }
             }
             isTheCurrentWeekFound = true
         }
