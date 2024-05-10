@@ -1,6 +1,7 @@
 package com.modarb.android.ui.home.helpers
 
 import com.modarb.android.ui.home.ui.plan.models.Day
+import com.modarb.android.ui.home.ui.plan.models.Exercise
 import com.modarb.android.ui.home.ui.plan.models.Week
 
 object WorkoutData {
@@ -9,6 +10,7 @@ object WorkoutData {
     var currentWeekPosition: Int = 0
 
     lateinit var weekList: List<Week>
+    lateinit var selectedExercise: Exercise
 
     fun getWeekDaysCount(): Int {
         return weekList[currentWeekPosition].days.size

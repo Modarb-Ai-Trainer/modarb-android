@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.models.Day
 import com.modarb.android.ui.workout.activities.ExerciseInfoActivity
 
@@ -38,6 +39,7 @@ class WorkoutAdapter(private val data: Day?, private var context: Context) :
         holder.workoutButton.text = item.category
 
         holder.itemView.setOnClickListener {
+            WorkoutData.selectedExercise = item
             context.startActivity(Intent(context, ExerciseInfoActivity::class.java))
         }
     }

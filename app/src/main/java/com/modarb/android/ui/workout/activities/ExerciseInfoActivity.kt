@@ -19,6 +19,10 @@ class ExerciseInfoActivity : AppCompatActivity() {
         initViewPager()
     }
 
+    private fun setData() {
+
+    }
+
     private fun initViewPager() {
         val adapter = ExerciseInfoViewPagerAdapter(this@ExerciseInfoActivity)
         binding.viewPager.adapter = adapter
