@@ -1,5 +1,7 @@
 package com.modarb.android.ui.workout.adapters
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.ui.home.ui.plan.models.Day
+import com.modarb.android.ui.workout.activities.ExerciseInfoActivity
 
-class WorkoutAdapter(private val data: Day?) :
+class WorkoutAdapter(private val data: Day?, private var context: Context) :
     RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,7 +36,9 @@ class WorkoutAdapter(private val data: Day?) :
         holder.workoutTitle.text = item!!.name
         holder.workoutDescription.text = "${item.sets} sets x ${item.reps} reps"
         holder.workoutButton.text = item.category
-        holder.workoutButton.setOnClickListener {
+
+        holder.itemView.setOnClickListener {
+            context.startActivity(Intent(context, ExerciseInfoActivity::class.java))
         }
     }
 

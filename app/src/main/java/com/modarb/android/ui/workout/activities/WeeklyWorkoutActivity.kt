@@ -61,7 +61,7 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        val adapter = WorkoutAdapter(WorkoutData.getTodayWorkout())
+        val adapter = WorkoutAdapter(WorkoutData.getTodayWorkout(), this)
         binding.recyclerView.adapter = adapter
     }
 
