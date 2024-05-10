@@ -67,15 +67,17 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
 
     private fun getTheDays(): ArrayList<Day> {
         val days: ArrayList<Day> = WorkoutData.getCurrentWeek()!!.days as ArrayList<Day>
-        val dummyDay = Day(
-            day_number = 0,
-            day_type = "Dummy Day",
-            exercises = emptyList(),
-            is_done = false,
-            total_number_exercises = 0
-        )
+        if (days[days.size - 1].day_number != 99) {
+            val dummyDay = Day(
+                day_number = 99,
+                day_type = "Dummy Day",
+                exercises = emptyList(),
+                is_done = false,
+                total_number_exercises = 0
+            )
 
-        days.add(dummyDay)
+            days.add(dummyDay)
+        }
         return days
     }
 
