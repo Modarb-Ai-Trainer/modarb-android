@@ -14,7 +14,14 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWeeklyWorkoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        handleBackButton()
         setRecycleData()
+    }
+
+    private fun handleBackButton() {
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setRecycleData() {
