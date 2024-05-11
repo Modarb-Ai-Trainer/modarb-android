@@ -1,7 +1,6 @@
 package com.modarb.android.ui.workout.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,7 +67,6 @@ class InstructionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val benefits: TextView = view.findViewById(R.id.benefits)
 
     fun bind() {
-        Log.e("fuck", WorkoutData.selectedExercise.instructions)
         instructions.text = WorkoutData.selectedExercise.instructions
         benefits.text = WorkoutData.selectedExercise.benefits
     }
