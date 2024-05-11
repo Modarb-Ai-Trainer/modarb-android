@@ -3,7 +3,6 @@ package com.modarb.android.ui.workout.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
@@ -25,11 +24,11 @@ class EquipmentAdapter(private val data: List<Equipment>) :
     override fun getItemCount(): Int = data.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView: ImageView = itemView.findViewById(R.id.imageView)
-        private val textView: TextView = itemView.findViewById(R.id.textView)
+        // TODO ADD IMAGE
+        private val exerciseName: TextView = itemView.findViewById(R.id.textView)
 
         fun bind(item: String) {
-            textView.text = item
+            exerciseName.text = item
         }
     }
 }
