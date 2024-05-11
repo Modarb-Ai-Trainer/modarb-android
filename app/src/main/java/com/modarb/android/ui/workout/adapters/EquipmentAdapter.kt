@@ -7,8 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.plan.models.Equipment
 
-class EquipmentAdapter(private val data: List<String>) :
+class EquipmentAdapter(private val data: List<Equipment>) :
     RecyclerView.Adapter<EquipmentAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,7 +19,7 @@ class EquipmentAdapter(private val data: List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position].name)
     }
 
     override fun getItemCount(): Int = data.size

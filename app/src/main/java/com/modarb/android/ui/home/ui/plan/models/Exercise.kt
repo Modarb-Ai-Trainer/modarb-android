@@ -6,7 +6,7 @@ data class Exercise(
     val benefits: String,
     val category: String,
     val duration: Int,
-    val equipments: List<String>,
+    val equipments: List<Equipment>,
     val expectedDurationRange: ExpectedDurationRange,
     val instructions: String,
     val media: Media,
