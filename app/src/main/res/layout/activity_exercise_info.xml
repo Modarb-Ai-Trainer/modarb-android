@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_900"
@@ -9,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,16 +40,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView36"
+                android:id="@+id/exerciseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="chest press"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/backBtn"
                 app:layout_constraintStart_toEndOf="@+id/backBtn"
-                app:layout_constraintTop_toTopOf="@+id/backBtn" />
+                app:layout_constraintTop_toTopOf="@+id/backBtn"
+                tools:text="chest press" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/startBtn"
@@ -60,9 +62,9 @@
                 android:textSize="14sp"
                 app:backgroundTint="@color/neon_blue"
                 app:cornerRadius="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView36"
+                app:layout_constraintBottom_toBottomOf="@+id/exerciseTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView36" />
+                app:layout_constraintTop_toTopOf="@+id/exerciseTitle" />
 
 
             <androidx.cardview.widget.CardView
@@ -87,11 +89,11 @@
 
                     <TextView
                         android:id="@+id/exerciseCount"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Exercise 1 / 6"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        tools:text="Exercise 1 / 6" />
 
 
                     <TextView
@@ -99,8 +101,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="4 sets x 12-15 reps"
-                        android:textColor="@color/primary_200" />
+                        android:textColor="@color/primary_200"
+                        tools:text="4 sets x 12-15 reps" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -109,7 +111,7 @@
             <ImageView
                 android:id="@+id/exerciseGIf"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/temp1"
@@ -168,18 +170,30 @@
                     app:cornerRadius="8dp" />
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
-            <!-- ViewPager2 for Swiping -->
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toggle_button_group" />
+                app:layout_constraintTop_toBottomOf="@+id/toggle_button_group">
+
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
