@@ -11,6 +11,8 @@ object WorkoutData {
 
     lateinit var weekList: List<Week>
     lateinit var selectedExercise: Exercise
+    var selectedExerciseNumber: Int = 1
+
 
     fun getWeekDaysCount(): Int {
         return weekList[currentWeekPosition].days.size

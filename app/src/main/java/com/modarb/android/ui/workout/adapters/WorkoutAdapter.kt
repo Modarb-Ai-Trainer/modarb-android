@@ -40,6 +40,7 @@ class WorkoutAdapter(private val data: Day?, private var context: Context) :
 
         holder.itemView.setOnClickListener {
             WorkoutData.selectedExercise = item
+            WorkoutData.selectedExerciseNumber = position + 1
             context.startActivity(Intent(context, ExerciseInfoActivity::class.java))
         }
     }

@@ -1,5 +1,6 @@
 package com.modarb.android.ui.workout.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +19,24 @@ class ExerciseInfoActivity : AppCompatActivity() {
         binding = ActivityExerciseInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViewPager()
+        setData()
+        handleBackBtn()
     }
 
+    private fun handleBackBtn() {
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setData() {
+        binding.exerciseTitle.text = WorkoutData.selectedExercise.name
+        binding.exerciseCount.text =
+            "Exercise " + (WorkoutData.selectedExerciseNumber.toString() + " / " + WorkoutData.getTodayWorkout()!!.exercises.size)
+        binding.exerciseSets.text =
+            (WorkoutData.selectedExercise.sets).toString() + " sets x " + WorkoutData.selectedExercise.reps + " reps"
+    }
 
 
     private fun initViewPager() {
