@@ -41,7 +41,7 @@ class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercis
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-//                is MusclesWorkedViewHolder -> holder.bind("My Plan Text")
+            is MusclesWorkedViewHolder -> holder.bind("My Plan Text")
             is InstructionsViewHolder -> holder.bind()
             is ExerciseInfoViewHolder -> holder.bind(context)
         }
@@ -55,11 +55,9 @@ class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercis
 }
 
 class MusclesWorkedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        private val textView: TextView = view.findViewById(R.id.textViewMyPlan)
-//
-//        fun bind(text: String) {
-//            textView.text = text
-//        }
+
+    fun bind(text: String) {
+    }
 }
 
 class InstructionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
