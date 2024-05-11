@@ -41,7 +41,7 @@ class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercis
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is MusclesWorkedViewHolder -> holder.bind("My Plan Text")
+            is MusclesWorkedViewHolder -> holder.bind()
             is InstructionsViewHolder -> holder.bind()
             is ExerciseInfoViewHolder -> holder.bind(context)
         }
@@ -56,7 +56,13 @@ class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercis
 
 class MusclesWorkedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(text: String) {
+    //TODO add the image view
+    private val primaryMuscles: TextView = view.findViewById(R.id.primary)
+    private val secondaryMuscles: TextView = view.findViewById(R.id.secondary)
+
+    fun bind() {
+        primaryMuscles.text = WorkoutData.selectedExercise.targetMuscles.primary.name
+        secondaryMuscles.text = WorkoutData.selectedExercise.targetMuscles.secondary.name
     }
 }
 
@@ -72,6 +78,7 @@ class InstructionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 class ExerciseInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+    //TODO add the image view
 
     fun bind(context: Context) {
         recyclerView.layoutManager = LinearLayoutManager(context)
