@@ -1,12 +1,15 @@
 package com.modarb.android.ui.workout.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.models.Exercise
 
 class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercise: Exercise) :
@@ -40,7 +43,7 @@ class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercis
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
 //                is MusclesWorkedViewHolder -> holder.bind("My Plan Text")
-//                is InstructionsViewHolder -> holder.bind("Custom Workout Text")
+            is InstructionsViewHolder -> holder.bind()
             is ExerciseInfoViewHolder -> holder.bind(context)
         }
     }
@@ -61,11 +64,14 @@ class MusclesWorkedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 }
 
 class InstructionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        private val textView: TextView = view.findViewById(R.id.textViewCustomWorkout)
-//
-//        fun bind(text: String) {
-//            textView.text = text
-//        }
+    private val instructions: TextView = view.findViewById(R.id.instructions)
+    private val benefits: TextView = view.findViewById(R.id.benefits)
+
+    fun bind() {
+        Log.e("fuck", WorkoutData.selectedExercise.instructions)
+        instructions.text = WorkoutData.selectedExercise.instructions
+        benefits.text = WorkoutData.selectedExercise.benefits
+    }
 }
 
 class ExerciseInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -74,8 +80,7 @@ class ExerciseInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(context: Context) {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val data = listOf("Item 1", "Item 2", "Item 3")
-        val adapter = EquipmentAdapter(data)
+        val adapter = EquipmentAdapter(WorkoutData.selectedExercise.equipments)
         recyclerView.adapter = adapter
     }
 }

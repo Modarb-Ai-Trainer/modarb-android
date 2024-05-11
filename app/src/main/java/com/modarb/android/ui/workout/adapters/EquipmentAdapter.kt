@@ -28,7 +28,6 @@ class EquipmentAdapter(private val data: List<String>) :
         private val textView: TextView = itemView.findViewById(R.id.textView)
 
         fun bind(item: String) {
-
             textView.text = item
         }
     }
