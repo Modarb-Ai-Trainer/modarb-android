@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityExerciseInfoBinding
+import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.workout.adapters.ExerciseInfoViewPagerAdapter
 
 class ExerciseInfoActivity : AppCompatActivity() {
@@ -19,12 +20,11 @@ class ExerciseInfoActivity : AppCompatActivity() {
         initViewPager()
     }
 
-    private fun setData() {
 
-    }
 
     private fun initViewPager() {
-        val adapter = ExerciseInfoViewPagerAdapter(this@ExerciseInfoActivity)
+        val adapter =
+            ExerciseInfoViewPagerAdapter(this@ExerciseInfoActivity, WorkoutData.selectedExercise)
         binding.viewPager.adapter = adapter
 
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->

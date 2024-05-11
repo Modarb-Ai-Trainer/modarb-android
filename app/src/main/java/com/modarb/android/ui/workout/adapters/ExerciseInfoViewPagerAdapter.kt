@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.plan.models.Exercise
 
-class ExerciseInfoViewPagerAdapter(private val context: Context) :
+class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercise: Exercise) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
