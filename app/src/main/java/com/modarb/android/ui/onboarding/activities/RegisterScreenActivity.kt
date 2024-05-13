@@ -44,7 +44,6 @@ class RegisterScreenActivity : AppCompatActivity() {
             UserRegisterData.registerRequest.dob = "2023/2/2"
 
             if (isValidInput()) {
-                //TODO make a request
                 UserRegisterData.registerRequest.name = name
                 UserRegisterData.registerRequest.email = email
                 UserRegisterData.registerRequest.password = password
@@ -72,8 +71,7 @@ class RegisterScreenActivity : AppCompatActivity() {
                         val intent = Intent(this, WelcomeScreenActivity::class.java)
                         intent.putExtra("register", true)
                         startActivity(intent)
-                        finish()
-
+                        this.finish()
                     }
                 },
                 onError = { errorResponse ->
