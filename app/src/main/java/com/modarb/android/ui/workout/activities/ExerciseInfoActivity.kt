@@ -1,6 +1,7 @@
 package com.modarb.android.ui.workout.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,13 @@ class ExerciseInfoActivity : AppCompatActivity() {
         initViewPager()
         setData()
         handleBackBtn()
+        handleStartBtn()
+    }
+
+    private fun handleStartBtn() {
+        binding.startBtn.setOnClickListener {
+            startActivity(Intent(this, WorkoutActivity::class.java))
+        }
     }
 
     private fun handleBackBtn() {

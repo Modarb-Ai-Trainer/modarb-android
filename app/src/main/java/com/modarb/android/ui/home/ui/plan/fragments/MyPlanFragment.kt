@@ -83,6 +83,7 @@ class MyPlanFragment : Fragment() {
         }
     }
 
+
     private fun handleAddCustomWorkout() {
         binding.addCustomWorkOut.setOnClickListener {
             bottomSheet.show()

@@ -26,7 +26,7 @@ class PlanViewModel(private val planRepo: PlanRepository) : ViewModel() {
 
     fun getCustomWorkouts(ctx: Context) {
         viewModelScope.launch {
-            val response = planRepo.getPlanPage(ctx)
+            val response = planRepo.getCustomWorkouts(ctx)
             _customWorkoutsResponse.value = response
         }
     }

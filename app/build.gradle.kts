@@ -62,6 +62,7 @@ dependencies {
     // progress indicators
     implementation("com.tbuonomo:dotsindicator:5.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.activity:activity:1.9.0")
 
 
     testImplementation("junit:junit:4.13.2")

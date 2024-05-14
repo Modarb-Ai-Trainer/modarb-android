@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/grey_900"
     android:orientation="vertical">
 
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Chest press"
+        tools:text="Chest press"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/exitButton"
@@ -22,15 +23,16 @@
         app:layout_constraintTop_toTopOf="@+id/exitButton" />
 
     <TextView
-        android:id="@+id/excersiceDesc"
+        android:id="@+id/exerciseDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Chest press"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        tools:text="Chest press"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +45,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@null"
+        android:importantForAccessibility="no"
         android:src="@drawable/ic_close"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:importantForAccessibility="no"
         android:scaleType="centerCrop"
         android:src="@drawable/temp1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,29 +63,41 @@
         app:layout_constraintTop_toBottomOf="@+id/exitButton" />
 
     <TextView
-        android:id="@+id/excerscieCount"
+        android:id="@+id/exerciseCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="15 reps"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseDesc"
         android:textColor="@color/primary_200"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/excersiceDesc"
+        tools:text="15 reps"
         app:layout_constraintVertical_bias="0.19999999" />
 
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/dummy_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/excerscieSetCounts"
+        android:id="@+id/exerciseSetCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="set 1/4"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/worm_dots_indicator"
         app:layout_constraintEnd_toEndOf="parent"
+        tools:text="set 1/4"
         app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -98,6 +114,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/excerscieCount"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseCount"
         app:layout_constraintVertical_bias="0.47000003" />
 </androidx.constraintlayout.widget.ConstraintLayout>

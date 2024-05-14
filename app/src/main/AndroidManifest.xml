@@ -15,7 +15,9 @@
         android:theme="@style/Theme.Modarb"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.workout.activities.WorkoutActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.onboarding.activities.WelcomeScreenActivity"
             android:exported="false" />
@@ -28,7 +30,6 @@
         <activity
             android:name=".ui.home.ui.more.activities.InjuryActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.workout.activities.WeeklyWorkoutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -39,9 +40,9 @@
         <activity
             android:name=".ui.home.ui.more.activities.NotificationActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.home.HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".ui.home.ui.more.activities.SettingActivity"
@@ -49,7 +50,6 @@
         <activity
             android:name=".ui.workout.activities.WorkoutInsightsActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.home.ui.more.activities.AppAppearanceActivity"
             android:exported="false" />
@@ -59,11 +59,9 @@
         <activity
             android:name=".ui.home.ui.more.activities.EditProfileActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.workout.activities.ExerciseInfoActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.home.ui.more.activities.ProfileActivity"
             android:exported="false" />
