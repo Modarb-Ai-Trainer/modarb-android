@@ -16,5 +16,11 @@ class PlanRepository(private val apiService: ApiService) {
         )
     }
 
+    suspend fun getCustomWorkouts(context: Context): Response<PlanPageResponse> {
+        return apiService.getCustomWorkouts(
+            "Bearer " + UserPrefUtil.getUserData(context)!!.token
+        )
+    }
+
 
 }

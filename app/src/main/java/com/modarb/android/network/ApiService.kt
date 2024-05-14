@@ -34,9 +34,9 @@ interface ApiService {
         @Path("id") myWorkoutId: String, @Header("Authorization") token: String
     ): Response<PlanPageResponse>
 
-    @GET("api/v1/user/workouts/{id}")
-    suspend fun getWorkouts(
-        @Path("id") workoutId: String, @Header("Authorization") token: String
+    @GET("api/v1/user/templates/}")
+    suspend fun getCustomWorkouts(
+        @Header("Authorization") token: String
     ): Response<PlanPageResponse>
 }
 
