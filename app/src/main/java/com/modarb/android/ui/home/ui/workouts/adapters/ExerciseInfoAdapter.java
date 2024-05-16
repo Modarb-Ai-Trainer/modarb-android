@@ -1,14 +1,12 @@
 package com.modarb.android.ui.home.ui.workouts.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.modarb.android.R;
+import com.modarb.android.databinding.ItemExerciseTypeBinding;
 import com.modarb.android.ui.home.ui.workouts.models.Exercise;
 
 import java.util.List;
@@ -21,17 +19,18 @@ public class ExerciseInfoAdapter extends RecyclerView.Adapter<ExerciseInfoAdapte
         this.exercises = exercises;
     }
 
+    @NonNull
     @Override
-    public ExerciseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise_type, parent, false);
-        return new ExerciseViewHolder(view);
+    public ExerciseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemExerciseTypeBinding binding = ItemExerciseTypeBinding.inflate(inflater, parent, false);
+        return new ExerciseViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(ExerciseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         Exercise exercise = exercises.get(position);
-        holder.exerciseName.setText(exercise.getName());
-        holder.exerciseImage.setImageResource(exercise.getImageResourceId());
+        holder.bind(exercise);
     }
 
     @Override
@@ -40,13 +39,16 @@ public class ExerciseInfoAdapter extends RecyclerView.Adapter<ExerciseInfoAdapte
     }
 
     public static class ExerciseViewHolder extends RecyclerView.ViewHolder {
-        public TextView exerciseName;
-        public ImageView exerciseImage;
+        private final ItemExerciseTypeBinding binding;
 
-        public ExerciseViewHolder(View itemView) {
-            super(itemView);
-            exerciseImage = itemView.findViewById(R.id.exerciseImage);
-            exerciseName = itemView.findViewById(R.id.exerciseName);
+        public ExerciseViewHolder(ItemExerciseTypeBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(Exercise exercise) {
+            binding.exerciseName.setText(exercise.getName());
+            binding.exerciseImage.setImageResource(exercise.getImageResourceId());
         }
     }
 }
