@@ -58,6 +58,10 @@ class ExercisePagerAdapter(private val context: Context, var listener: ExerciseL
         return true
     }
 
+    fun handleEndExercise() {
+
+    }
+
     fun logExercise(position: Int) {
         val exercise = exercises[position]
         Log.d("Exercise", "${exercise.sets} sets, ${exercise._currentSetCount}")
