@@ -3,79 +3,71 @@ package com.modarb.android.ui.workout.adapters
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
+import com.modarb.android.databinding.ItemTimelineBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.models.Day
 import com.modarb.android.ui.home.ui.plan.models.Week
 import com.modarb.android.ui.workout.activities.WeeklyWorkoutActivity
 
+class TrainingWeeksAdapter(private val dataList: List<Week>, private val context: Context) :
+    RecyclerView.Adapter<TrainingWeeksAdapter.TrainingWeeksViewHolder>() {
 
-class TrainingWeeksAdapter(private val dataList: List<Week>, private var context: Context) :
-    RecyclerView.Adapter<TrainingWeeksAdapter.TrainingWeeksAdapter>() {
-    private var isTheCurrentWeekFound: Boolean = false
+    inner class TrainingWeeksViewHolder(private val binding: ItemTimelineBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    inner class TrainingWeeksAdapter(itemView: View, viewType: Int) :
-        RecyclerView.ViewHolder(itemView) {
-        val timelineView: TimelineView = itemView.findViewById(R.id.timeline)
-        val weekName: TextView = itemView.findViewById(R.id.weekName)
-        val weekDesc: TextView = itemView.findViewById(R.id.weekDesc)
-        val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
+        fun bind(weekData: Week, isTheCurrentWeek: Boolean) {
+            binding.apply {
+                weekName.text = weekData.week_name
+                binding.timeline.initLine(itemViewType)
 
-        init {
-            timelineView.initLine(viewType)
-        }
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingWeeksAdapter {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_timeline, parent, false)
-        return TrainingWeeksAdapter(view, viewType)
-    }
-
-    override fun onBindViewHolder(holder: TrainingWeeksAdapter, position: Int) {
-        val weekData = dataList[position]
-
-        holder.weekName.text = weekData.week_name
-        setMarker(holder, R.drawable.ic_marker_inactive)
-        bindDaysAdapter(holder, weekData.days, false)
-
-        if (!weekData.is_done) {
-            // This is the current week
-            if (!isTheCurrentWeekFound) {
-                WorkoutData.currentWeekPosition = position
-                setMarker(holder, R.drawable.ic_marker)
-                bindDaysAdapter(holder, weekData.days, true)
-                holder.weekDesc.text = weekData.week_description
-                holder.itemView.setOnClickListener {
-                    context.startActivity(Intent(context, WeeklyWorkoutActivity::class.java))
+                if (isTheCurrentWeek) {
+                    WorkoutData.currentWeekPosition = adapterPosition
+                    setMarker(R.drawable.ic_marker)
+                    bindDaysAdapter(weekData.days, true)
+                    weekDesc.text = weekData.week_description
+                    itemView.setOnClickListener {
+                        context.startActivity(Intent(context, WeeklyWorkoutActivity::class.java))
+                    }
+                } else {
+                    setMarker(R.drawable.ic_marker_inactive)
+                    bindDaysAdapter(weekData.days, false)
                 }
             }
-            isTheCurrentWeekFound = true
+        }
+
+        private fun bindDaysAdapter(days: List<Day>, isTheCurrentWeek: Boolean) {
+            val adapter = DaysAdapter(days, isTheCurrentWeek)
+            binding.recyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerView.adapter = adapter
+        }
+
+        private fun setMarker(drawableResId: Int) {
+            binding.timeline.marker = ContextCompat.getDrawable(context, drawableResId)
         }
     }
 
-    private fun bindDaysAdapter(
-        holder: TrainingWeeksAdapter,
-        days: List<Day>,
-        isTheCurrentWeek: Boolean
-    ) {
-        val adapter = DaysAdapter(days, isTheCurrentWeek)
-        holder.recyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        holder.recyclerView.adapter = adapter
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingWeeksViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemTimelineBinding.inflate(inflater, parent, false)
+        return TrainingWeeksViewHolder(binding)
     }
 
-    private fun setMarker(holder: TrainingWeeksAdapter, drawableResId: Int) {
-        holder.timelineView.marker = getDrawable(holder.itemView.context, drawableResId)
+    override fun onBindViewHolder(holder: TrainingWeeksViewHolder, position: Int) {
+        val weekData = dataList[position]
+        val isTheCurrentWeek = !isTheCurrentWeekFound && !weekData.is_done
+
+        holder.bind(weekData, isTheCurrentWeek)
+        isTheCurrentWeekFound = isTheCurrentWeek
     }
+
+    private var isTheCurrentWeekFound: Boolean = false
 
     override fun getItemCount() = dataList.size
 
