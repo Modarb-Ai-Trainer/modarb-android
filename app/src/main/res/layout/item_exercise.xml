@@ -6,9 +6,21 @@
     android:background="@color/grey_900"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/exerciseSetCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/exerciseCount"
+        app:layout_constraintStart_toStartOf="@+id/exerciseCount"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseCount"
+        tools:text="set 1/4" />
 
     <TextView
-        android:id="@+id/excersiceName"
+        android:id="@+id/exerciseName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -82,38 +94,10 @@
         android:id="@+id/dummy_pager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/exerciseSetCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/worm_dots_indicator"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="set 1/4"
-        app:layout_constraintStart_toStartOf="parent" />
 
-
-    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-        android:id="@+id/worm_dots_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:dotsColor="@color/primary_400"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="16dp"
-        app:dotsSpacing="4dp"
-        app:dotsStrokeColor="@color/primary_400"
-        app:dotsStrokeWidth="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseCount"
-        app:layout_constraintVertical_bias="0.47000003" />
 </androidx.constraintlayout.widget.ConstraintLayout>

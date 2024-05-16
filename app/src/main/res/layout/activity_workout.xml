@@ -7,11 +7,31 @@
     android:background="@color/grey_900"
     android:orientation="vertical">
 
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/grey_900"
+        app:tabIndicatorColor="@color/primary_400"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorHeight="8dp"
+        app:tabSelectedTextColor="@color/primary_800" />
+
     <androidx.viewpager.widget.ViewPager
+        android:clickable="false"
+        android:focusable="false"
         android:id="@+id/exercise_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/dummy_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="invisible" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

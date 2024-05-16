@@ -11,7 +11,9 @@ data class Exercise(
     val instructions: String,
     val media: Media,
     val name: String,
-    val reps: Int,
+    var reps: Int,
     val sets: Int,
-    val targetMuscles: TargetMuscles
+    val targetMuscles: TargetMuscles,
+    var _currentSetCount: Int = 0,
+    var _isDone: Boolean
 )
