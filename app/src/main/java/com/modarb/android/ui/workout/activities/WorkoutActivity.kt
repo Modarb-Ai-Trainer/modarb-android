@@ -2,7 +2,10 @@ package com.modarb.android.ui.workout.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWorkoutBinding
 import com.modarb.android.ui.workout.adapters.ExercisePagerAdapter
 
@@ -21,18 +24,21 @@ class WorkoutActivity : AppCompatActivity() {
         initViewPager()
         disableViewPagerScroll()
         handleNavigationButtons()
+        incrementSetCount()
+    }
 
-
-        binding.doneButton.setOnClickListener {
+    private fun incrementSetCount() {
+        // TODO handle this when they fix the api
+        //if (adapter.isTimedExercise(currentPosition)) return
+        binding.incButton.setOnClickListener {
             val currentPosition = binding.exercisePager.currentItem
-            adapter.incSetCount(currentPosition)
+            val currentView = binding.exercisePager.findViewWithTag<View>("view$currentPosition")
+            adapter.incSetCount(currentPosition, currentView)
         }
-
     }
 
     private fun initViewPager() {
-
-        adapter = ExercisePagerAdapter(this, binding.exercisePager)
+        adapter = ExercisePagerAdapter(this)
         binding.exercisePager.adapter = adapter
         binding.tabLayout.setupWithViewPager(binding.exercisePager)
     }
@@ -46,10 +52,17 @@ class WorkoutActivity : AppCompatActivity() {
         }
 
         binding.nextButton.setOnClickListener {
+            if (!adapter.isExerciseDone(binding.exercisePager.currentItem)) {
+                Toast.makeText(
+                    this, getString(R.string.complete_the_exercise_first), Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             val currentItem = binding.exercisePager.currentItem
             val adapterCount = adapter.count - 1
             if (currentItem < adapterCount) {
                 binding.exercisePager.setCurrentItem(currentItem + 1, true)
+                adapter.logExercise(binding.exercisePager.currentItem)
             }
         }
 
@@ -58,7 +71,6 @@ class WorkoutActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     fun disableViewPagerScroll() {
         binding.exercisePager.setOnTouchListener { arg0, arg1 -> true }
-
     }
 
 

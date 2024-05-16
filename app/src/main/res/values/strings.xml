@@ -198,5 +198,6 @@
     <string name="days">days</string>
     <string name="primary">Primary:</string>
     <string name="secondary">Secondary:</string>
+    <string name="complete_the_exercise_first">Complete the exercise first</string>
 
 </resources>

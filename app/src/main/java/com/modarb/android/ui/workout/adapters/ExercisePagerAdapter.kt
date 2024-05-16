@@ -2,15 +2,15 @@ package com.modarb.android.ui.workout.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.modarb.android.databinding.ItemExerciseBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
 
-class ExercisePagerAdapter(private val context: Context, private val viewPager: ViewPager) :
+class ExercisePagerAdapter(private val context: Context) :
     PagerAdapter() {
 
     private val exercises = WorkoutData.getTodayWorkout()?.exercises ?: emptyList()
@@ -38,18 +38,31 @@ class ExercisePagerAdapter(private val context: Context, private val viewPager: 
 
     /**
      * this function responsible for increment set count
-     * it will return true if the user completed all of the sets
+     * it will return false if the user completed all of the sets
      * use it for workout activity navigation
      */
     @SuppressLint("SetTextI18n")
-    fun incSetCount(position: Int): Boolean {
-        val exercise = exercises.getOrNull(position)
-        if (exercise!!._currentSetCount >= exercise.sets) return false
-        val currentView = viewPager.findViewWithTag<View>("view${viewPager.currentItem}")
+    fun incSetCount(position: Int, currentView: View): Boolean {
+        val exercise = exercises[position]
+        if (exercise._currentSetCount >= exercise.sets) return false
         val binding = ItemExerciseBinding.bind(currentView)
         binding.exerciseSetCount.text = "${++exercise._currentSetCount} / ${exercise.sets} set"
         notifyDataSetChanged()
         return true
+    }
+
+    fun logExercise(position: Int) {
+        val exercise = exercises[position]
+        Log.d("Exercise", "${exercise.sets} sets, ${exercise._currentSetCount}")
+    }
+
+    fun isExerciseDone(position: Int): Boolean {
+        val exercise = exercises[position]
+        Log.d(
+            exercise.name + " pos= " + "${position}",
+            "${exercise._currentSetCount} / ${exercise.sets}"
+        )
+        return (exercise._currentSetCount >= exercise.sets)
     }
 
     fun isTimedExercise(position: Int): Boolean {

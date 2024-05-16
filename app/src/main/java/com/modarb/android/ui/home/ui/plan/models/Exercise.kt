@@ -17,3 +17,4 @@ data class Exercise(
     var _currentSetCount: Int = 0,
     var _isDone: Boolean
 )
+
