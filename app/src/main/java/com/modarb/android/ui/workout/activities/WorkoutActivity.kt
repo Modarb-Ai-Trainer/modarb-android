@@ -7,10 +7,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWorkoutBinding
+import com.modarb.android.ui.workout.ExerciseListener
 import com.modarb.android.ui.workout.adapters.ExercisePagerAdapter
 
 
-class WorkoutActivity : AppCompatActivity() {
+class WorkoutActivity : AppCompatActivity(), ExerciseListener {
 
     private lateinit var binding: ActivityWorkoutBinding
     private lateinit var adapter: ExercisePagerAdapter
@@ -38,7 +39,7 @@ class WorkoutActivity : AppCompatActivity() {
     }
 
     private fun initViewPager() {
-        adapter = ExercisePagerAdapter(this)
+        adapter = ExercisePagerAdapter(this, this)
         binding.exercisePager.adapter = adapter
         binding.tabLayout.setupWithViewPager(binding.exercisePager)
     }
@@ -71,6 +72,10 @@ class WorkoutActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     fun disableViewPagerScroll() {
         binding.exercisePager.setOnTouchListener { arg0, arg1 -> true }
+    }
+
+    override fun onCloseListener() {
+        finish()
     }
 
 

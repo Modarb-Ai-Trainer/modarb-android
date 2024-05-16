@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.modarb.android.databinding.ItemExerciseBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.workout.ExerciseListener
 
-class ExercisePagerAdapter(private val context: Context) :
+class ExercisePagerAdapter(private val context: Context, var listener: ExerciseListener) :
     PagerAdapter() {
 
     private val exercises = WorkoutData.getTodayWorkout()?.exercises ?: emptyList()
@@ -28,11 +29,17 @@ class ExercisePagerAdapter(private val context: Context) :
         binding.exerciseCount.text = "${exercise.reps} reps"
         binding.exerciseDesc.text = exercise.instructions
         binding.exerciseSetCount.text = "${exercise._currentSetCount} / ${exercise.sets} set"
-
+        handleCloseBtn(binding)
         binding.root.tag = "view$position"
         container.addView(binding.root)
 
         return binding.root
+    }
+
+    private fun handleCloseBtn(binding: ItemExerciseBinding) {
+        binding.exitButton.setOnClickListener {
+            listener.onCloseListener()
+        }
     }
 
 
