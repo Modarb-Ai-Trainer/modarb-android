@@ -1,15 +1,12 @@
 package com.modarb.android.ui.workout.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.modarb.android.R
+import com.modarb.android.databinding.ItemWorkoutDetailsBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.models.Day
 import com.modarb.android.ui.workout.activities.ExerciseInfoActivity
@@ -17,26 +14,22 @@ import com.modarb.android.ui.workout.activities.ExerciseInfoActivity
 class WorkoutAdapter(private val data: Day?, private var context: Context) :
     RecyclerView.Adapter<WorkoutAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var workoutImage: ImageView = itemView.findViewById(R.id.imageView6)
-        var workoutTitle: TextView = itemView.findViewById(R.id.exerciseTitle)
-        var workoutDescription: TextView = itemView.findViewById(R.id.exerciseDesc)
-        var workoutButton: Button = itemView.findViewById(R.id.button)
-    }
+    inner class ViewHolder(val binding: ItemWorkoutDetailsBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_workout_details, parent, false)
-        return ViewHolder(view)
+        val binding =
+            ItemWorkoutDetailsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data?.exercises?.get(position)
 
-        // holder.workoutImage.setImageResource(item.imageResId)
-        holder.workoutTitle.text = item!!.name
-        holder.workoutDescription.text = "${item.sets} sets x ${item.reps} reps"
-        holder.workoutButton.text = item.category
+        holder.binding.exerciseTitle.text = item!!.name
+        holder.binding.exerciseDesc.text = "${item.sets} sets x ${item.reps} reps"
+        holder.binding.button.text = item.category
 
         holder.itemView.setOnClickListener {
             WorkoutData.selectedExercise = item
@@ -46,6 +39,6 @@ class WorkoutAdapter(private val data: Day?, private var context: Context) :
     }
 
     override fun getItemCount(): Int {
-        return data?.exercises?.size!!
+        return data?.exercises?.size ?: 0
     }
 }
