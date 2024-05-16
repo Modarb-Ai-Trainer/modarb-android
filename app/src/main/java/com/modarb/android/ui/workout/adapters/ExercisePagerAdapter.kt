@@ -35,6 +35,12 @@ class ExercisePagerAdapter(private val context: Context, private val viewPager: 
         return binding.root
     }
 
+
+    /**
+     * this function responsible for increment set count
+     * it will return true if the user completed all of the sets
+     * use it for workout activity navigation
+     */
     @SuppressLint("SetTextI18n")
     fun incSetCount(position: Int): Boolean {
         val exercise = exercises.getOrNull(position)
