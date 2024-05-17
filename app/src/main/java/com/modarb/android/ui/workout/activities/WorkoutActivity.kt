@@ -4,17 +4,26 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWorkoutBinding
+import com.modarb.android.network.Result
+import com.modarb.android.network.models.BaseResponse
+import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.ExerciseListener
 import com.modarb.android.ui.workout.adapters.ExercisePagerAdapter
+import com.modarb.android.ui.workout.viewModel.WorkoutViewModel
+import kotlinx.coroutines.launch
 
 
 class WorkoutActivity : AppCompatActivity(), ExerciseListener {
 
     private lateinit var binding: ActivityWorkoutBinding
     private lateinit var adapter: ExercisePagerAdapter
+    private val workoutViewModel: WorkoutViewModel by viewModels()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +35,7 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
         disableViewPagerScroll()
         handleNavigationButtons()
         incrementSetCount()
+        observeViewModel()
     }
 
     private fun incrementSetCount() {
@@ -38,10 +48,41 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
         }
     }
 
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            workoutViewModel.workoutStatus.collect { result ->
+                when (result) {
+                    is Result.Success<*> -> handleSuccess(result.data as BaseResponse)
+                    is Result.Failure -> handleFailure(result.exception)
+                    else -> {}
+                }
+            }
+        }
+
+
+    }
+
+    private fun handleSuccess(data: BaseResponse) {
+        Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    private fun handleFailure(exception: Throwable) {
+        Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
+    }
+
     private fun initViewPager() {
         adapter = ExercisePagerAdapter(this, this)
         binding.exercisePager.adapter = adapter
         binding.tabLayout.setupWithViewPager(binding.exercisePager)
+    }
+
+    private fun markWorkoutDone() {
+        val myWorkoutId = WorkoutData.workoutId
+        val week = WorkoutData.getCurrentWeek()!!.week_number
+        val day = WorkoutData.getTodayWorkout()!!.day_number
+        val token = "Bearer ${UserPrefUtil.getUserData(this)?.token}"
+        workoutViewModel.markWorkoutDone(myWorkoutId, week, day, token)
     }
 
     private fun handleNavigationButtons() {
@@ -64,6 +105,8 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
             if (currentItem < adapterCount) {
                 binding.exercisePager.setCurrentItem(currentItem + 1, true)
                 adapter.logExercise(binding.exercisePager.currentItem)
+            } else {
+                markWorkoutDone()
             }
         }
 

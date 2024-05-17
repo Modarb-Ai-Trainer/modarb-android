@@ -1,5 +1,6 @@
 package com.modarb.android.network
 
+import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.home.models.HomePageResponse
 import com.modarb.android.ui.home.ui.plan.models.PlanPageResponse
 import com.modarb.android.ui.onboarding.models.LoginResponse
@@ -9,6 +10,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -28,15 +30,29 @@ interface ApiService {
     ): Response<HomePageResponse>
 
 
-    // my plan page
+    // My Plan Page
     @GET("api/v1/user/myWorkouts/{id}")
     suspend fun getPlanPage(
         @Path("id") myWorkoutId: String, @Header("Authorization") token: String
     ): Response<PlanPageResponse>
 
-    @GET("api/v1/user/templates/}")
+    // Workouts
+
+    @PATCH("/api/v1/user/myWorkouts/{id}/progress/{week}/{day}")
+    suspend fun markDoneWorkout(
+        @Path("id") myWorkoutId: String,
+        @Path("week") week: Int,
+        @Path("day") day: Int,
+        @Header("Authorization") token: String
+    ): Response<BaseResponse>
+
+
+    // Custom workouts page
+    @GET("api/v1/user/templates/")
     suspend fun getCustomWorkouts(
         @Header("Authorization") token: String
     ): Response<PlanPageResponse>
+
+
 }
 
