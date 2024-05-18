@@ -15,7 +15,7 @@ class HomeRepositoryImpl(private val apiService: ApiService) : HomeRepository {
                     ApiResult.Success(it)
                 } ?: ApiResult.Failure(Throwable("Response body is null"))
             } else {
-                ApiResult.Failure(Throwable(response.errorBody()?.string() ?: "Unknown error"))
+                ApiResult.Error(response.body() as HomePageResponse)
             }
         } catch (E: Exception) {
             ApiResult.Failure(E)
