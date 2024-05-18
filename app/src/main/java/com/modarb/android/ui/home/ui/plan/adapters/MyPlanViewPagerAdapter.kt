@@ -5,20 +5,19 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.CustomWorkoutViewBinding
 import com.modarb.android.databinding.MyPlanViewBinding
-import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
-import com.modarb.android.ui.home.ui.plan.models.Data
-import com.modarb.android.ui.home.ui.plan.models.Day
+import com.modarb.android.ui.home.ui.plan.domain.models.Data
+import com.modarb.android.ui.home.ui.plan.domain.models.Day
+import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 
 class MyPlanViewPagerAdapter(
-    private val context: Context, private var viewModel: PlanViewModel
+    private val context: Context, private var planResponse: PlanPageResponse
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -27,9 +26,11 @@ class MyPlanViewPagerAdapter(
             0 -> MyPlanViewHolder(
                 MyPlanViewBinding.inflate(inflater, parent, false)
             )
+
             1 -> CustomWorkoutViewHolder(
                 CustomWorkoutViewBinding.inflate(inflater, parent, false)
             )
+
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
@@ -55,20 +56,14 @@ class MyPlanViewPagerAdapter(
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
             if (!::adapter.isInitialized) {
                 adapter = TrainingWeeksAdapter(
-                    viewModel.planResponse.value?.body()?.data!!.weeks,
-                    context
+                    planResponse.data.weeks, context
                 )
                 binding.recyclerView.adapter = adapter
             }
         }
 
         private fun loadDataIntoViews(context: Context) {
-            viewModel.planResponse.value?.body()?.data?.let { data ->
-                updateTextViews(data, context)
-            } ?: run {
-                Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_SHORT)
-                    .show()
-            }
+            updateTextViews(planResponse.data, context)
         }
 
         @SuppressLint("SetTextI18n")
@@ -90,7 +85,7 @@ class MyPlanViewPagerAdapter(
         }
 
         private fun getTodayWorkout(): Day? {
-            val weekList = viewModel.planResponse.value!!.body()!!.data.weeks
+            val weekList = planResponse.data.weeks
             for (week in weekList) {
                 if (!week.is_done) {
                     for (day in week.days) {

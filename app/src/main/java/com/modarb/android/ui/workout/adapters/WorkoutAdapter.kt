@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.databinding.ItemWorkoutDetailsBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
-import com.modarb.android.ui.home.ui.plan.models.Day
+import com.modarb.android.ui.home.ui.plan.domain.models.Day
 import com.modarb.android.ui.workout.activities.ExerciseInfoActivity
 
 class WorkoutAdapter(private val data: Day?, private var context: Context) :

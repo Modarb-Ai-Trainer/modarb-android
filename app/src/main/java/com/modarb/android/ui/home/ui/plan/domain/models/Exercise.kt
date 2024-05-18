@@ -1,4 +1,4 @@
-package com.modarb.android.ui.home.ui.plan.models
+package com.modarb.android.ui.home.ui.plan.domain.models
 
 data class Exercise(
     val __v: Int,

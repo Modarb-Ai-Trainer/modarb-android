@@ -1,8 +1,8 @@
 package com.modarb.android.ui.home.helpers
 
-import com.modarb.android.ui.home.ui.plan.models.Day
-import com.modarb.android.ui.home.ui.plan.models.Exercise
-import com.modarb.android.ui.home.ui.plan.models.Week
+import com.modarb.android.ui.home.ui.plan.domain.models.Day
+import com.modarb.android.ui.home.ui.plan.domain.models.Exercise
+import com.modarb.android.ui.home.ui.plan.domain.models.Week
 
 object WorkoutData {
 

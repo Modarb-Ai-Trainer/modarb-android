@@ -12,7 +12,8 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -20,21 +21,22 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentMyPlanBinding
-import com.modarb.android.network.RetrofitService
+import com.modarb.android.network.Result
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
-import com.modarb.android.ui.home.ui.plan.logic.PlanRepository
-import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
-import com.modarb.android.ui.home.ui.plan.logic.PlanViewModelFactory
+import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
+import com.modarb.android.ui.home.ui.plan.persentation.PlanViewModel
+import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.domain.models.WorkoutModel
+import kotlinx.coroutines.launch
 
 
 class MyPlanFragment : Fragment() {
 
     private lateinit var bottomSheet: BottomSheetDialog
     private lateinit var selectExerciseBottomSheet: BottomSheetDialog
-    lateinit var viewModel: PlanViewModel
+    private val planViewModel: PlanViewModel by viewModels()
     private lateinit var binding: FragmentMyPlanBinding
 
 
@@ -50,37 +52,43 @@ class MyPlanFragment : Fragment() {
 
         binding.toggleButtonGroup.check(R.id.myPlanBtn)
 
-        initViewModels()
-        getDataFromViewModel()
+        observeData()
         initBottomSheet()
         handleAddCustomWorkout()
         initSelectBottomSheet()
+        Log.e("workoutID", WorkoutData.workoutId)
+
         return root
     }
 
-    private fun initViewModels() {
-        Log.e("workoutID", WorkoutData.workoutId)
-        val planRepository = PlanRepository(RetrofitService.createService())
-        viewModel = ViewModelProvider(
-            this, PlanViewModelFactory(planRepository)
-        )[PlanViewModel::class.java]
+    private fun observeData() {
+        binding.progress.progressOverlay.visibility = View.VISIBLE
+
+        planViewModel.getPlanPage(
+            WorkoutData.workoutId, "Bearer " + UserPrefUtil.getUserData(requireContext())!!.token
+        )
+
+        lifecycleScope.launch {
+            planViewModel.planResponse.collect {
+                when (it) {
+                    is Result.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
+                    is Result.Failure -> handlePlanError(it.exception)
+                    else -> {}
+                }
+                binding.progress.progressOverlay.visibility = View.GONE
+            }
+        }
+
     }
 
+    private fun handlePlanError(exception: Throwable) {
+        // TODO handle error message
+        Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+    }
 
-    private fun getDataFromViewModel() {
-        viewModel.getPlanPage(requireContext())
-        viewModel.planResponse.observe(viewLifecycleOwner) { response ->
-            RetrofitService.handleRequest(response = response, onSuccess = { res ->
-                initViewPager(viewModel)
-                WorkoutData.weekList = viewModel.planResponse.value?.body()?.data!!.weeks
-            }, onError = { errorResponse ->
-                val defaultErrorMessage = getString(R.string.an_error_occurred)
-                val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
-                ?: defaultErrorMessage
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            })
-            binding.progress.progressOverlay.visibility = View.GONE
-        }
+    private fun handlePlanSuccess(planPageResponse: PlanPageResponse) {
+        initViewPager(planPageResponse)
+        WorkoutData.weekList = planPageResponse.data.weeks
     }
 
 
@@ -163,9 +171,6 @@ class MyPlanFragment : Fragment() {
 
         val adapter = ExercisesAddAdapter(data)
         recyclerView.adapter = adapter
-
-
-        // spinner
         val items = arrayOf("All", "Body", "Chest")
 
         val spinnerAdapter = ArrayAdapter(
@@ -176,10 +181,10 @@ class MyPlanFragment : Fragment() {
         spinner.adapter = spinnerAdapter
     }
 
-    private fun initViewPager(viewModel: PlanViewModel) {
+    private fun initViewPager(planResponse: PlanPageResponse) {
 
 
-        val adapter = MyPlanViewPagerAdapter(requireContext(), viewModel)
+        val adapter = MyPlanViewPagerAdapter(requireContext(), planResponse)
         binding.viewPager.adapter = adapter
 
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->

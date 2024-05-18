@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.ItemDaysLayoutBinding
-import com.modarb.android.ui.home.ui.plan.models.Day
+import com.modarb.android.ui.home.ui.plan.domain.models.Day
 
 class DaysAdapter(private val itemList: List<Day>, private var isTheCurrentWeek: Boolean) :
     RecyclerView.Adapter<DaysAdapter.ItemViewHolder>() {

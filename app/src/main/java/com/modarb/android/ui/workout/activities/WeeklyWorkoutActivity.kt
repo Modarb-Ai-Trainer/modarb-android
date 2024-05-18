@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.modarb.android.databinding.ActivityWeeklyWorkoutBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
-import com.modarb.android.ui.home.ui.plan.models.Day
+import com.modarb.android.ui.home.ui.plan.domain.models.Day
 import com.modarb.android.ui.workout.adapters.DaysTimeLineAdapter
 import com.modarb.android.ui.workout.adapters.WorkoutAdapter
 

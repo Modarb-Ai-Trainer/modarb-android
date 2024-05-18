@@ -11,8 +11,8 @@ import com.github.vipulasri.timelineview.TimelineView
 import com.modarb.android.R
 import com.modarb.android.databinding.ItemTimelineBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
-import com.modarb.android.ui.home.ui.plan.models.Day
-import com.modarb.android.ui.home.ui.plan.models.Week
+import com.modarb.android.ui.home.ui.plan.domain.models.Day
+import com.modarb.android.ui.home.ui.plan.domain.models.Week
 import com.modarb.android.ui.workout.activities.WeeklyWorkoutActivity
 
 class TrainingWeeksAdapter(private val dataList: List<Week>, private val context: Context) :

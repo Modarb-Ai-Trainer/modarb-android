@@ -1,4 +1,4 @@
-package com.modarb.android.ui.home.ui.plan.models
+package com.modarb.android.ui.home.ui.plan.domain.models
 
 data class Data(
     val id: String,
