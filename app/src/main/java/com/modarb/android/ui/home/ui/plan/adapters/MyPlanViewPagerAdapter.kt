@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.CustomWorkoutViewBinding
 import com.modarb.android.databinding.MyPlanViewBinding
+import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.Data
-import com.modarb.android.ui.home.ui.plan.domain.models.Day
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
@@ -69,7 +69,7 @@ class MyPlanViewPagerAdapter(
 
         @SuppressLint("SetTextI18n")
         private fun updateTextViews(data: Data, context: Context) {
-            binding.todayWorkoutNameTxt.text = getTodayWorkout()?.day_type
+            binding.todayWorkoutNameTxt.text = WorkoutData.getTodayWorkout()?.day_type
             binding.planDesc.text = data.workout.description
             binding.fitGoal.text = data.workout.fitness_goal
             binding.fitLevel.text = data.workout.fitness_level
@@ -79,26 +79,14 @@ class MyPlanViewPagerAdapter(
             binding.todayWorkoutTime.text =
                 "${data.workout.min_per_day} ${context.getString(R.string.min)}"
             binding.exerciseCount.text =
-                getTodayWorkout()?.total_number_exercises.toString() + " " + context.getString(R.string.exercise)
+                WorkoutData.getTodayWorkout()?.total_number_exercises.toString() + " " + context.getString(
+                    R.string.exercise
+                )
             binding.workEquip.text = data.workout.type
             binding.workDays.text =
                 data.weeks.size.toString() + " " + context.getString(R.string.days)
         }
 
-        private fun getTodayWorkout(): Day? {
-            val weekList = planResponse.data.weeks
-            for (week in weekList) {
-                if (!week.is_done) {
-                    for (day in week.days) {
-                        if (!day.is_done) {
-                            return day
-                        }
-                    }
-                    break
-                }
-            }
-            return null
-        }
 
         private fun startWorkout() {
             binding.startWorkoutBtn.setOnClickListener {
