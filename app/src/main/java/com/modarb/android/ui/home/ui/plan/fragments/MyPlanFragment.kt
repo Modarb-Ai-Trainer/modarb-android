@@ -64,10 +64,6 @@ class MyPlanFragment : Fragment() {
     private fun observeData() {
         binding.progress.progressOverlay.visibility = View.VISIBLE
 
-        planViewModel.getPlanPage(
-            WorkoutData.workoutId, "Bear`er " + UserPrefUtil.getUserData(requireContext())!!.token
-        )
-
         lifecycleScope.launch {
             planViewModel.planResponse.collect {
                 when (it) {
@@ -75,20 +71,24 @@ class MyPlanFragment : Fragment() {
                     is Result.Failure -> handlePlanError(it.exception)
                     else -> {}
                 }
-                binding.progress.progressOverlay.visibility = View.GONE
             }
         }
 
+        planViewModel.getPlanPage(
+            WorkoutData.workoutId, "Bearer " + UserPrefUtil.getUserData(requireContext())!!.token
+        )
     }
 
     private fun handlePlanError(exception: Throwable) {
         // TODO handle error message
         Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+        binding.progress.progressOverlay.visibility = View.GONE
     }
 
     private fun handlePlanSuccess(planPageResponse: PlanPageResponse) {
         initViewPager(planPageResponse)
         WorkoutData.weekList = planPageResponse.data.weeks
+        binding.progress.progressOverlay.visibility = View.GONE
     }
 
 
