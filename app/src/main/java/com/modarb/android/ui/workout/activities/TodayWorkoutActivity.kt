@@ -1,5 +1,6 @@
 package com.modarb.android.ui.workout.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class TodayWorkoutActivity : AppCompatActivity() {
         startButton = findViewById(R.id.startButton)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setData() {
         var totalSets = 0
         val workoutData = WorkoutData.getTodayWorkout()
@@ -42,6 +44,8 @@ class TodayWorkoutActivity : AppCompatActivity() {
         binding.exerciseCount.text = "Exercises \n ${workoutData.total_number_exercises}"
         binding.setsCount.text = "Sets \n ${totalSets}"
         binding.timeCount.text = "Duration \n ${workoutData.exercises.get(0).duration} min"
+        binding.dayNum.text = "Day " + workoutData.day_number
+        binding.exerciseName.text = workoutData.day_type
     }
 
     private fun handleBackBtn() {
