@@ -11,19 +11,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.Result
-import com.modarb.android.network.RetrofitService
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
 import com.modarb.android.ui.home.ui.home.presentation.HomeViewModel
-import com.modarb.android.ui.home.ui.plan.logic.PlanRepository
-import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
-import com.modarb.android.ui.home.ui.plan.logic.PlanViewModelFactory
+import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
+import com.modarb.android.ui.home.ui.plan.persentation.PlanViewModel
 import com.modarb.android.ui.onboarding.activities.SplashActivity
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
@@ -32,6 +29,8 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
+    private val planViewModel: PlanViewModel by viewModels()
+
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -73,8 +72,8 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             homeViewModel.homeResponse.collect {
                 when (it) {
-                    is Result.Success<*> -> handleSuccess(it.data as HomePageResponse)
-                    is Result.Failure -> handleError(it.exception)
+                    is Result.Success<*> -> handleHomeSuccess(it.data as HomePageResponse)
+                    is Result.Failure -> handleHomeError(it.exception)
                     else -> {}
                 }
             }
@@ -82,35 +81,47 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun handleSuccess(res: HomePageResponse) {
+    private fun handleHomeSuccess(res: HomePageResponse) {
         WorkoutData.workoutId = res.data.myWorkout.id
         setData(res)
         getPlanData()
         binding.progressView.progressOverlay.visibility = View.GONE
     }
 
-    private fun handleError(exception: Throwable) {
+    private fun handleHomeError(exception: Throwable) {
         Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
         binding.progressView.progressOverlay.visibility = View.GONE
     }
 
     private fun getPlanData() {
-        val planRepository = PlanRepository(RetrofitService.createService())
-        val planViewModel = ViewModelProvider(
-            this, PlanViewModelFactory(planRepository)
-        )[PlanViewModel::class.java]
 
-        planViewModel.getPlanPage(requireContext())
-        planViewModel.planResponse.observe(this) { response ->
-            RetrofitService.handleRequest(response = response, onSuccess = { res ->
-                WorkoutData.weekList = planViewModel.planResponse.value?.body()?.data!!.weeks
-            }, onError = { errorResponse ->
-                val defaultErrorMessage = getString(R.string.an_error_occurred)
-                val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
-                ?: defaultErrorMessage
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            })
+        lifecycleScope.launch {
+            planViewModel.planResponse.collect {
+                when (it) {
+                    is Result.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
+                    is Result.Failure -> handlePlanError(it.exception)
+                    else -> {}
+                }
+            }
         }
+        planViewModel.getPlanPage(
+            WorkoutData.workoutId, "Bearer " + UserPrefUtil.getUserData(requireContext())!!.token
+        )
+
+    }
+
+    private fun handlePlanError(exception: Throwable) {
+
+        // TODO handle plan error
+//        val defaultErrorMessage = getString(R.string.an_error_occurred)
+//        val message = errResponse.errors?.firstOrNull() ?: errResponse.error ?: defaultErrorMessage
+//        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+
+
+    }
+
+    private fun handlePlanSuccess(res: PlanPageResponse) {
+        WorkoutData.weekList = res.data.weeks
     }
 
     private fun initActions() {

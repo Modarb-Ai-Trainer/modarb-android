@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.home.ui.plan.models.Equipment
+import com.modarb.android.ui.home.ui.plan.domain.models.Equipment
 
 class EquipmentAdapter(private val data: List<Equipment>) :
     RecyclerView.Adapter<EquipmentAdapter.ViewHolder>() {

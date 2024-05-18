@@ -1,6 +1,6 @@
-package com.modarb.android.ui.home.ui.plan.models
+package com.modarb.android.ui.home.ui.plan.domain.models
 
-data class Secondary(
+data class Primary(
     val __v: Int,
     val _id: String,
     val image: String,
