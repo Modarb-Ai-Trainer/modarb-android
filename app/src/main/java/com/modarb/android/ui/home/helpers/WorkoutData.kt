@@ -42,4 +42,20 @@ object WorkoutData {
         return null
     }
 
+
+    fun getTodayWorkout(weekList: List<Week>): Day? {
+        for (week in weekList) {
+            if (!week.is_done) {
+                for (day in week.days) {
+                    if (!day.is_done) {
+                        return day
+                    }
+                }
+                break
+            }
+        }
+        return null
+    }
+
+
 }

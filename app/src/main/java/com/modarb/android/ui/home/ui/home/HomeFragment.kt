@@ -10,27 +10,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
+import com.modarb.android.network.Result
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.ui.home.helpers.WorkoutData
-import com.modarb.android.ui.home.ui.home.logic.HomeRepository
-import com.modarb.android.ui.home.ui.home.logic.HomeViewModel
-import com.modarb.android.ui.home.ui.home.logic.HomeViewModelFactory
-import com.modarb.android.ui.home.ui.home.models.Day
-import com.modarb.android.ui.home.ui.home.models.HomePageResponse
+import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
+import com.modarb.android.ui.home.ui.home.presentation.HomeViewModel
 import com.modarb.android.ui.home.ui.plan.logic.PlanRepository
 import com.modarb.android.ui.home.ui.plan.logic.PlanViewModel
 import com.modarb.android.ui.home.ui.plan.logic.PlanViewModelFactory
 import com.modarb.android.ui.onboarding.activities.SplashActivity
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    lateinit var viewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -39,15 +40,12 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        initViewModels()
         getHomeData()
         initLogout()
         initActions()
         handleClick()
 
-
-
-        Log.e("User ID", UserPrefUtil.getUserData(requireContext())!!.user.id)
+        Log.d("User ID", UserPrefUtil.getUserData(requireContext())!!.user.id)
         return root
     }
 
@@ -57,6 +55,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+
     private fun initLogout() {
         binding.profileBtn.setOnClickListener {
             UserPrefUtil.saveUserData(requireContext(), null)
@@ -65,47 +64,34 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initViewModels() {
-        val homeRepository = HomeRepository(RetrofitService.createService())
-        viewModel = ViewModelProvider(
-            this, HomeViewModelFactory(homeRepository)
-        )[HomeViewModel::class.java]
-    }
-
-    private fun getTodayWorkout(): Day? {
-        val weekList = viewModel.homeResponse.value!!.body()!!.data.myWorkout.weeks
-
-        for (week in weekList) {
-            if (!week.is_done) {
-                for (day in week.days) {
-                    if (!day.is_done) {
-                        return day
-                    }
-                }
-                break
-            }
-        }
-        return null
-    }
-
 
     private fun getHomeData() {
         binding.progressView.progressOverlay.visibility = View.VISIBLE
-        viewModel.getUserHomePage(requireContext())
+        homeViewModel.getUserHomePage("Bearer " + UserPrefUtil.getUserData(requireContext())!!.token)
 
-        viewModel.homeResponse.observe(requireActivity()) { response ->
-            RetrofitService.handleRequest(response = response, onSuccess = { res ->
-                setData(res)
-                WorkoutData.workoutId = res.data.myWorkout.id
-                getPlanData()
-            }, onError = { errorResponse ->
-                val defaultErrorMessage = getString(R.string.an_error_occurred)
-                val message = errorResponse?.errors?.firstOrNull() ?: errorResponse?.error
-                ?: defaultErrorMessage
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            })
-            binding.progressView.progressOverlay.visibility = View.GONE
+
+        lifecycleScope.launch {
+            homeViewModel.homeResponse.collect {
+                when (it) {
+                    is Result.Success<*> -> handleSuccess(it.data as HomePageResponse)
+                    is Result.Failure -> handleError(it.exception)
+                    else -> {}
+                }
+            }
         }
+
+    }
+
+    private fun handleSuccess(res: HomePageResponse) {
+        WorkoutData.workoutId = res.data.myWorkout.id
+        setData(res)
+        getPlanData()
+        binding.progressView.progressOverlay.visibility = View.GONE
+    }
+
+    private fun handleError(exception: Throwable) {
+        Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+        binding.progressView.progressOverlay.visibility = View.GONE
     }
 
     private fun getPlanData() {
@@ -142,7 +128,9 @@ class HomeFragment : Fragment() {
         binding.workouttime.text =
             formatWorkoutTime(response.data.myWorkout.workout.min_per_day, requireContext())
         binding.exerciseCountTxt.text =
-            getTodayWorkout()?.total_number_exercises.toString() + " " + getString(R.string.exercise)
+            WorkoutData.getTodayWorkout(response.data.myWorkout.weeks)?.total_number_exercises.toString() + " " + getString(
+                R.string.exercise
+            )
     }
 
     private fun formatWorkoutTime(minutesPerDay: Int, context: Context): String {

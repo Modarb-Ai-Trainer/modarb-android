@@ -1,4 +1,4 @@
-package com.modarb.android.ui.home.ui.home.models
+package com.modarb.android.ui.home.ui.home.domain.models
 
 data class Data(
     val myMealPlan: MyMealPlan,

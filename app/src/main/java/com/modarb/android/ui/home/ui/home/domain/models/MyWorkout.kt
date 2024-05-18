@@ -1,4 +1,6 @@
-package com.modarb.android.ui.home.ui.home.models
+package com.modarb.android.ui.home.ui.home.domain.models
+
+import com.modarb.android.ui.home.ui.plan.models.Week
 
 data class MyWorkout(
     val id: String,
