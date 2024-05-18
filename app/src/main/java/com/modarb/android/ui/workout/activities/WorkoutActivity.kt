@@ -64,10 +64,8 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
 
     private fun handleSuccess(data: BaseResponse) {
         Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
-
         val i = Intent(this, WorkoutInsightsActivity::class.java)
         startActivity(i)
-
         finish()
     }
 

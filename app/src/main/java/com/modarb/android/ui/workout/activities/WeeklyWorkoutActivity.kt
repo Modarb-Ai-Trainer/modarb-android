@@ -1,6 +1,7 @@
 package com.modarb.android.ui.workout.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
         setRecycleData()
         setData()
         setTimeLineRecycler()
+        handleOnStartButton()
     }
 
     private fun handleBackButton() {
@@ -63,6 +65,12 @@ class WeeklyWorkoutActivity : AppCompatActivity() {
 
         val adapter = WorkoutAdapter(WorkoutData.getTodayWorkout(), this)
         binding.recyclerView.adapter = adapter
+    }
+
+    private fun handleOnStartButton() {
+        binding.startButton.setOnClickListener {
+            startActivity(Intent(this, WorkoutActivity::class.java))
+        }
     }
 
     private fun getTheDays(): ArrayList<Day> {
