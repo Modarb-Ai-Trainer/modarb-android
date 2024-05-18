@@ -40,7 +40,7 @@ object RetrofitService {
 
     fun createService(): ApiService {
         if (!NetworkHelper.isEmulator()) {
-            BASE_URL = "http://127.0.0.1:4000/"
+            BASE_URL = "http://192.168.1.9:4000/"
         }
         try {
             return Retrofit.Builder().baseUrl(BASE_URL)
