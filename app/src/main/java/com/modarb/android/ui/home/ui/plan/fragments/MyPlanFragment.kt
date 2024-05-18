@@ -21,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentMyPlanBinding
-import com.modarb.android.network.Result
+import com.modarb.android.network.ApiResult
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
@@ -67,8 +67,8 @@ class MyPlanFragment : Fragment() {
         lifecycleScope.launch {
             planViewModel.planResponse.collect {
                 when (it) {
-                    is Result.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
-                    is Result.Failure -> handlePlanError(it.exception)
+                    is ApiResult.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
+                    is ApiResult.Failure -> handlePlanError(it.exception)
                     else -> {}
                 }
             }

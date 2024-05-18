@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWorkoutBinding
-import com.modarb.android.network.Result
+import com.modarb.android.network.ApiResult
 import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
@@ -53,8 +53,8 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
         lifecycleScope.launch {
             workoutViewModel.workoutStatus.collect { result ->
                 when (result) {
-                    is Result.Success<*> -> handleSuccess(result.data as BaseResponse)
-                    is Result.Failure -> handleFailure(result.exception)
+                    is ApiResult.Success<*> -> handleSuccess(result.data as BaseResponse)
+                    is ApiResult.Failure -> handleFailure(result.exception)
                     else -> {}
                 }
                 binding.progress.progressOverlay.visibility = View.GONE

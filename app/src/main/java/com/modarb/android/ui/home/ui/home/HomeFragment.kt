@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
-import com.modarb.android.network.Result
+import com.modarb.android.network.ApiResult
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
 import com.modarb.android.ui.home.ui.home.presentation.HomeViewModel
@@ -72,8 +72,8 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             homeViewModel.homeResponse.collect {
                 when (it) {
-                    is Result.Success<*> -> handleHomeSuccess(it.data as HomePageResponse)
-                    is Result.Failure -> handleHomeError(it.exception)
+                    is ApiResult.Success<*> -> handleHomeSuccess(it.data as HomePageResponse)
+                    is ApiResult.Failure -> handleHomeError(it.exception)
                     else -> {}
                 }
             }
@@ -98,8 +98,8 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             planViewModel.planResponse.collect {
                 when (it) {
-                    is Result.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
-                    is Result.Failure -> handlePlanError(it.exception)
+                    is ApiResult.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
+                    is ApiResult.Failure -> handlePlanError(it.exception)
                     else -> {}
                 }
             }

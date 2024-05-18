@@ -2,7 +2,7 @@ package com.modarb.android.ui.home.ui.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.modarb.android.network.Result
+import com.modarb.android.network.ApiResult
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.home.data.HomeRepositoryImpl
@@ -18,8 +18,8 @@ class HomeViewModel : ViewModel() {
     private var homeRepository = HomeRepositoryImpl(apiService)
     private var homeUseCase = HomePageUseCase(homeRepository)
 
-    private val _homeResponse = MutableStateFlow<Result<HomePageResponse>?>(null)
-    val homeResponse: StateFlow<Result<BaseResponse>?> get() = _homeResponse
+    private val _homeResponse = MutableStateFlow<ApiResult<HomePageResponse>?>(null)
+    val homeResponse: StateFlow<ApiResult<BaseResponse>?> get() = _homeResponse
 
 
     fun getUserHomePage(token: String) {

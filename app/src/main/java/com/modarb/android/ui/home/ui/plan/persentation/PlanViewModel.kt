@@ -2,7 +2,7 @@ package com.modarb.android.ui.home.ui.plan.persentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.modarb.android.network.Result
+import com.modarb.android.network.ApiResult
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.ui.home.ui.plan.data.PlanRepositoryImp
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
@@ -19,8 +19,8 @@ class PlanViewModel : ViewModel() {
     private var myPlanPageUseCase = PlanPageUseCase(myPlanRepository)
 
 
-    private val _planPageResponse = MutableStateFlow<Result<PlanPageResponse>?>(null)
-    val planResponse: StateFlow<Result<PlanPageResponse>?> get() = _planPageResponse
+    private val _planPageResponse = MutableStateFlow<ApiResult<PlanPageResponse>?>(null)
+    val planResponse: StateFlow<ApiResult<PlanPageResponse>?> get() = _planPageResponse
 
 //    private val _customWorkoutsResponse = MutableLiveData<Response<PlanPageResponse>>()
 //    val customWorkoutsResponse: LiveData<Response<PlanPageResponse>> = _customWorkoutsResponse

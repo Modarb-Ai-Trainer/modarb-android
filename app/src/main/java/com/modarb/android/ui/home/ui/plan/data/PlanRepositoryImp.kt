@@ -1,8 +1,8 @@
 package com.modarb.android.ui.home.ui.plan.data
 
 import android.content.Context
+import com.modarb.android.network.ApiResult
 import com.modarb.android.network.ApiService
-import com.modarb.android.network.Result
 import com.modarb.android.ui.home.ui.plan.domain.MyPlanRepository
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
@@ -18,19 +18,22 @@ class PlanRepositoryImp(private val apiService: ApiService) : MyPlanRepository {
         )
     }
 
-    override suspend fun getMyPlanPage(workoutId: String, token: String): Result<PlanPageResponse> {
+    override suspend fun getMyPlanPage(
+        workoutId: String,
+        token: String
+    ): ApiResult<PlanPageResponse> {
 
         return try {
             val response = apiService.getPlanPage(workoutId, token)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    Result.Success(it)
-                } ?: Result.Failure(Throwable("Response body is null"))
+                    ApiResult.Success(it)
+                } ?: ApiResult.Failure(Throwable("Response body is null"))
             } else {
-                Result.Failure(Throwable(response.errorBody()?.string() ?: "Unknown error"))
+                ApiResult.Failure(Throwable(response.errorBody()?.string() ?: "Unknown error"))
             }
         } catch (e: Exception) {
-            Result.Failure(e)
+            ApiResult.Failure(e)
         }
     }
 
