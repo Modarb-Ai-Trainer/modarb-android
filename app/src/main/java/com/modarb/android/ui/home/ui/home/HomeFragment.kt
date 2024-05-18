@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.ApiResult
+import com.modarb.android.network.NetworkHelper
 import com.modarb.android.ui.home.HomeActivity
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
@@ -73,12 +74,18 @@ class HomeFragment : Fragment() {
             homeViewModel.homeResponse.collect {
                 when (it) {
                     is ApiResult.Success<*> -> handleHomeSuccess(it.data as HomePageResponse)
-                    is ApiResult.Failure -> handleHomeError(it.exception)
+                    is ApiResult.Error -> handleHomeError(it.data as HomePageResponse)
+                    is ApiResult.Failure -> handleHomeFail(it.exception)
                     else -> {}
                 }
             }
         }
 
+    }
+
+    private fun handleHomeFail(exception: Throwable) {
+        Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+        binding.progressView.progressOverlay.visibility = View.GONE
     }
 
     private fun handleHomeSuccess(res: HomePageResponse) {
@@ -88,8 +95,8 @@ class HomeFragment : Fragment() {
         binding.progressView.progressOverlay.visibility = View.GONE
     }
 
-    private fun handleHomeError(exception: Throwable) {
-        Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+    private fun handleHomeError(errorResponse: HomePageResponse) {
+        NetworkHelper.showErrorMessage(requireContext(), errorResponse)
         binding.progressView.progressOverlay.visibility = View.GONE
     }
 
@@ -99,7 +106,8 @@ class HomeFragment : Fragment() {
             planViewModel.planResponse.collect {
                 when (it) {
                     is ApiResult.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
-                    is ApiResult.Failure -> handlePlanError(it.exception)
+                    is ApiResult.Error -> handlePlanError(it.data)
+                    is ApiResult.Failure -> handlePlanFail(it.exception)
                     else -> {}
                 }
             }
@@ -110,14 +118,12 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun handlePlanError(exception: Throwable) {
+    private fun handlePlanFail(exception: Throwable) {
+        Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+    }
 
-        // TODO handle plan error
-//        val defaultErrorMessage = getString(R.string.an_error_occurred)
-//        val message = errResponse.errors?.firstOrNull() ?: errResponse.error ?: defaultErrorMessage
-//        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-
-
+    private fun handlePlanError(errorResponse: PlanPageResponse) {
+        NetworkHelper.showErrorMessage(requireContext(), errorResponse)
     }
 
     private fun handlePlanSuccess(res: PlanPageResponse) {

@@ -30,7 +30,7 @@ class PlanRepositoryImp(private val apiService: ApiService) : MyPlanRepository {
                     ApiResult.Success(it)
                 } ?: ApiResult.Failure(Throwable("Response body is null"))
             } else {
-                ApiResult.Failure(Throwable(response.errorBody()?.string() ?: "Unknown error"))
+                ApiResult.Error(response.body() as PlanPageResponse)
             }
         } catch (e: Exception) {
             ApiResult.Failure(e)
