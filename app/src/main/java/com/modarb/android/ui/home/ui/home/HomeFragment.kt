@@ -12,10 +12,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.ApiResult
+import com.modarb.android.ui.home.HomeActivity
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
 import com.modarb.android.ui.home.ui.home.presentation.HomeViewModel
@@ -125,12 +125,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun initActions() {
-
         binding.workoutPlanView.setOnClickListener {
-            findNavController().popBackStack()
-            findNavController().navigate(R.id.navigation_my_plan)
+            (activity as? HomeActivity)?.navigateToFragment(R.id.navigation_my_plan)
         }
-
     }
 
     @SuppressLint("SetTextI18n")

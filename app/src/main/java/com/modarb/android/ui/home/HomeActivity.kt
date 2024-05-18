@@ -41,4 +41,9 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
+    fun navigateToFragment(itemId: Int) {
+        binding.navView.selectedItemId = itemId
+    }
 }
