@@ -59,6 +59,7 @@ class MyPlanViewPagerAdapter(
                     planResponse.data.weeks, context
                 )
                 binding.recyclerView.adapter = adapter
+                binding.recyclerView.isNestedScrollingEnabled = false
             }
         }
 
@@ -123,6 +124,7 @@ class MyPlanViewPagerAdapter(
             }
             val adapter = CustomWorkoutTemplateAdapter(context, data)
             binding.recycleView.adapter = adapter
+            binding.recycleView.isNestedScrollingEnabled = false
         }
     }
 }
