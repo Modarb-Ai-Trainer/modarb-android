@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitService {
 
-    private const val BASE_URL = "http://10.0.2.2:4000/"
+    private var BASE_URL = "http://10.0.2.2:4000/"
     inline fun <reified T> handleRequest(
         response: Response<T>, onSuccess: (T) -> Unit, onError: (T?) -> Unit
     ) {
@@ -39,6 +39,9 @@ object RetrofitService {
     }
 
     fun createService(): ApiService {
+        if (!NetworkHelper.isEmulator()) {
+            BASE_URL = "http://127.0.0.1:4000/"
+        }
         try {
             return Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build()
