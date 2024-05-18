@@ -74,9 +74,7 @@
         <activity
             android:name=".ui.onboarding.activities.OnBoardingActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.onboarding.activities.SplashActivity"
             android:exported="true">

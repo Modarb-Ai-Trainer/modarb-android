@@ -1,6 +1,7 @@
 package com.modarb.android.ui.workout.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -39,7 +40,7 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
     }
 
     private fun incrementSetCount() {
-        // TODO handle this when they fix the api
+        // TODO uncomment / handle this when they fix the api
         //if (adapter.isTimedExercise(currentPosition)) return
         binding.incButton.setOnClickListener {
             val currentPosition = binding.exercisePager.currentItem
@@ -56,14 +57,17 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
                     is Result.Failure -> handleFailure(result.exception)
                     else -> {}
                 }
+                binding.progress.progressOverlay.visibility = View.GONE
             }
         }
-
-
     }
 
     private fun handleSuccess(data: BaseResponse) {
         Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
+
+        val i = Intent(this, WorkoutInsightsActivity::class.java)
+        startActivity(i)
+
         finish()
     }
 
@@ -78,6 +82,7 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
     }
 
     private fun markWorkoutDone() {
+        binding.progress.progressOverlay.visibility = View.VISIBLE
         val myWorkoutId = WorkoutData.workoutId
         val week = WorkoutData.getCurrentWeek()!!.week_number
         val day = WorkoutData.getTodayWorkout()!!.day_number

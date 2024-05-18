@@ -65,7 +65,7 @@ class MyPlanFragment : Fragment() {
         binding.progress.progressOverlay.visibility = View.VISIBLE
 
         planViewModel.getPlanPage(
-            WorkoutData.workoutId, "Bearer " + UserPrefUtil.getUserData(requireContext())!!.token
+            WorkoutData.workoutId, "Bear`er " + UserPrefUtil.getUserData(requireContext())!!.token
         )
 
         lifecycleScope.launch {

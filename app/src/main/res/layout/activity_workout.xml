@@ -7,6 +7,9 @@
     android:background="@color/grey_900"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/progress"
+        layout="@layout/progress" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -84,5 +87,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </LinearLayout>
