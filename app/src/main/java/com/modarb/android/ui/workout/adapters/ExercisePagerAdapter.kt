@@ -20,6 +20,7 @@ class ExercisePagerAdapter(private val context: Context, var listener: ExerciseL
 
     override fun isViewFromObject(view: View, obj: Any): Boolean = view == obj
 
+    @SuppressLint("SetTextI18n")
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflater = LayoutInflater.from(context)
         val binding = ItemExerciseBinding.inflate(inflater, container, false)
@@ -58,9 +59,6 @@ class ExercisePagerAdapter(private val context: Context, var listener: ExerciseL
         return true
     }
 
-    fun handleEndExercise() {
-
-    }
 
     fun logExercise(position: Int) {
         val exercise = exercises[position]
