@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.models
+package com.modarb.android.ui.workout.domain.models
 
 data class Exercise(
     val _id: String,

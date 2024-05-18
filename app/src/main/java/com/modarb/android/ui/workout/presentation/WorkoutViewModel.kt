@@ -1,12 +1,12 @@
-package com.modarb.android.ui.workout.viewModel
+package com.modarb.android.ui.workout.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.modarb.android.network.Result
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.network.models.BaseResponse
-import com.modarb.android.ui.workout.repo.MarkWorkoutDoneUseCase
-import com.modarb.android.ui.workout.repo.WorkoutRepositoryImpl
+import com.modarb.android.ui.workout.data.WorkoutRepositoryImpl
+import com.modarb.android.ui.workout.domain.usecase.MarkWorkoutDoneUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

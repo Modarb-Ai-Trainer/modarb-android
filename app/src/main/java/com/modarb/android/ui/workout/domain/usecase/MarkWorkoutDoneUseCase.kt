@@ -1,7 +1,8 @@
-package com.modarb.android.ui.workout.repo
+package com.modarb.android.ui.workout.domain.usecase
 
 import com.modarb.android.network.Result
 import com.modarb.android.network.models.BaseResponse
+import com.modarb.android.ui.workout.domain.repo.WorkoutRepository
 
 class MarkWorkoutDoneUseCase(private val workoutRepository: WorkoutRepository) {
 

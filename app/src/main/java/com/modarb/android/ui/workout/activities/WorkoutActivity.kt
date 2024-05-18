@@ -15,7 +15,7 @@ import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.ExerciseListener
 import com.modarb.android.ui.workout.adapters.ExercisePagerAdapter
-import com.modarb.android.ui.workout.viewModel.WorkoutViewModel
+import com.modarb.android.ui.workout.presentation.WorkoutViewModel
 import kotlinx.coroutines.launch
 
 

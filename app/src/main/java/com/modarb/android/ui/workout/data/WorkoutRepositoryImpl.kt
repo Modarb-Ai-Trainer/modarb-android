@@ -1,8 +1,9 @@
-package com.modarb.android.ui.workout.repo
+package com.modarb.android.ui.workout.data
 
 import com.modarb.android.network.ApiService
 import com.modarb.android.network.Result
 import com.modarb.android.network.models.BaseResponse
+import com.modarb.android.ui.workout.domain.repo.WorkoutRepository
 
 class WorkoutRepositoryImpl(private val apiService: ApiService) : WorkoutRepository {
 

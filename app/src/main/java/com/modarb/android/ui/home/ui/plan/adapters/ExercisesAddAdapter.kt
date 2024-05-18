@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.databinding.ItemExerciseSelectionDetailsBinding
-import com.modarb.android.ui.workout.models.WorkoutModel
+import com.modarb.android.ui.workout.domain.models.WorkoutModel
 
 class ExercisesAddAdapter(private val itemList: List<WorkoutModel>) :
     RecyclerView.Adapter<ExercisesAddAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.modarb.android.ui.workout.models
+package com.modarb.android.ui.workout.domain.models
 
 data class Data(
     val created_by: String,
