@@ -22,12 +22,12 @@
         app:tabSelectedTextColor="@color/primary_800" />
 
     <androidx.viewpager.widget.ViewPager
-        android:clickable="false"
-        android:focusable="false"
         android:id="@+id/exercise_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:clickable="false"
+        android:focusable="false" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/dummy_pager"

@@ -11,7 +11,7 @@ import com.modarb.android.databinding.ItemExerciseBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.workout.ExerciseListener
 
-class ExercisePagerAdapter(private val context: Context, var listener: ExerciseListener) :
+class ExercisePagerAdapter(private val context: Context, private var listener: ExerciseListener) :
     PagerAdapter() {
 
     private val exercises = WorkoutData.getTodayWorkout()?.exercises ?: emptyList()
@@ -42,7 +42,6 @@ class ExercisePagerAdapter(private val context: Context, var listener: ExerciseL
             listener.onCloseListener()
         }
     }
-
 
     /**
      * this function responsible for increment set count
