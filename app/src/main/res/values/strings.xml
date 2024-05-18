@@ -192,4 +192,16 @@
     <string name="common_injuries">Common Injuries </string>
     <string name="your_daily_recovery_session">Your Daily\nRecovery Session </string>
 
+    <string name="standard">Standard</string>
+    <string name="eat_all_essence_unrestricted_nutrition">Eat All Essence : Unrestricted Nutrition</string>
+    <string name="key_features">Key Features:</string>
+    <string name="your_journey">Your Journey</string>
+    <string name="intermittent_fasting">Intermittent fasting</string>
+    <string name="duration">Duration</string>
+    <string name="level">Level</string>
+    <string name="choose_plan">Choose plan</string>
+    <string name="nutri_guide">NutriGuide</string>
+    <string name="available_plans">Available plans</string>
+
+
 </resources>
