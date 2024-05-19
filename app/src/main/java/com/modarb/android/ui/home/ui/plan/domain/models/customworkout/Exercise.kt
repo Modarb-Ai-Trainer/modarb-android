@@ -1,7 +1,6 @@
 package com.modarb.android.ui.home.ui.plan.domain.models.customworkout
 
 data class Exercise(
-    val __v: Int,
     val _id: String,
     val benefits: String,
     val category: String,
