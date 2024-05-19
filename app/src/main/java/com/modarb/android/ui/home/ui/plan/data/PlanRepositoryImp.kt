@@ -1,26 +1,15 @@
 package com.modarb.android.ui.home.ui.plan.data
 
-import android.content.Context
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.ApiService
 import com.modarb.android.ui.home.ui.plan.domain.MyPlanRepository
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
-import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
-import retrofit2.Response
+import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 
 class PlanRepositoryImp(private val apiService: ApiService) : MyPlanRepository {
 
-
-    // TODO handle get custom workouts
-    suspend fun getCustomWorkouts(context: Context): Response<PlanPageResponse> {
-        return apiService.getCustomWorkouts(
-            "Bearer " + UserPrefUtil.getUserData(context)!!.token
-        )
-    }
-
     override suspend fun getMyPlanPage(
-        workoutId: String,
-        token: String
+        workoutId: String, token: String
     ): ApiResult<PlanPageResponse> {
 
         return try {
@@ -31,6 +20,22 @@ class PlanRepositoryImp(private val apiService: ApiService) : MyPlanRepository {
                 } ?: ApiResult.Failure(Throwable("Response body is null"))
             } else {
                 ApiResult.Error(response.body() as PlanPageResponse)
+            }
+        } catch (e: Exception) {
+            ApiResult.Failure(e)
+        }
+    }
+
+    override suspend fun getCustomWorkouts(token: String): ApiResult<CustomWorkoutResponse> {
+        return try {
+            val response = apiService.getCustomWorkouts(token)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    ApiResult.Success(it)
+                } ?: ApiResult.Failure(Throwable("Response body is null"))
+            } else {
+                ApiResult.Error(response.body() as CustomWorkoutResponse)
+
             }
         } catch (e: Exception) {
             ApiResult.Failure(e)

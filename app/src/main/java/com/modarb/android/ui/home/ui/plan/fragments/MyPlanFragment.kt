@@ -26,6 +26,7 @@ import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 import com.modarb.android.ui.home.ui.plan.persentation.PlanViewModel
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.domain.models.WorkoutModel
@@ -56,6 +57,8 @@ class MyPlanFragment : Fragment() {
         initBottomSheet()
         handleAddCustomWorkout()
         initSelectBottomSheet()
+        getCustomWorkouts()
+        observeCombinedResponses()
         Log.e("workoutID", WorkoutData.workoutId)
 
         return root
@@ -64,29 +67,53 @@ class MyPlanFragment : Fragment() {
     private fun observeData() {
         binding.progress.progressOverlay.visibility = View.VISIBLE
 
-        lifecycleScope.launch {
-            planViewModel.planResponse.collect {
-                when (it) {
-                    is ApiResult.Success<*> -> handlePlanSuccess(it.data as PlanPageResponse)
-                    is ApiResult.Failure -> handlePlanError(it.exception)
-                    else -> {}
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            planViewModel.planResponse.collect {
+//                when (it) {
+//                    is ApiResult.Error<*> -> handlePlanError(it as PlanPageResponse)
+//                    is ApiResult.Failure -> handlePlanFail(it.exception)
+//                    else -> {}
+//                }
+//            }
+//        }
 
         planViewModel.getPlanPage(
             WorkoutData.workoutId, "Bearer " + UserPrefUtil.getUserData(requireContext())!!.token
         )
     }
 
-    private fun handlePlanError(exception: Throwable) {
-        // TODO handle error message
+    private fun observeCombinedResponses() {
+        lifecycleScope.launch {
+            planViewModel.combinedResponses.collect { combined ->
+                val planResponse = combined.first
+                val customWorkoutsResponse = combined.second
+
+                if (planResponse is ApiResult.Success && customWorkoutsResponse is ApiResult.Success) {
+                    handleBothSuccess(
+                        planResponse.data, customWorkoutsResponse.data
+                    )
+                }
+            }
+        }
+    }
+
+    private fun handleBothSuccess(
+        planPageResponse: PlanPageResponse, customWorkoutResponse: CustomWorkoutResponse
+    ) {
+        Log.d("My plan page success", "Nice work")
+        initViewPager(planPageResponse, customWorkoutResponse)
+        WorkoutData.weekList = planPageResponse.data.weeks
+        binding.progress.progressOverlay.visibility = View.GONE
+
+    }
+
+
+    private fun handlePlanFail(exception: Throwable) {
         Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
         binding.progress.progressOverlay.visibility = View.GONE
     }
 
-    private fun handlePlanSuccess(planPageResponse: PlanPageResponse) {
-        initViewPager(planPageResponse)
+    private fun handlePlanError(planPageResponse: PlanPageResponse) {
         WorkoutData.weekList = planPageResponse.data.weeks
         binding.progress.progressOverlay.visibility = View.GONE
     }
@@ -96,6 +123,19 @@ class MyPlanFragment : Fragment() {
         binding.addCustomWorkOut.setOnClickListener {
             bottomSheet.show()
         }
+    }
+
+    private fun getCustomWorkouts() {
+        lifecycleScope.launch {
+            planViewModel.customWorkoutResponse.collect {
+                when (it) {
+                    is ApiResult.Error<*> -> handlePlanError(it as PlanPageResponse)
+                    is ApiResult.Failure -> handlePlanFail(it.exception)
+                    else -> {}
+                }
+            }
+        }
+        planViewModel.getCustomWorkouts("Bearer ${UserPrefUtil.getUserData(requireContext())?.token}")
     }
 
 
@@ -181,10 +221,12 @@ class MyPlanFragment : Fragment() {
         spinner.adapter = spinnerAdapter
     }
 
-    private fun initViewPager(planResponse: PlanPageResponse) {
+    private fun initViewPager(
+        planResponse: PlanPageResponse, customWorkoutResponse: CustomWorkoutResponse
+    ) {
 
 
-        val adapter = MyPlanViewPagerAdapter(requireContext(), planResponse)
+        val adapter = MyPlanViewPagerAdapter(requireContext(), planResponse, customWorkoutResponse)
         binding.viewPager.adapter = adapter
 
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->

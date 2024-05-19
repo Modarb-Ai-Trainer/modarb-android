@@ -57,5 +57,23 @@ object WorkoutData {
         return null
     }
 
+    fun getTotalExerciseTime(exercise: List<com.modarb.android.ui.home.ui.plan.domain.models.customworkout.Exercise>): String {
+        var totalTime = 0
+        for (ex in exercise) {
+            totalTime += ex.duration
+        }
+        return totalTime.toString()
+    }
+
+
+    // TODO handle getting reps after fixing the api
+//    fun getTotalExerciseReps(exercise: List<com.modarb.android.ui.home.ui.plan.domain.models.customworkout.Exercise>): String {
+//        var totalReps = 0
+//        for (ex in exercise) {
+//            totalReps += ex.
+//        }
+//        return totalReps.toString()
+//    }
+
 
 }
