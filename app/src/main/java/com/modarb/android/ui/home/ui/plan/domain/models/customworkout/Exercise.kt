@@ -12,6 +12,8 @@ data class Exercise(
     val expectedDurationRange: ExpectedDurationRange,
     val instructions: String,
     val media: Media,
+    var reps: Int,
+    val sets: Int,
     val name: String,
     val targetMuscles: TargetMuscles
 )
