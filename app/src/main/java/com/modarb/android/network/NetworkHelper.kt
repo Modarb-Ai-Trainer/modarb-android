@@ -5,6 +5,9 @@ import android.os.Build
 import android.widget.Toast
 import com.modarb.android.R
 import com.modarb.android.network.models.BaseResponse
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class NetworkHelper {
 
@@ -38,6 +41,18 @@ class NetworkHelper {
                 "Genymotion"
             ) || fingerprint.contains("generic") || fingerprint.contains("vbox"))
 
+        }
+
+        fun getDate(timestamp: String): String {
+            val dateTime = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_DATE_TIME)
+            } else {
+                TODO("VERSION.SDK_INT < O")
+            }
+
+            val formattedDate =
+                dateTime.format(DateTimeFormatter.ofPattern("EEEE, d MMM", Locale.ENGLISH))
+            return formattedDate
         }
 
     }

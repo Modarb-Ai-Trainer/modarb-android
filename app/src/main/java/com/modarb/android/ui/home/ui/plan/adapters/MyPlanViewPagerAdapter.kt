@@ -13,11 +13,14 @@ import com.modarb.android.databinding.MyPlanViewBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.Data
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
 import com.modarb.android.ui.workout.adapters.TrainingWeeksAdapter
 
 class MyPlanViewPagerAdapter(
-    private val context: Context, private var planResponse: PlanPageResponse
+    private val context: Context,
+    private var planResponse: PlanPageResponse,
+    private var customWorkoutResponse: CustomWorkoutResponse
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -103,14 +106,10 @@ class MyPlanViewPagerAdapter(
 
     inner class CustomWorkoutViewHolder(private val binding: CustomWorkoutViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val data = mutableListOf<String>()
 
         fun bind(context: Context) {
             binding.recycleView.layoutManager = LinearLayoutManager(context)
-            for (i in 0..3) {
-                data.add("test")
-            }
-            val adapter = CustomWorkoutTemplateAdapter(context, data)
+            val adapter = CustomWorkoutTemplateAdapter(context, customWorkoutResponse.data)
             binding.recycleView.adapter = adapter
             binding.recycleView.isNestedScrollingEnabled = false
         }

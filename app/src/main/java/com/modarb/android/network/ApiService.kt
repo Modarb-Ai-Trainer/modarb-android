@@ -3,6 +3,7 @@ package com.modarb.android.network
 import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 import com.modarb.android.ui.onboarding.models.LoginResponse
 import com.modarb.android.ui.onboarding.models.RequestModels.LoginRequest
 import com.modarb.android.ui.onboarding.models.RequestModels.RegisterRequest
@@ -51,7 +52,7 @@ interface ApiService {
     @GET("api/v1/user/templates/")
     suspend fun getCustomWorkouts(
         @Header("Authorization") token: String
-    ): Response<PlanPageResponse>
+    ): Response<CustomWorkoutResponse>
 
 
 }
