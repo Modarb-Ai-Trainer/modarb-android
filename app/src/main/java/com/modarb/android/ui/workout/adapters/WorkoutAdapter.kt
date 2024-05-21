@@ -3,9 +3,11 @@ package com.modarb.android.ui.workout.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.modarb.android.R
 import com.modarb.android.databinding.ItemWorkoutDetailsBinding
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.Day
@@ -28,7 +30,12 @@ class WorkoutAdapter(private val data: Day?, private var context: Context) :
         val item = data?.exercises?.get(position)
 
         holder.binding.exerciseTitle.text = item!!.name
-        holder.binding.exerciseDesc.text = "${item.sets} sets x ${item.reps} reps"
+        Log.e("item dur", item.duration.toString() + item.name)
+        if (item.duration > 0) {
+            holder.binding.exerciseDesc.text = context.getString(R.string.timed_exercise)
+        } else {
+            holder.binding.exerciseDesc.text = "${item.sets} sets x ${item.reps} reps"
+        }
         holder.binding.button.text = item.category
 
         holder.itemView.setOnClickListener {
