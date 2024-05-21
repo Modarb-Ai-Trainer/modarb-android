@@ -15,6 +15,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:fillViewport="true"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,14 +23,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".ui.home.ui.plan.fragments.MyPlanFragment">
 
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/Frame1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/imageView9"
@@ -123,19 +128,20 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/toggle_button_group"
                     app:layout_constraintVertical_bias="0.0" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </FrameLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

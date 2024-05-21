@@ -42,8 +42,14 @@ class ExerciseInfoActivity : AppCompatActivity() {
         binding.exerciseTitle.text = WorkoutData.selectedExercise.name
         binding.exerciseCount.text =
             "Exercise " + (WorkoutData.selectedExerciseNumber.toString() + " / " + WorkoutData.getTodayWorkout()!!.exercises.size)
-        binding.exerciseSets.text =
-            (WorkoutData.selectedExercise.sets).toString() + " sets x " + WorkoutData.selectedExercise.reps + " reps"
+
+        if (WorkoutData.selectedExercise.duration > 0) {
+            binding.exerciseSets.text = getString(R.string.timed_exercise)
+        } else {
+            binding.exerciseSets.text =
+                (WorkoutData.selectedExercise.sets).toString() + " sets x " + WorkoutData.selectedExercise.reps + " reps"
+        }
+
     }
 
 

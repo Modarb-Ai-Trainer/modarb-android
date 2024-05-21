@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -108,6 +109,10 @@ class MyPlanViewPagerAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(context: Context) {
+            if (customWorkoutResponse.data.isEmpty()) {
+                binding.noDataView.visibility = View.VISIBLE
+                return
+            }
             binding.recycleView.layoutManager = LinearLayoutManager(context)
             val adapter = CustomWorkoutTemplateAdapter(context, customWorkoutResponse.data)
             binding.recycleView.adapter = adapter
