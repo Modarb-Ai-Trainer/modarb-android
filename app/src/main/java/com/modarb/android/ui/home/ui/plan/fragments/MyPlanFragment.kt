@@ -19,12 +19,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.modarb.android.R
 import com.modarb.android.databinding.FragmentMyPlanBinding
 import com.modarb.android.network.ApiResult
 import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
+import com.modarb.android.ui.home.ui.plan.adapters.ViewPager2ViewHeightAnimator
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 import com.modarb.android.ui.home.ui.plan.persentation.PlanViewModel
@@ -51,7 +51,7 @@ class MyPlanFragment : Fragment() {
         binding = FragmentMyPlanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.toggleButtonGroup.check(R.id.myPlanBtn)
+        binding.toggleButtonGroup.check(com.modarb.android.R.id.myPlanBtn)
 
         observeData()
         initBottomSheet()
@@ -63,6 +63,7 @@ class MyPlanFragment : Fragment() {
 
         return root
     }
+
 
     private fun observeData() {
         binding.progress.progressOverlay.visibility = View.VISIBLE
@@ -141,10 +142,10 @@ class MyPlanFragment : Fragment() {
 
     private fun initBottomSheet() {
         bottomSheet = BottomSheetDialog(requireContext())
-        bottomSheet.setContentView(R.layout.add_excersice_view)
+        bottomSheet.setContentView(com.modarb.android.R.layout.add_excersice_view)
 
-        val closeBtn: ImageButton? = bottomSheet.findViewById(R.id.closeBtn)
-        val addExercise: View? = bottomSheet.findViewById(R.id.addExerciseView)
+        val closeBtn: ImageButton? = bottomSheet.findViewById(com.modarb.android.R.id.closeBtn)
+        val addExercise: View? = bottomSheet.findViewById(com.modarb.android.R.id.addExerciseView)
 
         bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheet.setOnShowListener {
@@ -175,12 +176,15 @@ class MyPlanFragment : Fragment() {
     private fun initSelectBottomSheet() {
         // TODO refactor this shit
         selectExerciseBottomSheet = BottomSheetDialog(requireContext())
-        selectExerciseBottomSheet.setContentView(R.layout.select_exersice_view)
+        selectExerciseBottomSheet.setContentView(com.modarb.android.R.layout.select_exersice_view)
 
-        val closeBtn: ImageButton? = selectExerciseBottomSheet.findViewById(R.id.closeBtn)
-        val recyclerView: RecyclerView? = selectExerciseBottomSheet.findViewById(R.id.recyclerView)
+        val closeBtn: ImageButton? =
+            selectExerciseBottomSheet.findViewById(com.modarb.android.R.id.closeBtn)
+        val recyclerView: RecyclerView? =
+            selectExerciseBottomSheet.findViewById(com.modarb.android.R.id.recyclerView)
 
-        val spinner: Spinner? = selectExerciseBottomSheet.findViewById(R.id.typeSpinner)
+        val spinner: Spinner? =
+            selectExerciseBottomSheet.findViewById(com.modarb.android.R.id.typeSpinner)
 
         selectExerciseBottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         selectExerciseBottomSheet.setOnShowListener {
@@ -214,7 +218,7 @@ class MyPlanFragment : Fragment() {
         val items = arrayOf("All", "Body", "Chest")
 
         val spinnerAdapter = ArrayAdapter(
-            requireContext(), R.layout.custom_spinner_item, items
+            requireContext(), com.modarb.android.R.layout.custom_spinner_item, items
         )
         spinner!!.setSelection(0)
 
@@ -226,24 +230,28 @@ class MyPlanFragment : Fragment() {
     ) {
 
 
+        val viewPager2 = ViewPager2ViewHeightAnimator()
+        viewPager2.viewPager2 = binding.viewPager
+
         val adapter = MyPlanViewPagerAdapter(requireContext(), planResponse, customWorkoutResponse)
-        binding.viewPager.adapter = adapter
+        viewPager2.viewPager2!!.adapter = adapter
 
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
-                    R.id.myPlanBtn -> binding.viewPager.currentItem = 0
-                    R.id.customWorkOut -> binding.viewPager.currentItem = 1
+                    com.modarb.android.R.id.myPlanBtn -> viewPager2.viewPager2!!.currentItem = 0
+                    com.modarb.android.R.id.customWorkOut -> viewPager2.viewPager2!!.currentItem = 1
                 }
             }
         }
 
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        viewPager2.viewPager2!!.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 binding.toggleButtonGroup.check(
                     when (position) {
-                        0 -> R.id.myPlanBtn
-                        1 -> R.id.customWorkOut
+                        0 -> com.modarb.android.R.id.myPlanBtn
+                        1 -> com.modarb.android.R.id.customWorkOut
                         else -> View.NO_ID
                     }
                 )
