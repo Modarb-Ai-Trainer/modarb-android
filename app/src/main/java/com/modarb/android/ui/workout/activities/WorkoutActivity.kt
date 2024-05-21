@@ -125,7 +125,9 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
         binding.nextButton.setOnClickListener {
             val currentItem = binding.exercisePager.currentItem
 
-            if (!adapter.isExerciseDone(currentItem) || !adapter.isTimedExerciseDone(currentItem)
+            if (!adapter.isExerciseDone(currentItem) || (adapter.isTimedExercise(currentItem) && !adapter.isTimedExerciseDone(
+                    currentItem
+                ))
             ) {
                 Toast.makeText(
                     this, getString(R.string.complete_the_exercise_first), Toast.LENGTH_SHORT
