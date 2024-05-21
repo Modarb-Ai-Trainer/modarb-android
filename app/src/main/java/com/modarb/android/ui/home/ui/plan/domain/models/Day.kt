@@ -5,5 +5,5 @@ data class Day(
     val day_type: String,
     val exercises: List<Exercise>,
     val is_done: Boolean,
-    val total_number_exercises: Int
+    val total_number_exercises: Int,
 )

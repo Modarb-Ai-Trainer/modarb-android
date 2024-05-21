@@ -1,5 +1,7 @@
 package com.modarb.android.ui.home.ui.plan.domain.models
 
+import android.os.CountDownTimer
+
 data class Exercise(
     val __v: Int,
     val _id: String,
@@ -15,6 +17,10 @@ data class Exercise(
     val sets: Int,
     val targetMuscles: TargetMuscles,
     var _currentSetCount: Int = 0,
-    var _isDone: Boolean
-)
+    var _isDone: Boolean,
+    var countDownTimer: CountDownTimer,
+    var isStarted: Boolean = false,
+    var remainingTime: Long = duration * 1000L,
+    var isTimeExerciseDone: Boolean = false
 
+)

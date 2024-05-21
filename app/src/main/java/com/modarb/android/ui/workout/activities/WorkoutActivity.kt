@@ -3,6 +3,7 @@ package com.modarb.android.ui.workout.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -36,18 +37,42 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
         disableViewPagerScroll()
         handleNavigationButtons()
         incrementSetCount()
+        checkButtonState()
         observeViewModel()
     }
 
+    private fun checkButtonState() {
+        val currentPosition = binding.exercisePager.currentItem
+        val currentView = binding.exercisePager.findViewWithTag<View>("view$currentPosition")
+
+        Log.d("is Timed", adapter.isTimedExercise(currentPosition).toString())
+        if (adapter.isTimedExercise(currentPosition)) {
+            binding.incButton.setImageResource(R.drawable.ic_play)
+        } else {
+            binding.incButton.setImageResource(R.drawable.ic_done_button)
+        }
+    }
+
     private fun incrementSetCount() {
-        // TODO uncomment / handle this when they fix the api
-        //if (adapter.isTimedExercise(currentPosition)) return
         binding.incButton.setOnClickListener {
             val currentPosition = binding.exercisePager.currentItem
             val currentView = binding.exercisePager.findViewWithTag<View>("view$currentPosition")
-            adapter.incSetCount(currentPosition, currentView)
+            if (adapter.isTimedExercise(currentPosition)) {
+                if (!adapter.isStarted(currentPosition)) {
+                    adapter.initTimer(currentPosition, currentView)
+                    adapter.startTimer(currentPosition)
+                    binding.incButton.setImageResource(R.drawable.ic_pause)
+                } else {
+                    binding.incButton.setImageResource(R.drawable.ic_play)
+                    adapter.pauseTimer(currentPosition)
+                }
+            } else {
+                adapter.incSetCount(currentPosition, currentView)
+            }
+
         }
     }
+
 
     private fun observeViewModel() {
         lifecycleScope.launch {
@@ -93,21 +118,25 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
             val currentItem = binding.exercisePager.currentItem
             if (currentItem > 0) {
                 binding.exercisePager.setCurrentItem(currentItem - 1, true)
+                checkButtonState()
             }
         }
 
         binding.nextButton.setOnClickListener {
-            if (!adapter.isExerciseDone(binding.exercisePager.currentItem)) {
+            val currentItem = binding.exercisePager.currentItem
+
+            if (!adapter.isExerciseDone(currentItem) || !adapter.isTimedExerciseDone(currentItem)
+            ) {
                 Toast.makeText(
                     this, getString(R.string.complete_the_exercise_first), Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
             }
-            val currentItem = binding.exercisePager.currentItem
             val adapterCount = adapter.count - 1
             if (currentItem < adapterCount) {
                 binding.exercisePager.setCurrentItem(currentItem + 1, true)
                 adapter.logExercise(binding.exercisePager.currentItem)
+                checkButtonState()
             } else {
                 markWorkoutDone()
             }
