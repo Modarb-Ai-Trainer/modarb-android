@@ -203,7 +203,7 @@ class MyPlanFragment : Fragment() {
 
         val closeBtn: ImageButton? = bottomSheet.findViewById(com.modarb.android.R.id.closeBtn)
         val addExercise: View? = bottomSheet.findViewById(R.id.addExerciseView)
-        var saveAsTemplate: Button = bottomSheet.findViewById(R.id.saveAsTemplate)!!
+        val saveAsTemplate: Button = bottomSheet.findViewById(R.id.saveAsTemplate)!!
         currentSelectedRecyclerView = bottomSheet.findViewById(R.id.recyclerView)!!
 
         bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -221,6 +221,7 @@ class MyPlanFragment : Fragment() {
             }
         }
 
+        initCurrentSelectedAdapter(currentSelectedRecyclerView)
         handleCreateCustomWorkout(saveAsTemplate)
 
         closeBtn?.setOnClickListener {
@@ -235,10 +236,14 @@ class MyPlanFragment : Fragment() {
         }
     }
 
-    private fun showSelectedExercise(recyclerView: RecyclerView) {
+    private fun initCurrentSelectedAdapter(recyclerView: RecyclerView) {
         currentSelectedAdapter = ExercisesAddAdapter(requireContext(), false)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = currentSelectedAdapter
+    }
+
+    private fun showSelectedExercise() {
+
         currentSelectedAdapter.updateData(this, exercisesAdapter.getSelectedData())
     }
 
@@ -278,7 +283,7 @@ class MyPlanFragment : Fragment() {
             selectExerciseBottomSheet.hide()
         }
         addButton.setOnClickListener {
-            showSelectedExercise(currentSelectedRecyclerView)
+            showSelectedExercise()
             selectExerciseBottomSheet.hide()
         }
 
