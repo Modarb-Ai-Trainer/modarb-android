@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -398,12 +397,13 @@ class MyPlanFragment : Fragment() {
     }
 
     private fun initAddCustomWorkoutDialog() {
-        addCustomWorkoutDialog = Dialog(requireContext())
-        addCustomWorkoutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        //TODO handle dialog margin
+        addCustomWorkoutDialog = Dialog(requireContext(), R.style.CustomDialogStyle)
         addCustomWorkoutDialog.setContentView(R.layout.dialog_save_custom_template)
         addCustomWorkoutDialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         )
+
         addCustomWorkoutDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         addCustomWorkoutDialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
 
