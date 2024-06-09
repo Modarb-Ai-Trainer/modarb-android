@@ -2,6 +2,7 @@ package com.modarb.android.ui.home.ui.plan.fragments
 
 import ExercisesAddAdapter
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -30,12 +32,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentMyPlanBinding
 import com.modarb.android.network.ApiResult
+import com.modarb.android.network.NetworkHelper
 import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.ViewPager2ViewHeightAnimator
+import com.modarb.android.ui.home.ui.plan.domain.models.CreateCustomWorkoutRequest
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.create.CreateCustomWorkoutResponse
 import com.modarb.android.ui.home.ui.plan.persentation.PlanViewModel
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import kotlinx.coroutines.flow.collectLatest
@@ -50,7 +55,7 @@ class MyPlanFragment : Fragment() {
     private lateinit var binding: FragmentMyPlanBinding
     private lateinit var exercisesAdapter: ExercisesAddAdapter
     private lateinit var currentSelectedAdapter: ExercisesAddAdapter
-
+    private lateinit var addCustomWorkoutDialog: Dialog
     private lateinit var exercisesData: ExercisesResponse
     private var selectedFilter: String = ""
     private lateinit var progressBar: ProgressBar
@@ -74,6 +79,7 @@ class MyPlanFragment : Fragment() {
         handleAddCustomWorkout()
         getCustomWorkouts()
         observeCombinedResponses()
+        showAddCustomDialog()
         exercisesAdapter = ExercisesAddAdapter(requireContext(), true)
         initSelectBottomSheet()
         Log.e("workoutID", WorkoutData.workoutId)
@@ -121,11 +127,6 @@ class MyPlanFragment : Fragment() {
         binding.progress.progressOverlay.visibility = View.GONE
     }
 
-    private fun handlePlanError(planPageResponse: PlanPageResponse) {
-        WorkoutData.weekList = planPageResponse.data.weeks
-        binding.progress.progressOverlay.visibility = View.GONE
-    }
-
 
     private fun handleAddCustomWorkout() {
         binding.addCustomWorkOut.setOnClickListener {
@@ -134,15 +135,6 @@ class MyPlanFragment : Fragment() {
     }
 
     private fun getCustomWorkouts() {
-        lifecycleScope.launch {
-            planViewModel.customWorkoutResponse.collect {
-                when (it) {
-                    is ApiResult.Error<*> -> handlePlanError(it as PlanPageResponse)
-                    is ApiResult.Failure -> handlePlanFail(it.exception)
-                    else -> {}
-                }
-            }
-        }
         planViewModel.getCustomWorkouts("Bearer ${UserPrefUtil.getUserData(requireContext())?.token}")
     }
 
@@ -211,6 +203,7 @@ class MyPlanFragment : Fragment() {
 
         val closeBtn: ImageButton? = bottomSheet.findViewById(com.modarb.android.R.id.closeBtn)
         val addExercise: View? = bottomSheet.findViewById(R.id.addExerciseView)
+        var saveAsTemplate: Button = bottomSheet.findViewById(R.id.saveAsTemplate)!!
         currentSelectedRecyclerView = bottomSheet.findViewById(R.id.recyclerView)!!
 
         bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -227,6 +220,8 @@ class MyPlanFragment : Fragment() {
                 behaviour.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
+
+        handleCreateCustomWorkout(saveAsTemplate)
 
         closeBtn?.setOnClickListener {
             exercisesAdapter.clearSelectedData()
@@ -397,5 +392,90 @@ class MyPlanFragment : Fragment() {
         })
     }
 
+    private fun showAddCustomDialog() {
+        addCustomWorkoutDialog = Dialog(requireContext())
+        addCustomWorkoutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        addCustomWorkoutDialog.setContentView(R.layout.dialog_save_custom_template)
+        addCustomWorkoutDialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        addCustomWorkoutDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        addCustomWorkoutDialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+        val btnClose = addCustomWorkoutDialog.findViewById<ImageButton>(R.id.btn_close)
+        val btnSave = addCustomWorkoutDialog.findViewById<Button>(R.id.btn_save)
+        val etTemplateName = addCustomWorkoutDialog.findViewById<EditText>(R.id.et_template_name)
+
+        btnClose.setOnClickListener {
+            addCustomWorkoutDialog.dismiss()
+        }
+
+        btnSave.setOnClickListener {
+            val templateName = etTemplateName.text.toString()
+            if (templateName.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.please_enter_template_name),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+            requestCreateCustomWorkout(templateName)
+        }
+
+    }
+
+
+    private fun requestCreateCustomWorkout(name: String) {
+        val token = "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
+
+        if (exercisesAdapter.getSelectedExerciseId().isEmpty()) {
+            Toast.makeText(
+                requireContext(), getString(R.string.please_select_an_exercise), Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        planViewModel.createCustomWorkout(
+            token, CreateCustomWorkoutRequest(
+                exercisesAdapter.getSelectedExerciseId(),
+                name,
+                UserPrefUtil.getUserData(requireContext())!!.user.id
+            )
+        )
+
+    }
+
+    private fun handleCreateCustomWorkout(save: Button) {
+
+        save.setOnClickListener {
+            addCustomWorkoutDialog.show()
+        }
+        lifecycleScope.launch {
+            planViewModel.createCustomWorkoutResponse.collect {
+                when (it) {
+                    is ApiResult.Success<*> -> {
+                        addCustomWorkoutDialog.dismiss()
+                        bottomSheet.hide()
+                        val response = it.data as CreateCustomWorkoutResponse
+                        Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
+                    is ApiResult.Error -> {
+                        val response = it.data
+                        NetworkHelper.showErrorMessage(requireContext(), response)
+                    }
+
+                    is ApiResult.Failure -> {
+                        handlePlanFail(it.exception)
+                    }
+
+                    else -> {}
+                }
+
+            }
+        }
+
+    }
 
 }

@@ -92,6 +92,14 @@ class ExercisesAddAdapter(private var context: Context, private val isAdd: Boole
         return selectedDataList
     }
 
+    fun getSelectedExerciseId(): List<String> {
+        val selectedExerciseIds = mutableListOf<String>()
+        for ((key, _) in selectedItems) {
+            selectedExerciseIds.add(key)
+        }
+        return selectedExerciseIds
+    }
+
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Data>() {

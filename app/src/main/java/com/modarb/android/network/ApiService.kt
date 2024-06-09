@@ -2,9 +2,11 @@ package com.modarb.android.network
 
 import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.CreateCustomWorkoutRequest
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.create.CreateCustomWorkoutResponse
 import com.modarb.android.ui.onboarding.models.LoginResponse
 import com.modarb.android.ui.onboarding.models.RequestModels.LoginRequest
 import com.modarb.android.ui.onboarding.models.RequestModels.RegisterRequest
@@ -72,6 +74,13 @@ interface ApiService {
         @Query("searchTerm") search: String,
         @Query("filter") filter: String
     ): Response<ExercisesResponse>
+
+    // Create custom workout
+    @POST("api/v1/user/templates")
+    suspend fun createCustomWorkout(
+        @Header("Authorization") token: String,
+        @Body customWorkoutRequest: CreateCustomWorkoutRequest
+    ): Response<CreateCustomWorkoutResponse>
 
 
 }

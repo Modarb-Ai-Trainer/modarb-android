@@ -7,9 +7,12 @@ import androidx.paging.cachedIn
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.ui.home.ui.plan.data.PlanRepositoryImp
+import com.modarb.android.ui.home.ui.plan.domain.models.CreateCustomWorkoutRequest
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.create.CreateCustomWorkoutResponse
+import com.modarb.android.ui.home.ui.plan.domain.usecase.CreateCustomWorkoutUseCase
 import com.modarb.android.ui.home.ui.plan.domain.usecase.GetCustomWorkoutUseCase
 import com.modarb.android.ui.home.ui.plan.domain.usecase.PlanPageUseCase
 import com.modarb.android.ui.home.ui.plan.domain.usecase.SearchExercisesUseCase
@@ -27,6 +30,8 @@ class PlanViewModel : ViewModel() {
     private var myPlanPageUseCase = PlanPageUseCase(myPlanRepository)
     private var getCustomWorkoutUseCase = GetCustomWorkoutUseCase(myPlanRepository)
     private var searchExercisesUseCase = SearchExercisesUseCase(myPlanRepository)
+    private var createCustomWorkoutUseCase = CreateCustomWorkoutUseCase(myPlanRepository)
+
 
 //    private var getExercisesUseCase = GetExercisesUseCase(myPlanRepository)
 
@@ -38,6 +43,10 @@ class PlanViewModel : ViewModel() {
 
     private var _getAllExercises = MutableStateFlow<ApiResult<ExercisesResponse>?>(null)
     val getExercise: StateFlow<ApiResult<ExercisesResponse>?> get() = _getAllExercises
+
+    private var _createCustomWorkoutResponse =
+        MutableStateFlow<ApiResult<CreateCustomWorkoutResponse>?>(null)
+    val createCustomWorkoutResponse: StateFlow<ApiResult<CreateCustomWorkoutResponse>?> get() = _createCustomWorkoutResponse
 
 
     private val _combinedResponses =
@@ -67,9 +76,9 @@ class PlanViewModel : ViewModel() {
             _customWorkoutsResponse.value = response
         }
     }
+
     fun getPaginatedExercises(
-        token: String,
-        filter: String
+        token: String, filter: String
     ): Flow<PagingData<com.modarb.android.ui.home.ui.plan.domain.models.allExercises.Data>> {
         return myPlanRepository.getExercisesPagingData(token, filter).cachedIn(viewModelScope)
     }
@@ -85,6 +94,13 @@ class PlanViewModel : ViewModel() {
         viewModelScope.launch {
             val response = searchExercisesUseCase.invoke(token, search, filter)
             _getAllExercises.value = response
+        }
+    }
+
+    fun createCustomWorkout(token: String, createCustomWorkoutRequest: CreateCustomWorkoutRequest) {
+        viewModelScope.launch {
+            val response = createCustomWorkoutUseCase.invoke(token, createCustomWorkoutRequest)
+            _createCustomWorkoutResponse.value = response
         }
     }
 
