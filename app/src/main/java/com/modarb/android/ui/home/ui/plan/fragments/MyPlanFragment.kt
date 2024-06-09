@@ -1,14 +1,21 @@
 package com.modarb.android.ui.home.ui.plan.fragments
 
+import ExercisesAddAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,17 +26,18 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.modarb.android.R
 import com.modarb.android.databinding.FragmentMyPlanBinding
 import com.modarb.android.network.ApiResult
-import com.modarb.android.ui.home.helpers.WorkoutData
-import com.modarb.android.ui.home.ui.plan.adapters.ExercisesAddAdapter
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.adapters.MyPlanViewPagerAdapter
 import com.modarb.android.ui.home.ui.plan.adapters.ViewPager2ViewHeightAnimator
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 import com.modarb.android.ui.home.ui.plan.persentation.PlanViewModel
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
-import com.modarb.android.ui.workout.domain.models.WorkoutModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -39,6 +47,13 @@ class MyPlanFragment : Fragment() {
     private lateinit var selectExerciseBottomSheet: BottomSheetDialog
     private val planViewModel: PlanViewModel by viewModels()
     private lateinit var binding: FragmentMyPlanBinding
+    private lateinit var exercisesAdapter: ExercisesAddAdapter
+    private lateinit var currentSelectedAdapter: ExercisesAddAdapter
+
+    private lateinit var exercisesData: ExercisesResponse
+    private var selectedFilter: String = ""
+    private lateinit var progressBar: ProgressBar
+    private lateinit var currentSelectedRecyclerView: RecyclerView
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -51,14 +66,15 @@ class MyPlanFragment : Fragment() {
         binding = FragmentMyPlanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.toggleButtonGroup.check(com.modarb.android.R.id.myPlanBtn)
+        binding.toggleButtonGroup.check(R.id.myPlanBtn)
 
         observeData()
         initBottomSheet()
         handleAddCustomWorkout()
-        initSelectBottomSheet()
         getCustomWorkouts()
         observeCombinedResponses()
+        exercisesAdapter = ExercisesAddAdapter(requireContext(), true)
+        initSelectBottomSheet()
         Log.e("workoutID", WorkoutData.workoutId)
 
         return root
@@ -67,16 +83,6 @@ class MyPlanFragment : Fragment() {
 
     private fun observeData() {
         binding.progress.progressOverlay.visibility = View.VISIBLE
-
-//        lifecycleScope.launch {
-//            planViewModel.planResponse.collect {
-//                when (it) {
-//                    is ApiResult.Error<*> -> handlePlanError(it as PlanPageResponse)
-//                    is ApiResult.Failure -> handlePlanFail(it.exception)
-//                    else -> {}
-//                }
-//            }
-//        }
 
         planViewModel.getPlanPage(
             WorkoutData.workoutId, "Bearer " + UserPrefUtil.getUserData(requireContext())!!.token
@@ -139,13 +145,54 @@ class MyPlanFragment : Fragment() {
         planViewModel.getCustomWorkouts("Bearer ${UserPrefUtil.getUserData(requireContext())?.token}")
     }
 
+    private fun getSearchResultData(search: String) {
+        planViewModel.searchExercise(
+            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}", search, selectedFilter
+        )
+
+        lifecycleScope.launch {
+            planViewModel.getExercise.collect {
+                when (it) {
+                    is ApiResult.Success<*> -> handleSearchResult(it.data as ExercisesResponse)
+                    is ApiResult.Failure -> handlePlanFail(it.exception)
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun handleSearchResult(exercisesResponse: ExercisesResponse) {
+        if (exercisesResponse.data.isEmpty()) return
+        exercisesData = exercisesResponse
+        exercisesAdapter.updateData(this, exercisesData.data)
+        //Log.d("Search Data", exercisesResponse.data[0].name)
+    }
+
+    private fun getExercises() {
+        val token = "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
+
+        progressBar.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            planViewModel.getPaginatedExercises(token, selectedFilter).collectLatest { pagingData ->
+                exercisesAdapter.submitData(pagingData)
+            }
+        }
+//
+//        lifecycleScope.launch {
+//            planViewModel.isLoading.collect { isLoading ->
+//                progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+//            }
+//        }
+
+    }
 
     private fun initBottomSheet() {
         bottomSheet = BottomSheetDialog(requireContext())
-        bottomSheet.setContentView(com.modarb.android.R.layout.add_excersice_view)
+        bottomSheet.setContentView(R.layout.add_excersice_view)
 
         val closeBtn: ImageButton? = bottomSheet.findViewById(com.modarb.android.R.id.closeBtn)
-        val addExercise: View? = bottomSheet.findViewById(com.modarb.android.R.id.addExerciseView)
+        val addExercise: View? = bottomSheet.findViewById(R.id.addExerciseView)
+        currentSelectedRecyclerView = bottomSheet.findViewById(R.id.recyclerView)!!
 
         bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheet.setOnShowListener {
@@ -163,6 +210,8 @@ class MyPlanFragment : Fragment() {
         }
 
         closeBtn?.setOnClickListener {
+            exercisesAdapter.clearSelectedData()
+            currentSelectedAdapter.clearData(this)
             bottomSheet.hide()
         }
 
@@ -172,19 +221,28 @@ class MyPlanFragment : Fragment() {
         }
     }
 
+    private fun showSelectedExercise(recyclerView: RecyclerView) {
+        currentSelectedAdapter = ExercisesAddAdapter(requireContext(), false)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = currentSelectedAdapter
+        currentSelectedAdapter.updateData(this, exercisesAdapter.getSelectedData())
+    }
+
 
     private fun initSelectBottomSheet() {
-        // TODO refactor this shit
+
         selectExerciseBottomSheet = BottomSheetDialog(requireContext())
-        selectExerciseBottomSheet.setContentView(com.modarb.android.R.layout.select_exersice_view)
+        selectExerciseBottomSheet.setContentView(R.layout.select_exersice_view)
 
         val closeBtn: ImageButton? =
             selectExerciseBottomSheet.findViewById(com.modarb.android.R.id.closeBtn)
+        val addButton: Button = selectExerciseBottomSheet.findViewById(R.id.addBtn)!!
         val recyclerView: RecyclerView? =
             selectExerciseBottomSheet.findViewById(com.modarb.android.R.id.recyclerView)
+        progressBar = selectExerciseBottomSheet.findViewById(R.id.progress)!!
 
-        val spinner: Spinner? =
-            selectExerciseBottomSheet.findViewById(com.modarb.android.R.id.typeSpinner)
+        val searchEditText: EditText? = selectExerciseBottomSheet.findViewById(R.id.searchEditText)
+        val spinner: Spinner? = selectExerciseBottomSheet.findViewById(R.id.typeSpinner)
 
         selectExerciseBottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         selectExerciseBottomSheet.setOnShowListener {
@@ -201,28 +259,83 @@ class MyPlanFragment : Fragment() {
             }
         }
 
+        // TODO handle clear when swipe down
         closeBtn?.setOnClickListener {
             selectExerciseBottomSheet.hide()
         }
-
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
-
-        val data = mutableListOf<WorkoutModel>()
-
-        for (i in 0..3) {
-            data.add(WorkoutModel(1, "test", "test", "test", i + 1))
+        addButton.setOnClickListener {
+            showSelectedExercise(currentSelectedRecyclerView)
+            selectExerciseBottomSheet.hide()
         }
 
-        val adapter = ExercisesAddAdapter(data)
-        recyclerView.adapter = adapter
-        val items = arrayOf("All", "Body", "Chest")
+        initBottomSheetRecycle(recyclerView!!)
+        initBottomSheetSpinner(spinner!!)
+        handleSearch(searchEditText!!)
+        handleOnClickOnSpinner(spinner)
 
+    }
+
+    private fun initBottomSheetSpinner(spinner: Spinner) {
         val spinnerAdapter = ArrayAdapter(
-            requireContext(), com.modarb.android.R.layout.custom_spinner_item, items
+            requireContext(), R.layout.custom_spinner_item, WorkoutData.getBodyParts()
         )
-        spinner!!.setSelection(0)
-
         spinner.adapter = spinnerAdapter
+
+        spinner.setSelection(0)
+    }
+
+    private fun handleOnClickOnSpinner(spinner: Spinner) {
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                selectedFilter = selectedItem
+                if (selectedFilter == "All") selectedFilter = ""
+                exercisesAdapter.clearData(this@MyPlanFragment)
+                getExercises()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
+    }
+
+    private fun initBottomSheetRecycle(recyclerView: RecyclerView) {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = exercisesAdapter
+    }
+
+
+    private fun handleSearch(searchEditText: EditText) {
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                val searchTerm = searchEditText.text.trim().toString()
+                Log.d("searchTermLen", searchTerm.length.toString())
+                if (searchTerm.isEmpty()) {
+                    getExercises()
+                } else {
+                    getSearchResultData(searchTerm)
+                }
+
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
+
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
+
+
+            }
+        })
+
     }
 
     private fun initViewPager(
@@ -239,8 +352,8 @@ class MyPlanFragment : Fragment() {
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
-                    com.modarb.android.R.id.myPlanBtn -> viewPager2.viewPager2!!.currentItem = 0
-                    com.modarb.android.R.id.customWorkOut -> viewPager2.viewPager2!!.currentItem = 1
+                    R.id.myPlanBtn -> viewPager2.viewPager2!!.currentItem = 0
+                    R.id.customWorkOut -> viewPager2.viewPager2!!.currentItem = 1
                 }
             }
         }
@@ -250,8 +363,8 @@ class MyPlanFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 binding.toggleButtonGroup.check(
                     when (position) {
-                        0 -> com.modarb.android.R.id.myPlanBtn
-                        1 -> com.modarb.android.R.id.customWorkOut
+                        0 -> R.id.myPlanBtn
+                        1 -> R.id.customWorkOut
                         else -> View.NO_ID
                     }
                 )

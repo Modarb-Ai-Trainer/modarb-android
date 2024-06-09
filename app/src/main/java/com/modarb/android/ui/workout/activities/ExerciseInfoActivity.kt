@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityExerciseInfoBinding
-import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.workout.adapters.ExerciseInfoViewPagerAdapter
 
 class ExerciseInfoActivity : AppCompatActivity() {

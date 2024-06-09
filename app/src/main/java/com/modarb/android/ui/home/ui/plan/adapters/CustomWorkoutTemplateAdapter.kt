@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.databinding.ItemCustomworkoutTemplateBinding
 import com.modarb.android.network.NetworkHelper
-import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.Data
 
 class CustomWorkoutTemplateAdapter(

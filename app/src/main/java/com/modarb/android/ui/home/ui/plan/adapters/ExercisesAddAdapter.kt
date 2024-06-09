@@ -1,62 +1,107 @@
-package com.modarb.android.ui.home.ui.plan.adapters
-
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.paging.PagingData
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.databinding.ItemExerciseSelectionDetailsBinding
-import com.modarb.android.ui.workout.domain.models.WorkoutModel
+import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.Data
 
-class ExercisesAddAdapter(private val itemList: List<WorkoutModel>) :
-    RecyclerView.Adapter<ExercisesAddAdapter.ViewHolder>() {
+class ExercisesAddAdapter(private var context: Context, private val isAdd: Boolean) :
+    PagingDataAdapter<Data, ExercisesAddAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private val selectedItems = mutableListOf<Int>()
+    private var selectedItems: HashMap<String, Data> = HashMap()
 
     inner class ViewHolder(private val binding: ItemExerciseSelectionDetailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: WorkoutModel) {
-            val isSelected = selectedItems.contains(item.id)
-            binding.root.isActivated = isSelected
-            binding.overlay.visibility = if (isSelected) ViewGroup.VISIBLE else ViewGroup.INVISIBLE
-            binding.checkMark.visibility =
-                if (isSelected) ViewGroup.VISIBLE else ViewGroup.INVISIBLE
+        fun bind(item: Data?) {
+            item?.let { data ->
+                // TODO uncomment this  
+                //ViewUtils.loadImage(context,data.coverImage,binding.exerciseImage)
 
-            binding.root.setOnClickListener {
-                toggleSelection(item.id, adapterPosition)
-                Log.d("selected", getSelectedItems().toString())
+                binding.exerciseTitle.text = data.name
+                binding.exerciseDesc.text = data.benefits
+
+                if (isAdd) {
+                    val isSelected = selectedItems.contains(data.id)
+                    binding.root.isActivated = isSelected
+                    binding.overlay.visibility =
+                        if (isSelected) ViewGroup.VISIBLE else ViewGroup.INVISIBLE
+                    binding.checkMark.visibility =
+                        if (isSelected) ViewGroup.VISIBLE else ViewGroup.INVISIBLE
+
+                    binding.root.setOnClickListener {
+                        toggleSelection(data.id, adapterPosition)
+                    }
+                }
+
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemExerciseSelectionDetailsBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+            LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = itemList[position]
-        holder.bind(item)
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
-
-    private fun toggleSelection(itemId: Int, position: Int) {
+    private fun toggleSelection(itemId: String, position: Int) {
         if (selectedItems.contains(itemId)) {
             selectedItems.remove(itemId)
+
         } else {
-            selectedItems.add(itemId)
+            selectedItems[itemId] = getItem(position)!!
         }
+        getSelectedItems()
         notifyItemChanged(position)
     }
 
-    fun getSelectedItems(): List<Int> {
-        return selectedItems.toList()
+    private fun getSelectedItems() {
+        Log.d("selectedItems", selectedItems.toString())
+    }
+
+    fun updateData(lifecycleOwner: LifecycleOwner, newData: List<Data>) {
+        submitData(lifecycleOwner.lifecycle, PagingData.from(newData))
+    }
+
+    fun clearData(lifecycleOwner: LifecycleOwner) {
+        submitData(lifecycleOwner.lifecycle, PagingData.empty())
+    }
+
+    fun clearSelectedData() {
+        selectedItems.clear()
+        notifyDataSetChanged()
+    }
+
+    fun getSelectedData(): List<Data> {
+        val selectedDataList = mutableListOf<Data>()
+
+        for ((_, value) in selectedItems) {
+            selectedDataList.add(value)
+        }
+
+        return selectedDataList
+    }
+
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Data>() {
+            override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }
