@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityTodayWorkoutBinding
-import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.workout.adapters.WorkoutAdapter
 
 class TodayWorkoutActivity : AppCompatActivity() {

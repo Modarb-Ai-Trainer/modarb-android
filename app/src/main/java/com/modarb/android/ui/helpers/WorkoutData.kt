@@ -1,8 +1,9 @@
-package com.modarb.android.ui.home.helpers
+package com.modarb.android.ui.helpers
 
 import com.modarb.android.ui.home.ui.plan.domain.models.Day
 import com.modarb.android.ui.home.ui.plan.domain.models.Exercise
 import com.modarb.android.ui.home.ui.plan.domain.models.Week
+import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.Data
 
 object WorkoutData {
 
@@ -12,7 +13,7 @@ object WorkoutData {
     lateinit var weekList: List<Week>
     lateinit var selectedExercise: Exercise
     var selectedExerciseNumber: Int = 1
-
+    var selectedCustomExercisesList: MutableList<Data> = mutableListOf()
 
     fun getWeekDaysCount(): Int {
         return weekList[currentWeekPosition].days.size
@@ -64,6 +65,28 @@ object WorkoutData {
         }
         return totalTime.toString()
     }
+
+
+    fun getBodyParts(): Array<String> {
+        return arrayOf(
+            "All",
+            "waist",
+            "upper legs",
+            "upper arms",
+            "lower legs",
+            "chest",
+            "lower arms",
+            "back",
+            "neck",
+            "shoulders",
+            "cardio"
+        )
+    }
+
+    fun getSelectedCustomExercises(): List<Data> {
+        return selectedCustomExercisesList
+    }
+
 
 
     // TODO handle getting reps after fixing the api

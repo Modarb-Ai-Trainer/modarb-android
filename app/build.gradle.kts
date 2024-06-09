@@ -53,6 +53,10 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    // Paging
+    implementation("androidx.paging:paging-runtime:3.1.1")
+
     // LiveData and ViewModel
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
@@ -63,6 +67,8 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:5.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.activity:activity:1.9.0")
+    // Image fetch
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 
     testImplementation("junit:junit:4.13.2")

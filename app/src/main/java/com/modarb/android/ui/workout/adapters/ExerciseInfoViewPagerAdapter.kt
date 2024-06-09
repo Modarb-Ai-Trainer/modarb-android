@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.Exercise
 
 class ExerciseInfoViewPagerAdapter(private val context: Context, selectedExercise: Exercise) :

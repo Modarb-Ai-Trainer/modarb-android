@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.CustomWorkoutViewBinding
 import com.modarb.android.databinding.MyPlanViewBinding
-import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.Data
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse

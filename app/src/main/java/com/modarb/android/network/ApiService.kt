@@ -3,6 +3,7 @@ package com.modarb.android.network
 import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
+import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 import com.modarb.android.ui.onboarding.models.LoginResponse
 import com.modarb.android.ui.onboarding.models.RequestModels.LoginRequest
@@ -14,6 +15,7 @@ import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @POST("/api/v1/user/auth/login")
@@ -53,6 +55,23 @@ interface ApiService {
     suspend fun getCustomWorkouts(
         @Header("Authorization") token: String
     ): Response<CustomWorkoutResponse>
+
+
+    // Exercises Selection APIs
+    @GET("api/v1/user/exercises/")
+    suspend fun getExercises(
+        @Header("Authorization") token: String,
+        @Query("filterName") filter: String,
+        @Query("skip") skip: Int,
+        @Query("limit") limit: Int
+    ): Response<ExercisesResponse>
+
+    @GET("api/v1/user/exercises/search")
+    suspend fun getExercisesSearch(
+        @Header("Authorization") token: String,
+        @Query("searchTerm") search: String,
+        @Query("filter") filter: String
+    ): Response<ExercisesResponse>
 
 
 }

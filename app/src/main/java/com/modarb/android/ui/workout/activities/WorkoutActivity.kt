@@ -13,7 +13,7 @@ import com.modarb.android.R
 import com.modarb.android.databinding.ActivityWorkoutBinding
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.models.BaseResponse
-import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.ExerciseListener
 import com.modarb.android.ui.workout.adapters.ExercisePagerAdapter

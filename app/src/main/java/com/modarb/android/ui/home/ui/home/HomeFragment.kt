@@ -16,8 +16,8 @@ import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.NetworkHelper
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.HomeActivity
-import com.modarb.android.ui.home.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
 import com.modarb.android.ui.home.ui.home.presentation.HomeViewModel
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse

@@ -200,5 +200,6 @@
     <string name="secondary">Secondary:</string>
     <string name="complete_the_exercise_first">Complete the exercise first</string>
     <string name="timed_exercise">Timed exercise</string>
+    <string name="save_as_template">Save as template</string>
 
 </resources>

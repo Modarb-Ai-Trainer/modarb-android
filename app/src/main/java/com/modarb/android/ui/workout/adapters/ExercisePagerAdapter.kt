@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.modarb.android.databinding.ItemExerciseBinding
-import com.modarb.android.ui.home.helpers.WorkoutData
+import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.workout.ExerciseListener
 
 class ExercisePagerAdapter(private val context: Context, private var listener: ExerciseListener) :
