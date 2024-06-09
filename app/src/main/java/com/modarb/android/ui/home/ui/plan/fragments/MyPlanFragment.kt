@@ -79,10 +79,9 @@ class MyPlanFragment : Fragment() {
         handleAddCustomWorkout()
         getCustomWorkouts()
         observeCombinedResponses()
-        showAddCustomDialog()
         exercisesAdapter = ExercisesAddAdapter(requireContext(), true)
         initSelectBottomSheet()
-        Log.e("workoutID", WorkoutData.workoutId)
+        Log.d("workoutID", WorkoutData.workoutId)
 
         return root
     }
@@ -167,9 +166,10 @@ class MyPlanFragment : Fragment() {
         val token = "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
 
         lifecycleScope.launch {
-            planViewModel.getPaginatedExercises(token, selectedFilter).collectLatest { pagingData ->
-                exercisesAdapter.submitData(pagingData)
-            }
+            planViewModel.getPaginatedExercises(token, "category", selectedFilter)
+                .collectLatest { pagingData ->
+                    exercisesAdapter.submitData(pagingData)
+                }
         }
         observeLoadingState()
     }
@@ -397,7 +397,7 @@ class MyPlanFragment : Fragment() {
         })
     }
 
-    private fun showAddCustomDialog() {
+    private fun initAddCustomWorkoutDialog() {
         addCustomWorkoutDialog = Dialog(requireContext())
         addCustomWorkoutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         addCustomWorkoutDialog.setContentView(R.layout.dialog_save_custom_template)
@@ -451,7 +451,7 @@ class MyPlanFragment : Fragment() {
     }
 
     private fun handleCreateCustomWorkout(save: Button) {
-
+        initAddCustomWorkoutDialog()
         save.setOnClickListener {
             addCustomWorkoutDialog.show()
         }

@@ -78,9 +78,10 @@ class PlanViewModel : ViewModel() {
     }
 
     fun getPaginatedExercises(
-        token: String, filter: String
+        token: String, filterName: String, filterVal: String
     ): Flow<PagingData<com.modarb.android.ui.home.ui.plan.domain.models.allExercises.Data>> {
-        return myPlanRepository.getExercisesPagingData(token, filter).cachedIn(viewModelScope)
+        return myPlanRepository.getExercisesPagingData(token, filterName, filterVal)
+            .cachedIn(viewModelScope)
     }
 
 //    fun getAllExercises(token: String, filter: String,page: Int, limit: Int) {

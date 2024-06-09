@@ -6,11 +6,8 @@ import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesRe
 
 class GetExercisesUseCase(private val planRepository: MyPlanRepository) {
     suspend fun invoke(
-        token: String,
-        filter: String,
-        page: Int,
-        limit: Int
+        token: String, filterName: String, filterVal: String, page: Int, limit: Int
     ): ApiResult<ExercisesResponse> {
-        return planRepository.getExercises(token, filter, page, limit)
+        return planRepository.getExercises(token, filterName, filterVal, page, limit)
     }
 }

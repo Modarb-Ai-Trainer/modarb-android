@@ -8,13 +8,15 @@ import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.Data
 class ExercisesPagingSource(
     private val apiService: ApiService,
     private val token: String,
-    private val filter: String,
+    private val filterName: String,
+    private val filterVal: String
 ) : PagingSource<Int, Data>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
         val page = params.key ?: 0
         try {
-            val response = apiService.getExercises(token, filter, page, params.loadSize)
+            val response =
+                apiService.getExercises(token, filterName, filterVal, page, params.loadSize)
 
             return LoadResult.Page(
                 data = response.body()!!.data,

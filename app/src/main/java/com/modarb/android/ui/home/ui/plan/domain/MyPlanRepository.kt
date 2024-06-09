@@ -13,7 +13,7 @@ interface MyPlanRepository {
     suspend fun getCustomWorkouts(token: String): ApiResult<CustomWorkoutResponse>
 
     suspend fun getExercises(
-        token: String, filter: String, page: Int, limit: Int
+        token: String, filterName: String, filterVal: String, page: Int, limit: Int
     ): ApiResult<ExercisesResponse>
 
     suspend fun getSearchExercises(

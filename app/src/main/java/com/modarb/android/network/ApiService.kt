@@ -63,7 +63,8 @@ interface ApiService {
     @GET("api/v1/user/exercises/")
     suspend fun getExercises(
         @Header("Authorization") token: String,
-        @Query("filterName") filter: String,
+        @Query("filterName") filterCat: String,
+        @Query("filterVal") filterVal: String,
         @Query("skip") skip: Int,
         @Query("limit") limit: Int
     ): Response<ExercisesResponse>

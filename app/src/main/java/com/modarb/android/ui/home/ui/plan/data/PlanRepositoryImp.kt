@@ -58,10 +58,10 @@ class PlanRepositoryImp(private val apiService: ApiService) : MyPlanRepository {
     }
 
     override suspend fun getExercises(
-        token: String, filter: String, page: Int, limit: Int
+        token: String, filterName: String, filterVal: String, page: Int, limit: Int
     ): ApiResult<ExercisesResponse> {
         return try {
-            val response = apiService.getExercises(token, filter, page, limit)
+            val response = apiService.getExercises(token, filterName, filterVal, page, limit)
             if (response.isSuccessful) {
                 response.body()?.let {
                     ApiResult.Success(it)
@@ -120,9 +120,15 @@ class PlanRepositoryImp(private val apiService: ApiService) : MyPlanRepository {
     }
 
 
-    fun getExercisesPagingData(token: String, filter: String): Flow<PagingData<Data>> {
+    fun getExercisesPagingData(
+        token: String, filterName: String, filterVal: String
+    ): Flow<PagingData<Data>> {
         return Pager(config = PagingConfig(pageSize = 20, enablePlaceholders = false),
-            pagingSourceFactory = { ExercisesPagingSource(apiService, token, filter) }).flow
+            pagingSourceFactory = {
+                ExercisesPagingSource(
+                    apiService, token, filterName, filterVal
+                )
+            }).flow
     }
 
 
