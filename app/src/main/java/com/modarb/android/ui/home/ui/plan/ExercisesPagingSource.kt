@@ -15,6 +15,7 @@ class ExercisesPagingSource(
         val page = params.key ?: 0
         try {
             val response = apiService.getExercises(token, filter, page, params.loadSize)
+
             return LoadResult.Page(
                 data = response.body()!!.data,
                 prevKey = if (page == 0) null else page - 1,

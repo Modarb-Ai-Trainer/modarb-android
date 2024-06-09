@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -150,6 +151,7 @@ class MyPlanFragment : Fragment() {
             "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}", search, selectedFilter
         )
 
+
         lifecycleScope.launch {
             planViewModel.getExercise.collect {
                 when (it) {
@@ -165,26 +167,43 @@ class MyPlanFragment : Fragment() {
         if (exercisesResponse.data.isEmpty()) return
         exercisesData = exercisesResponse
         exercisesAdapter.updateData(this, exercisesData.data)
+        progressBar.visibility = View.GONE
         //Log.d("Search Data", exercisesResponse.data[0].name)
     }
 
     private fun getExercises() {
         val token = "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
 
-        progressBar.visibility = View.VISIBLE
         lifecycleScope.launch {
             planViewModel.getPaginatedExercises(token, selectedFilter).collectLatest { pagingData ->
                 exercisesAdapter.submitData(pagingData)
             }
         }
-//
-//        lifecycleScope.launch {
-//            planViewModel.isLoading.collect { isLoading ->
-//                progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-//            }
-//        }
+        observeLoadingState()
+    }
+
+    private fun observeLoadingState() {
+        exercisesAdapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading || loadState.append is LoadState.Loading) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+
+                val errorState = when {
+                    loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                    loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                    loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                    else -> null
+                }
+                errorState?.let {
+                    Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
 
     }
+
 
     private fun initBottomSheet() {
         bottomSheet = BottomSheetDialog(requireContext())
