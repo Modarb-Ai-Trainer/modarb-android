@@ -53,7 +53,8 @@ interface ApiService {
 
 
     // Custom workouts page
-    @GET("api/v1/user/templates/")
+    // TODO add paging
+    @GET("api/v1/user/templates?limit=200")
     suspend fun getCustomWorkouts(
         @Header("Authorization") token: String
     ): Response<CustomWorkoutResponse>
