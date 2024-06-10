@@ -25,9 +25,9 @@
 
     <fragment
         android:id="@+id/navigation_nutrition"
-        android:name="com.modarb.android.ui.home.ui.plan.fragments.MyPlanFragment"
+        android:name="com.modarb.android.ui.home.ui.nutrition.NutritionFragment"
         android:label="@string/nutrition"
-        tools:layout="@layout/fragment_my_plan" />
+        tools:layout="@layout/fragment_nutrition" />
 
 
     <fragment

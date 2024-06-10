@@ -1,4 +1,4 @@
-package com.modarb.android.ui.nutrition.models
+package com.modarb.android.ui.home.ui.nutrition.models
 
 data class NutritionDataModel(
     var dayName: String,

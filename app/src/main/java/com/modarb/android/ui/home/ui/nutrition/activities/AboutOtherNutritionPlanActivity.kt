@@ -1,10 +1,10 @@
-package com.modarb.android.ui.nutrition.activities
+package com.modarb.android.ui.home.ui.nutrition.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.modarb.android.R
 
 class AboutOtherNutritionPlanActivity : AppCompatActivity() {

@@ -47,7 +47,7 @@
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No custom workouts click on add button"
+            android:text="@string/no_custom_workouts_click_on_add_button"
             android:textColor="@color/white"
             android:textSize="16sp" />
 

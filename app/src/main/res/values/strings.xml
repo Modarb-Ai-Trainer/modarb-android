@@ -204,6 +204,8 @@
     <string name="please_select_an_exercise">Please select an exercise</string>
     <string name="please_enter_template_name">PLease enter template name</string>
     <string name="all_muscles">All muscles</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="standard">Standard</string>
     <string name="eat_all_essence_unrestricted_nutrition">Eat All Essence : Unrestricted Nutrition</string>
@@ -215,6 +217,10 @@
     <string name="choose_plan">Choose plan</string>
     <string name="nutri_guide">NutriGuide</string>
     <string name="available_plans">Available plans</string>
+    <string name="nutriguide">NutriGuide</string>
+    <string name="daily_routine">Daily Routine</string>
+    <string name="plans">Plans</string>
+    <string name="no_custom_workouts_click_on_add_button">No custom workouts click on add button</string>
 
 
 </resources>

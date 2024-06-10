@@ -1,4 +1,4 @@
-package com.modarb.android.ui.nutrition.adapters
+package com.modarb.android.ui.home.ui.nutrition.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.nutrition.models.AvailablePlanModel
+import com.modarb.android.ui.home.ui.nutrition.models.AvailablePlanModel
 
 class AvailablePlanAdapter(private val dataList: List<AvailablePlanModel>, private val itemClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<AvailablePlanAdapter.ViewHolder>() {

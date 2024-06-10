@@ -1,4 +1,4 @@
-package com.modarb.android.ui.nutrition.adapters
+package com.modarb.android.ui.home.ui.nutrition.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.nutrition.models.NutritionDataModel
+import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
 
 class NutritionMealAdapter(private var dataList: List<NutritionDataModel>) :
     RecyclerView.Adapter<NutritionMealAdapter.ViewHolder>() {

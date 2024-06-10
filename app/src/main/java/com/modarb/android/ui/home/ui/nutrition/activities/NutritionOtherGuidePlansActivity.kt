@@ -1,13 +1,13 @@
-package com.modarb.android.ui.nutrition.activities
+package com.modarb.android.ui.home.ui.nutrition.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.nutrition.adapters.AvailablePlanAdapter
-import com.modarb.android.ui.nutrition.models.AvailablePlanModel
+import com.modarb.android.ui.home.ui.nutrition.adapters.AvailablePlanAdapter
+import com.modarb.android.ui.home.ui.nutrition.models.AvailablePlanModel
 
 class NutritionOtherGuidePlansActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
