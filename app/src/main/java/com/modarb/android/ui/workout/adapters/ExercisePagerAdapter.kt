@@ -121,14 +121,14 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
     }
 
     fun startTimer(position: Int) {
-        exercises[position].countDownTimer.start()
+        exercises[position].countDownTimer!!.start()
         exercises[position].isStarted = true
         notifyDataSetChanged()
     }
 
     fun pauseTimer(position: Int) {
         val exercise = exercises[position]
-        exercise.countDownTimer.cancel()
+        exercise.countDownTimer!!.cancel()
         exercise.isStarted = false
         notifyDataSetChanged()
     }

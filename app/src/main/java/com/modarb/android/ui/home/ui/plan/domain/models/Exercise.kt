@@ -18,7 +18,7 @@ data class Exercise(
     val targetMuscles: TargetMuscles,
     var _currentSetCount: Int = 0,
     var _isDone: Boolean,
-    var countDownTimer: CountDownTimer,
+    var countDownTimer: CountDownTimer?,
     var isStarted: Boolean = false,
     var remainingTime: Long = duration * 1000L,
     var isTimeExerciseDone: Boolean = false

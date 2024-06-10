@@ -23,6 +23,14 @@ class ExerciseInfoActivity : AppCompatActivity() {
         setData()
         handleBackBtn()
         handleStartBtn()
+        handleIntent()
+    }
+
+    private fun handleIntent() {
+        val isInfo = intent.getBooleanExtra("info", false)
+        if (isInfo) {
+            binding.startBtn.visibility = View.GONE
+        }
     }
 
     private fun handleStartBtn() {
