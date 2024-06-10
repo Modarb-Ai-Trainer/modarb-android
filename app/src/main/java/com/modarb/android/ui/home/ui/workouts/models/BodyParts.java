@@ -1,10 +1,10 @@
 package com.modarb.android.ui.home.ui.workouts.models;
 
-public class Exercise {
+public class BodyParts {
     private final String name;
     private final int imageResourceId;
 
-    public Exercise(String name, int imageResourceId) {
+    public BodyParts(String name, int imageResourceId) {
         this.name = name;
         this.imageResourceId = imageResourceId;
     }

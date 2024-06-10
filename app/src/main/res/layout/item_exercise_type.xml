@@ -6,7 +6,9 @@
     app:cardElevation="3dp"
     android:layout_height="wrap_content"
     android:clipToPadding="true"
-    app:cardBackgroundColor="@color/grey_800">
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/grey_500"
+    app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/ic_launcher" />
+            tools:src="@drawable/deadlift" />
 
         <TextView
             android:id="@+id/exerciseName"

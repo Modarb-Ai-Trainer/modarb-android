@@ -197,7 +197,6 @@ class MyPlanFragment : Fragment() {
                 }
             }
         }
-
     }
 
 

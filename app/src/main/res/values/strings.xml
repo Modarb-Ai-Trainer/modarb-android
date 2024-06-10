@@ -203,5 +203,6 @@
     <string name="save_as_template">Save as template</string>
     <string name="please_select_an_exercise">Please select an exercise</string>
     <string name="please_enter_template_name">PLease enter template name</string>
+    <string name="all_muscles">All muscles</string>
 
 </resources>

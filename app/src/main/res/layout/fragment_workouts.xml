@@ -46,6 +46,7 @@
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
@@ -61,15 +62,4 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/flipBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="TODO"
-        android:importantForAccessibility="no"
-        android:src="@drawable/baseline_flip_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,11 @@ object ViewUtils {
 
 
     fun loadImage(context: Context, imageUrl: String, imageView: ImageView) {
-        Glide.with(context).asBitmap().load(imageUrl).into(imageView)
+        Glide
+            .with(context)
+            .load(imageUrl)
+            .centerCrop()
+            .into(imageView)
     }
 
 
