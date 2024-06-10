@@ -114,7 +114,9 @@ class MyPlanViewPagerAdapter(
                 return
             }
             binding.recycleView.layoutManager = LinearLayoutManager(context)
-            val adapter = CustomWorkoutTemplateAdapter(context, customWorkoutResponse.data)
+
+            val adapter =
+                CustomWorkoutTemplateAdapter(context, customWorkoutResponse.data.asReversed())
             binding.recycleView.adapter = adapter
             binding.recycleView.isNestedScrollingEnabled = false
         }

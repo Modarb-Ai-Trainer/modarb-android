@@ -59,6 +59,7 @@ class MyPlanFragment : Fragment() {
     private var selectedFilter: String = ""
     private lateinit var progressBar: ProgressBar
     private lateinit var currentSelectedRecyclerView: RecyclerView
+    private var isUpdate: Boolean = false
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -116,7 +117,11 @@ class MyPlanFragment : Fragment() {
         initViewPager(planPageResponse, customWorkoutResponse)
         WorkoutData.weekList = planPageResponse.data.weeks
         binding.progress.progressOverlay.visibility = View.GONE
-
+        if (isUpdate) {
+            binding.toggleButtonGroup.check(R.id.customWorkOut)
+            binding.viewPager.currentItem = 1
+            isUpdate = false
+        }
     }
 
 
@@ -406,6 +411,7 @@ class MyPlanFragment : Fragment() {
 
         addCustomWorkoutDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         addCustomWorkoutDialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+        addCustomWorkoutDialog.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
 
         val btnClose = addCustomWorkoutDialog.findViewById<ImageButton>(R.id.btn_close)
         val btnSave = addCustomWorkoutDialog.findViewById<Button>(R.id.btn_save)
@@ -459,11 +465,13 @@ class MyPlanFragment : Fragment() {
             planViewModel.createCustomWorkoutResponse.collect {
                 when (it) {
                     is ApiResult.Success<*> -> {
+                        isUpdate = true
                         addCustomWorkoutDialog.dismiss()
                         bottomSheet.hide()
                         val response = it.data as CreateCustomWorkoutResponse
                         Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT)
                             .show()
+                        getCustomWorkouts()
                     }
 
                     is ApiResult.Error -> {
