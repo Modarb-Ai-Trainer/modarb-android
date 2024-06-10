@@ -20,7 +20,6 @@ class ExercisesAdapter(private var context: Context) :
 
         fun bind(item: Data?) {
             item?.let { data ->
-                // TODO uncomment this  
                 ViewUtils.loadImage(context, data.coverImage, binding.exerciseImage)
                 binding.exerciseName.text = data.name
             }
