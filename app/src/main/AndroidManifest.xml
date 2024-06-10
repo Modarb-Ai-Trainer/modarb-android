@@ -19,6 +19,18 @@
             android:name=".ui.workout.activities.WorkoutActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.nutrition.activities.NutritionGuidePlansActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.nutrition.activities.NutritionOtherGuidePlansActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.nutrition.activities.AboutOtherNutritionPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.nutrition.activities.AboutNutritionPlanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.onboarding.activities.WelcomeScreenActivity"
             android:exported="false" />
         <activity

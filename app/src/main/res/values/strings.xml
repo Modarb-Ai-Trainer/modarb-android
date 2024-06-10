@@ -205,4 +205,16 @@
     <string name="please_enter_template_name">PLease enter template name</string>
     <string name="all_muscles">All muscles</string>
 
+    <string name="standard">Standard</string>
+    <string name="eat_all_essence_unrestricted_nutrition">Eat All Essence : Unrestricted Nutrition</string>
+    <string name="key_features">Key Features:</string>
+    <string name="your_journey">Your Journey</string>
+    <string name="intermittent_fasting">Intermittent fasting</string>
+    <string name="duration">Duration</string>
+    <string name="level">Level</string>
+    <string name="choose_plan">Choose plan</string>
+    <string name="nutri_guide">NutriGuide</string>
+    <string name="available_plans">Available plans</string>
+
+
 </resources>
