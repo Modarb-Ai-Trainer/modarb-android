@@ -1,5 +1,6 @@
 package com.modarb.android.ui.home.ui.home.data
 
+import com.google.gson.Gson
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.ApiService
 import com.modarb.android.ui.home.ui.home.domain.HomeRepository
@@ -15,7 +16,10 @@ class HomeRepositoryImpl(private val apiService: ApiService) : HomeRepository {
                     ApiResult.Success(it)
                 } ?: ApiResult.Failure(Throwable("Response body is null"))
             } else {
-                ApiResult.Error(response.body() as HomePageResponse)
+                val errorResponse = response.errorBody()?.string()
+                val parsedError = Gson().fromJson(errorResponse, HomePageResponse::class.java)
+                ApiResult.Error(parsedError)
+
             }
         } catch (E: Exception) {
             ApiResult.Failure(E)
