@@ -7,6 +7,7 @@ import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.Data
 
 object WorkoutData {
 
+
     var workoutId: String = ""
     var currentWeekPosition: Int = 0
 
