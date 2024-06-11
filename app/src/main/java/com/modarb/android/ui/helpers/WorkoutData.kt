@@ -14,7 +14,7 @@ object WorkoutData {
     lateinit var weekList: List<Week>
     lateinit var selectedExercise: Exercise
     var selectedExerciseNumber: Int = 1
-    var selectedCustomExercisesList: MutableList<Data> = mutableListOf()
+    private var selectedCustomExercisesList: MutableList<Data> = mutableListOf()
 
     fun getWeekDaysCount(): Int {
         return weekList[currentWeekPosition].days.size

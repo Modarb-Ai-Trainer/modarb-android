@@ -11,8 +11,7 @@ import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.Data
 
 class CustomWorkoutTemplateAdapter(
-    private val context: Context,
-    private val data: List<Data>
+    private val context: Context, private val data: List<Data>
 ) : RecyclerView.Adapter<CustomWorkoutTemplateAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemCustomworkoutTemplateBinding) :
@@ -30,6 +29,34 @@ class CustomWorkoutTemplateAdapter(
         holder.binding.workoutName.text = item.name
         holder.binding.workoutDate.text = NetworkHelper.getDate(item.creationDate)
         holder.binding.timeTxt.text = WorkoutData.getTotalExerciseTime(item.exercises) + " min"
+
+        var exerciseName = ""
+        var exerciseDetails = ""
+        var totalReps = 0
+        var totalSets = 0
+
+
+        for (exercise in item.exercises) {
+            exerciseName += "- ${exercise.name} \n \n"
+            totalReps += exercise.reps
+            totalSets += exercise.sets
+        }
+
+        for (exercise in item.exercises) {
+            exerciseDetails += if (exercise.duration > 0) {
+                "${(exercise.duration)} sec"
+            } else {
+                "${exercise.reps} x ${exercise.sets} sets"
+            }
+            exerciseDetails += "\n \n"
+        }
+
+        exerciseDetails = exerciseDetails.trimEnd()
+        exerciseName = exerciseName.trimEnd()
+
+        holder.binding.exerciseName.text = exerciseName
+        holder.binding.exerciseDetails.text = exerciseDetails
+        holder.binding.repCount.text = (totalReps * totalSets).toString() + " reps"
 
     }
 
