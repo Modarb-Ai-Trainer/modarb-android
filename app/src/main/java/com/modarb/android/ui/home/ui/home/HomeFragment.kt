@@ -130,10 +130,17 @@ class HomeFragment : Fragment() {
         WorkoutData.weekList = res.data.weeks
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initActions() {
         binding.workoutPlanView.setOnClickListener {
             (activity as? HomeActivity)?.navigateToFragment(R.id.navigation_my_plan)
         }
+
+        binding.nutritionView.setOnClickListener {
+            (activity as? HomeActivity)?.navigateToFragment(R.id.navigation_nutrition)
+        }
+
+        binding.userName.text = "Hey, \n" + UserPrefUtil.getUserData(requireContext())!!.user.name
     }
 
     @SuppressLint("SetTextI18n")

@@ -368,13 +368,13 @@
                 android:textColor="@color/gray_92"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/toggle_button_group"
-                app:layout_constraintEnd_toStartOf="@id/textView12"
+                app:layout_constraintEnd_toStartOf="@id/userName"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toBottomOf="@id/textView6"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -402,7 +402,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/toggle_button_group"
                 app:layout_constraintEnd_toEndOf="@+id/toggle_button_group"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintStart_toEndOf="@+id/userName"
                 app:layout_constraintTop_toBottomOf="@id/textView6"
                 app:layout_constraintVertical_bias="0.0" />
 
