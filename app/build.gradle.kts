@@ -69,7 +69,8 @@ dependencies {
     implementation("androidx.activity:activity:1.9.0")
     // Image fetch
     implementation("com.github.bumptech.glide:glide:4.16.0")
-
+    //Circle progress bar
+    implementation("com.mikhaellopez:circularprogressbar:3.1.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

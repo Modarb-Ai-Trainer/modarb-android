@@ -221,6 +221,11 @@
     <string name="daily_routine">Daily Routine</string>
     <string name="plans">Plans</string>
     <string name="no_custom_workouts_click_on_add_button">No custom workouts click on add button</string>
+    <string name="remaining">Remaining</string>
+    <string name="kcal">Kcal</string>
+    <string name="carbs">carbs</string>
+    <string name="protein">Protein</string>
+    <string name="fats">Fats</string>
 
 
 </resources>
