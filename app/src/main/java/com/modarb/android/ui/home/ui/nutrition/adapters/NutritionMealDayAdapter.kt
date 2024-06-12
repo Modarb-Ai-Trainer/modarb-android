@@ -35,7 +35,7 @@ class NutritionMealDayAdapter(private var dataList: List<MealDayModel>) :
         fun bind(position: Int, data: MealDayModel) {
             when (position) {
                 1 -> {
-                    binding.backgroundImageView.setImageResource(R.drawable.lunch_meal)
+                    binding.backgroundImageView.setImageResource(R.drawable.lunch_meal_2)
                 }
 
                 2 -> {

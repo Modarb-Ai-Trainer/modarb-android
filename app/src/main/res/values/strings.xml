@@ -226,6 +226,13 @@
     <string name="carbs">carbs</string>
     <string name="protein">Protein</string>
     <string name="fats">Fats</string>
+    <string name="intaked">Intaked</string>
+    <string name="burned">Burned</string>
+    <string name="track_meals">Track meals</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="snack">Snack</string>
+    <string name="dinner">Dinner</string>
 
 
 </resources>
