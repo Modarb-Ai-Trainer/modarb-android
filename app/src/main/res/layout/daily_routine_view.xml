@@ -26,9 +26,9 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -221,8 +221,8 @@
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="1"
@@ -367,6 +367,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -380,7 +381,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="@string/track_meals"
                     android:textColor="#FFFFFF"
@@ -399,6 +400,7 @@
                     android:rowCount="2">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/breakFastView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_row="0"
@@ -460,6 +462,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/lunchView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_row="0"
@@ -515,6 +518,7 @@
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/snackView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_row="1"
@@ -569,6 +573,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dinnerView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_row="1"
@@ -626,6 +631,30 @@
                 </GridLayout>
 
             </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:text="@string/today_s_diet"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

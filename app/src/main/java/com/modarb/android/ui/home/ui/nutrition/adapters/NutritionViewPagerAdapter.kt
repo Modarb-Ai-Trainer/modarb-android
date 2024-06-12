@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.databinding.DailyRoutineViewBinding
 import com.modarb.android.databinding.PlansViewBinding
+import com.modarb.android.ui.home.ui.nutrition.OnMealClickListener
 import com.modarb.android.ui.home.ui.nutrition.activities.AboutNutritionPlanActivity
 import com.modarb.android.ui.home.ui.nutrition.models.MealDayModel
 import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
 
 class NutritionViewPagerAdapter(
-    private val context: Context
+    private val context: Context, private val listener: OnMealClickListener
+
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -33,7 +35,7 @@ class NutritionViewPagerAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is DailyRoutineViewHolder -> holder.bind(context)
+            is DailyRoutineViewHolder -> holder.bind(listener)
             is PlansViewHolder -> holder.bind(context)
         }
     }
@@ -46,8 +48,24 @@ class NutritionViewPagerAdapter(
 
     inner class DailyRoutineViewHolder(private val binding: DailyRoutineViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private var listener: OnMealClickListener? = null
 
-        fun bind(context: Context) {
+        fun bind(listener: OnMealClickListener) {
+            this.listener = listener
+
+            binding.lunchView.setOnClickListener {
+                listener.onMailClick("lunch")
+            }
+            binding.breakFastView.setOnClickListener {
+                listener.onMailClick("breakfast")
+            }
+            binding.snackView.setOnClickListener {
+                listener.onMailClick("snack")
+            }
+            binding.dinnerView.setOnClickListener {
+                listener.onMailClick("dinner")
+            }
+
 
         }
     }
@@ -82,7 +100,7 @@ class NutritionViewPagerAdapter(
         val dataList = mutableListOf<NutritionDataModel>()
 
         for (day in dayNames) {
-            var list: MutableList<MealDayModel> = mutableListOf()
+            val list: MutableList<MealDayModel> = mutableListOf()
             for (meal in mealNames) {
                 val mealModel = MealDayModel("test", "test", "test", "test")
                 list.add(mealModel)
