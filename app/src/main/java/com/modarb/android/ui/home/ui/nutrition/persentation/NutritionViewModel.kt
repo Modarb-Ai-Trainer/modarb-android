@@ -1,4 +1,4 @@
-package com.modarb.android.ui.home.ui.nutrition.persentation
+package com.modarb.android.ui.home.ui.nutrition.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,8 +16,19 @@ import com.modarb.android.ui.home.ui.nutrition.domain.usecase.GetTodayInTakeUseC
 import com.modarb.android.ui.home.ui.nutrition.domain.usecase.GetTodayMealUseCase
 import com.modarb.android.ui.home.ui.plan.data.NutritionRepositoryImp
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+
+data class NutritionData(
+    val todayMeals: ApiResult<TodayMealsResponse>?,
+    val dailyGoals: ApiResult<DailyGoalsResponse>?,
+    val todayInTake: ApiResult<TodayInTakeResponse>?,
+    val myMealPlan: ApiResult<MyMealPlanResponse>?,
+    val allMealsPlans: ApiResult<AllMealsPlansResponse>?
+)
 
 class NutritionViewModel : ViewModel() {
 
@@ -29,56 +40,29 @@ class NutritionViewModel : ViewModel() {
     private var myMealPlanUseCase = GetMyMealPlanUseCase(nutritionRepository)
     private var allMyMealsPlansUseCase = GetAllMyMealsPlansUseCase(nutritionRepository)
 
-
     private val _todayMealsResponse = MutableStateFlow<ApiResult<TodayMealsResponse>?>(null)
-    val todayMealsResponse: StateFlow<ApiResult<TodayMealsResponse>?> get() = _todayMealsResponse
-
-
     private val _getDailyGoalsResponse = MutableStateFlow<ApiResult<DailyGoalsResponse>?>(null)
-    val getDailyGoalsResponse: StateFlow<ApiResult<DailyGoalsResponse>?> get() = _getDailyGoalsResponse
-
-
     private val _getTodayInTake = MutableStateFlow<ApiResult<TodayInTakeResponse>?>(null)
-    val getTodayInTake: StateFlow<ApiResult<TodayInTakeResponse>?> get() = _getTodayInTake
-
     private val _getMyMealPlan = MutableStateFlow<ApiResult<MyMealPlanResponse>?>(null)
-    val getMyMealPlan: StateFlow<ApiResult<MyMealPlanResponse>?> get() = _getMyMealPlan
-
     private val _getAllMealsPlan = MutableStateFlow<ApiResult<AllMealsPlansResponse>?>(null)
-    val getAllMealsPlans: StateFlow<ApiResult<AllMealsPlansResponse>?> get() = _getAllMealsPlan
 
-    fun getTodayMeals(token: String) {
-        viewModelScope.launch {
-            val response = todayMealUseCase.invoke(token)
-            _todayMealsResponse.value = response
-        }
-    }
+    val combinedNutritionData: StateFlow<NutritionData> = combine(
+        _todayMealsResponse,
+        _getDailyGoalsResponse,
+        _getTodayInTake,
+        _getMyMealPlan,
+        _getAllMealsPlan
+    ) { todayMeals, dailyGoals, todayInTake, myMealPlan, allMealsPlans ->
+        NutritionData(todayMeals, dailyGoals, todayInTake, myMealPlan, allMealsPlans)
+    }.stateIn(viewModelScope, SharingStarted.Lazily, NutritionData(null, null, null, null, null))
 
-    fun getDailyGoals(token: String) {
+    fun getAllNutritionData(token: String) {
         viewModelScope.launch {
-            val response = getDailyGoalsUseCase.invoke(token)
-            _getDailyGoalsResponse.value = response
-        }
-    }
-
-    fun getTodayInTake(token: String) {
-        viewModelScope.launch {
-            val response = getTodayInTakeUseCase.invoke(token)
-            _getTodayInTake.value = response
-        }
-    }
-
-    fun getMyMealPlan(token: String) {
-        viewModelScope.launch {
-            val response = myMealPlanUseCase.invoke(token)
-            _getMyMealPlan.value = response
-        }
-    }
-
-    fun getAllMealsPlans(token: String) {
-        viewModelScope.launch {
-            val response = allMyMealsPlansUseCase.invoke(token)
-            _getAllMealsPlan.value = response
+            launch { _todayMealsResponse.value = todayMealUseCase.invoke(token) }
+            launch { _getDailyGoalsResponse.value = getDailyGoalsUseCase.invoke(token) }
+            launch { _getTodayInTake.value = getTodayInTakeUseCase.invoke(token) }
+            launch { _getMyMealPlan.value = myMealPlanUseCase.invoke(token) }
+            launch { _getAllMealsPlan.value = allMyMealsPlansUseCase.invoke(token) }
         }
     }
 }

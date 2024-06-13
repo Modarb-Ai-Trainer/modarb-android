@@ -1,5 +1,6 @@
 package com.modarb.android.ui.home.ui.nutrition.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,12 +11,22 @@ import com.modarb.android.databinding.DailyRoutineViewBinding
 import com.modarb.android.databinding.PlansViewBinding
 import com.modarb.android.ui.home.ui.nutrition.OnMealClickListener
 import com.modarb.android.ui.home.ui.nutrition.activities.AboutNutritionPlanActivity
+import com.modarb.android.ui.home.ui.nutrition.domain.models.TodayMealsResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.nutrition.models.MealDayModel
 import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
 
 class NutritionViewPagerAdapter(
     private val context: Context,
-    private val listener: OnMealClickListener
+    private val listener: OnMealClickListener,
+    private val todayMealsResponse: TodayMealsResponse,
+    private val todayInTakeResponse: TodayInTakeResponse,
+    private val allMealsResponse: AllMealsPlansResponse,
+    private val myMealsResponse: MyMealPlanResponse,
+    private val dailyGoalsResponse: DailyGoalsResponse
 
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -51,8 +62,14 @@ class NutritionViewPagerAdapter(
         RecyclerView.ViewHolder(binding.root) {
         private var listener: OnMealClickListener? = null
 
+        @SuppressLint("SetTextI18n")
         fun bind(listener: OnMealClickListener) {
             this.listener = listener
+
+            //Burned progress
+            binding.burnedProgressBar.progress = todayInTakeResponse.data.caloriesBurned
+            binding.burnedProgressBar.max = todayInTakeResponse.data.caloriesGoal
+            binding.burnedCal.text = todayInTakeResponse.data.caloriesBurned.toString() + " Kcal"
 
             binding.lunchView.setOnClickListener {
                 listener.onMailClick("lunch")

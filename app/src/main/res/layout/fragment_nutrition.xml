@@ -6,6 +6,10 @@
     android:background="@color/grey_900">
 
 
+    <include
+        android:id="@+id/progressView"
+        layout="@layout/single_progress"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

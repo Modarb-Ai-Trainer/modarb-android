@@ -1,7 +1,6 @@
 package com.modarb.android.ui.home.ui.nutrition
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +26,8 @@ import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllM
 import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
-import com.modarb.android.ui.home.ui.nutrition.persentation.NutritionViewModel
+import com.modarb.android.ui.home.ui.nutrition.presentation.NutritionData
+import com.modarb.android.ui.home.ui.nutrition.presentation.NutritionViewModel
 import com.modarb.android.ui.home.ui.plan.adapters.ViewPager2ViewHeightAnimator
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import kotlinx.coroutines.launch
@@ -47,18 +47,30 @@ class NutritionFragment : Fragment(), OnMealClickListener {
         val root: View = binding.root
         viewModel = ViewModelProvider(this).get(NutritionViewModel::class.java)
 
-        initViewPager()
-        getMeals()
+        viewModel.getAllNutritionData("Bearer ${UserPrefUtil.getUserData(requireContext())!!.token}")
+        collectData()
         return root
     }
 
     private fun initViewPager(
-
+        todayMealsResponse: TodayMealsResponse,
+        todayInTakeResponse: TodayInTakeResponse,
+        allMealsResponse: AllMealsPlansResponse,
+        myMealsResponse: MyMealPlanResponse,
+        dailyGoalsResponse: DailyGoalsResponse
     ) {
         val viewPager2 = ViewPager2ViewHeightAnimator()
         viewPager2.viewPager2 = binding.viewPager
 
-        val adapter = NutritionViewPagerAdapter(requireContext(), this)
+        val adapter = NutritionViewPagerAdapter(
+            requireContext(),
+            this,
+            todayMealsResponse,
+            todayInTakeResponse,
+            allMealsResponse,
+            myMealsResponse,
+            dailyGoalsResponse
+        )
         viewPager2.viewPager2!!.adapter = adapter
 
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
@@ -117,96 +129,59 @@ class NutritionFragment : Fragment(), OnMealClickListener {
 
     }
 
-    private fun getMeals() {
-        viewModel.getTodayMeals(
-            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
-        )
-
-        viewModel.getDailyGoals(
-            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
-        )
-        viewModel.getTodayInTake(
-            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
-        )
-
-        viewModel.getMyMealPlan(
-            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
-        )
-
-        viewModel.getAllMealsPlans(
-            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
-        )
-
-        lifecycleScope.launch {
-            viewModel.getDailyGoalsResponse.collect {
-                when (it) {
-                    is ApiResult.Success<*> -> {
-                        val response = it.data as DailyGoalsResponse
-                        Log.e("dailyGoal", response.data.stepsGoal.toString())
-                    }
-
-                    is ApiResult.Failure -> handleFail(it.exception)
-                    else -> {}
-                }
-            }
-        }
-
-
-        lifecycleScope.launch {
-            viewModel.getTodayInTake.collect {
-                when (it) {
-                    is ApiResult.Success<*> -> {
-                        val response = it.data as TodayInTakeResponse
-                        Log.e("todayInTake", response.data.fatGoal.toString())
-                    }
-
-                    is ApiResult.Failure -> handleFail(it.exception)
-                    else -> {}
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.todayMealsResponse.collect {
-                when (it) {
-                    is ApiResult.Success<*> -> handleMealsOK(it.data as TodayMealsResponse)
-                    is ApiResult.Failure -> handleFail(it.exception)
-                    else -> {}
-                }
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.getMyMealPlan.collect {
-                when (it) {
-                    is ApiResult.Success<*> -> {
-                        val response = it.data as MyMealPlanResponse
-                        Log.e("MyMealPlanPage", response.data.meal_plan.your_journey)
-                    }
-
-                    is ApiResult.Failure -> handleFail(it.exception)
-                    else -> {}
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.getAllMealsPlans.collect {
-                when (it) {
-                    is ApiResult.Success<*> -> {
-                        val response = it.data as AllMealsPlansResponse
-                        Log.e("AllMealPlanPage", response.data[0].description)
-                    }
-
-                    is ApiResult.Failure -> handleFail(it.exception)
-                    else -> {}
+    private fun collectData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.combinedNutritionData.collect { nutritionData ->
+                if (isAllDataLoaded(nutritionData)) {
+                    handleCombinedData(nutritionData)
                 }
             }
         }
     }
 
-    private fun handleMealsOK(exercisesResponse: TodayMealsResponse) {
-        Log.e("mealsData", exercisesResponse.data.meal_plan.description)
+    private fun isAllDataLoaded(nutritionData: NutritionData): Boolean {
+        return nutritionData.todayMeals != null && nutritionData.dailyGoals != null && nutritionData.todayInTake != null && nutritionData.myMealPlan != null && nutritionData.allMealsPlans != null
     }
+
+    private fun handleCombinedData(nutritionData: NutritionData) {
+        fun <T> handleApiResult(result: ApiResult<T>?, onSuccess: (T) -> Unit) {
+            when (result) {
+                is ApiResult.Success -> {
+                    onSuccess(result.data)
+                    binding.progressView.progressOverlay.visibility = View.GONE
+
+                }
+
+                is ApiResult.Failure -> {
+                    handleFail(result.exception)
+                    binding.progressView.progressOverlay.visibility = View.GONE
+                }
+
+                else -> {}
+            }
+        }
+
+        var todayMealsResponse: TodayMealsResponse? = null
+        var todayInTakeResponse: TodayInTakeResponse? = null
+        var allMealsResponse: AllMealsPlansResponse? = null
+        var myMealsResponse: MyMealPlanResponse? = null
+        var dailyGoalsResponse: DailyGoalsResponse? = null
+
+        handleApiResult(nutritionData.todayMeals) { todayMealsResponse = it }
+        handleApiResult(nutritionData.todayInTake) { todayInTakeResponse = it }
+        handleApiResult(nutritionData.allMealsPlans) { allMealsResponse = it }
+        handleApiResult(nutritionData.myMealPlan) { myMealsResponse = it }
+        handleApiResult(nutritionData.dailyGoals) { dailyGoalsResponse = it }
+
+        initViewPager(
+            todayMealsResponse!!,
+            todayInTakeResponse!!,
+            allMealsResponse!!,
+            myMealsResponse!!,
+            dailyGoalsResponse!!
+        )
+    }
+
 
     private fun handleFail(exception: Throwable) {
         Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
