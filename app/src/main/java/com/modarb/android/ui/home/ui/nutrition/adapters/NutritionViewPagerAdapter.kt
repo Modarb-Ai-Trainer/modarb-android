@@ -66,10 +66,40 @@ class NutritionViewPagerAdapter(
         fun bind(listener: OnMealClickListener) {
             this.listener = listener
 
+            //todayInTakeCal
+            binding.calProgressBar.progress =
+                ((todayInTakeResponse.data.caloriesGoal - todayInTakeResponse.data.caloriesLeft).toFloat())
+            binding.calProgressBar.progressMax = todayInTakeResponse.data.caloriesGoal.toFloat()
+            binding.calValue.text = todayInTakeResponse.data.caloriesLeft.toString()
+            // carb
+            binding.carbsValue.text =
+                "${todayInTakeResponse.data.carbsConsumed}/${todayInTakeResponse.data.carbsGoal}g"
+            binding.carbsProgressBar.max = todayInTakeResponse.data.carbsGoal
+            binding.carbsProgressBar.progress = todayInTakeResponse.data.carbsConsumed
+
+            //protein
+            binding.proteinValue.text =
+                "${todayInTakeResponse.data.proteinConsumed}/${todayInTakeResponse.data.proteinGoal}g"
+            binding.proteinProgressBar.max = todayInTakeResponse.data.proteinGoal
+            binding.proteinProgressBar.progress = todayInTakeResponse.data.proteinConsumed
+
+            //fats
+            binding.fatsValue.text =
+                "${todayInTakeResponse.data.fatConsumed}/${todayInTakeResponse.data.fatGoal}g"
+            binding.fatsProgressBar.max = todayInTakeResponse.data.fatGoal
+            binding.fatsProgressBar.progress = todayInTakeResponse.data.fatConsumed
+
             //Burned progress
             binding.burnedProgressBar.progress = todayInTakeResponse.data.caloriesBurned
             binding.burnedProgressBar.max = todayInTakeResponse.data.caloriesGoal
             binding.burnedCal.text = todayInTakeResponse.data.caloriesBurned.toString() + " Kcal"
+
+            //Intaked progress
+            binding.intakedProgressBar.progress =
+                todayInTakeResponse.data.caloriesGoal - todayInTakeResponse.data.caloriesLeft
+            binding.intakedProgressBar.max = todayInTakeResponse.data.caloriesGoal
+            binding.intakedCal.text =
+                (todayInTakeResponse.data.caloriesGoal - todayInTakeResponse.data.caloriesLeft).toString() + " Kcal"
 
             binding.lunchView.setOnClickListener {
                 listener.onMailClick("lunch")

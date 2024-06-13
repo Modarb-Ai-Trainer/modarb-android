@@ -49,7 +49,7 @@
 
 
                 <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                    android:id="@+id/circularProgressBar"
+                    android:id="@+id/calProgressBar"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:layout_marginStart="32dp"
@@ -67,22 +67,22 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:background="@drawable/circle_view"
-                    app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
-                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                    app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
+                    app:layout_constraintBottom_toBottomOf="@+id/calProgressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/calProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/calProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/calProgressBar" />
 
 
                 <TextView
-                    android:id="@+id/value"
+                    android:id="@+id/calValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
-                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                    app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+                    app:layout_constraintBottom_toBottomOf="@+id/calProgressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/calProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/calProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/calProgressBar"
                     tools:text="1.112" />
 
                 <TextView
@@ -94,10 +94,10 @@
                     android:text="@string/remaining"
                     android:textColor="@color/primary_50"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
-                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                    app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+                    app:layout_constraintBottom_toBottomOf="@+id/calProgressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/calProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/calProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/calProgressBar"
                     app:layout_constraintVertical_bias="0.25" />
 
                 <TextView
@@ -106,10 +106,10 @@
                     android:text="@string/kcal"
                     android:textColor="@color/primary_50"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
-                    app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-                    app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-                    app:layout_constraintTop_toBottomOf="@+id/value"
+                    app:layout_constraintBottom_toBottomOf="@+id/calProgressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/calProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/calProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/calValue"
                     app:layout_constraintVertical_bias="0.16000003" />
 
                 <LinearLayout
@@ -120,7 +120,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/imageView20"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.74"
-                    app:layout_constraintStart_toEndOf="@+id/circularProgressBar"
+                    app:layout_constraintStart_toEndOf="@+id/calProgressBar"
                     app:layout_constraintTop_toTopOf="parent">
 
 
@@ -147,7 +147,7 @@
                         android:id="@+id/carbsValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
                         android:textColor="@color/white"
                         android:textSize="12sp"
@@ -178,7 +178,7 @@
                         android:id="@+id/proteinValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
                         android:textColor="@color/white"
                         android:textSize="12sp"
@@ -193,7 +193,7 @@
                         android:textSize="14sp" />
 
                     <ProgressBar
-                        android:id="@+id/fatssProgressBar"
+                        android:id="@+id/fatsProgressBar"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="100dp"
                         android:layout_height="8dp"
@@ -208,7 +208,7 @@
                         android:id="@+id/fatsValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
                         android:textColor="@color/white"
                         android:textSize="12sp"
@@ -283,7 +283,7 @@
 
 
                         <TextView
-                            android:id="@+id/takedCal"
+                            android:id="@+id/intakedCal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
