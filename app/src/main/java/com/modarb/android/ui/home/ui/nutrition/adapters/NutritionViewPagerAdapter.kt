@@ -131,7 +131,7 @@ class NutritionViewPagerAdapter(
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             val dataList = prepareData()
-            nutritionMealAdapter = NutritionMealAdapter(dataList)
+            nutritionMealAdapter = NutritionMealAdapter(dataList, context)
             binding.nutritionMealRecyclerView.adapter = nutritionMealAdapter
             binding.nutritionMealRecyclerView.isNestedScrollingEnabled = false
 

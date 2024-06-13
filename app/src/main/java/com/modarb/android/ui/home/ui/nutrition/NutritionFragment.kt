@@ -45,11 +45,15 @@ class NutritionFragment : Fragment(), OnMealClickListener {
     ): View {
         binding = FragmentNutritionBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        requestData()
+        collectData()
+        return root
+    }
+
+    private fun requestData() {
         viewModel = ViewModelProvider(this).get(NutritionViewModel::class.java)
 
         viewModel.getAllNutritionData("Bearer ${UserPrefUtil.getUserData(requireContext())!!.token}")
-        collectData()
-        return root
     }
 
     private fun initViewPager(
