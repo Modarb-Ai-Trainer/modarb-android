@@ -14,7 +14,8 @@ import com.modarb.android.ui.home.ui.nutrition.models.MealDayModel
 import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
 
 class NutritionViewPagerAdapter(
-    private val context: Context, private val listener: OnMealClickListener
+    private val context: Context,
+    private val listener: OnMealClickListener
 
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -65,7 +66,6 @@ class NutritionViewPagerAdapter(
             binding.dinnerView.setOnClickListener {
                 listener.onMailClick("dinner")
             }
-
 
         }
     }

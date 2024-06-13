@@ -2,6 +2,11 @@ package com.modarb.android.network
 
 import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.TodayMealsResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.CreateCustomWorkoutRequest
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
@@ -84,6 +89,32 @@ interface ApiService {
         @Body customWorkoutRequest: CreateCustomWorkoutRequest
     ): Response<CreateCustomWorkoutResponse>
 
+    // Nutrition API's
 
+    @GET("api/v1/user/nutri-guide/today-meals")
+    suspend fun getToadyMeals(
+        @Header("Authorization") token: String,
+    ): Response<TodayMealsResponse>
+
+    @GET("api/v1/user/nutri-guide/daily-goals")
+    suspend fun getDailyGoals(
+        @Header("Authorization") token: String,
+    ): Response<DailyGoalsResponse>
+
+    @GET("api/v1/user/nutri-guide/todays-intake")
+    suspend fun getTodayInTake(
+        @Header("Authorization") token: String,
+    ): Response<TodayInTakeResponse>
+
+
+    @GET("api/v1/user/myMealPlan")
+    suspend fun getMyMealPlan(
+        @Header("Authorization") token: String,
+    ): Response<MyMealPlanResponse>
+
+    @GET("api/v1/user/mealPlans")
+    suspend fun getAllMealsPlan(
+        @Header("Authorization") token: String,
+    ): Response<AllMealsPlansResponse>
 }
 
