@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.ItemNutritionMealDayBinding
-import com.modarb.android.ui.home.ui.nutrition.models.MealDayModel
+import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.Day
 
 class NutritionMealDayAdapter(
-    private var dataList: List<MealDayModel>,
+    private var dataList: List<Day>,
     private var context: Context
 ) :
     RecyclerView.Adapter<NutritionMealDayAdapter.ViewHolder>() {
@@ -33,10 +33,10 @@ class NutritionMealDayAdapter(
         private val binding: ItemNutritionMealDayBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(position: Int, data: MealDayModel) {
+        fun bind(position: Int, data: Day) {
             loadImageBasedOnPosition(position)
 
-            binding.textViewMealName.text = data.mealName
+            //   binding.textViewMealName.text = data.meals[position].name
         }
 
         private fun loadImageBasedOnPosition(position: Int) {

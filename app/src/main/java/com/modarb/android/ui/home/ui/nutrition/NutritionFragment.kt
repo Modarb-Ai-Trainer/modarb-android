@@ -1,6 +1,7 @@
 package com.modarb.android.ui.home.ui.nutrition
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,16 +22,17 @@ import com.modarb.android.R
 import com.modarb.android.databinding.FragmentNutritionBinding
 import com.modarb.android.network.ApiResult
 import com.modarb.android.ui.home.ui.nutrition.adapters.NutritionViewPagerAdapter
-import com.modarb.android.ui.home.ui.nutrition.domain.models.TodayMealsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.TodayMealsResponse
 import com.modarb.android.ui.home.ui.nutrition.presentation.NutritionData
 import com.modarb.android.ui.home.ui.nutrition.presentation.NutritionViewModel
 import com.modarb.android.ui.home.ui.plan.adapters.ViewPager2ViewHeightAnimator
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import kotlinx.coroutines.launch
+import kotlin.reflect.KClass
 
 
 class NutritionFragment : Fragment(), OnMealClickListener {
@@ -148,22 +150,32 @@ class NutritionFragment : Fragment(), OnMealClickListener {
     }
 
     private fun handleCombinedData(nutritionData: NutritionData) {
-        fun <T> handleApiResult(result: ApiResult<T>?, onSuccess: (T) -> Unit) {
+
+        fun <T : Any> handleApiResult(
+            type: KClass<T>,
+            result: ApiResult<T>?,
+            onSuccess: (T) -> Unit
+        ) {
             when (result) {
                 is ApiResult.Success -> {
                     onSuccess(result.data)
                     binding.progressView.progressOverlay.visibility = View.GONE
-
                 }
-
                 is ApiResult.Failure -> {
-                    handleFail(result.exception)
+                    val exception = result.exception
+                    val className = exception::class.java.name
+                    val genericClassName = type.simpleName
+                    Log.e(
+                        "Failure",
+                        "API call failed in class: $className with exception: $exception and generic type: $genericClassName"
+                    )
+                    handleFail(exception)
                     binding.progressView.progressOverlay.visibility = View.GONE
                 }
-
                 else -> {}
             }
         }
+
 
         var todayMealsResponse: TodayMealsResponse? = null
         var todayInTakeResponse: TodayInTakeResponse? = null
@@ -171,11 +183,23 @@ class NutritionFragment : Fragment(), OnMealClickListener {
         var myMealsResponse: MyMealPlanResponse? = null
         var dailyGoalsResponse: DailyGoalsResponse? = null
 
-        handleApiResult(nutritionData.todayMeals) { todayMealsResponse = it }
-        handleApiResult(nutritionData.todayInTake) { todayInTakeResponse = it }
-        handleApiResult(nutritionData.allMealsPlans) { allMealsResponse = it }
-        handleApiResult(nutritionData.myMealPlan) { myMealsResponse = it }
-        handleApiResult(nutritionData.dailyGoals) { dailyGoalsResponse = it }
+        handleApiResult(TodayMealsResponse::class, nutritionData.todayMeals) {
+            todayMealsResponse = it
+        }
+        handleApiResult(
+            TodayInTakeResponse::class,
+            nutritionData.todayInTake
+        ) { todayInTakeResponse = it }
+        handleApiResult(
+            AllMealsPlansResponse::class,
+            nutritionData.allMealsPlans
+        ) { allMealsResponse = it }
+        handleApiResult(MyMealPlanResponse::class, nutritionData.myMealPlan) {
+            myMealsResponse = it
+        }
+        handleApiResult(DailyGoalsResponse::class, nutritionData.dailyGoals) {
+            dailyGoalsResponse = it
+        }
 
         initViewPager(
             todayMealsResponse!!,
@@ -188,7 +212,8 @@ class NutritionFragment : Fragment(), OnMealClickListener {
 
 
     private fun handleFail(exception: Throwable) {
-        Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, exception.message, Toast.LENGTH_LONG).show()
+        Log.e("fail", exception.stackTrace.toString())
 
     }
 

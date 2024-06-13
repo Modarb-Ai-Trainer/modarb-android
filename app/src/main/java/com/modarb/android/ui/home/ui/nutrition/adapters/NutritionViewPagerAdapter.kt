@@ -5,17 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.modarb.android.databinding.DailyRoutineViewBinding
 import com.modarb.android.databinding.PlansViewBinding
 import com.modarb.android.ui.home.ui.nutrition.OnMealClickListener
 import com.modarb.android.ui.home.ui.nutrition.activities.AboutNutritionPlanActivity
-import com.modarb.android.ui.home.ui.nutrition.domain.models.TodayMealsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
+import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.TodayMealsResponse
 import com.modarb.android.ui.home.ui.nutrition.models.MealDayModel
 import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
 
@@ -66,55 +69,78 @@ class NutritionViewPagerAdapter(
         fun bind(listener: OnMealClickListener) {
             this.listener = listener
 
-            //todayInTakeCal
-            binding.calProgressBar.progress =
-                ((todayInTakeResponse.data.caloriesGoal - todayInTakeResponse.data.caloriesLeft).toFloat())
-            binding.calProgressBar.progressMax = todayInTakeResponse.data.caloriesGoal.toFloat()
-            binding.calValue.text = todayInTakeResponse.data.caloriesLeft.toString()
-            // carb
-            binding.carbsValue.text =
-                "${todayInTakeResponse.data.carbsConsumed}/${todayInTakeResponse.data.carbsGoal}g"
-            binding.carbsProgressBar.max = todayInTakeResponse.data.carbsGoal
-            binding.carbsProgressBar.progress = todayInTakeResponse.data.carbsConsumed
-
-            //protein
-            binding.proteinValue.text =
-                "${todayInTakeResponse.data.proteinConsumed}/${todayInTakeResponse.data.proteinGoal}g"
-            binding.proteinProgressBar.max = todayInTakeResponse.data.proteinGoal
-            binding.proteinProgressBar.progress = todayInTakeResponse.data.proteinConsumed
-
-            //fats
-            binding.fatsValue.text =
-                "${todayInTakeResponse.data.fatConsumed}/${todayInTakeResponse.data.fatGoal}g"
-            binding.fatsProgressBar.max = todayInTakeResponse.data.fatGoal
-            binding.fatsProgressBar.progress = todayInTakeResponse.data.fatConsumed
-
-            //Burned progress
-            binding.burnedProgressBar.progress = todayInTakeResponse.data.caloriesBurned
-            binding.burnedProgressBar.max = todayInTakeResponse.data.caloriesGoal
-            binding.burnedCal.text = todayInTakeResponse.data.caloriesBurned.toString() + " Kcal"
-
-            //Intaked progress
-            binding.intakedProgressBar.progress =
-                todayInTakeResponse.data.caloriesGoal - todayInTakeResponse.data.caloriesLeft
-            binding.intakedProgressBar.max = todayInTakeResponse.data.caloriesGoal
-            binding.intakedCal.text =
-                (todayInTakeResponse.data.caloriesGoal - todayInTakeResponse.data.caloriesLeft).toString() + " Kcal"
-
-            binding.lunchView.setOnClickListener {
-                listener.onMailClick("lunch")
-            }
-            binding.breakFastView.setOnClickListener {
-                listener.onMailClick("breakfast")
-            }
-            binding.snackView.setOnClickListener {
-                listener.onMailClick("snack")
-            }
-            binding.dinnerView.setOnClickListener {
-                listener.onMailClick("dinner")
-            }
-
+            updateProgressBars(todayInTakeResponse)
+            setOnClickListeners(listener)
         }
+
+        private fun updateProgressBars(model: TodayInTakeResponse) {
+            val data = model.data
+            updateProgressBar(
+                binding.calProgressBar,
+                data.caloriesGoal,
+                data.caloriesGoal - data.caloriesLeft
+            )
+            binding.calValue.text = data.caloriesLeft.toString()
+
+            updateMacroProgressBar(
+                binding.carbsProgressBar,
+                binding.carbsValue,
+                data.carbsGoal,
+                data.carbsConsumed,
+                "g"
+            )
+            updateMacroProgressBar(
+                binding.proteinProgressBar,
+                binding.proteinValue,
+                data.proteinGoal,
+                data.proteinConsumed,
+                "g"
+            )
+            updateMacroProgressBar(
+                binding.fatsProgressBar,
+                binding.fatsValue,
+                data.fatGoal,
+                data.fatConsumed,
+                "g"
+            )
+
+            updateProgressBar(binding.burnedProgressBar, data.caloriesGoal, data.caloriesBurned)
+            binding.burnedCal.text = "${data.caloriesBurned} Kcal"
+
+            val intakedCalories = data.caloriesGoal - data.caloriesLeft
+            updateProgressBar(binding.intakedProgressBar, data.caloriesGoal, intakedCalories)
+            binding.intakedCal.text = "${intakedCalories} Kcal"
+        }
+
+        private fun updateProgressBar(progressBar: ProgressBar, max: Int, progress: Int) {
+            progressBar.max = max
+            progressBar.progress = progress
+        }
+
+        private fun updateProgressBar(progressBar: CircularProgressBar, max: Int, progress: Int) {
+            progressBar.progressMax = max.toFloat()
+            progressBar.progress = progress.toFloat()
+        }
+
+        private fun updateMacroProgressBar(
+            progressBar: ProgressBar,
+            valueTextView: TextView,
+            goal: Int,
+            consumed: Int,
+            unit: String
+        ) {
+            valueTextView.text = "$consumed/$goal$unit"
+            progressBar.max = goal
+            progressBar.progress = consumed
+        }
+
+        private fun setOnClickListeners(listener: OnMealClickListener) {
+            binding.lunchView.setOnClickListener { listener.onMailClick("lunch") }
+            binding.breakFastView.setOnClickListener { listener.onMailClick("breakfast") }
+            binding.snackView.setOnClickListener { listener.onMailClick("snack") }
+            binding.dinnerView.setOnClickListener { listener.onMailClick("dinner") }
+        }
+
     }
 
     inner class PlansViewHolder(private val binding: PlansViewBinding) :
@@ -154,7 +180,7 @@ class NutritionViewPagerAdapter(
             }
 
             val dataModel = NutritionDataModel(
-                day, list
+                day, myMealsResponse.data.days
             )
             dataList.add(dataModel)
         }
