@@ -1,5 +1,6 @@
 package com.modarb.android.ui.home.ui.nutrition.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,10 +10,8 @@ import com.modarb.android.databinding.ItemNutritionMealDayBinding
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.Day
 
 class NutritionMealDayAdapter(
-    private var dataList: List<Day>,
-    private var context: Context
-) :
-    RecyclerView.Adapter<NutritionMealDayAdapter.ViewHolder>() {
+    private var dataList: List<Day>, private var context: Context
+) : RecyclerView.Adapter<NutritionMealDayAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -33,10 +32,20 @@ class NutritionMealDayAdapter(
         private val binding: ItemNutritionMealDayBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(position: Int, data: Day) {
             loadImageBasedOnPosition(position)
+            binding.textViewMealName.text = data.meals[position].name
+            binding.textViewCalorieAmount.text = data.meals[position].calories.toString() + " Kcal"
 
-            //   binding.textViewMealName.text = data.meals[position].name
+            var desc = ""
+            for (i in data.meals[position].ingredients.indices) {
+                desc += data.meals[position].ingredients[i].name
+                if (i != data.meals[position].ingredients.size - 1) {
+                    desc += "\n"
+                }
+            }
+            binding.textViewMealDescription.text = desc
         }
 
         private fun loadImageBasedOnPosition(position: Int) {

@@ -19,7 +19,6 @@ import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGo
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.TodayMealsResponse
-import com.modarb.android.ui.home.ui.nutrition.models.MealDayModel
 import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
 
 class NutritionViewPagerAdapter(
@@ -76,9 +75,7 @@ class NutritionViewPagerAdapter(
         private fun updateProgressBars(model: TodayInTakeResponse) {
             val data = model.data
             updateProgressBar(
-                binding.calProgressBar,
-                data.caloriesGoal,
-                data.caloriesGoal - data.caloriesLeft
+                binding.calProgressBar, data.caloriesGoal, data.caloriesGoal - data.caloriesLeft
             )
             binding.calValue.text = data.caloriesLeft.toString()
 
@@ -97,11 +94,7 @@ class NutritionViewPagerAdapter(
                 "g"
             )
             updateMacroProgressBar(
-                binding.fatsProgressBar,
-                binding.fatsValue,
-                data.fatGoal,
-                data.fatConsumed,
-                "g"
+                binding.fatsProgressBar, binding.fatsValue, data.fatGoal, data.fatConsumed, "g"
             )
 
             updateProgressBar(binding.burnedProgressBar, data.caloriesGoal, data.caloriesBurned)
@@ -166,19 +159,12 @@ class NutritionViewPagerAdapter(
 
     private fun prepareData(): List<NutritionDataModel> {
         val dayNames =
-            listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
-        val mealNames = listOf("Breakfast", "Lunch", "Snack", "Dinner")
+            listOf("Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 
 
         val dataList = mutableListOf<NutritionDataModel>()
 
         for (day in dayNames) {
-            val list: MutableList<MealDayModel> = mutableListOf()
-            for (meal in mealNames) {
-                val mealModel = MealDayModel("test", "test", "test", "test")
-                list.add(mealModel)
-            }
-
             val dataModel = NutritionDataModel(
                 day, myMealsResponse.data.days
             )
