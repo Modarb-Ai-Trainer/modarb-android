@@ -70,6 +70,7 @@ class NutritionViewPagerAdapter(
 
             updateProgressBars(todayInTakeResponse)
             setOnClickListeners(listener)
+
         }
 
         private fun updateProgressBars(model: TodayInTakeResponse) {
@@ -141,11 +142,27 @@ class NutritionViewPagerAdapter(
         private lateinit var nutritionMealAdapter: NutritionMealAdapter
 
         fun bind(context: Context) {
+
+            showPlanDetails()
+            initRecyclerView()
+
+        }
+
+        private fun showPlanDetails() {
+
+
             binding.nutritionPlanCardView.setOnClickListener {
                 val intent = Intent(context, AboutNutritionPlanActivity::class.java)
                 context.startActivity(intent)
             }
 
+            binding.standardPlanTextView.text = myMealsResponse.data.meal_plan.description
+            binding.desStandardPlanTextView.text = myMealsResponse.data.meal_plan.your_journey
+            //TODO uncomment this line after adding image
+            //ViewUtils.loadImage(context, myMealsResponse.data.meal_plan.image, binding.imageViewBackground)
+        }
+
+        private fun initRecyclerView() {
             binding.nutritionMealRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
@@ -153,8 +170,8 @@ class NutritionViewPagerAdapter(
             nutritionMealAdapter = NutritionMealAdapter(dataList, context)
             binding.nutritionMealRecyclerView.adapter = nutritionMealAdapter
             binding.nutritionMealRecyclerView.isNestedScrollingEnabled = false
-
         }
+
     }
 
     private fun prepareData(): List<NutritionDataModel> {

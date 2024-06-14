@@ -25,7 +25,8 @@ class NutritionMealDayAdapter(
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        //TODO check this again for size
+        return dataList[0].meals.size
     }
 
     class ViewHolder(
