@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityExerciseInfoBinding
+import com.modarb.android.ui.helpers.ViewUtils
 import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.workout.adapters.ExerciseInfoViewPagerAdapter
 
@@ -57,6 +58,11 @@ class ExerciseInfoActivity : AppCompatActivity() {
             binding.exerciseSets.text =
                 (WorkoutData.selectedExercise.sets).toString() + " sets x " + WorkoutData.selectedExercise.reps + " reps"
         }
+        ViewUtils.loadImage(
+            this@ExerciseInfoActivity,
+            WorkoutData.selectedExercise.media.url,
+            binding.exerciseGIf
+        )
 
     }
 
