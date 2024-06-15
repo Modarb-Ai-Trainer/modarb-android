@@ -6,12 +6,15 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.RetrofitService
+import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.plan.data.PlanRepositoryImp
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.plan.domain.usecase.SearchExercisesUseCase
 import com.modarb.android.ui.home.ui.workouts.data.WorkoutRepoImpl
+import com.modarb.android.ui.home.ui.workouts.domain.EnrollWorkoutProgramUseCase
 import com.modarb.android.ui.home.ui.workouts.domain.GetWorkoutProgramsUseCase
+import com.modarb.android.ui.home.ui.workouts.models.Workout
 import com.modarb.android.ui.home.ui.workouts.models.workout_programs.WorkoutProgramsResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +28,8 @@ class WorkoutViewModel : ViewModel() {
     private var myPlanRepository = PlanRepositoryImp(apiService)
     private var workoutProgramsRepo = WorkoutRepoImpl(apiService)
     private var workoutsUseCase = GetWorkoutProgramsUseCase(workoutProgramsRepo)
+    private var enrollWorkoutsUseCase = EnrollWorkoutProgramUseCase(workoutProgramsRepo)
+
     private var searchExercisesUseCase = SearchExercisesUseCase(myPlanRepository)
 
 
@@ -37,7 +42,8 @@ class WorkoutViewModel : ViewModel() {
 
     private var _getAllPrograms = MutableStateFlow<ApiResult<WorkoutProgramsResponse>?>(null)
     val getWorkoutPrograms: StateFlow<ApiResult<WorkoutProgramsResponse>?> get() = _getAllPrograms
-
+    private var _enrollWorkout = MutableStateFlow<ApiResult<BaseResponse>?>(null)
+    val enrollWorkout: StateFlow<ApiResult<BaseResponse>?> get() = _enrollWorkout
 
     fun getPaginatedExercises(
         token: String, filterName: String, filterVal: String
@@ -50,6 +56,13 @@ class WorkoutViewModel : ViewModel() {
         viewModelScope.launch {
             val response = workoutsUseCase.invoke(token)
             _getAllPrograms.value = response
+        }
+    }
+
+    fun enrollWorkoutProgram(token: String, workoutId: Workout) {
+        viewModelScope.launch {
+            val response = enrollWorkoutsUseCase.invoke(token)
+            _enrollWorkout.value = response
         }
     }
 

@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.WorkoutsProgramsViewBinding
 import com.modarb.android.ui.home.ui.workouts.OnBodyPartClickListener
+import com.modarb.android.ui.home.ui.workouts.OnWorkoutItemClickListener
 import com.modarb.android.ui.home.ui.workouts.holders.WorkoutProgramsViewHolder
 import com.modarb.android.ui.home.ui.workouts.models.workout_programs.WorkoutProgramsResponse
 
 class WorkoutsViewPagerAdapter(
     private val context: Context,
     private val listener: OnBodyPartClickListener,
+    private val workoutListener: OnWorkoutItemClickListener,
+
     private val workoutProgramsResponse: WorkoutProgramsResponse
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -33,7 +36,11 @@ class WorkoutsViewPagerAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ExerciseLibViewHolder -> holder.bind(listener)
-            is WorkoutProgramsViewHolder -> holder.bind(context, workoutProgramsResponse)
+            is WorkoutProgramsViewHolder -> holder.bind(
+                context,
+                workoutProgramsResponse,
+                workoutListener
+            )
         }
     }
 

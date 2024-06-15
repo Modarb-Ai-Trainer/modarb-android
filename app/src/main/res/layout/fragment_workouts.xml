@@ -7,6 +7,10 @@
     android:background="@color/grey_800"
     tools:context=".ui.home.ui.workouts.WorkoutsFragment">
 
+    <include
+        android:id="@+id/progress"
+        layout="@layout/single_progress" />
+
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
