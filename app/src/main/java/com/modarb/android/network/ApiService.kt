@@ -12,6 +12,7 @@ import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.CustomWorkoutResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.customworkout.create.CreateCustomWorkoutResponse
+import com.modarb.android.ui.home.ui.workouts.models.workout_programs.WorkoutProgramsResponse
 import com.modarb.android.ui.onboarding.models.LoginResponse
 import com.modarb.android.ui.onboarding.models.RequestModels.LoginRequest
 import com.modarb.android.ui.onboarding.models.RequestModels.RegisterRequest
@@ -63,6 +64,11 @@ interface ApiService {
     suspend fun getCustomWorkouts(
         @Header("Authorization") token: String
     ): Response<CustomWorkoutResponse>
+
+    @GET("api/v1/user/workouts")
+    suspend fun getWorkoutPrograms(
+        @Header("Authorization") token: String,
+    ): Response<WorkoutProgramsResponse>
 
 
     // Exercises Selection APIs
@@ -116,5 +122,7 @@ interface ApiService {
     suspend fun getAllMealsPlan(
         @Header("Authorization") token: String,
     ): Response<AllMealsPlansResponse>
+
+
 }
 

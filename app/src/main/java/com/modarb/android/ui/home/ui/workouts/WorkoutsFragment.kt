@@ -28,6 +28,7 @@ import com.modarb.android.databinding.FragmentWorkoutsBinding
 import com.modarb.android.network.ApiResult
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.workouts.models.BodyParts
+import com.modarb.android.ui.home.ui.workouts.models.workout_programs.WorkoutProgramsResponse
 import com.modarb.android.ui.home.ui.workouts.persentation.WorkoutViewModel
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import kotlinx.coroutines.flow.collectLatest
@@ -53,14 +54,14 @@ class WorkoutsFragment : Fragment(), OnBodyPartClickListener {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWorkoutsBinding.inflate(inflater, container, false)
-        initViewPager()
         initSearchExercisesBottomSheet()
+        getWorkoutPrograms()
         return binding.root
     }
 
-    private fun initViewPager() {
+    private fun initViewPager(workoutProgramsResponse: WorkoutProgramsResponse) {
 
-        val adapter = WorkoutsViewPagerAdapter(requireContext(), this)
+        val adapter = WorkoutsViewPagerAdapter(requireContext(), this, workoutProgramsResponse)
         binding.viewPager.adapter = adapter
 
         binding.toggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
@@ -84,6 +85,34 @@ class WorkoutsFragment : Fragment(), OnBodyPartClickListener {
 
             }
         })
+    }
+
+    private fun getWorkoutPrograms() {
+        viewModel = ViewModelProvider(this)[WorkoutViewModel::class.java]
+
+        viewModel.getWorkoutPrograms(
+            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
+        )
+
+
+        lifecycleScope.launch {
+            viewModel.getWorkoutPrograms.collect {
+                when (it) {
+                    is ApiResult.Success<*> -> {
+                        initViewPager(it.data as WorkoutProgramsResponse)
+                    }
+
+                    is ApiResult.Error -> {
+                    }
+
+                    is ApiResult.Failure -> {
+
+                    }
+
+                    else -> {}
+                }
+            }
+        }
     }
 
     private fun initSearchExercisesBottomSheet() {
@@ -111,11 +140,6 @@ class WorkoutsFragment : Fragment(), OnBodyPartClickListener {
         initBottomSheetRecycle(recyclerView)
         handleSearch(searchEditText)
         closeBtn?.setOnClickListener { bottomSheet.hide() }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(WorkoutViewModel::class.java)
     }
 
     override fun onDestroyView() {

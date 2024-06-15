@@ -152,15 +152,14 @@ class NutritionFragment : Fragment(), OnMealClickListener {
     private fun handleCombinedData(nutritionData: NutritionData) {
 
         fun <T : Any> handleApiResult(
-            type: KClass<T>,
-            result: ApiResult<T>?,
-            onSuccess: (T) -> Unit
+            type: KClass<T>, result: ApiResult<T>?, onSuccess: (T) -> Unit
         ) {
             when (result) {
                 is ApiResult.Success -> {
                     onSuccess(result.data)
                     binding.progressView.progressOverlay.visibility = View.GONE
                 }
+
                 is ApiResult.Failure -> {
                     val exception = result.exception
                     val className = exception::class.java.name
@@ -172,6 +171,7 @@ class NutritionFragment : Fragment(), OnMealClickListener {
                     handleFail(exception)
                     binding.progressView.progressOverlay.visibility = View.GONE
                 }
+
                 else -> {}
             }
         }
@@ -187,12 +187,10 @@ class NutritionFragment : Fragment(), OnMealClickListener {
             todayMealsResponse = it
         }
         handleApiResult(
-            TodayInTakeResponse::class,
-            nutritionData.todayInTake
+            TodayInTakeResponse::class, nutritionData.todayInTake
         ) { todayInTakeResponse = it }
         handleApiResult(
-            AllMealsPlansResponse::class,
-            nutritionData.allMealsPlans
+            AllMealsPlansResponse::class, nutritionData.allMealsPlans
         ) { allMealsResponse = it }
         handleApiResult(MyMealPlanResponse::class, nutritionData.myMealPlan) {
             myMealsResponse = it

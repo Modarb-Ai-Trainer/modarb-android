@@ -36,5 +36,6 @@
     <color name="transparent_overlay">#80CCCCCC</color>
     <color name="primary_800">#391F8C</color>
     <color name="primary_500">#6739FF</color>
+    <color name="white_300">#EEEEEE</color>
 
 </resources>
