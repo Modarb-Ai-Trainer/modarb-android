@@ -21,6 +21,7 @@ data class Exercise(
     var countDownTimer: CountDownTimer?,
     var isStarted: Boolean = false,
     var remainingTime: Long = duration * 1000L,
-    var isTimeExerciseDone: Boolean = false
-
+    var isTimeExerciseDone: Boolean = false,
+    var isStartedSound: Boolean = false,
+    var isStartedHelpSound: Boolean = false,
 )

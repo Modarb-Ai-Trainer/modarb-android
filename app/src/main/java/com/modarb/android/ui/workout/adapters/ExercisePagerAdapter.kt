@@ -2,23 +2,30 @@ package com.modarb.android.ui.workout.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.media.MediaPlayer
+import android.os.Bundle
 import android.os.CountDownTimer
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
+import com.modarb.android.R
 import com.modarb.android.databinding.ItemExerciseBinding
 import com.modarb.android.ui.helpers.ViewUtils
 import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.workout.ExerciseListener
+import java.util.Locale
+
 
 class ExercisePagerAdapter(private val context: Context, private var listener: ExerciseListener) :
     PagerAdapter() {
 
     private val exercises = WorkoutData.getTodayWorkout()?.exercises ?: emptyList()
     private val timedExercise: HashSet<Int> = HashSet()
+    private lateinit var textToSpeech: TextToSpeech
 
     override fun getCount(): Int = exercises.size
 
@@ -52,10 +59,48 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
             setSeconds(minutes, seconds, binding.timer)
         }
         container.addView(binding.root)
-
         return binding.root
     }
 
+    fun startSound(position: Int) {
+        if (position != -1 && exercises[position].isStartedSound) return
+        val mediaPlayer = MediaPlayer.create(
+            context, R.raw.start_sound
+        )
+        mediaPlayer.start()
+        if (position != -1) exercises[position].isStartedSound = true
+    }
+
+    fun startHelpSound(position: Int) {
+        if (exercises[position].isStartedHelpSound) return
+
+        textToSpeech = TextToSpeech(
+            context
+        ) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                textToSpeech.setLanguage(Locale.US)
+                val params = Bundle()
+                params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, 1.0f)
+                if (isTimedExercise(position)) {
+                    textToSpeech.speak(
+                        "Exercise instructions: you will do " + "${exercises[position].instructions} for ${exercises[position].duration} seconds",
+                        TextToSpeech.QUEUE_FLUSH,
+                        params,
+                        "utteranceId"
+                    )
+                } else {
+                    textToSpeech.speak(
+                        "Exercise instructions: ${exercises[position].instructions} you will do ${exercises[position].reps} reps for ${exercises[position].sets} sets",
+                        TextToSpeech.QUEUE_FLUSH,
+                        params,
+                        "utteranceId"
+                    )
+
+                }
+            }
+        }
+        exercises[position].isStartedHelpSound = true
+    }
 
     private fun handleCloseBtn(binding: ItemExerciseBinding) {
         binding.exitButton.setOnClickListener {

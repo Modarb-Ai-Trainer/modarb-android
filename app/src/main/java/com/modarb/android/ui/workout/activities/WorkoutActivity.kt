@@ -67,6 +67,7 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
                     adapter.pauseTimer(currentPosition)
                 }
             } else {
+                Toast.makeText(this, "Go for the next exercise !", Toast.LENGTH_SHORT).show()
                 adapter.markDone(currentPosition)
                 //adapter.incSetCount(currentPosition, currentView)
             }
@@ -115,6 +116,8 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
     }
 
     private fun handleNavigationButtons() {
+        adapter.startSound(-1)
+        adapter.startHelpSound(0)
         binding.prevButton.setOnClickListener {
             val currentItem = binding.exercisePager.currentItem
             if (currentItem > 0) {
@@ -140,15 +143,21 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
                 ).show()
                 return@setOnClickListener
             }
+            adapter.startSound(currentItem)
             val adapterCount = adapter.count - 1
             if (currentItem < adapterCount) {
                 binding.exercisePager.setCurrentItem(currentItem + 1, true)
                 adapter.logExercise(binding.exercisePager.currentItem)
+                adapter.startHelpSound(binding.exercisePager.currentItem)
                 checkButtonState()
             } else {
                 markWorkoutDone()
             }
         }
+
+    }
+
+    private fun handleExerciseVoice() {
 
     }
 
