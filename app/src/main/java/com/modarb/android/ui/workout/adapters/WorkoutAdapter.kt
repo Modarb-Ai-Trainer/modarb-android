@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.ItemWorkoutDetailsBinding
+import com.modarb.android.ui.helpers.ViewUtils
 import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.ui.plan.domain.models.Day
 import com.modarb.android.ui.workout.activities.ExerciseInfoActivity
@@ -37,6 +38,7 @@ class WorkoutAdapter(private val data: Day?, private var context: Context) :
             holder.binding.exerciseDesc.text = "${item.sets} sets x ${item.reps} reps"
         }
         holder.binding.button.text = item.category
+        ViewUtils.loadImage(context, item.media.url, holder.binding.exerciseImage)
 
         holder.itemView.setOnClickListener {
             WorkoutData.selectedExercise = item

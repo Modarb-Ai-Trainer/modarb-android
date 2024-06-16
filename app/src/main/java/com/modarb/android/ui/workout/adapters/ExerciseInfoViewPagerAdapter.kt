@@ -77,7 +77,7 @@ class ExerciseInfoViewHolder(private val binding: EquipmentsViewBinding) :
 
     fun bind(context: Context, selectedExercise: Exercise) {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = EquipmentAdapter(selectedExercise.equipments)
+        val adapter = EquipmentAdapter(context, selectedExercise.equipments)
         binding.recyclerView.adapter = adapter
     }
 }
