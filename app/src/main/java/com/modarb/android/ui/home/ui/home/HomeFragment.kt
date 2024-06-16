@@ -62,6 +62,10 @@ class HomeFragment : Fragment() {
             UserPrefUtil.setUserLoggedIn(requireContext(), false)
             startActivity(Intent(requireContext(), SplashActivity::class.java))
         }
+
+        binding.viewMealBtn.setOnClickListener {
+            (activity as? HomeActivity)?.navigateToFragment(R.id.navigation_nutrition)
+        }
     }
 
 
@@ -92,7 +96,6 @@ class HomeFragment : Fragment() {
         WorkoutData.workoutId = res.data.myWorkout.id
         setData(res)
         getPlanData()
-        binding.progressView.progressOverlay.visibility = View.GONE
     }
 
     private fun handleHomeError(errorResponse: HomePageResponse) {
@@ -128,6 +131,7 @@ class HomeFragment : Fragment() {
 
     private fun handlePlanSuccess(res: PlanPageResponse) {
         WorkoutData.weekList = res.data.weeks
+        binding.progressView.progressOverlay.visibility = View.GONE
     }
 
     @SuppressLint("SetTextI18n")

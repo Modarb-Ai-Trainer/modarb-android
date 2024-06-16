@@ -331,7 +331,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button2"
+                    android:id="@+id/viewMealBtn"
                     android:layout_width="110dp"
                     android:layout_height="50dp"
                     android:text="@string/view"
@@ -354,7 +354,7 @@
 
                     android:textColor="@color/white_500"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/button2"
+                    app:layout_constraintBottom_toTopOf="@+id/viewMealBtn"
                     app:layout_constraintEnd_toEndOf="@+id/imageView19"
                     app:layout_constraintHorizontal_bias="0.8"
                     app:layout_constraintStart_toStartOf="@+id/imageView19"
