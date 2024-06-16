@@ -23,13 +23,16 @@
 
     <TextView
         android:id="@+id/dayDetails"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:layout_constraintVertical_bias="0.050000012"
@@ -40,11 +43,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/finistBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,18 +62,20 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/white"
+            android:textSize="24sp"
             tools:text="6 \nExercise" />
 
 
-        <TextView
-            android:id="@+id/weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/white"
-            tools:text="62.4 \ncalories" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/calories"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_margin="4dp"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:gravity="center"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="22sp"-->
+        <!--            tools:text="62.4 \ncalories" />-->
 
 
         <TextView
@@ -81,36 +86,10 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/white"
+            android:textSize="24sp"
             tools:text="30.00\nDuration" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/post_workout_meal"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/dayDetails"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/finistBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.0" />
 
 
     <Button
