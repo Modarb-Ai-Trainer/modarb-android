@@ -6,25 +6,27 @@
     android:background="@color/grey_900"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/exerciseSetCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/exerciseCount"
-        app:layout_constraintStart_toStartOf="@+id/exerciseCount"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseCount"
-        tools:text="set 1/4" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/exerciseSetCount"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/exerciseCount"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/exerciseCount"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/exerciseCount"-->
+    <!--        tools:text="set 1/4" />-->
 
     <TextView
         android:id="@+id/exerciseName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/exitButton"
@@ -65,7 +67,7 @@
     <ImageView
         android:id="@+id/exerciseGIf"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginTop="16dp"
         android:importantForAccessibility="no"
         android:scaleType="centerCrop"
@@ -87,7 +89,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDesc"
         app:layout_constraintVertical_bias="0.19999999"
-        tools:text="15 reps" />
+        tools:text="4 sets x 15 reps" />
 
     <TextView
         android:id="@+id/timer"

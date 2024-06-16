@@ -67,7 +67,8 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
                     adapter.pauseTimer(currentPosition)
                 }
             } else {
-                adapter.incSetCount(currentPosition, currentView)
+                adapter.markDone(currentPosition)
+                //adapter.incSetCount(currentPosition, currentView)
             }
 
         }
@@ -125,10 +126,15 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
         binding.nextButton.setOnClickListener {
             val currentItem = binding.exercisePager.currentItem
 
-            if (!adapter.isExerciseDone(currentItem) || (adapter.isTimedExercise(currentItem) && !adapter.isTimedExerciseDone(
-                    currentItem
-                ))
-            ) {
+            if (adapter.isTimedExercise(currentItem)) {
+                if (!adapter.isTimedExerciseDone(currentItem)) {
+                    Toast.makeText(
+                        this, getString(R.string.complete_the_exercise_first), Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+
+            } else if (!adapter.isExerciseDone(currentItem)) {
                 Toast.makeText(
                     this, getString(R.string.complete_the_exercise_first), Toast.LENGTH_SHORT
                 ).show()

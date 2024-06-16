@@ -8,6 +8,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.databinding.ItemExerciseSelectionDetailsBinding
+import com.modarb.android.ui.helpers.ViewUtils
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.Data
 
 class ExercisesAddAdapter(private var context: Context, private val isAdd: Boolean) :
@@ -20,8 +21,8 @@ class ExercisesAddAdapter(private var context: Context, private val isAdd: Boole
 
         fun bind(item: Data?) {
             item?.let { data ->
-                // TODO uncomment this  
-                //ViewUtils.loadImage(context,data.coverImage,binding.exerciseImage)
+
+                ViewUtils.loadImage(context, data.media.url, binding.exerciseImage)
 
                 binding.exerciseTitle.text = data.name
                 binding.exerciseDesc.text = data.benefits

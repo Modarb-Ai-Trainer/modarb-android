@@ -114,7 +114,7 @@
             <ImageView
                 android:id="@+id/exerciseGIf"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/temp1"
