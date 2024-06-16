@@ -6,18 +6,18 @@
     android:background="@color/grey_900"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/exerciseSetCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/exerciseCount"
-        app:layout_constraintStart_toStartOf="@+id/exerciseCount"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseCount"
-        tools:text="set 1/4" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/exerciseSetCount"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/exerciseCount"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/exerciseCount"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/exerciseCount"-->
+    <!--        tools:text="set 1/4" />-->
 
     <TextView
         android:id="@+id/exerciseName"
@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDesc"
         app:layout_constraintVertical_bias="0.19999999"
-        tools:text="15 reps" />
+        tools:text="4 sets x 15 reps" />
 
     <TextView
         android:id="@+id/timer"

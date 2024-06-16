@@ -30,16 +30,16 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
 
         val exercise = exercises[position]
         binding.exerciseName.text = exercise.name
-        binding.exerciseCount.text = "${exercise.reps} reps"
+        binding.exerciseCount.text = "${exercise.sets} sets x ${exercise.reps} reps"
         binding.exerciseDesc.text = exercise.instructions
-        binding.exerciseSetCount.text = "${exercise._currentSetCount} / ${exercise.sets} set"
+        //binding.exerciseSetCount.text = "${exercise._currentSetCount} / ${exercise.sets} set"
         handleCloseBtn(binding)
         binding.root.tag = "view$position"
 
         if (isTimedExercise(position)) {
 
             binding.exerciseCount.visibility = View.GONE
-            binding.exerciseSetCount.visibility = View.GONE
+            //binding.exerciseSetCount.visibility = View.GONE
             binding.timer.visibility = View.VISIBLE
             exercises[position].remainingTime = (exercises[position].duration * 1000).toLong()
             timedExercise.add(position)
@@ -66,22 +66,22 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
      * it will return false if the user completed all of the sets
      * use it for workout activity navigation
      */
-    @SuppressLint("SetTextI18n")
-    fun incSetCount(position: Int, currentView: View): Boolean {
-        val exercise = exercises[position]
-        if (exercise.reps == 0) return false
-        val binding = ItemExerciseBinding.bind(currentView)
-        if (exercise._currentSetCount + 1 == exercise.sets) {
-            exercises[position].reps--
-            binding.exerciseCount.text = "${exercise.reps} reps"
-            exercises[position]._currentSetCount = 0
-            binding.exerciseSetCount.text = "${exercise._currentSetCount} / ${exercise.sets} set"
-        } else {
-            binding.exerciseSetCount.text = "${++exercise._currentSetCount} / ${exercise.sets} set"
-        }
-        notifyDataSetChanged()
-        return true
-    }
+//    @SuppressLint("SetTextI18n")
+//    fun incSetCount(position: Int, currentView: View): Boolean {
+//        val exercise = exercises[position]
+//        if (exercise.reps == 0) return false
+//        val binding = ItemExerciseBinding.bind(currentView)
+//        if (exercise._currentSetCount + 1 == exercise.sets) {
+//            exercises[position].reps--
+//            binding.exerciseCount.text = "${exercise.reps} reps"
+//            exercises[position]._currentSetCount = 0
+//            binding.exerciseSetCount.text = "${exercise._currentSetCount} / ${exercise.sets} set"
+//        } else {
+//            binding.exerciseSetCount.text = "${++exercise._currentSetCount} / ${exercise.sets} set"
+//        }
+//        notifyDataSetChanged()
+//        return true
+//    }
 
 
     fun initTimer(position: Int, currentView: View) {
@@ -145,7 +145,7 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
             exercise.name + " pos= " + "${position}",
             "${exercise._currentSetCount} / ${exercise.sets}"
         )
-        return (exercise.reps == 0)
+        return (exercise._isDone)
     }
 
     fun isTimedExerciseDone(position: Int): Boolean {
@@ -159,6 +159,10 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
         container.removeView(obj as View)
+    }
+
+    fun markDone(currentPosition: Int) {
+        exercises[currentPosition]._isDone = true
     }
 
 
