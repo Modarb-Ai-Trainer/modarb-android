@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.modarb.android.databinding.ItemExerciseBinding
+import com.modarb.android.ui.helpers.ViewUtils
 import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.workout.ExerciseListener
 
@@ -32,6 +33,7 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
         binding.exerciseName.text = exercise.name
         binding.exerciseCount.text = "${exercise.sets} sets x ${exercise.reps} reps"
         binding.exerciseDesc.text = exercise.instructions
+        ViewUtils.loadImage(context, exercise.media.url, binding.exerciseGIf)
         //binding.exerciseSetCount.text = "${exercise._currentSetCount} / ${exercise.sets} set"
         handleCloseBtn(binding)
         binding.root.tag = "view$position"

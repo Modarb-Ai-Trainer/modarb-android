@@ -28,23 +28,38 @@
         android:importantForAccessibility="no"
         android:src="@drawable/baseline_check_24"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/exerciseImage"
+        app:layout_constraintBottom_toBottomOf="@+id/card"
         app:layout_constraintEnd_toEndOf="@+id/overlay"
-        app:layout_constraintTop_toTopOf="@+id/exerciseImage" />
+        app:layout_constraintTop_toTopOf="@+id/card" />
 
-    <ImageView
-        android:id="@+id/exerciseImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:clipToPadding="true"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/chest_press"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/exerciseImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/chest_press"
+            tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/exerciseTitle"
@@ -56,11 +71,11 @@
         android:text="@string/workoutTitle"
         android:textColor="@color/white_500"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/exerciseImage"
+        app:layout_constraintBottom_toBottomOf="@+id/card"
         app:layout_constraintEnd_toStartOf="@+id/checkMark"
         app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toEndOf="@+id/exerciseImage"
-        app:layout_constraintTop_toTopOf="@+id/exerciseImage"
+        app:layout_constraintStart_toEndOf="@+id/card"
+        app:layout_constraintTop_toTopOf="@+id/card"
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
@@ -73,10 +88,10 @@
         android:text="@string/workoutDescription"
         android:textColor="@color/lavender_blue"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/exerciseImage"
+        app:layout_constraintBottom_toBottomOf="@+id/card"
         app:layout_constraintEnd_toStartOf="@+id/checkMark"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/exerciseImage"
+        app:layout_constraintStart_toEndOf="@+id/card"
         app:layout_constraintTop_toBottomOf="@+id/exerciseTitle" />
 
 
