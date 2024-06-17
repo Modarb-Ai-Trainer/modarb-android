@@ -4,15 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import com.modarb.android.R
 import com.modarb.android.databinding.DailyRoutineViewBinding
 import com.modarb.android.databinding.PlansViewBinding
 import com.modarb.android.ui.home.ui.nutrition.OnMealClickListener
+import com.modarb.android.ui.home.ui.nutrition.OnPlanItemClickListener
 import com.modarb.android.ui.home.ui.nutrition.activities.AboutNutritionPlanActivity
 import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
@@ -20,6 +26,7 @@ import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMeal
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.TodayMealsResponse
 import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
+
 
 class NutritionViewPagerAdapter(
     private val context: Context,
@@ -30,7 +37,7 @@ class NutritionViewPagerAdapter(
     private val myMealsResponse: MyMealPlanResponse,
     private val dailyGoalsResponse: DailyGoalsResponse
 
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), OnPlanItemClickListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -139,8 +146,7 @@ class NutritionViewPagerAdapter(
                 mealTypeOrder.indexOf(meal.type)
             }
 
-            binding.recycleView.adapter =
-                TodayMealAdapter(context, sortedMealList)
+            binding.recycleView.adapter = TodayMealAdapter(context, sortedMealList)
         }
 
         private fun setOnClickListeners(listener: OnMealClickListener) {
@@ -159,8 +165,42 @@ class NutritionViewPagerAdapter(
         fun bind(context: Context) {
 
             showPlanDetails()
-            initRecyclerView()
+            initNutritionMealAdapter()
+            initSpinner()
+        }
 
+        private fun initSpinner() {
+            val plans = arrayOf("My plans", "Other plans")
+
+
+            val adapter = ArrayAdapter(
+                context, R.layout.item_nutrition_spinner, plans
+            )
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerPlans.adapter = adapter
+            binding.spinnerPlans.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?, view: View?, position: Int, id: Long
+                    ) {
+                        val selectedPlan = plans[position]
+                        if (selectedPlan == "My plans") {
+                            binding.nutritionPlanCardView.visibility = View.VISIBLE
+                            binding.availablePlan.visibility = View.GONE
+                            initNutritionMealAdapter()
+                        } else {
+                            binding.nutritionPlanCardView.visibility = View.GONE
+                            binding.availablePlan.visibility = View.VISIBLE
+                            initPlansPrograms()
+                        }
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+
+                }
         }
 
         private fun showPlanDetails() {
@@ -175,14 +215,22 @@ class NutritionViewPagerAdapter(
             //ViewUtils.loadImage(context, myMealsResponse.data.meal_plan.image, binding.imageViewBackground)
         }
 
-        private fun initRecyclerView() {
-            binding.nutritionMealRecyclerView.layoutManager =
+        private fun initPlansPrograms() {
+            binding.recycleView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            val programsAdapter =
+                NutritionProgramsAdapter(allMealsResponse.data, this@NutritionViewPagerAdapter)
+            binding.recycleView.adapter = programsAdapter
+        }
+
+        private fun initNutritionMealAdapter() {
+            binding.recycleView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             val dataList = prepareData()
             nutritionMealAdapter = NutritionMealAdapter(dataList, context)
-            binding.nutritionMealRecyclerView.adapter = nutritionMealAdapter
-            binding.nutritionMealRecyclerView.isNestedScrollingEnabled = false
+            binding.recycleView.adapter = nutritionMealAdapter
+            binding.recycleView.isNestedScrollingEnabled = false
         }
 
     }
@@ -202,5 +250,9 @@ class NutritionViewPagerAdapter(
         }
 
         return dataList
+    }
+
+    override fun onPlanItemClick(workoutId: com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.Data) {
+        Toast.makeText(context, workoutId.description, Toast.LENGTH_SHORT).show()
     }
 }
