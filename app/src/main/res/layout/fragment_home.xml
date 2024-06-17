@@ -320,7 +320,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:elevation="9dp"
-                    android:text="3 meals  1 snack"
+                    tools:text="3 meals  1 snack"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView21"
@@ -370,7 +370,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="Macro Tracker: Your Daily Intake"
+                android:text="@string/macro_tracker_your_daily_intake"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -379,6 +379,7 @@
 
 
             <include
+                android:id="@+id/trackerView"
                 layout="@layout/tracker_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

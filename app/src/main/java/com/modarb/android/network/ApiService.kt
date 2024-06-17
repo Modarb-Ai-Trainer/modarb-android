@@ -128,6 +128,10 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): Response<AllMealsPlansResponse>
 
+    @GET("/api/v1/user/homePage/your-daily-intake")
+    suspend fun getHomePageTodayInTake(
+        @Header("Authorization") token: String,
+    ): Response<TodayInTakeResponse>
 
 }
 

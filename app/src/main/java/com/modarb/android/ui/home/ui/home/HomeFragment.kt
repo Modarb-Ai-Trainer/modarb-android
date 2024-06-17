@@ -8,10 +8,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.ApiResult
@@ -20,6 +23,7 @@ import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.HomeActivity
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
 import com.modarb.android.ui.home.ui.home.presentation.HomeViewModel
+import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.persentation.PlanViewModel
 import com.modarb.android.ui.onboarding.activities.SplashActivity
@@ -41,6 +45,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         getHomeData()
+        getTodayInTake()
         initLogout()
         initActions()
         handleClick()
@@ -55,6 +60,79 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun getTodayInTake() {
+        homeViewModel.getTodayInTake("Bearer " + UserPrefUtil.getUserData(requireContext())!!.token)
+
+
+        lifecycleScope.launch {
+            homeViewModel.todayInTake.collect {
+                when (it) {
+                    is ApiResult.Success<*> -> handleTodayInTakeResponse(it.data as TodayInTakeResponse)
+                    is ApiResult.Failure -> handleHomeFail(it.exception)
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun handleTodayInTakeResponse(todayInTakeResponse: TodayInTakeResponse) {
+        updateProgressBars(todayInTakeResponse)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateProgressBars(model: TodayInTakeResponse) {
+        val data = model.data
+        updateProgressBar(
+            binding.trackerView.circularProgressBar,
+            data.caloriesGoal,
+            data.caloriesGoal - data.caloriesLeft
+        )
+        binding.trackerView.calValue.text =
+            (data.caloriesGoal - data.caloriesLeft).toString() + " / " + data.caloriesGoal + "\n\nKcal"
+        binding.trackerView.burnedVal.text = data.caloriesBurned.toString() + "\nBurned"
+        binding.trackerView.leftVal.text = data.caloriesLeft.toString() + "\nLeft"
+
+        updateMacroProgressBar(
+            binding.trackerView.carbsProgressBar,
+            binding.trackerView.carbsValue,
+            data.carbsGoal,
+            data.carbsConsumed,
+            "g"
+        )
+        updateMacroProgressBar(
+            binding.trackerView.proteinProgressBar,
+            binding.trackerView.proteinValue,
+            data.proteinGoal,
+            data.proteinConsumed,
+            "g"
+        )
+        updateMacroProgressBar(
+            binding.trackerView.fatsProgressBar,
+            binding.trackerView.fatsValue,
+            data.fatGoal,
+            data.fatConsumed,
+            "g"
+        )
+
+    }
+
+    private fun updateProgressBar(progressBar: ProgressBar, max: Int, progress: Int) {
+        progressBar.max = max
+        progressBar.progress = progress
+    }
+
+    private fun updateProgressBar(progressBar: CircularProgressBar, max: Int, progress: Int) {
+        progressBar.progressMax = max.toFloat()
+        progressBar.progress = progress.toFloat()
+    }
+
+    private fun updateMacroProgressBar(
+        progressBar: ProgressBar, valueTextView: TextView, goal: Int, consumed: Int, unit: String
+    ) {
+        valueTextView.text = "$consumed/$goal$unit"
+        progressBar.max = goal
+        progressBar.progress = consumed
+    }
 
     private fun initLogout() {
         binding.profileBtn.setOnClickListener {
