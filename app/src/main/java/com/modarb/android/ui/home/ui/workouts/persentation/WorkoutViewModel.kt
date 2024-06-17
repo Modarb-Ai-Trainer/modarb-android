@@ -17,7 +17,9 @@ import com.modarb.android.ui.home.ui.workouts.domain.GetWorkoutProgramsUseCase
 import com.modarb.android.ui.home.ui.workouts.models.Workout
 import com.modarb.android.ui.home.ui.workouts.models.workout_programs.WorkoutProgramsResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -36,14 +38,13 @@ class WorkoutViewModel : ViewModel() {
     private val _planPageResponse = MutableStateFlow<ApiResult<PlanPageResponse>?>(null)
     val planResponse: StateFlow<ApiResult<PlanPageResponse>?> get() = _planPageResponse
 
-
     private var _getAllExercises = MutableStateFlow<ApiResult<ExercisesResponse>?>(null)
     val getExercise: StateFlow<ApiResult<ExercisesResponse>?> get() = _getAllExercises
 
     private var _getAllPrograms = MutableStateFlow<ApiResult<WorkoutProgramsResponse>?>(null)
     val getWorkoutPrograms: StateFlow<ApiResult<WorkoutProgramsResponse>?> get() = _getAllPrograms
-    private var _enrollWorkout = MutableStateFlow<ApiResult<BaseResponse>?>(null)
-    val enrollWorkout: StateFlow<ApiResult<BaseResponse>?> get() = _enrollWorkout
+    private val _enrollWorkout = MutableSharedFlow<ApiResult<BaseResponse>>(replay = 0)
+    val enrollWorkout: SharedFlow<ApiResult<BaseResponse>> get() = _enrollWorkout
 
     fun getPaginatedExercises(
         token: String, filterName: String, filterVal: String
@@ -61,8 +62,8 @@ class WorkoutViewModel : ViewModel() {
 
     fun enrollWorkoutProgram(token: String, workoutId: Workout) {
         viewModelScope.launch {
-            val response = enrollWorkoutsUseCase.invoke(token)
-            _enrollWorkout.value = response
+            val response = enrollWorkoutsUseCase.invoke(token, workoutId)
+            _enrollWorkout.emit(response)
         }
     }
 
