@@ -17,7 +17,9 @@ import com.modarb.android.ui.home.ui.plan.domain.usecase.GetCustomWorkoutUseCase
 import com.modarb.android.ui.home.ui.plan.domain.usecase.PlanPageUseCase
 import com.modarb.android.ui.home.ui.plan.domain.usecase.SearchExercisesUseCase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -45,8 +47,8 @@ class PlanViewModel : ViewModel() {
     val getExercise: StateFlow<ApiResult<ExercisesResponse>?> get() = _getAllExercises
 
     private var _createCustomWorkoutResponse =
-        MutableStateFlow<ApiResult<CreateCustomWorkoutResponse>?>(null)
-    val createCustomWorkoutResponse: StateFlow<ApiResult<CreateCustomWorkoutResponse>?> get() = _createCustomWorkoutResponse
+        MutableSharedFlow<ApiResult<CreateCustomWorkoutResponse>?>(replay = 0)
+    val createCustomWorkoutResponse: SharedFlow<ApiResult<CreateCustomWorkoutResponse>?> get() = _createCustomWorkoutResponse
 
 
     private val _combinedResponses =
@@ -101,7 +103,7 @@ class PlanViewModel : ViewModel() {
     fun createCustomWorkout(token: String, createCustomWorkoutRequest: CreateCustomWorkoutRequest) {
         viewModelScope.launch {
             val response = createCustomWorkoutUseCase.invoke(token, createCustomWorkoutRequest)
-            _createCustomWorkoutResponse.value = response
+            _createCustomWorkoutResponse.emit(response)
         }
     }
 

@@ -401,7 +401,6 @@ class MyPlanFragment : Fragment() {
     }
 
     private fun initAddCustomWorkoutDialog() {
-        //TODO handle dialog margin
         addCustomWorkoutDialog = Dialog(requireContext(), R.style.CustomDialogStyle)
         addCustomWorkoutDialog.setContentView(R.layout.dialog_save_custom_template)
         addCustomWorkoutDialog.window?.setLayout(
@@ -466,7 +465,10 @@ class MyPlanFragment : Fragment() {
                     is ApiResult.Success<*> -> {
                         isUpdate = true
                         addCustomWorkoutDialog.dismiss()
+                        exercisesAdapter.clearSelectedData()
+                        currentSelectedAdapter.clearData(this@MyPlanFragment)
                         bottomSheet.hide()
+                        selectExerciseBottomSheet.hide()
                         val response = it.data as CreateCustomWorkoutResponse
                         Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT)
                             .show()
