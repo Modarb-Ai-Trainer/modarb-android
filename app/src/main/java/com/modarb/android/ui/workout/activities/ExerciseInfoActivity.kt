@@ -49,8 +49,9 @@ class ExerciseInfoActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun setData() {
         binding.exerciseTitle.text = WorkoutData.selectedExercise.name
+        val exerciseCount = WorkoutData.getTodayWorkout()?.exercises?.size ?: 1
         binding.exerciseCount.text =
-            "Exercise " + (WorkoutData.selectedExerciseNumber.toString() + " / " + WorkoutData.getTodayWorkout()!!.exercises.size)
+            "Exercise " + (WorkoutData.selectedExerciseNumber.toString() + " / " + exerciseCount)
 
         if (WorkoutData.selectedExercise.duration > 0) {
             binding.exerciseSets.text = getString(R.string.timed_exercise)
