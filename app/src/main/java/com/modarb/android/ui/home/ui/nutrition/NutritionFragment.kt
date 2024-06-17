@@ -199,13 +199,15 @@ class NutritionFragment : Fragment(), OnMealClickListener {
             dailyGoalsResponse = it
         }
 
-        initViewPager(
-            todayMealsResponse!!,
-            todayInTakeResponse!!,
-            allMealsResponse!!,
-            myMealsResponse!!,
-            dailyGoalsResponse!!
-        )
+        if (todayMealsResponse != null && todayInTakeResponse != null && allMealsResponse != null && myMealsResponse != null && dailyGoalsResponse != null) {
+            initViewPager(
+                todayMealsResponse!!,
+                todayInTakeResponse!!,
+                allMealsResponse!!,
+                myMealsResponse!!,
+                dailyGoalsResponse!!
+            )
+        }
     }
 
 
