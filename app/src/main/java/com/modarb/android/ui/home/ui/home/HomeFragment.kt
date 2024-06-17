@@ -90,7 +90,7 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initMealPlan(homePageResponse: HomePageResponse) {
         binding.mealDetails.text =
-            homePageResponse.data.myMealPlan.today.numberOfMeals.toString() + " Meals  and ${homePageResponse.data.myMealPlan.today.numberOfSnacks} snacks"
+            homePageResponse.data.myMealPlan.today.numberOfMeals.toString() + " Meals and ${homePageResponse.data.myMealPlan.today.numberOfSnacks} snacks"
         binding.calories.text =
             homePageResponse.data.myMealPlan.today.totalCalories.toString() + " Cal"
     }
