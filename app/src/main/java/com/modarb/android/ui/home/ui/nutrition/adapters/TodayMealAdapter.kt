@@ -1,14 +1,13 @@
 package com.modarb.android.ui.home.ui.nutrition.adapters
 
-import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.databinding.ItemMealBinding
+import com.modarb.android.ui.helpers.NutritionHelper
 import com.modarb.android.ui.helpers.ViewUtils
-import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.Ingredient
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.Meal
 
 class TodayMealAdapter(private val context: Context, private val mealList: List<Meal>) :
@@ -50,30 +49,12 @@ class TodayMealAdapter(private val context: Context, private val mealList: List<
                 binding.mealType.visibility = View.GONE
             }
             itemView.setOnClickListener {
-                showDetails(context, buildNutritionString(mealItem.ingredients[position]))
+                NutritionHelper.showDetails(
+                    context,
+                    NutritionHelper.buildNutritionString(mealItem.ingredients[position])
+                )
             }
         }
-
-        private fun showDetails(context: Context, message: String) {
-            val builder = AlertDialog.Builder(context)
-            builder.setMessage(message).setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            builder.create().show()
-        }
-
-        private fun buildNutritionString(item: Ingredient): String {
-            val stringBuilder = StringBuilder()
-
-            stringBuilder.append("Name: ${item.name}\n\n")
-            stringBuilder.append("Calories: ${item.calories} kcal\n\n")
-            stringBuilder.append("Carbs: ${item.carbs} g\n\n")
-            stringBuilder.append("Fats: ${item.fats} g\n\n")
-            stringBuilder.append("Proteins: ${item.proteins} g\n\n")
-            stringBuilder.append("Serving Size: ${item.serving_size} g")
-            return stringBuilder.toString()
-        }
-
 
     }
 
