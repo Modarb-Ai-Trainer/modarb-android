@@ -1,4 +1,3 @@
-
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,7 +29,8 @@ class ExerciseLibViewHolder(private val view: View, private val context: Context
 
         exercises = ArrayList()
         for (part in WorkoutData.getBodyParts()) {
-            exercises.add(BodyParts(part, R.mipmap.ic_launcher))
+            if (part != "All")
+                exercises.add(BodyParts(part, R.mipmap.ic_launcher))
         }
 
         adapter = BodyPartsAdapter(exercises, listener!!)
