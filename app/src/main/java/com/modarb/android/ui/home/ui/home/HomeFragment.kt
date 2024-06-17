@@ -87,6 +87,14 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun initMealPlan(homePageResponse: HomePageResponse) {
+        binding.mealDetails.text =
+            homePageResponse.data.myMealPlan.today.numberOfMeals.toString() + " Meals  and ${homePageResponse.data.myMealPlan.today.numberOfSnacks} snacks"
+        binding.calories.text =
+            homePageResponse.data.myMealPlan.today.totalCalories.toString() + " Cal"
+    }
+
     private fun handleHomeFail(exception: Throwable) {
         Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
         binding.progressView.progressOverlay.visibility = View.GONE
@@ -95,6 +103,7 @@ class HomeFragment : Fragment() {
     private fun handleHomeSuccess(res: HomePageResponse) {
         WorkoutData.workoutId = res.data.myWorkout.id
         setData(res)
+        initMealPlan(res)
         getPlanData()
     }
 
