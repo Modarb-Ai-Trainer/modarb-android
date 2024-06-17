@@ -1,7 +1,9 @@
 package com.modarb.android.ui.home
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -14,6 +16,7 @@ import com.modarb.android.ui.home.ui.more.activities.NotificationActivity
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var textToSpeech: TextToSpeech
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +35,15 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
         }
+        //startSound()
     }
 
+    private fun startSound() {
+        val mediaPlayer = MediaPlayer.create(
+            this, R.raw.music
+        )
+        mediaPlayer.start()
+    }
 
     fun navigateToFragment(itemId: Int) {
         binding.navView.selectedItemId = itemId

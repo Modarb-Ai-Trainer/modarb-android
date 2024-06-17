@@ -70,7 +70,7 @@ class NutritionViewPagerAdapter(
 
             updateProgressBars(todayInTakeResponse)
             setOnClickListeners(listener)
-
+            initRecyclerView()
         }
 
         private fun updateProgressBars(model: TodayInTakeResponse) {
@@ -128,6 +128,21 @@ class NutritionViewPagerAdapter(
             progressBar.progress = consumed
         }
 
+        private fun initRecyclerView() {
+            binding.recycleView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+            val list = todayMealsResponse.data.days[0].meals
+            val mealTypeOrder = listOf("breakfast", "lunch", "dinner", "snacks")
+
+            val sortedMealList = list.sortedBy { meal ->
+                mealTypeOrder.indexOf(meal.type)
+            }
+
+            binding.recycleView.adapter =
+                TodayMealAdapter(context, sortedMealList)
+        }
+
         private fun setOnClickListeners(listener: OnMealClickListener) {
             binding.lunchView.setOnClickListener { listener.onMailClick("lunch") }
             binding.breakFastView.setOnClickListener { listener.onMailClick("breakfast") }
@@ -149,8 +164,6 @@ class NutritionViewPagerAdapter(
         }
 
         private fun showPlanDetails() {
-
-
             binding.nutritionPlanCardView.setOnClickListener {
                 val intent = Intent(context, AboutNutritionPlanActivity::class.java)
                 context.startActivity(intent)
