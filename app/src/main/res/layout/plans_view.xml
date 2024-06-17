@@ -70,8 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="true"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,16 +79,16 @@
 
 
                 <ImageView
-                android:id="@+id/imageViewBackground"
+                    android:id="@+id/imageViewBackground"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/nutrition_plan_img"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/nutrition_plan_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
             </androidx.cardview.widget.CardView>
 
