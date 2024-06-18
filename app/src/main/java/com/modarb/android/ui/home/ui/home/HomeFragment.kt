@@ -56,6 +56,7 @@ class HomeFragment : Fragment() {
 
     private fun handleClick() {
         binding.continueBtn.setOnClickListener {
+            if (WorkoutData.getTodayWorkout() == null) return@setOnClickListener
             startActivity(Intent(requireContext(), TodayWorkoutActivity::class.java))
         }
     }
@@ -139,6 +140,7 @@ class HomeFragment : Fragment() {
             UserPrefUtil.saveUserData(requireContext(), null)
             UserPrefUtil.setUserLoggedIn(requireContext(), false)
             startActivity(Intent(requireContext(), SplashActivity::class.java))
+            requireActivity().finish()
         }
 
         binding.viewMealBtn.setOnClickListener {
