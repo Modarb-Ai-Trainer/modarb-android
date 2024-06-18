@@ -56,7 +56,15 @@ class HomeFragment : Fragment() {
 
     private fun handleClick() {
         binding.continueBtn.setOnClickListener {
-            if (WorkoutData.getTodayWorkout() == null) return@setOnClickListener
+            if (WorkoutData.getTodayWorkout() == null) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.please_enroll_on_a_new_program),
+                    Toast.LENGTH_SHORT
+                ).show()
+                (activity as? HomeActivity)?.navigateToFragment(R.id.navigation_workouts)
+                return@setOnClickListener
+            }
             startActivity(Intent(requireContext(), TodayWorkoutActivity::class.java))
         }
     }
@@ -241,10 +249,11 @@ class HomeFragment : Fragment() {
         binding.todayWorkoutName.text = response.data.myWorkout.workout.name
         binding.workouttime.text =
             formatWorkoutTime(response.data.myWorkout.workout.min_per_day, requireContext())
-        binding.exerciseCountTxt.text =
-            WorkoutData.getTodayWorkout(response.data.myWorkout.weeks)?.total_number_exercises.toString() + " " + getString(
-                R.string.exercise
-            )
+
+        val exerciseCount =
+            WorkoutData.getTodayWorkout(response.data.myWorkout.weeks)?.total_number_exercises?.toString()
+                ?: ("No " + getString(R.string.exercise))
+        binding.exerciseCountTxt.text = exerciseCount
     }
 
     private fun formatWorkoutTime(minutesPerDay: Int, context: Context): String {
