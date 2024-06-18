@@ -25,7 +25,7 @@ class ExercisesAddAdapter(private var context: Context, private val isAdd: Boole
                 ViewUtils.loadImage(context, data.media.url, binding.exerciseImage)
 
                 binding.exerciseTitle.text = data.name
-                binding.exerciseDesc.text = data.benefits
+                binding.exerciseDesc.text = data.category
 
                 if (isAdd) {
                     val isSelected = selectedItems.contains(data.id)
