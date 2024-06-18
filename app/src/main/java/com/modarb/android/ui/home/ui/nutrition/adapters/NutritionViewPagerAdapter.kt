@@ -17,6 +17,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import com.modarb.android.R
 import com.modarb.android.databinding.DailyRoutineViewBinding
 import com.modarb.android.databinding.PlansViewBinding
+import com.modarb.android.ui.helpers.NutritionHelper
 import com.modarb.android.ui.home.ui.nutrition.OnMealClickListener
 import com.modarb.android.ui.home.ui.nutrition.OnPlanItemClickListener
 import com.modarb.android.ui.home.ui.nutrition.activities.AboutNutritionPlanActivity
@@ -208,6 +209,7 @@ class NutritionViewPagerAdapter(
         private fun showPlanDetails() {
             binding.nutritionPlanCardView.setOnClickListener {
                 val intent = Intent(context, AboutNutritionPlanActivity::class.java)
+                NutritionHelper.selectedMeal = myMealsResponse.data.meal_plan
                 context.startActivity(intent)
             }
 
@@ -244,9 +246,10 @@ class NutritionViewPagerAdapter(
 
         val dataList = mutableListOf<NutritionDataModel>()
 
+        var pos = 0
         for (day in dayNames) {
             val dataModel = NutritionDataModel(
-                day, myMealsResponse.data.days
+                day, myMealsResponse.data.days[pos++].meals
             )
             dataList.add(dataModel)
         }

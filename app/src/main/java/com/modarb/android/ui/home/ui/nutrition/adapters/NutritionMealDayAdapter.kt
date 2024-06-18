@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
 import com.modarb.android.databinding.ItemNutritionMealDayBinding
-import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.Day
+import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.Meal
 
 class NutritionMealDayAdapter(
-    private var dataList: List<Day>, private var context: Context
+    private var dataList: List<Meal>, private var context: Context
 ) : RecyclerView.Adapter<NutritionMealDayAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,12 +21,11 @@ class NutritionMealDayAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = dataList[position]
-        holder.bind(position, data)
+        holder.bind(position, data, context)
     }
 
     override fun getItemCount(): Int {
-        //TODO check this again for size
-        return dataList[0].meals.size
+        return dataList.size
     }
 
     class ViewHolder(
@@ -34,19 +33,27 @@ class NutritionMealDayAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(position: Int, data: Day) {
+        fun bind(position: Int, data: Meal, context: Context) {
             loadImageBasedOnPosition(position)
-            binding.textViewMealName.text = data.meals[position].name
-            binding.textViewCalorieAmount.text = data.meals[position].calories.toString() + " Kcal"
+            binding.textViewMealName.text = data.name
+            binding.textViewCalorieAmount.text = data.calories.toString() + " Kcal"
 
             var desc = ""
-            for (i in data.meals[position].ingredients.indices) {
-                desc += data.meals[position].ingredients[i].name
-                if (i != data.meals[position].ingredients.size - 1) {
+            for (i in data.ingredients.indices) {
+                desc += data.ingredients[i].name
+                if (i != data.ingredients.size - 1) {
                     desc += "\n"
                 }
             }
             binding.textViewMealDescription.text = desc
+
+            // TODO check feedback
+//            binding.root.setOnClickListener {
+//                NutritionHelper.showDetails(
+//                    context,
+//                    NutritionHelper.buildNutritionString(data.ingredients[position])
+//                )
+//            }
         }
 
         private fun loadImageBasedOnPosition(position: Int) {

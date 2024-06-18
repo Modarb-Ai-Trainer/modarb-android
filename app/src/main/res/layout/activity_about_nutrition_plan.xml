@@ -40,20 +40,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/standardTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="start"
-        android:padding="8dp"
-        android:text="@string/standard"
-        android:textColor="@color/white_smoke"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="@string/standard"
+            android:textColor="@color/white_smoke"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
     <TextView
         android:id="@+id/desStandardTextView"
@@ -138,72 +137,40 @@
         app:layout_constraintTop_toBottomOf="@+id/keyFeaturesTextView"
         tools:text="Unrestricted Choices: Revel in the freedom to eat what you love, when you want." />
 
-    <TextView
-        android:id="@+id/desKeyFeaturesTextView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="start"
-        android:text="@string/test"
-        android:textColor="@color/white_600"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desKeyFeaturesTextView1"
-        tools:text="Balanced Nutrition: Discover a plan that promotes balance and flexibility in your dietary choices." />
+        <TextView
+            android:id="@+id/yourJourneyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:text="@string/your_journey"
+            android:textColor="@color/gray_92"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desKeyFeaturesTextView1" />
 
-    <TextView
-        android:id="@+id/desKeyFeaturesTextView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="start"
-        android:text="@string/test"
-        android:textColor="@color/white_600"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desKeyFeaturesTextView2"
-        tools:text="Simplicity: No complex rules or counting – just the essence of enjoying wholesome, satisfying meals." />
-
-    <TextView
-        android:id="@+id/yourJourneyTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:gravity="start"
-        android:text="@string/your_journey"
-        android:textColor="@color/gray_92"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desKeyFeaturesTextView3" />
-
-    <TextView
-        android:id="@+id/desYourJourneyTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="start"
-        android:text="@string/test"
-        android:textColor="@color/gray_92"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yourJourneyTextView"
-        tools:text="In Your Plan, Standard: EatAll Essence is about making nutrition simple, enjoyable, and sustainable. Whether you're a food enthusiast or looking for a fuss-free approach, we've crafted a plan that suits everyone." />
+        <TextView
+            android:id="@+id/desYourJourneyTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="start"
+            android:text="@string/test"
+            android:textColor="@color/gray_92"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yourJourneyTextView"
+            tools:text="In Your Plan, Standard: EatAll Essence is about making nutrition simple, enjoyable, and sustainable. Whether you're a food enthusiast or looking for a fuss-free approach, we've crafted a plan that suits everyone." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
