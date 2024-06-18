@@ -212,8 +212,14 @@ class NutritionViewPagerAdapter(
                 context.startActivity(intent)
             }
 
-            binding.standardPlanTextView.text = myMealsResponse.data.meal_plan.description
-            binding.desStandardPlanTextView.text = myMealsResponse.data.meal_plan.your_journey
+            // TODO remove this
+            try {
+                binding.standardPlanTextView.text = myMealsResponse.data.meal_plan.description
+                binding.desStandardPlanTextView.text = myMealsResponse.data.meal_plan.your_journey
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
             //TODO uncomment this line after adding image
             //ViewUtils.loadImage(context, myMealsResponse.data.meal_plan.image, binding.imageViewBackground)
         }
@@ -259,6 +265,7 @@ class NutritionViewPagerAdapter(
     override fun onPlanItemClick(data: com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.Data) {
         val intent = Intent(context, AboutNutritionPlanActivity::class.java)
         intent.putExtra("isAddProgram", true)
+        intent.putExtra("planId", data.id)
         NutritionHelper.selectedProgram = data
         context.startActivity(intent)
     }

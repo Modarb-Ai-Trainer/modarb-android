@@ -35,6 +35,7 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
         }
+        handleIntent()
         //startSound()
     }
 
@@ -43,6 +44,13 @@ class HomeActivity : AppCompatActivity() {
             this, R.raw.music
         )
         mediaPlayer.start()
+    }
+
+    private fun handleIntent() {
+        val openNutrition = intent.getBooleanExtra("openNutrition", false)
+        if (openNutrition) {
+            navigateToFragment(R.id.navigation_nutrition)
+        }
     }
 
     fun navigateToFragment(itemId: Int) {

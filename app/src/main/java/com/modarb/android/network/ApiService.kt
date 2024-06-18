@@ -2,6 +2,7 @@ package com.modarb.android.network
 
 import com.modarb.android.network.models.BaseResponse
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
+import com.modarb.android.ui.home.ui.nutrition.PlanBody
 import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
@@ -150,6 +151,11 @@ interface ApiService {
     @POST("/api/v1/user/meals/eat-custom-meal")
     suspend fun addCustomMeal(
         @Header("Authorization") token: String, @Body data: AddCustomMealBody
+    ): Response<BaseResponse>
+
+    @POST("/api/v1/user/myMealPlan")
+    suspend fun enrollIntoPlanProgram(
+        @Header("Authorization") token: String, @Body data: PlanBody
     ): Response<BaseResponse>
 
 }

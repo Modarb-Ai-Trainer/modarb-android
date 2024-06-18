@@ -7,6 +7,7 @@ import androidx.paging.cachedIn
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.RetrofitService
 import com.modarb.android.network.models.BaseResponse
+import com.modarb.android.ui.home.ui.nutrition.PlanBody
 import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
@@ -58,10 +59,12 @@ class NutritionViewModel : ViewModel() {
     private val _getMyMealPlan = MutableStateFlow<ApiResult<MyMealPlanResponse>?>(null)
     private val _getAllMealsPlan = MutableStateFlow<ApiResult<AllMealsPlansResponse>?>(null)
     private val _addCustomMeal = MutableSharedFlow<ApiResult<BaseResponse>?>(replay = 0)
+    private val _enrollIntoPlan = MutableSharedFlow<ApiResult<BaseResponse>?>(replay = 0)
 
 
     private var _getAllIngredients = MutableStateFlow<ApiResult<IngredientsResponse>?>(null)
     val addCustomMeal: SharedFlow<ApiResult<BaseResponse>?> get() = _addCustomMeal
+    val enrollIntoPlan: SharedFlow<ApiResult<BaseResponse>?> get() = _enrollIntoPlan
 
     val getAllIngredients: StateFlow<ApiResult<IngredientsResponse>?> get() = _getAllIngredients
     val combinedNutritionData: StateFlow<NutritionData> = combine(
@@ -101,6 +104,13 @@ class NutritionViewModel : ViewModel() {
         viewModelScope.launch {
             val response = nutritionRepository.addCustomMeal(token, data)
             _addCustomMeal.emit(response)
+        }
+    }
+
+    fun enrollIntoPlan(token: String, planId: PlanBody) {
+        viewModelScope.launch {
+            val response = nutritionRepository.enrollIntoPlan(token, planId)
+            _enrollIntoPlan.emit(response)
         }
     }
 }
