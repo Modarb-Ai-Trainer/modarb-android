@@ -78,6 +78,8 @@ class NutritionViewPagerAdapter(
             updateProgressBars(todayInTakeResponse)
             setOnClickListeners(listener)
             initRecyclerView()
+
+            //binding.breakfastCalories.text =
         }
 
         private fun updateProgressBars(model: TodayInTakeResponse) {

@@ -235,6 +235,14 @@
     <string name="dinner">Dinner</string>
     <string name="enroll">Enroll</string>
     <string name="macro_tracker_your_daily_intake">Macro Tracker: Your Daily Intake</string>
+    <string name="add_to_breakfast">Add to breakfast</string>
+    <string name="number_of_serving">Number of serving</string>
+    <string name="serving_size">serving size</string>
+    <string name="save_meal">Save meal</string>
+    <string name="please_select_ingredients">Please select ingredients</string>
+    <string name="confirm">Confirm</string>
+    <string name="calories">calories</string>
+    <string name="meal_added_successfully">Meal added successfully</string>
 
 
 </resources>

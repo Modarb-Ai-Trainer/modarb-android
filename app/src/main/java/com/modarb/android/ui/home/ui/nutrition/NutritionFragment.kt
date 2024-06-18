@@ -1,36 +1,47 @@
 package com.modarb.android.ui.home.ui.nutrition
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.modarb.android.R
+import com.modarb.android.databinding.AllMealsBottomSheetBinding
 import com.modarb.android.databinding.FragmentNutritionBinding
+import com.modarb.android.databinding.SelectedIngredientViewBinding
 import com.modarb.android.network.ApiResult
+import com.modarb.android.ui.home.ui.nutrition.adapters.IngredientsAdapter
 import com.modarb.android.ui.home.ui.nutrition.adapters.NutritionViewPagerAdapter
 import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.TodayMealsResponse
+import com.modarb.android.ui.home.ui.nutrition.models.AddCustomMealBody
+import com.modarb.android.ui.home.ui.nutrition.models.Ingredient
+import com.modarb.android.ui.home.ui.nutrition.models.ingredients.Data
+import com.modarb.android.ui.home.ui.nutrition.models.ingredients.IngredientsResponse
 import com.modarb.android.ui.home.ui.nutrition.presentation.NutritionData
 import com.modarb.android.ui.home.ui.nutrition.presentation.NutritionViewModel
 import com.modarb.android.ui.home.ui.plan.adapters.ViewPager2ViewHeightAnimator
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
@@ -38,9 +49,12 @@ import kotlin.reflect.KClass
 class NutritionFragment : Fragment(), OnMealClickListener {
 
     private lateinit var binding: FragmentNutritionBinding
-    private lateinit var bottomSheet: BottomSheetDialog
+    private lateinit var ingreadientsBottomSheet: BottomSheetDialog
+    private lateinit var saveMealBottomSheet: BottomSheetDialog
+
     private lateinit var bottomSheetProgressBar: ProgressBar
     private lateinit var viewModel: NutritionViewModel
+    private lateinit var ingredientsAdapter: IngredientsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -53,7 +67,7 @@ class NutritionFragment : Fragment(), OnMealClickListener {
     }
 
     private fun requestData() {
-        viewModel = ViewModelProvider(this).get(NutritionViewModel::class.java)
+        viewModel = ViewModelProvider(this)[NutritionViewModel::class.java]
 
         viewModel.getAllNutritionData("Bearer ${UserPrefUtil.getUserData(requireContext())!!.token}")
     }
@@ -103,16 +117,15 @@ class NutritionFragment : Fragment(), OnMealClickListener {
         })
     }
 
-    private fun initAddMealBottomSheet(mealName: String) {
-        bottomSheet = BottomSheetDialog(requireContext())
-        bottomSheet.setContentView(R.layout.all_meals_bottom_sheet)
-        val closeBtn: ImageButton? = bottomSheet.findViewById(R.id.closeBtn)
-        val recyclerView: RecyclerView = bottomSheet.findViewById(R.id.recyclerView)!!
-        val searchEditText: EditText = bottomSheet.findViewById(R.id.searchEditText)!!
-        val mealType: TextView = bottomSheet.findViewById(R.id.mealName)!!
-        bottomSheetProgressBar = bottomSheet.findViewById(R.id.bottomSheetProgressBar)!!
-        bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
-        bottomSheet.setOnShowListener {
+
+    private fun initAddIngredientsBottomSheet(mealName: String) {
+        ingreadientsBottomSheet = BottomSheetDialog(requireContext())
+
+        val binding = AllMealsBottomSheetBinding.inflate(LayoutInflater.from(context))
+        ingreadientsBottomSheet.setContentView(binding.root)
+
+        ingreadientsBottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        ingreadientsBottomSheet.setOnShowListener {
             val bottomSheetDialog = it as BottomSheetDialog
             val parentLayout = bottomSheetDialog.findViewById<View>(
                 com.google.android.material.R.id.design_bottom_sheet
@@ -125,14 +138,85 @@ class NutritionFragment : Fragment(), OnMealClickListener {
                 behaviour.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
-        mealType.text = mealName
-        initBottomSheetRecycle(recyclerView)
-        handleSearch(searchEditText)
-        closeBtn?.setOnClickListener { bottomSheet.hide() }
+
+        binding.saveMealBtn.setOnClickListener {
+            if (ingredientsAdapter.getSelectedData().isEmpty()) {
+                Toast.makeText(
+                    context, getString(R.string.please_select_ingredients), Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+            initSaveMealDialog(mealName)
+        }
+        initBottomSheetRecycle(binding.recyclerView)
+        binding.mealName.text = mealName
+        handleSearch(binding.searchEditText)
+        binding.closeBtn.setOnClickListener { ingreadientsBottomSheet.hide() }
+        bottomSheetProgressBar = binding.bottomSheetProgressBar
+        ingreadientsBottomSheet.show()
     }
 
-    private fun handleSearch(searchEditText: EditText) {
 
+    private fun handleSearch(searchEditText: EditText) {
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                val searchTerm = searchEditText.text.trim().toString()
+                Log.d("searchTermLen", searchTerm.length.toString())
+                if (searchTerm.isEmpty()) {
+                    getIngredients()
+                } else {
+                    getSearchResultData(searchTerm)
+                }
+
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
+
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
+
+
+            }
+        })
+    }
+
+    private fun getSearchResultData(searchTerm: String) {
+        viewModel.searchIngredients(
+            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}", searchTerm
+        )
+
+
+        lifecycleScope.launch {
+            viewModel.getAllIngredients.collect {
+                when (it) {
+                    is ApiResult.Success<*> -> handleSearchResult(it.data as IngredientsResponse)
+                    is ApiResult.Failure -> handleFail(it.exception)
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun handleSearchResult(ingredientsResponse: IngredientsResponse) {
+        if (ingredientsResponse.data.isEmpty()) return
+        ingredientsAdapter.updateData(this, ingredientsResponse.data)
+        bottomSheetProgressBar.visibility = View.GONE
+    }
+
+    private fun getIngredients() {
+        val token = "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}"
+
+        lifecycleScope.launch {
+            viewModel.getPaginatedExercises(token).collectLatest { pagingData ->
+                ingredientsAdapter.submitData(pagingData)
+            }
+        }
     }
 
     private fun collectData() {
@@ -218,11 +302,124 @@ class NutritionFragment : Fragment(), OnMealClickListener {
     }
 
     private fun initBottomSheetRecycle(recyclerView: RecyclerView) {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        ingredientsAdapter = IngredientsAdapter(requireContext(), true)
+        recyclerView.adapter = ingredientsAdapter
+
+        ingredientsAdapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading || loadState.append is LoadState.Loading) {
+                bottomSheetProgressBar.visibility = View.VISIBLE
+            } else {
+                bottomSheetProgressBar.visibility = View.GONE
+
+                val errorState = when {
+                    loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                    loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                    loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                    else -> null
+                }
+                errorState?.let {
+                    Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+
     }
 
     override fun onMailClick(mealType: String) {
-        initAddMealBottomSheet(mealType)
-        bottomSheet.show()
+        initAddIngredientsBottomSheet(mealType)
+        ingreadientsBottomSheet.show()
+        getIngredients()
+    }
+
+
+    private fun initSaveMealDialog(mealName: String) {
+        saveMealBottomSheet = BottomSheetDialog(requireContext())
+        val binding = SelectedIngredientViewBinding.inflate(LayoutInflater.from(context))
+        saveMealBottomSheet.setContentView(binding.root)
+        saveMealBottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        saveMealBottomSheet.setOnShowListener {
+            val bottomSheetDialog = it as BottomSheetDialog
+            val parentLayout = bottomSheetDialog.findViewById<View>(
+                com.google.android.material.R.id.design_bottom_sheet
+            )
+            parentLayout?.let { bottomSheet ->
+                val behaviour = BottomSheetBehavior.from(bottomSheet)
+                val layoutParams = bottomSheet.layoutParams
+                layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+                bottomSheet.layoutParams = layoutParams
+                behaviour.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+
+        binding.tvName.text = mealName
+        initSelectedIngredients(binding.recyclerView)
+        binding.btnClose.setOnClickListener { saveMealBottomSheet.hide() }
+        setMealData(binding, ingredientsAdapter.getSelectedData())
+        binding.confirmButton.setOnClickListener {
+            addMealRequest()
+        }
+        saveMealBottomSheet.show()
+    }
+
+    private fun initSelectedIngredients(recyclerView: RecyclerView) {
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        val adapter = IngredientsAdapter(requireContext(), false)
+        recyclerView.adapter = adapter
+        adapter.updateData(this, ingredientsAdapter.getSelectedData())
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setMealData(binding: SelectedIngredientViewBinding, ingredients: List<Data>) {
+        var totalFats = 0.0f
+        var totalCarbs = 0.0f
+        var totalProtein = 0.0f
+        var totalCalories = 0.0f
+
+        for (ingredient in ingredients) {
+            totalFats += ingredient.fats
+            totalCarbs += ingredient.carbs
+            totalProtein += ingredient.proteins
+            totalCalories += ingredient.calories
+        }
+
+        binding.tvCarbsValue.text = totalCarbs.toString() + "g"
+        binding.tvProteinValue.text = totalProtein.toString() + "g"
+        binding.tvFatsValue.text = totalFats.toString() + "g"
+        binding.tvCaloriesValue.text = totalCalories.toString() + "Kcal"
+    }
+
+    private fun addMealRequest() {
+
+        val list: ArrayList<Ingredient> = ArrayList()
+
+        for (ingredient in ingredientsAdapter.getSelectedData()) {
+            list.add(Ingredient(ingredient.id, ingredient.servings_count))
+        }
+        var data = AddCustomMealBody(list)
+        viewModel.addCustomMeal(
+            "Bearer ${UserPrefUtil.getUserData(requireContext())?.token}", data
+        )
+
+
+        lifecycleScope.launch {
+            viewModel.addCustomMeal.collect {
+                when (it) {
+                    is ApiResult.Success<*> -> {
+                        Toast.makeText(
+                            context, getString(R.string.meal_added_successfully), Toast.LENGTH_SHORT
+                        ).show()
+                        saveMealBottomSheet.hide()
+                        ingreadientsBottomSheet.hide()
+                        requestData()
+                    }
+
+                    is ApiResult.Failure -> handleFail(it.exception)
+                    else -> {}
+                }
+            }
+        }
     }
 
 

@@ -7,6 +7,8 @@ import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGo
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.TodayMealsResponse
+import com.modarb.android.ui.home.ui.nutrition.models.AddCustomMealBody
+import com.modarb.android.ui.home.ui.nutrition.models.ingredients.IngredientsResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.CreateCustomWorkoutRequest
 import com.modarb.android.ui.home.ui.plan.domain.models.PlanPageResponse
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
@@ -132,6 +134,23 @@ interface ApiService {
     suspend fun getHomePageTodayInTake(
         @Header("Authorization") token: String,
     ): Response<TodayInTakeResponse>
+
+    // Ingredients
+    @GET("/api/v1/user/ingredients")
+    suspend fun getIngredients(
+        @Header("Authorization") token: String, @Query("skip") skip: Int, @Query("limit") limit: Int
+    ): Response<IngredientsResponse>
+
+    //TODO handle paging here
+    @GET("/api/v1/user/ingredients/search?limit=50")
+    suspend fun searchIngredients(
+        @Header("Authorization") token: String, @Query("searchTerm") search: String
+    ): Response<IngredientsResponse>
+
+    @POST("/api/v1/user/meals/eat-custom-meal")
+    suspend fun addCustomMeal(
+        @Header("Authorization") token: String, @Body data: AddCustomMealBody
+    ): Response<BaseResponse>
 
 }
 
