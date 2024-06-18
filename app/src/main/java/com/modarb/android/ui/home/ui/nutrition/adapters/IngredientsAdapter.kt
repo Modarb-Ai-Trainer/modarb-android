@@ -19,7 +19,11 @@ import com.modarb.android.databinding.IngredientDetailsViewBinding
 import com.modarb.android.databinding.ItemIngredientsBinding
 import com.modarb.android.ui.home.ui.nutrition.models.ingredients.Data
 
-class IngredientsAdapter(private val context: Context, private val isAdd: Boolean) :
+class IngredientsAdapter(
+    private val mealType: String,
+    private val context: Context,
+    private val isAdd: Boolean
+) :
     PagingDataAdapter<Data, IngredientsAdapter.IngredientViewHolder>(DIFF_CALLBACK) {
     private var selectedItems: HashMap<String, Data> = HashMap()
 
@@ -131,6 +135,8 @@ class IngredientsAdapter(private val context: Context, private val isAdd: Boolea
         binding.tvCarbs.text = "${data.carbs}"
         binding.tvProtein.text = "${data.proteins} mg"
         binding.tvFats.text = "${data.fats} g"
+
+        binding.btnAddToBreakfast.text = "Add to ${mealType}"
 
         binding.btnAddToBreakfast.setOnClickListener {
             markAsSelected(data.id, position)

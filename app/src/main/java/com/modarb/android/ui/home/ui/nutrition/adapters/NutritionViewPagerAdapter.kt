@@ -10,7 +10,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -209,7 +208,7 @@ class NutritionViewPagerAdapter(
         private fun showPlanDetails() {
             binding.nutritionPlanCardView.setOnClickListener {
                 val intent = Intent(context, AboutNutritionPlanActivity::class.java)
-                NutritionHelper.selectedMeal = myMealsResponse.data.meal_plan
+                NutritionHelper.selectedMyProgram = myMealsResponse.data.meal_plan
                 context.startActivity(intent)
             }
 
@@ -257,7 +256,10 @@ class NutritionViewPagerAdapter(
         return dataList
     }
 
-    override fun onPlanItemClick(workoutId: com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.Data) {
-        Toast.makeText(context, workoutId.description, Toast.LENGTH_SHORT).show()
+    override fun onPlanItemClick(data: com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.Data) {
+        val intent = Intent(context, AboutNutritionPlanActivity::class.java)
+        intent.putExtra("isAddProgram", true)
+        NutritionHelper.selectedProgram = data
+        context.startActivity(intent)
     }
 }

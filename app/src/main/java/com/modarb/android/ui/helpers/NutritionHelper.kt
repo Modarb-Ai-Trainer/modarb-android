@@ -3,11 +3,13 @@ package com.modarb.android.ui.helpers
 import android.app.AlertDialog
 import android.content.Context
 import com.modarb.android.R
+import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.Data
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MealPlan
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.Ingredient
 
 object NutritionHelper {
-    lateinit var selectedMeal: MealPlan
+    lateinit var selectedProgram: Data
+    lateinit var selectedMyProgram: MealPlan
 
     fun showDetails(context: Context, message: String) {
         val builder = AlertDialog.Builder(context, R.style.DarkAlertDialogTheme)

@@ -148,7 +148,7 @@ class NutritionFragment : Fragment(), OnMealClickListener {
             }
             initSaveMealDialog(mealName)
         }
-        initBottomSheetRecycle(binding.recyclerView)
+        initBottomSheetRecycle(mealName, binding.recyclerView)
         binding.mealName.text = mealName
         handleSearch(binding.searchEditText)
         binding.closeBtn.setOnClickListener { ingreadientsBottomSheet.hide() }
@@ -298,12 +298,11 @@ class NutritionFragment : Fragment(), OnMealClickListener {
     private fun handleFail(exception: Throwable) {
         Toast.makeText(context, exception.message, Toast.LENGTH_LONG).show()
         Log.e("fail", exception.stackTrace.toString())
-
     }
 
-    private fun initBottomSheetRecycle(recyclerView: RecyclerView) {
+    private fun initBottomSheetRecycle(mealType: String, recyclerView: RecyclerView) {
         recyclerView.layoutManager = LinearLayoutManager(context)
-        ingredientsAdapter = IngredientsAdapter(requireContext(), true)
+        ingredientsAdapter = IngredientsAdapter(mealType, requireContext(), true)
         recyclerView.adapter = ingredientsAdapter
 
         ingredientsAdapter.addLoadStateListener { loadState ->
@@ -354,7 +353,7 @@ class NutritionFragment : Fragment(), OnMealClickListener {
         }
 
         binding.tvName.text = mealName
-        initSelectedIngredients(binding.recyclerView)
+        initSelectedIngredients(mealName, binding.recyclerView)
         binding.btnClose.setOnClickListener { saveMealBottomSheet.hide() }
         setMealData(binding, ingredientsAdapter.getSelectedData())
         binding.confirmButton.setOnClickListener {
@@ -363,9 +362,9 @@ class NutritionFragment : Fragment(), OnMealClickListener {
         saveMealBottomSheet.show()
     }
 
-    private fun initSelectedIngredients(recyclerView: RecyclerView) {
+    private fun initSelectedIngredients(mealType: String, recyclerView: RecyclerView) {
         recyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = IngredientsAdapter(requireContext(), false)
+        val adapter = IngredientsAdapter(mealType, requireContext(), false)
         recyclerView.adapter = adapter
         adapter.updateData(this, ingredientsAdapter.getSelectedData())
     }
