@@ -8,6 +8,12 @@
 
     </style>
 
+    <style name="DarkAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">@color/grey_800</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/grey_400</item>
+    </style>
+
     <style name="AppTheme.Picker" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:textColorPrimary">@color/primary_400</item>
     </style>
