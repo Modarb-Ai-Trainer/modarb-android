@@ -1,13 +1,12 @@
 package com.modarb.android.ui.home.ui.more.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.modarb.android.R
-import com.modarb.android.ui.home.ui.more.adapters.CommonInjuriesAdapter
 import com.modarb.android.ui.home.ui.more.adapters.RecoveryPlanAdapter
 
 class InjuryActivity : AppCompatActivity() {
@@ -36,13 +35,13 @@ class InjuryActivity : AppCompatActivity() {
         }
 
         val commonInjuriesList = listOf("Sprained Ankle", "Calf Strain", "Shoulder\nTendinitis")
-        val imageResources2 = listOf(
-            R.drawable.common_injuries_img1,
-            R.drawable.common_injuries_img2,
-            R.drawable.common_injuries_img3
-        )
-        val recyclerView2: RecyclerView = findViewById(R.id.commonInjuriesRecyclerView)
-        recyclerView2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView2.adapter = CommonInjuriesAdapter(commonInjuriesList, imageResources2)
+//        val imageResources2 = listOf(
+//            R.drawable.common_injuries_img1,
+//            R.drawable.common_injuries_img2,
+//            R.drawable.common_injuries_img3
+//        )
+//        val recyclerView2: RecyclerView = findViewById(R.id.commonInjuriesRecyclerView)
+//        recyclerView2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        recyclerView2.adapter = CommonInjuriesAdapter(commonInjuriesList, imageResources2)
     }
 }

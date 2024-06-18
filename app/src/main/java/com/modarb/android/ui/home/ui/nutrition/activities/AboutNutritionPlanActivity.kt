@@ -23,7 +23,8 @@ class AboutNutritionPlanActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        binding.desStandardTextView.text = NutritionHelper.selectedMeal.level
+        binding.title.text = NutritionHelper.selectedMeal.level
+        binding.desStandardTextView.text = NutritionHelper.selectedMeal.your_journey
         binding.desAboutThePlanTextView.text = NutritionHelper.selectedMeal.description
 
         val keyFeature: StringBuilder = StringBuilder()
