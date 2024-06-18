@@ -252,8 +252,8 @@ class HomeFragment : Fragment() {
 
         val exerciseCount =
             WorkoutData.getTodayWorkout(response.data.myWorkout.weeks)?.total_number_exercises?.toString()
-                ?: ("No " + getString(R.string.exercise))
-        binding.exerciseCountTxt.text = exerciseCount
+        binding.exerciseCountTxt.text =
+            if (exerciseCount.isNullOrBlank()) "No Exercises" else "$exerciseCount Exercises"
     }
 
     private fun formatWorkoutTime(minutesPerDay: Int, context: Context): String {
