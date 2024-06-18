@@ -30,7 +30,7 @@ class ExerciseLibViewHolder(private val view: View, private val context: Context
         exercises = ArrayList()
         for (part in WorkoutData.getBodyParts()) {
             if (part != "All")
-                exercises.add(BodyParts(part, R.mipmap.ic_launcher))
+                exercises.add(BodyParts(part, R.drawable.rounded_gradient_rectangle))
         }
 
         adapter = BodyPartsAdapter(exercises, listener!!)
