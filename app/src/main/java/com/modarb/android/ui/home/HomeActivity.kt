@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         handleIntent()
-        //startSound()
+        startSound()
     }
 
     private fun startSound() {
