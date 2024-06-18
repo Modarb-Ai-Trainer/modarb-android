@@ -244,6 +244,7 @@
     <string name="calories">calories</string>
     <string name="meal_added_successfully">Meal added successfully</string>
     <string name="please_enroll_on_a_new_program">Please Enroll on a new program</string>
+    <string name="whats_your_date_of_birth">What’s Your date of birth ?</string>
 
 
 </resources>
