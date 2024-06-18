@@ -51,7 +51,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/nutritionPlanCardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
@@ -82,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -96,7 +96,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.45" />
 
             <TextView
                 android:id="@+id/desStandardPlanTextView"
@@ -106,6 +106,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:maxLines="4"
                 android:background="?android:attr/selectableItemBackground"
                 android:gravity="start"
                 android:text="@string/eat_all_essence_unrestricted_nutrition"
