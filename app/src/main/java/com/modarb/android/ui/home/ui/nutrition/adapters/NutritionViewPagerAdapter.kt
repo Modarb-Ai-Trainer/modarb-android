@@ -142,7 +142,7 @@ class NutritionViewPagerAdapter(
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             val list = todayMealsResponse.data.days[0].meals
-            val mealTypeOrder = listOf("breakfast", "lunch", "dinner", "snacks")
+            val mealTypeOrder = listOf("Breakfast", "Lunch", "Dinner", "Snacks")
 
             val sortedMealList = list.sortedBy { meal ->
                 mealTypeOrder.indexOf(meal.type)
