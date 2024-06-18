@@ -31,7 +31,7 @@
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:padding="8dp"
-        android:text="@string/how_old_are_you"
+        android:text="@string/whats_your_date_of_birth"
         android:textColor="@color/lavender"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
