@@ -1,7 +1,6 @@
 package com.modarb.android.ui.home
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.View
@@ -36,14 +35,6 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         handleIntent()
-        startSound()
-    }
-
-    private fun startSound() {
-        val mediaPlayer = MediaPlayer.create(
-            this, R.raw.music
-        )
-        mediaPlayer.start()
     }
 
     private fun handleIntent() {
