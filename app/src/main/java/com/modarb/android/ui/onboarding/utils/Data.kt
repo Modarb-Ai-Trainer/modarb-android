@@ -49,7 +49,7 @@ class Data {
 
         fun getSelected(selected: String): String {
             var selectedText = selected
-            if (selectedText == "body weight") {
+            if (selectedText == "Body weight") {
                 selectedText = "bodyweight"
             }
             return selectedText.lowercase(Locale.ROOT)

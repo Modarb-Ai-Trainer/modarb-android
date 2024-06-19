@@ -41,7 +41,6 @@ class RegisterScreenActivity : AppCompatActivity() {
             val email = binding.emailEditText2.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
             val confirmPassword = binding.confirmPasswordEditText.text.toString().trim()
-            UserRegisterData.registerRequest.dob = "2023/2/2"
 
             if (isValidInput()) {
                 UserRegisterData.registerRequest.name = name
@@ -53,6 +52,8 @@ class RegisterScreenActivity : AppCompatActivity() {
                 viewModel.registerUser(UserRegisterData.registerRequest)
             }
         }
+        UserRegisterData.printData()
+
         getResponse()
     }
 

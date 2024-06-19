@@ -1,5 +1,6 @@
 package com.modarb.android.ui.onboarding.ViewPagerViews
 
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import com.modarb.android.R
@@ -43,20 +44,22 @@ class SelectGenderView(view: View) {
 
         var formattedDate = formatDate(calendar.time)
         UserRegisterData.registerRequest.dob = formattedDate
+        datePicker.init(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ) { view, year, month, dayOfMonth ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            formattedDate = formatDate(calendar.time)
+            UserRegisterData.registerRequest.dob = formattedDate
+            Log.d("birthdate", UserRegisterData.registerRequest.dob)
+        }
         datePicker.setOnClickListener {
-            datePicker.init(
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ) { view, year, month, dayOfMonth ->
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-                formattedDate = formatDate(calendar.time)
-                UserRegisterData.registerRequest.dob = formattedDate
-
-            }
+            UserRegisterData.registerRequest.dob = formattedDate
+            Log.d("birthdate22", UserRegisterData.registerRequest.dob)
         }
     }
 
