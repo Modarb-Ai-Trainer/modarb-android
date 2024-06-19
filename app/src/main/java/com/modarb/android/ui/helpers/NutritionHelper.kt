@@ -19,27 +19,21 @@ object NutritionHelper {
         builder.create().show()
     }
 
-    fun buildNutritionString(item: Ingredient): String {
+    fun buildNutritionString(item: List<Ingredient>): String {
         val stringBuilder = StringBuilder()
 
-        stringBuilder.append("Name: ${item.name}\n\n")
-        stringBuilder.append("Calories: ${item.calories} kcal\n\n")
-        stringBuilder.append("Carbs: ${item.carbs} g\n\n")
-        stringBuilder.append("Fats: ${item.fats} g\n\n")
-        stringBuilder.append("Proteins: ${item.proteins} g\n\n")
-        stringBuilder.append("Serving Size: ${item.serving_size} g")
+        for (ingredient in item) {
+            stringBuilder.append("Name: ${ingredient.name}\n\n")
+            stringBuilder.append("- Calories: ${ingredient.calories} kcal\n")
+            stringBuilder.append("- Carbs: ${ingredient.carbs} g\n")
+            stringBuilder.append("- Fats: ${ingredient.fats} g\n")
+            stringBuilder.append("- Proteins: ${ingredient.proteins} g\n")
+            stringBuilder.append("- Serving Size: ${ingredient.serving_size} g")
+            stringBuilder.append("\n\n")
+        }
+
         return stringBuilder.toString()
     }
 
-    fun buildNutritionString(item: com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.Ingredient): String {
-        val stringBuilder = StringBuilder()
-        stringBuilder.append("Name: ${item.name}\n\n")
-        stringBuilder.append("Calories: ${item.calories} kcal\n\n")
-        stringBuilder.append("Carbs: ${item.carbs} g\n\n")
-        stringBuilder.append("Fats: ${item.fats} g\n\n")
-        stringBuilder.append("Proteins: ${item.proteins} g\n\n")
-        stringBuilder.append("Serving Size: ${item.serving_size} g")
-        return stringBuilder.toString()
-    }
 
 }

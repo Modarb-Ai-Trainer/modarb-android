@@ -50,8 +50,7 @@ class TodayMealAdapter(private val context: Context, private val mealList: List<
             }
             itemView.setOnClickListener {
                 NutritionHelper.showDetails(
-                    context,
-                    NutritionHelper.buildNutritionString(mealItem.ingredients[position])
+                    context, NutritionHelper.buildNutritionString(mealItem.ingredients)
                 )
             }
         }
