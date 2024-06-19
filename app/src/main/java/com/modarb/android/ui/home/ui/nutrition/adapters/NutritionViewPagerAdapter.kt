@@ -215,7 +215,7 @@ class NutritionViewPagerAdapter(
             // TODO remove this
             try {
                 binding.standardPlanTextView.text = myMealsResponse.data.meal_plan.level
-                binding.desStandardPlanTextView.text = myMealsResponse.data.meal_plan.your_journey
+                binding.desStandardPlanTextView.text = myMealsResponse.data.meal_plan.description
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -110,8 +110,10 @@ class AboutNutritionPlanActivity : AppCompatActivity() {
         }
 
         if (keyFeature.isNotEmpty()) binding.desKeyFeaturesTextView1.text = keyFeature
-        if (NutritionHelper.selectedMyProgram.your_journey!!.isNotEmpty()) binding.desYourJourneyTextView.text =
+        else binding.keyFeaturesTextView.visibility = View.GONE
+        if (NutritionHelper.selectedMyProgram.your_journey != null) binding.desYourJourneyTextView.text =
             NutritionHelper.selectedMyProgram.your_journey
+        else binding.yourJourneyTextView.visibility = View.GONE
     }
 
     private fun initIntentData() {
