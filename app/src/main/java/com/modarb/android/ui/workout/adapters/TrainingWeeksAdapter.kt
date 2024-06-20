@@ -1,7 +1,7 @@
 package com.modarb.android.ui.workout.adapters
-
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -18,16 +18,21 @@ import com.modarb.android.ui.workout.activities.WeeklyWorkoutActivity
 class TrainingWeeksAdapter(private val dataList: List<Week>, private val context: Context) :
     RecyclerView.Adapter<TrainingWeeksAdapter.TrainingWeeksViewHolder>() {
 
+    private var isTheCurrentWeekFound: Boolean = false
+
+    private var isVisited: HashMap<String, Boolean> = HashMap()
+
     inner class TrainingWeeksViewHolder(private val binding: ItemTimelineBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(weekData: Week, isTheCurrentWeek: Boolean) {
+
+            binding.timeline.initLine(itemViewType)
             binding.apply {
                 weekName.text = weekData.week_name
-                binding.timeline.initLine(itemViewType)
-
-                if (isTheCurrentWeek) {
+                if (weekData.is_theCurrentWeek) {
                     WorkoutData.currentWeekPosition = adapterPosition
+
                     setMarker(R.drawable.ic_marker)
                     bindDaysAdapter(weekData.days, true)
                     weekDesc.text = weekData.week_description
@@ -39,6 +44,7 @@ class TrainingWeeksAdapter(private val dataList: List<Week>, private val context
                     bindDaysAdapter(weekData.days, false)
                 }
             }
+            isVisited[weekData.week_name] = true
         }
 
         private fun bindDaysAdapter(days: List<Day>, isTheCurrentWeek: Boolean) {
@@ -62,16 +68,24 @@ class TrainingWeeksAdapter(private val dataList: List<Week>, private val context
     override fun onBindViewHolder(holder: TrainingWeeksViewHolder, position: Int) {
         val weekData = dataList[position]
         val isTheCurrentWeek = !isTheCurrentWeekFound && !weekData.is_done
+        if (isTheCurrentWeek) {
+            dataList[position].is_theCurrentWeek = true
+            isTheCurrentWeekFound = true
+        }
 
         holder.bind(weekData, isTheCurrentWeek)
-        isTheCurrentWeekFound = isTheCurrentWeek
+        Log.e(
+            "CURRENT WEEK",
+            "${weekData.week_name}, Position: $position, IsCurrentWeek: $isTheCurrentWeek, IsCurrentWeekFound: $isTheCurrentWeekFound"
+        )
     }
 
-    private var isTheCurrentWeekFound: Boolean = false
-
     override fun getItemCount() = dataList.size
+
 
     override fun getItemViewType(position: Int): Int {
         return TimelineView.getTimeLineViewType(position, itemCount)
     }
+//    override fun getItemViewType(position: Int): Int = position
+
 }

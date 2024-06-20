@@ -69,7 +69,8 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Response<CustomWorkoutResponse>
 
-    @GET("api/v1/user/workouts")
+    // TODO add paging
+    @GET("api/v1/user/workouts?limit=200")
     suspend fun getWorkoutPrograms(
         @Header("Authorization") token: String,
     ): Response<WorkoutProgramsResponse>

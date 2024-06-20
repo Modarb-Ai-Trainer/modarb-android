@@ -5,5 +5,6 @@ data class Week(
     val is_done: Boolean,
     val week_description: String,
     val week_name: String,
-    val week_number: Int
+    val week_number: Int,
+    var is_theCurrentWeek: Boolean = false
 )

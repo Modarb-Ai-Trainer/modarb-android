@@ -3,6 +3,7 @@ package com.modarb.android.ui.home.ui.plan.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,17 +55,18 @@ class MyPlanViewPagerAdapter(
 
     inner class MyPlanViewHolder(private val binding: MyPlanViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var adapter: TrainingWeeksAdapter
 
         private fun setupRecyclerView(context: Context) {
-            binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            if (!::adapter.isInitialized) {
-                adapter = TrainingWeeksAdapter(
-                    planResponse.data.weeks, context
-                )
-                binding.recyclerView.adapter = adapter
-                binding.recyclerView.isNestedScrollingEnabled = false
-            }
+            binding.recyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+            Log.e("weeks", planResponse.data.weeks.size.toString())
+            val adapter = TrainingWeeksAdapter(
+                planResponse.data.weeks, context
+            )
+            binding.recyclerView.adapter = adapter
+            binding.recyclerView.isNestedScrollingEnabled = false
+
         }
 
         private fun loadDataIntoViews(context: Context) {
