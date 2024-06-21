@@ -23,16 +23,6 @@
             android:screenOrientation="nosensor" />
 
         <activity
-            android:name=".ui.home.ui.nutrition.activities.NutritionOtherGuidePlansActivity"
-            android:exported="false"
-            android:screenOrientation="nosensor" />
-
-        <activity
-            android:name=".ui.home.ui.nutrition.activities.AboutOtherNutritionPlanActivity"
-            android:exported="false"
-            android:screenOrientation="nosensor" />
-
-        <activity
             android:name=".ui.home.ui.nutrition.activities.AboutNutritionPlanActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
