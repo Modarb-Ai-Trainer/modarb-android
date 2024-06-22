@@ -17,6 +17,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="70dp"
+            android:background="@drawable/corner_image"
             android:layout_height="70dp"
             android:layout_margin="8dp"
             android:layout_marginStart="16dp"
