@@ -27,10 +27,11 @@ class WorkoutInsightsActivity : AppCompatActivity() {
         var totalDuration = 0
         WorkoutData.getTodayWorkout()!!.exercises.forEach {
             totalDuration += it.duration
+            totalDuration += it.expectedDurationRange.min
         }
         binding.dayDetails.text =
             " Day" + WorkoutData.getTodayWorkout()!!.day_number + " " + WorkoutData.getTodayWorkout()!!.day_type
-        binding.timeTxt.text = "${totalDuration / 60} \n Minutes"
+        binding.timeTxt.text = "${(totalDuration / 60)} \n Minutes"
 
     }
 
