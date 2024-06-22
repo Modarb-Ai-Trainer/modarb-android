@@ -1,22 +1,16 @@
 package com.modarb.android.ui.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.modarb.android.R
 import com.modarb.android.databinding.ActivityHomeBinding
-import com.modarb.android.ui.home.ui.more.activities.NotificationActivity
 
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var textToSpeech: TextToSpeech
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,11 +23,6 @@ class HomeActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
 
-        val imageView = findViewById<View>(R.id.notificationBtn)
-        imageView.setOnClickListener {
-            val intent = Intent(this, NotificationActivity::class.java)
-            startActivity(intent)
-        }
         handleIntent()
     }
 

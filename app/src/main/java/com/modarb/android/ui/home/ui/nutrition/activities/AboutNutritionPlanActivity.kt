@@ -117,7 +117,6 @@ class AboutNutritionPlanActivity : AppCompatActivity() {
     }
 
     private fun initIntentData() {
-        //TODO refactor this
         binding.title.text = NutritionHelper.selectedProgram.level
         binding.desStandardTextView.text = NutritionHelper.selectedProgram.your_journey
         binding.desAboutThePlanTextView.text = NutritionHelper.selectedProgram.description

@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.modarb.android.R
 import com.modarb.android.databinding.ItemWorkoutProgramBinding
-import com.modarb.android.ui.helpers.ViewUtils
 import com.modarb.android.ui.home.ui.workouts.OnWorkoutItemClickListener
 import com.modarb.android.ui.home.ui.workouts.models.workout_programs.Data
 
@@ -18,8 +18,15 @@ class WorkoutProgramAdapter(
     inner class WorkoutViewHolder(private val binding: ItemWorkoutProgramBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(program: Data) {
-            //TODO Uncomment this
-            ViewUtils.loadImage(context, program.image, binding.workoutImage)
+            if (position % 4 == 0) {
+                binding.workoutImage.setImageResource(R.drawable.rounded_gradient_rectangle2)
+            } else if (position % 4 == 1) {
+                binding.workoutImage.setImageResource(R.drawable.rounded_gradient_rectangle3)
+            } else if (position % 4 == 2) {
+                binding.workoutImage.setImageResource(R.drawable.rounded_gradient_rectangle4)
+            } else if (position % 4 == 3) {
+                binding.workoutImage.setImageResource(R.drawable.rounded_gradient_rectangle5)
+            }
             binding.workoutName.text = program.name
             binding.workoutView.setOnClickListener {
                 listener.onWorkoutItemClick(program)

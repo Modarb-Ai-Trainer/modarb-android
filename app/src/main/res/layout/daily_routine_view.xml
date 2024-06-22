@@ -423,13 +423,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:layout_marginTop="8dp"
                             android:text="@string/breakfast"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/breakfast_image"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView23" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
                         <ImageView
@@ -437,27 +437,15 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:layout_alignTop="@+id/breakfast_calories"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="4dp"
                             android:layout_toStartOf="@+id/breakfast_calories"
                             android:src="@drawable/baseline_add_circle_outline_24"
                             app:layout_constraintEnd_toEndOf="@+id/breakfast_text"
                             app:layout_constraintStart_toStartOf="@+id/breakfast_text"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/breakfast_text"
                             app:tint="@color/primary_200" />
 
-                        <TextView
-                            android:id="@+id/breakfast_calories"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/breakfast_text"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="8dp"
-                            android:text="250kcal"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/breakfast_text" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -487,32 +475,23 @@
                             android:text="@string/lunch"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/lunch_add_icon" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/lunch_add_icon"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="4dp"
                             android:src="@drawable/baseline_add_circle_outline_24"
                             app:layout_constraintEnd_toEndOf="@+id/lunch_text"
                             app:layout_constraintStart_toStartOf="@+id/lunch_text"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/lunch_text"
                             app:tint="@color/primary_200" />
 
-                        <TextView
-                            android:id="@+id/lunch_calories"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="650kcal"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/lunch_text" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -539,36 +518,26 @@
                             android:id="@+id/snack_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:text="@string/snack"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/snack_image"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/snack_add_icon" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/snack_add_icon"
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="4dp"
                             android:src="@drawable/baseline_add_circle_outline_24"
                             app:layout_constraintEnd_toEndOf="@+id/snack_text"
                             app:layout_constraintStart_toStartOf="@+id/snack_text"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/snack_text"
                             app:tint="@color/primary_200" />
 
-                        <TextView
-                            android:id="@+id/snack_calories"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="200kcal"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/snack_text" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -594,36 +563,26 @@
                             android:id="@+id/dinner_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:text="@string/dinner"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/dinner_add_icon" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/dinner_add_icon"
                             android:layout_width="28dp"
+                            android:layout_marginTop="4dp"
                             android:layout_height="28dp"
-                            android:layout_marginTop="16dp"
                             android:src="@drawable/baseline_add_circle_outline_24"
                             app:layout_constraintEnd_toEndOf="@+id/dinner_text"
                             app:layout_constraintStart_toStartOf="@+id/dinner_text"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/dinner_text"
                             app:tint="@color/primary_200" />
 
-                        <TextView
-                            android:id="@+id/dinner_calories"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="320kcal"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/dinner_text" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

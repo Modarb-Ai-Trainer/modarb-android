@@ -16,117 +16,108 @@
         android:usesCleartextTraffic="true"
         tools:ignore="DiscouragedApi"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.WebView"
+            android:exported="false" />
         <activity
             android:name=".ui.workout.activities.WorkoutActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.nutrition.activities.AboutNutritionPlanActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.onboarding.activities.WelcomeScreenActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.workout.activities.TodayWorkoutActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.InjuryTodayWorkoutActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.InjuryActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.workout.activities.WeeklyWorkoutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.ChallengeActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.NotificationActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.SettingActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.workout.activities.WorkoutInsightsActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.AppAppearanceActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.ReminderActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.EditProfileActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.workout.activities.ExerciseInfoActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.home.ui.more.activities.ProfileActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.onboarding.activities.RegisterScreenActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.onboarding.activities.OnBoardingSplashActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
-
         <activity
             android:name=".ui.onboarding.activities.OnBoardingActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
 
         <activity
+            android:name=".ui.ChatBotWebView"
+            android:exported="false"
+            android:label="Chat Bot"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".ui.onboarding.activities.SplashActivity"
             android:exported="true"
+
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

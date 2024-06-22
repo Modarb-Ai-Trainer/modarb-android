@@ -19,6 +19,7 @@ import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.NetworkHelper
+import com.modarb.android.ui.ChatBotWebView
 import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.HomeActivity
 import com.modarb.android.ui.home.ui.home.domain.models.HomePageResponse
@@ -239,6 +240,10 @@ class HomeFragment : Fragment() {
 
         binding.nutritionView.setOnClickListener {
             (activity as? HomeActivity)?.navigateToFragment(R.id.navigation_nutrition)
+        }
+
+        binding.chatBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), ChatBotWebView::class.java))
         }
 
         binding.userName.text = "Hey, \n" + UserPrefUtil.getUserData(requireContext())!!.user.name

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:clipToPadding="true"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,11 +24,10 @@
 
             <ImageView
                 android:id="@+id/workoutImage"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/corner_image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/break_fast_meal"
+                android:src="@drawable/rounded_gradient_rectangle2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
