@@ -35,7 +35,6 @@ import kotlinx.coroutines.launch
 
 data class NutritionData(
     val todayMeals: ApiResult<TodayMealsResponse>?,
-    val dailyGoals: ApiResult<DailyGoalsResponse>?,
     val todayInTake: ApiResult<TodayInTakeResponse>?,
     val myMealPlan: ApiResult<MyMealPlanResponse>?,
     val allMealsPlans: ApiResult<AllMealsPlansResponse>?
@@ -68,14 +67,10 @@ class NutritionViewModel : ViewModel() {
 
     val getAllIngredients: StateFlow<ApiResult<IngredientsResponse>?> get() = _getAllIngredients
     val combinedNutritionData: StateFlow<NutritionData> = combine(
-        _todayMealsResponse,
-        _getDailyGoalsResponse,
-        _getTodayInTake,
-        _getMyMealPlan,
-        _getAllMealsPlan
-    ) { todayMeals, dailyGoals, todayInTake, myMealPlan, allMealsPlans ->
-        NutritionData(todayMeals, dailyGoals, todayInTake, myMealPlan, allMealsPlans)
-    }.stateIn(viewModelScope, SharingStarted.Lazily, NutritionData(null, null, null, null, null))
+        _todayMealsResponse, _getTodayInTake, _getMyMealPlan, _getAllMealsPlan
+    ) { todayMeals, todayInTake, myMealPlan, allMealsPlans ->
+        NutritionData(todayMeals, todayInTake, myMealPlan, allMealsPlans)
+    }.stateIn(viewModelScope, SharingStarted.Lazily, NutritionData(null, null, null, null))
 
     fun getAllNutritionData(token: String) {
         viewModelScope.launch {

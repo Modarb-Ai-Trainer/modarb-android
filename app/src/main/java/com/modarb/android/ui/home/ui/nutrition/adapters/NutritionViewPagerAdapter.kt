@@ -21,11 +21,11 @@ import com.modarb.android.ui.home.ui.nutrition.OnMealClickListener
 import com.modarb.android.ui.home.ui.nutrition.OnPlanItemClickListener
 import com.modarb.android.ui.home.ui.nutrition.activities.AboutNutritionPlanActivity
 import com.modarb.android.ui.home.ui.nutrition.domain.models.all_meals_plan.AllMealsPlansResponse
-import com.modarb.android.ui.home.ui.nutrition.domain.models.daily_goals.DailyGoalsResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.my_meal_plan.MyMealPlanResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_intake.TodayInTakeResponse
 import com.modarb.android.ui.home.ui.nutrition.domain.models.today_meals.TodayMealsResponse
 import com.modarb.android.ui.home.ui.nutrition.models.NutritionDataModel
+import kotlin.math.roundToInt
 
 
 class NutritionViewPagerAdapter(
@@ -34,9 +34,7 @@ class NutritionViewPagerAdapter(
     private val todayMealsResponse: TodayMealsResponse,
     private val todayInTakeResponse: TodayInTakeResponse,
     private val allMealsResponse: AllMealsPlansResponse,
-    private val myMealsResponse: MyMealPlanResponse,
-    private val dailyGoalsResponse: DailyGoalsResponse
-
+    private val myMealsResponse: MyMealPlanResponse
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), OnPlanItemClickListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -85,33 +83,45 @@ class NutritionViewPagerAdapter(
         private fun updateProgressBars(model: TodayInTakeResponse) {
             val data = model.data
             updateProgressBar(
-                binding.calProgressBar, data.caloriesGoal, data.caloriesGoal - data.caloriesLeft
+                binding.calProgressBar,
+                data.caloriesGoal.roundToInt(),
+                data.caloriesIntake.roundToInt()
             )
             binding.calValue.text = data.caloriesLeft.toString()
 
             updateMacroProgressBar(
                 binding.carbsProgressBar,
                 binding.carbsValue,
-                data.carbsGoal,
-                data.carbsConsumed,
+                data.carbsGoal.roundToInt(),
+                data.carbsConsumed.roundToInt(),
                 "g"
             )
             updateMacroProgressBar(
                 binding.proteinProgressBar,
                 binding.proteinValue,
-                data.proteinGoal,
-                data.proteinConsumed,
+                data.proteinGoal.roundToInt(),
+                data.proteinConsumed.roundToInt(),
                 "g"
             )
             updateMacroProgressBar(
-                binding.fatsProgressBar, binding.fatsValue, data.fatGoal, data.fatConsumed, "g"
+                binding.fatsProgressBar,
+                binding.fatsValue,
+                data.fatGoal.roundToInt(),
+                data.fatConsumed.roundToInt(),
+                "g"
             )
 
-            updateProgressBar(binding.burnedProgressBar, data.caloriesGoal, data.caloriesBurned)
+            updateProgressBar(
+                binding.burnedProgressBar,
+                data.caloriesGoal.roundToInt(),
+                data.caloriesBurned.roundToInt()
+            )
             binding.burnedCal.text = "${data.caloriesBurned} Kcal"
 
-            val intakedCalories = data.caloriesGoal - data.caloriesLeft
-            updateProgressBar(binding.intakedProgressBar, data.caloriesGoal, intakedCalories)
+            val intakedCalories = data.caloriesIntake.roundToInt()
+            updateProgressBar(
+                binding.intakedProgressBar, data.caloriesGoal.roundToInt(), intakedCalories
+            )
             binding.intakedCal.text = "${intakedCalories} Kcal"
         }
 

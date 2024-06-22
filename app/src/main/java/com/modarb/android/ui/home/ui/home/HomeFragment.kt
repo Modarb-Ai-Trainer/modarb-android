@@ -31,6 +31,7 @@ import com.modarb.android.ui.onboarding.activities.SplashActivity
 import com.modarb.android.ui.onboarding.utils.UserPref.UserPrefUtil
 import com.modarb.android.ui.workout.activities.TodayWorkoutActivity
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 class HomeFragment : Fragment() {
 
@@ -94,33 +95,33 @@ class HomeFragment : Fragment() {
         val data = model.data
         updateProgressBar(
             binding.trackerView.circularProgressBar,
-            data.caloriesGoal,
-            data.caloriesGoal - data.caloriesLeft
+            data.caloriesGoal.roundToInt(),
+            data.caloriesIntake.roundToInt()
         )
         binding.trackerView.calValue.text =
-            (data.caloriesGoal - data.caloriesLeft).toString() + " / " + data.caloriesGoal + "\n\nKcal"
+            (data.caloriesIntake.roundToInt()).toString() + " / " + data.caloriesGoal.roundToInt() + "\n\nKcal"
         binding.trackerView.burnedVal.text = data.caloriesBurned.toString() + "\nBurned"
         binding.trackerView.leftVal.text = data.caloriesLeft.toString() + "\nLeft"
 
         updateMacroProgressBar(
             binding.trackerView.carbsProgressBar,
             binding.trackerView.carbsValue,
-            data.carbsGoal,
-            data.carbsConsumed,
+            data.carbsGoal.roundToInt(),
+            data.carbsConsumed.roundToInt(),
             "g"
         )
         updateMacroProgressBar(
             binding.trackerView.proteinProgressBar,
             binding.trackerView.proteinValue,
-            data.proteinGoal,
-            data.proteinConsumed,
+            data.proteinGoal.roundToInt(),
+            data.proteinConsumed.roundToInt(),
             "g"
         )
         updateMacroProgressBar(
             binding.trackerView.fatsProgressBar,
             binding.trackerView.fatsValue,
-            data.fatGoal,
-            data.fatConsumed,
+            data.fatGoal.roundToInt(),
+            data.fatConsumed.roundToInt(),
             "g"
         )
 

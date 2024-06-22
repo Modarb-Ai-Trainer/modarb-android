@@ -77,7 +77,6 @@ class NutritionFragment : Fragment(), OnMealClickListener {
         todayInTakeResponse: TodayInTakeResponse,
         allMealsResponse: AllMealsPlansResponse,
         myMealsResponse: MyMealPlanResponse,
-        dailyGoalsResponse: DailyGoalsResponse
     ) {
         val viewPager2 = ViewPager2ViewHeightAnimator()
         viewPager2.viewPager2 = binding.viewPager
@@ -89,7 +88,6 @@ class NutritionFragment : Fragment(), OnMealClickListener {
             todayInTakeResponse,
             allMealsResponse,
             myMealsResponse,
-            dailyGoalsResponse
         )
         viewPager2.viewPager2!!.adapter = adapter
 
@@ -230,7 +228,7 @@ class NutritionFragment : Fragment(), OnMealClickListener {
     }
 
     private fun isAllDataLoaded(nutritionData: NutritionData): Boolean {
-        return nutritionData.todayMeals != null && nutritionData.dailyGoals != null && nutritionData.todayInTake != null && nutritionData.myMealPlan != null && nutritionData.allMealsPlans != null
+        return nutritionData.todayMeals != null && nutritionData.todayInTake != null && nutritionData.myMealPlan != null && nutritionData.allMealsPlans != null
     }
 
     private fun handleCombinedData(nutritionData: NutritionData) {
@@ -279,17 +277,14 @@ class NutritionFragment : Fragment(), OnMealClickListener {
         handleApiResult(MyMealPlanResponse::class, nutritionData.myMealPlan) {
             myMealsResponse = it
         }
-        handleApiResult(DailyGoalsResponse::class, nutritionData.dailyGoals) {
-            dailyGoalsResponse = it
-        }
 
-        if (todayMealsResponse != null && todayInTakeResponse != null && allMealsResponse != null && myMealsResponse != null && dailyGoalsResponse != null) {
+
+        if (todayMealsResponse != null && todayInTakeResponse != null && allMealsResponse != null && myMealsResponse != null) {
             initViewPager(
                 todayMealsResponse!!,
                 todayInTakeResponse!!,
                 allMealsResponse!!,
                 myMealsResponse!!,
-                dailyGoalsResponse!!
             )
         }
     }
