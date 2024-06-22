@@ -16,8 +16,6 @@ class NutritionProgramsAdapter(
     inner class NutritionViewHolder(private val binding: ItemNutritionProgramBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(program: Data) {
-            //TODO Uncomment this
-            //ViewUtils.loadImage(context, program.image, binding.image)
             if (position % 4 == 0) {
                 binding.image.setImageResource(R.drawable.rounded_gradient_rectangle2)
             } else if (position % 4 == 1) {
