@@ -74,6 +74,7 @@
                         android:id="@+id/primaryImageView"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        android:background="@drawable/corner_image"
                         android:layout_marginTop="8dp"
                         android:src="@mipmap/ic_launcher" />
 
@@ -106,6 +107,7 @@
                     <ImageView
                         android:id="@+id/secondyImageView"
                         android:layout_width="100dp"
+                        android:background="@drawable/corner_image"
                         android:layout_height="100dp"
                         android:layout_marginTop="8dp"
                         android:src="@mipmap/ic_launcher" />
