@@ -29,11 +29,10 @@ class ExerciseLibViewHolder(private val view: View, private val context: Context
 
         exercises = ArrayList()
         for (part in WorkoutData.getBodyParts()) {
-            if (part != "All")
-                exercises.add(BodyParts(part, R.drawable.rounded_gradient_rectangle))
+            if (part != "All") exercises.add(BodyParts(part, R.drawable.rounded_gradient_rectangle))
         }
 
-        adapter = BodyPartsAdapter(exercises, listener!!)
+        adapter = BodyPartsAdapter(exercises, listener!!, context)
         recyclerView.adapter = adapter
     }
 }
