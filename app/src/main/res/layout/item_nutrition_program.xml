@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:clipToPadding="true"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
