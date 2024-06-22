@@ -143,6 +143,7 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
                 ).show()
                 return@setOnClickListener
             }
+            adapter.stopSound(currentItem)
             adapter.startSound(currentItem)
             val adapterCount = adapter.count - 1
             if (currentItem < adapterCount) {
@@ -157,8 +158,19 @@ class WorkoutActivity : AppCompatActivity(), ExerciseListener {
 
     }
 
-    private fun handleExerciseVoice() {
+    override fun onStop() {
+        super.onStop()
+        adapter.stopSound()
+    }
 
+    override fun onPause() {
+        super.onPause()
+        adapter.stopSound()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter.stopSound()
     }
 
     @SuppressLint("ClickableViewAccessibility")

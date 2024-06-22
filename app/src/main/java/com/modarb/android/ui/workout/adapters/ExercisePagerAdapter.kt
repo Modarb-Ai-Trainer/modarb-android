@@ -25,7 +25,7 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
 
     private val exercises = WorkoutData.getTodayWorkout()?.exercises ?: emptyList()
     private val timedExercise: HashSet<Int> = HashSet()
-    private lateinit var textToSpeech: TextToSpeech
+    private var textToSpeech: TextToSpeech? = null
 
     override fun getCount(): Int = exercises.size
 
@@ -78,18 +78,18 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
             context
         ) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                textToSpeech.setLanguage(Locale.US)
+                textToSpeech!!.setLanguage(Locale.US)
                 val params = Bundle()
                 params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, 1.0f)
                 if (isTimedExercise(position)) {
-                    textToSpeech.speak(
+                    textToSpeech!!.speak(
                         "Exercise instructions: you will do " + "${exercises[position].instructions} for ${exercises[position].duration} seconds",
                         TextToSpeech.QUEUE_FLUSH,
                         params,
                         "utteranceId"
                     )
                 } else {
-                    textToSpeech.speak(
+                    textToSpeech!!.speak(
                         "Exercise instructions: ${exercises[position].instructions} you will do ${exercises[position].reps} reps for ${exercises[position].sets} sets",
                         TextToSpeech.QUEUE_FLUSH,
                         params,
@@ -100,6 +100,17 @@ class ExercisePagerAdapter(private val context: Context, private var listener: E
             }
         }
         exercises[position].isStartedHelpSound = true
+    }
+
+    fun stopSound(currentPosition: Int) {
+        if (textToSpeech == null) return
+        exercises[currentPosition].isStartedSound = true
+        if (textToSpeech!!.isSpeaking) textToSpeech!!.stop()
+    }
+
+    fun stopSound() {
+        if (textToSpeech == null) return
+        if (textToSpeech!!.isSpeaking) textToSpeech!!.stop()
     }
 
     private fun handleCloseBtn(binding: ItemExerciseBinding) {
