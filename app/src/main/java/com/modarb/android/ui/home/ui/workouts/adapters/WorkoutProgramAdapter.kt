@@ -28,7 +28,8 @@ class WorkoutProgramAdapter(
                 binding.workoutImage.setImageResource(R.drawable.rounded_gradient_rectangle5)
             }
             binding.workoutName.text = program.name
-            binding.workoutView.setOnClickListener {
+            binding.workoutdesc.text = program.description
+            itemView.setOnClickListener {
                 listener.onWorkoutItemClick(program)
             }
         }

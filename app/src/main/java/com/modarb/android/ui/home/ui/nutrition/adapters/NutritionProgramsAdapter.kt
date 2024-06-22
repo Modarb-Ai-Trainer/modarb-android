@@ -27,7 +27,7 @@ class NutritionProgramsAdapter(
             }
             binding.name.text = program.level
             binding.desc.text = program.description
-            binding.planView.setOnClickListener {
+            itemView.setOnClickListener {
                 listener.onPlanItemClick(program)
             }
         }

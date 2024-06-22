@@ -16,8 +16,9 @@ class WorkoutProgramsViewHolder(private val binding: WorkoutsProgramsViewBinding
         workoutProgramsResponse: WorkoutProgramsResponse?,
         listener: OnWorkoutItemClickListener
     ) {
+        var data = workoutProgramsResponse!!.data
+        data = data.reversed()
         binding.recycleView.layoutManager = LinearLayoutManager(context)
-        binding.recycleView.adapter =
-            WorkoutProgramAdapter(context, workoutProgramsResponse!!.data, listener)
+        binding.recycleView.adapter = WorkoutProgramAdapter(context, data, listener)
     }
 }

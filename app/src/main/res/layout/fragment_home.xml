@@ -48,13 +48,25 @@
                 app:layout_constraintTop_toTopOf="@+id/profileBtn"
                 tools:text="Hey, \nAmr" />
 
+
             <ImageButton
                 android:id="@+id/chatBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
                 android:background="@null"
                 android:src="@drawable/baseline_chat_24"
+                app:layout_constraintBottom_toBottomOf="@+id/cameraBtn"
+                app:layout_constraintEnd_toStartOf="@+id/cameraBtn"
+                app:layout_constraintTop_toTopOf="@+id/cameraBtn"
+                app:layout_constraintVertical_bias="0.4" />
+
+            <ImageButton
+                android:id="@+id/cameraBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:src="@drawable/round_camera_24"
                 app:layout_constraintBottom_toBottomOf="@+id/profileBtn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/profileBtn"
