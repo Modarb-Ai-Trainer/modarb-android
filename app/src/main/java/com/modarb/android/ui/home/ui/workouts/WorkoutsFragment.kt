@@ -27,6 +27,7 @@ import com.modarb.android.R
 import com.modarb.android.databinding.FragmentWorkoutsBinding
 import com.modarb.android.databinding.WorkoutEnrollViewBinding
 import com.modarb.android.network.ApiResult
+import com.modarb.android.ui.home.HomeActivity
 import com.modarb.android.ui.home.ui.plan.domain.models.allExercises.ExercisesResponse
 import com.modarb.android.ui.home.ui.workouts.models.BodyParts
 import com.modarb.android.ui.home.ui.workouts.models.Workout
@@ -312,6 +313,7 @@ class WorkoutsFragment : Fragment(), OnBodyPartClickListener, OnWorkoutItemClick
                 when (it) {
                     is ApiResult.Success<*> -> {
                         exerciseInfoSheet.hide()
+                        (activity as? HomeActivity)?.navigateToFragment(R.id.navigation_home)
                         Toast.makeText(requireContext(), "Enrolled", Toast.LENGTH_SHORT).show()
                     }
 
