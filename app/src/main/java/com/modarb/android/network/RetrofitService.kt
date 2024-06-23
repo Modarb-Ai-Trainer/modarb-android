@@ -10,7 +10,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitService {
 
-    private var BASE_URL = "https://moahmedwafy-modarb-be.hf.space/"
+    var BASE_URL = "https://moahmedwafy-modarb-be.hf.space/"
+
+    fun changeBaseUrl(newUrl: String) {
+        BASE_URL = newUrl
+    }
     inline fun <reified T> handleRequest(
         response: Response<T>, onSuccess: (T) -> Unit, onError: (T?) -> Unit
     ) {

@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,9 +23,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="DiscouragedApi"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.WebView"
-            android:exported="false" />
+        <activity android:name=".posedetection.RequestPermissionsActivity" />
         <activity
             android:name=".ui.workout.activities.WorkoutActivity"
             android:exported="false"
@@ -99,6 +104,16 @@
             android:screenOrientation="nosensor" />
         <activity
             android:name=".ui.onboarding.activities.OnBoardingActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name=".posedetection.CameraActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name=".posedetection.CameraSettingsActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
 
