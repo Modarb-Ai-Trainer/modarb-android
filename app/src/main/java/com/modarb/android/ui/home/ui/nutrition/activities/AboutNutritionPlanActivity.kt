@@ -109,7 +109,8 @@ class AboutNutritionPlanActivity : AppCompatActivity() {
             }
         }
 
-        if (keyFeature.isNotEmpty()) binding.desKeyFeaturesTextView1.text = keyFeature
+        if (keyFeature != null && keyFeature.isNotEmpty()) binding.desKeyFeaturesTextView1.text =
+            keyFeature
         else binding.keyFeaturesTextView.visibility = View.GONE
         if (NutritionHelper.selectedMyProgram.your_journey != null) binding.desYourJourneyTextView.text =
             NutritionHelper.selectedMyProgram.your_journey
@@ -130,8 +131,11 @@ class AboutNutritionPlanActivity : AppCompatActivity() {
             }
         }
 
-        if (keyFeature.isNotEmpty()) binding.desKeyFeaturesTextView1.text = keyFeature
-        if (NutritionHelper.selectedProgram.your_journey.isNotEmpty()) binding.desYourJourneyTextView.text =
+        if (keyFeature != null && keyFeature.isNotEmpty()) binding.desKeyFeaturesTextView1.text =
+            keyFeature
+        else binding.keyFeaturesTextView.visibility = View.GONE
+        if (NutritionHelper.selectedProgram.your_journey != null) binding.desYourJourneyTextView.text =
             NutritionHelper.selectedProgram.your_journey
+        else binding.yourJourneyTextView.visibility = View.GONE
     }
 }

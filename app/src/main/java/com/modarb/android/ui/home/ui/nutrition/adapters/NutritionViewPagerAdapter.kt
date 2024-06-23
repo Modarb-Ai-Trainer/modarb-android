@@ -237,8 +237,10 @@ class NutritionViewPagerAdapter(
         private fun initPlansPrograms() {
             binding.recycleView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+            val data = allMealsResponse.data.asReversed()
             val programsAdapter =
-                NutritionProgramsAdapter(allMealsResponse.data, this@NutritionViewPagerAdapter)
+                NutritionProgramsAdapter(data, this@NutritionViewPagerAdapter)
             binding.recycleView.adapter = programsAdapter
         }
 
