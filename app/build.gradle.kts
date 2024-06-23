@@ -11,9 +11,8 @@ android {
         applicationId = "com.modarb.android"
         minSdk = 22
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.2"
-
+        versionCode = 4
+        versionName = "2.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -75,11 +74,11 @@ dependencies {
     implementation("com.google.mlkit:pose-detection:18.0.0-beta4")
     implementation("com.google.mlkit:pose-detection-accurate:18.0.0-beta4")
     // CameraX
-    implementation("androidx.camera:camera-camera2:1.0.0-SNAPSHOT")
-    implementation("androidx.camera:camera-lifecycle:1.0.0-SNAPSHOT")
-    implementation("androidx.camera:camera-view:1.0.0-SNAPSHOT")
+    implementation("androidx.camera:camera-camera2:1.3.4")
+    implementation("androidx.camera:camera-lifecycle:1.3.4")
+    implementation("androidx.camera:camera-view:1.3.4")
+
     // On Device Machine Learnings
-    implementation("com.google.android.odml:image:1.0.0-beta1")
     implementation("com.google.guava:guava:32.1.2-jre")
     implementation("androidx.camera:camera-core:1.3.4")
     implementation("com.google.android.gms:play-services-vision-common:19.1.3")
