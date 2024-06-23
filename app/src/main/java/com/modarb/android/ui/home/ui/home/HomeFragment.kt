@@ -19,6 +19,7 @@ import com.modarb.android.R
 import com.modarb.android.databinding.FragmentHomeBinding
 import com.modarb.android.network.ApiResult
 import com.modarb.android.network.NetworkHelper
+import com.modarb.android.posedetection.RequestPermissionsActivity
 import com.modarb.android.ui.ChatBotWebView
 import com.modarb.android.ui.helpers.WorkoutData
 import com.modarb.android.ui.home.HomeActivity
@@ -247,6 +248,9 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), ChatBotWebView::class.java))
         }
 
+        binding.cameraBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), RequestPermissionsActivity::class.java))
+        }
         binding.userName.text = "Hey, \n" + UserPrefUtil.getUserData(requireContext())!!.user.name
     }
 

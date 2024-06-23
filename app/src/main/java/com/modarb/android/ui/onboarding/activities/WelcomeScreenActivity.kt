@@ -1,9 +1,11 @@
 package com.modarb.android.ui.onboarding.activities
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -36,8 +38,33 @@ class WelcomeScreenActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         init()
+        initServerDialog()
         initViewModels()
         onRegister()
+    }
+
+    private fun initServerDialog() {
+        binding.titleTv.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Change Server Link")
+
+            val input = EditText(this)
+            input.hint = "Enter new server link"
+            input.setText(RetrofitService.BASE_URL)
+            builder.setView(input)
+            builder.setPositiveButton("OK") { dialog, which ->
+                val newUrl = input.text.toString()
+                if (newUrl.isNotEmpty()) {
+                    RetrofitService.changeBaseUrl(newUrl)
+                    var i = Intent(this, WelcomeScreenActivity::class.java)
+                    startActivity(i)
+                    finish()
+                }
+            }
+            builder.setNegativeButton("Cancel") { dialog, which -> dialog.cancel() }
+
+            builder.show()
+        }
     }
 
     private fun init() {
