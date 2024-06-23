@@ -127,7 +127,7 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): Response<MyMealPlanResponse>
 
-    @GET("api/v1/user/mealPlans")
+    @GET("api/v1/user/mealPlans?limit=200")
     suspend fun getAllMealsPlan(
         @Header("Authorization") token: String,
     ): Response<AllMealsPlansResponse>
