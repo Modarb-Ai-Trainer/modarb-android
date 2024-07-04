@@ -30,7 +30,7 @@ App Demo | Pose correction (Please enable sound)
 ## Running Project
 First, clone the repo:
 
-`git clone git@github.com:amrhossamdev/Function-Plotter-Android-App.git`
+`git clone git@github.com:Modarb-Ai-Trainer/modarb-android.git`
 
 ## Android Studio
 
